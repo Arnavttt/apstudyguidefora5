@@ -53,6 +53,7 @@
       rgba(255,255,255,0.015) 30px,
       rgba(255,255,255,0.015) 60px
     );
+    pointer-events: none;
   }
   .masthead-label {
     font-family: 'JetBrains Mono', monospace;
@@ -601,7 +602,7 @@
 
 <!-- ═══════════════════════════════════════════════════════════ MASTHEAD -->
 <header class="masthead">
-  <button class="back-link" onclick="window.location.href='index.html'">← Back to Hub</button>
+  <button onclick="window.location.href='index.html'" style="appearance:none;-webkit-appearance:none;font-family:'JetBrains Mono',monospace;font-size:12px;color:#d4a017;letter-spacing:0.08em;display:inline-flex;align-items:center;gap:0.5rem;margin-bottom:1.5rem;padding:0.45rem 1rem;border:1px solid rgba(212,160,23,0.45);border-radius:3px;background:rgba(212,160,23,0.08);cursor:pointer;transition:all 0.18s;font-weight:500;line-height:1;position:relative;z-index:2;" onmouseover="this.style.background='rgba(212,160,23,0.22)';this.style.borderColor='#d4a017';" onmouseout="this.style.background='rgba(212,160,23,0.08)';this.style.borderColor='rgba(212,160,23,0.45)';">← Back to Hub</button>
   <p class="masthead-label">Score 5 Edition · All 9 Periods</p>
   <h1>APUSH Master<br>Study Guide</h1>
   <p class="masthead-sub">Key Events · Key People · Causation · CCOT · HIPP · Essay Skills</p>

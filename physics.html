@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AP Physics 1 &amp; 2 — Score 5 Edition</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#040b0f;--bg2:#071218;--bg3:#0a1820;--bg4:#0e2030;
+  --border:#0f2535;--border2:#163040;
+  --text:#cfe8f0;--text2:#7da8bc;--text3:#3a6070;
+  --teal:#4dd4c4;--teal2:#1a9e90;
+  --blue:#60b8f0;--cyan:#67e8f9;
+  --green:#6ee7b7;--yellow:#fde68a;
+  --orange:#fdba74;--red:#fca5a5;--purple:#c4b5fd;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'IBM Plex Sans',sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.7;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(77,212,196,0.04) 0%,transparent 60%);pointer-events:none;z-index:0;}
+
+.masthead{background:var(--bg2);border-bottom:1px solid var(--border);padding:3.5rem 2rem 3rem;position:relative;z-index:1;}
+.masthead-inner{max-width:980px;margin:0 auto;}
+.back-link{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text3);text-decoration:none;letter-spacing:0.1em;display:inline-flex;align-items:center;gap:0.4rem;margin-bottom:1.5rem;transition:color 0.2s;}
+.back-link:hover{color:var(--teal);}
+.masthead-tag{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--teal);letter-spacing:0.15em;margin-bottom:0.75rem;}
+.masthead h1{font-family:'Syne',sans-serif;font-size:clamp(2rem,5vw,3.8rem);font-weight:800;line-height:1;letter-spacing:-0.03em;margin-bottom:0.75rem;color:var(--text);}
+.masthead h1 .accent{color:var(--teal);}
+.masthead-desc{color:var(--text2);font-size:0.95rem;max-width:520px;margin-bottom:1.5rem;}
+.unit-pills{display:flex;flex-wrap:wrap;gap:0.35rem;}
+.upill{background:var(--bg3);border:1px solid var(--border);color:var(--text3);font-family:'IBM Plex Mono',monospace;font-size:11px;padding:0.25rem 0.7rem;border-radius:2px;text-decoration:none;transition:all 0.15s;}
+.upill:hover{border-color:var(--teal);color:var(--teal);}
+.upill.p2{border-color:rgba(96,184,240,0.3);color:var(--blue);}
+.upill.p2:hover{border-color:var(--blue);color:var(--blue);}
+
+.topnav{background:rgba(4,11,15,0.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0.6rem 2rem;display:flex;flex-wrap:wrap;gap:0;position:sticky;top:0;z-index:100;}
+.topnav a{color:var(--text3);text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:11px;padding:0.3rem 0.6rem;border-radius:2px;transition:all 0.15s;white-space:nowrap;}
+.topnav a:hover{color:var(--teal);background:rgba(77,212,196,0.06);}
+.topnav .p2-link:hover{color:var(--blue);background:rgba(96,184,240,0.06);}
+
+.container{max-width:980px;margin:0 auto;padding:0 2rem;}
+.section{padding:3.5rem 0 2.5rem;border-bottom:1px solid var(--border);}
+.section:last-child{border-bottom:none;}
+.sec-header{margin-bottom:2rem;}
+.sec-tag{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--text3);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.3rem;}
+.sec-tag.p2-tag{color:var(--blue);}
+.sec-title{font-family:'Syne',sans-serif;font-size:1.9rem;font-weight:800;line-height:1.1;letter-spacing:-0.02em;}
+.exam-pct{display:inline-block;background:rgba(77,212,196,0.08);border:1px solid rgba(77,212,196,0.2);color:var(--teal);font-family:'IBM Plex Mono',monospace;font-size:10px;padding:0.2rem 0.5rem;border-radius:2px;margin-top:0.35rem;letter-spacing:0.05em;}
+.exam-pct.p2{background:rgba(96,184,240,0.08);border-color:rgba(96,184,240,0.2);color:var(--blue);}
+
+.phys-banner{background:var(--bg3);border:1px solid var(--border2);border-left:3px solid var(--teal);padding:0.6rem 1rem;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--teal);letter-spacing:0.08em;margin-bottom:2rem;border-radius:0 3px 3px 0;}
+.phys-banner.p2{border-left-color:var(--blue);color:var(--blue);}
+
+h2.sub{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;color:var(--text);margin:2rem 0 1rem;padding-bottom:0.4rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:0.6rem;}
+h2.sub::before{content:'→';font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--text3);}
+h2.sub span{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--text3);font-weight:400;letter-spacing:0.06em;}
+
+.eq-block{background:var(--bg2);border:1px solid var(--border);border-left:3px solid var(--teal);border-radius:4px;padding:1.25rem 1.5rem;font-family:'IBM Plex Mono',monospace;font-size:13px;line-height:2;overflow-x:auto;margin:0.9rem 0;}
+.eq-block .eq{color:var(--cyan);font-weight:500;}
+.eq-block .cmt{color:var(--text3);font-style:italic;font-size:12px;}
+.eq-block .label{color:var(--teal);font-weight:500;}
+.eq-block.p2-eq{border-left-color:var(--blue);}
+.eq-block.p2-eq .label{color:var(--blue);}
+.eq-block.p2-eq .eq{color:var(--blue);}
+
+.eq-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:0.85rem;margin-bottom:1.25rem;}
+.eq-card{background:var(--bg2);border:1px solid var(--border);border-radius:4px;padding:1.1rem 1.25rem;}
+.eq-card h3{font-family:'Syne',sans-serif;font-size:0.9rem;font-weight:700;margin-bottom:0.5rem;color:var(--text);}
+.eq-card .f{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--cyan);display:block;line-height:1.9;}
+.eq-card p{font-size:13px;color:var(--text2);margin-top:0.4rem;line-height:1.5;}
+.ec-teal{border-top:2px solid var(--teal);}
+.ec-blue{border-top:2px solid var(--blue);}
+.ec-green{border-top:2px solid var(--green);}
+.ec-yellow{border-top:2px solid var(--yellow);}
+.ec-orange{border-top:2px solid var(--orange);}
+.ec-red{border-top:2px solid var(--red);}
+.ec-purple{border-top:2px solid var(--purple);}
+.ec-cyan{border-top:2px solid var(--cyan);}
+
+.callout{background:rgba(253,230,138,0.05);border:1px solid rgba(253,230,138,0.18);border-left:3px solid var(--yellow);padding:1rem 1.25rem;border-radius:0 4px 4px 0;margin:1.25rem 0;}
+.callout-tag{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--yellow);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.3rem;}
+.callout p,.callout li{font-size:14px;color:var(--text2);line-height:1.6;}
+.callout ul{padding-left:1.2rem;}
+.trap{background:rgba(252,165,165,0.05);border:1px solid rgba(252,165,165,0.18);border-left:3px solid var(--red);padding:1rem 1.25rem;border-radius:0 4px 4px 0;margin:1.25rem 0;}
+.trap-tag{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--red);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.3rem;}
+.trap p,.trap li{font-size:14px;color:var(--text2);line-height:1.6;}
+.trap ul{padding-left:1.2rem;}
+
+.ctable{width:100%;border-collapse:collapse;margin-bottom:1.25rem;font-size:13px;overflow-x:auto;display:block;}
+.ctable th{background:var(--bg3);color:var(--text2);font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.05em;padding:0.6rem 0.9rem;text-align:left;border-bottom:1px solid var(--border2);white-space:nowrap;}
+.ctable td{padding:0.5rem 0.9rem;border-bottom:1px solid var(--border);color:var(--text2);vertical-align:top;line-height:1.5;font-size:13px;}
+.ctable tr:nth-child(even) td{background:rgba(255,255,255,0.015);}
+.ctable td:first-child{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--cyan);font-weight:500;white-space:nowrap;}
+
+.question-box{background:var(--bg2);border:1px solid var(--border2);border-radius:4px;margin-bottom:1.25rem;overflow:hidden;}
+.q-header{background:var(--bg3);padding:0.75rem 1.25rem;display:flex;align-items:center;gap:0.75rem;border-bottom:1px solid var(--border);}
+.q-num{font-family:'IBM Plex Mono',monospace;font-size:11px;background:rgba(77,212,196,0.12);color:var(--teal);padding:0.2rem 0.6rem;border-radius:2px;font-weight:600;}
+.q-type{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--text3);letter-spacing:0.06em;text-transform:uppercase;}
+.q-body{padding:1.25rem;}
+.q-body p{font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:0.75rem;}
+.q-choices{list-style:none;padding:0;margin:0.75rem 0;}
+.q-choices li{padding:0.5rem 0.75rem;margin:0.3rem 0;border:1px solid var(--border);border-radius:3px;font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--text2);cursor:pointer;transition:all 0.15s;background:var(--bg);}
+.q-choices li:hover{border-color:var(--teal);color:var(--teal);background:rgba(77,212,196,0.04);}
+.q-choices li.correct{border-color:var(--green);color:var(--green);background:rgba(110,231,183,0.05);}
+.q-choices li.wrong{border-color:var(--red);color:var(--red);background:rgba(252,165,165,0.05);}
+.q-reveal{display:none;padding:0 1.25rem 1.25rem;}
+.q-reveal.show{display:block;}
+.q-answer{background:rgba(110,231,183,0.05);border:1px solid rgba(110,231,183,0.18);border-radius:3px;padding:0.75rem 1rem;font-size:13px;color:var(--text2);line-height:1.7;}
+.q-answer strong{color:var(--green);}
+
+.frq-box{background:var(--bg2);border:1px solid var(--border2);border-radius:4px;margin-bottom:1.5rem;overflow:hidden;}
+.frq-header{background:var(--bg3);padding:0.9rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:1rem;}
+.frq-badge{font-family:'IBM Plex Mono',monospace;font-size:11px;background:rgba(77,212,196,0.12);color:var(--teal);padding:0.25rem 0.7rem;border-radius:2px;font-weight:600;}
+.frq-title{font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:700;color:var(--text);}
+.frq-body{padding:1.5rem;}
+.frq-body p{font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:0.75rem;}
+.solution-toggle{background:transparent;border:1px solid var(--border2);color:var(--text3);font-family:'IBM Plex Mono',monospace;font-size:11px;padding:0.4rem 0.9rem;border-radius:2px;cursor:pointer;transition:all 0.15s;margin-top:0.75rem;letter-spacing:0.05em;}
+.solution-toggle:hover{border-color:var(--teal);color:var(--teal);}
+.solution-content{display:none;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border);}
+.solution-content.show{display:block;}
+
+.must-know{background:linear-gradient(135deg,rgba(77,212,196,0.07),rgba(96,184,240,0.04));border:1px solid rgba(77,212,196,0.18);border-radius:4px;padding:1.25rem 1.5rem;margin:1.5rem 0;}
+.must-know h4{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--teal);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.75rem;}
+.must-know ul{padding-left:1.2rem;}
+.must-know li{font-size:14px;color:var(--text2);line-height:1.9;}
+.must-know li strong{color:var(--text);}
+
+.divider-p2{height:2px;background:linear-gradient(90deg,transparent,var(--blue),transparent);margin:2.5rem 0;border:none;}
+.footer{background:var(--bg2);border-top:1px solid var(--border);padding:2rem;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text3);letter-spacing:0.05em;margin-top:3rem;}
+</style>
+</head>
+<body>
+<header class="masthead">
+  <div class="masthead-inner">
+    <a class="back-link" href="index.html">← Back to Hub</a>
+    <div class="masthead-tag">AP Physics 1 &amp; 2 · Score 5 Master Reference</div>
+    <h1>F = m<span class="accent">a</span></h1>
+    <p class="masthead-desc">Every equation, every concept, every FRQ strategy for Physics 1 and 2 — from kinematics to modern physics.</p>
+    <div class="unit-pills">
+      <a class="upill" href="#kinematics">Kinematics</a>
+      <a class="upill" href="#forces">Newton's Laws</a>
+      <a class="upill" href="#energy">Energy &amp; Work</a>
+      <a class="upill" href="#momentum">Momentum</a>
+      <a class="upill" href="#rotation">Rotation</a>
+      <a class="upill" href="#waves">Waves &amp; Sound</a>
+      <a class="upill" href="#electric-p1">Electric Charge</a>
+      <hr style="width:1px;height:20px;border:none;background:var(--border2);margin:0 0.25rem;">
+      <a class="upill p2" href="#fluids">Fluids (P2)</a>
+      <a class="upill p2" href="#thermo">Thermo (P2)</a>
+      <a class="upill p2" href="#em">E&amp;M (P2)</a>
+      <a class="upill p2" href="#circuits">Circuits (P2)</a>
+      <a class="upill p2" href="#optics">Optics (P2)</a>
+      <a class="upill p2" href="#modern">Modern Physics (P2)</a>
+      <a class="upill" href="#frq">FRQ Practice</a>
+    </div>
+  </div>
+</header>
+<nav class="topnav">
+  <a href="index.html">← Hub</a>
+  <a href="#kinematics">Kinem</a><a href="#forces">Forces</a><a href="#energy">Energy</a>
+  <a href="#momentum">Momentum</a><a href="#rotation">Rotation</a><a href="#waves">Waves</a>
+  <a href="#electric-p1">Charge</a>
+  <a href="#fluids" class="p2-link">Fluids★</a><a href="#thermo" class="p2-link">Thermo★</a>
+  <a href="#em" class="p2-link">E&amp;M★</a><a href="#circuits" class="p2-link">Circuits★</a>
+  <a href="#optics" class="p2-link">Optics★</a><a href="#modern" class="p2-link">Modern★</a>
+  <a href="#mcq">MCQ</a><a href="#frq">FRQ</a>
+</nav>
+
+<div class="container">
+
+<!-- KINEMATICS -->
+<section class="section" id="kinematics">
+  <div class="sec-header">
+    <div class="sec-tag">Physics 1 · Unit 1</div>
+    <div class="sec-title">Kinematics</div>
+    <div class="exam-pct">~12–18% of Physics 1</div>
+  </div>
+  <h2 class="sub">Big 4 Kinematic Equations <span>constant acceleration only</span></h2>
+  <div class="eq-block">
+    <span class="label">THE BIG 4 (constant acceleration):</span><br>
+    <span class="eq">v = v₀ + at</span>                        <span class="cmt">// no displacement</span><br>
+    <span class="eq">x = x₀ + v₀t + ½at²</span>               <span class="cmt">// no final velocity</span><br>
+    <span class="eq">v² = v₀² + 2a(x − x₀)</span>             <span class="cmt">// no time</span><br>
+    <span class="eq">x = x₀ + ½(v₀ + v)t</span>               <span class="cmt">// no acceleration</span><br><br>
+    <span class="label">VARIABLE DEFINITIONS:</span><br>
+    v₀ = initial velocity  ·  v = final velocity  ·  a = acceleration  ·  t = time  ·  x = displacement
+  </div>
+  <h2 class="sub">Projectile Motion</h2>
+  <div class="eq-block">
+    <span class="label">KEY PRINCIPLE: horizontal and vertical motions are INDEPENDENT</span><br><br>
+    Horizontal: aₓ = 0  →  x = v₀ₓt  (constant velocity)<br>
+    Vertical:   aᵧ = −g = −9.8 m/s² (or −10 m/s² for estimates)<br><br>
+    <span class="label">At maximum height:</span>  vᵧ = 0<br>
+    <span class="label">Range (level ground):</span>  R = v₀² sin(2θ)/g<br>
+    <span class="cmt">// 45° gives maximum range; angles that add to 90° give same range</span>
+  </div>
+  <div class="trap">
+    <div class="trap-tag">⚡ Exam Trap — Graphs</div>
+    <ul>
+      <li>Slope of x-t graph = velocity; slope of v-t graph = acceleration</li>
+      <li>Area under v-t graph = displacement (not distance!)</li>
+      <li>Object at rest: x-t flat. Moving at constant v: x-t straight line.</li>
+      <li>Negative acceleration ≠ slowing down (could be speeding up in negative direction)</li>
+    </ul>
+  </div>
+</section>
+
+<!-- FORCES -->
+<section class="section" id="forces">
+  <div class="sec-header">
+    <div class="sec-tag">Physics 1 · Unit 2</div>
+    <div class="sec-title">Newton's Laws &amp; Forces</div>
+    <div class="exam-pct">~20–25% of Physics 1</div>
+  </div>
+  <h2 class="sub">Newton's Three Laws</h2>
+  <div class="eq-grid">
+    <div class="eq-card ec-teal"><h3>1st Law — Inertia</h3><p>An object at rest stays at rest, and an object in motion stays in motion unless acted on by a net external force. ΣF = 0 → a = 0</p></div>
+    <div class="eq-card ec-blue"><h3>2nd Law — F = ma</h3><span class="f">ΣF = ma</span><p>Net force equals mass × acceleration. Always draw FBD first. Sum forces in each direction separately.</p></div>
+    <div class="eq-card ec-green"><h3>3rd Law — Action-Reaction</h3><p>Forces come in equal and opposite pairs acting on DIFFERENT objects. FAB = −FBA. They don't cancel (different objects).</p></div>
+  </div>
+  <h2 class="sub">Common Forces</h2>
+  <table class="ctable">
+    <tr><th>Force</th><th>Equation</th><th>Direction</th><th>Key Notes</th></tr>
+    <tr><td>Weight</td><td>W = mg</td><td>Downward</td><td>g = 9.8 m/s² ≈ 10 m/s². Mass ≠ weight.</td></tr>
+    <tr><td>Normal Force</td><td>N = mg cos θ (on ramp)</td><td>Perpendicular to surface</td><td>Not always equal to mg</td></tr>
+    <tr><td>Friction (kinetic)</td><td>fₖ = μₖN</td><td>Opposes motion</td><td>μₖ &lt; μₛ always</td></tr>
+    <tr><td>Friction (static)</td><td>fₛ ≤ μₛN</td><td>Opposes tendency to slide</td><td>Maximum just before sliding</td></tr>
+    <tr><td>Tension</td><td>T (from rope/string)</td><td>Along rope, away from object</td><td>Same throughout massless rope</td></tr>
+    <tr><td>Spring Force</td><td>F = −kx (Hooke's Law)</td><td>Opposite to displacement</td><td>k = spring constant (N/m)</td></tr>
+    <tr><td>Gravity (orbital)</td><td>Fg = Gm₁m₂/r²</td><td>Along line joining masses</td><td>G = 6.67×10⁻¹¹ N·m²/kg²</td></tr>
+  </table>
+  <h2 class="sub">Free Body Diagrams — Exam Requirement</h2>
+  <div class="callout">
+    <div class="callout-tag">FBD Rules — Always Do This First</div>
+    <ul>
+      <li>Draw object as a dot or box. Draw every force as an arrow FROM the object.</li>
+      <li>Label each force (N, W, T, fₖ, etc.). Include direction.</li>
+      <li>For inclined planes: use tilted axes (x parallel to ramp, y perpendicular).</li>
+      <li>Decompose forces: Wₓ = mg sin θ (along ramp), Wᵧ = mg cos θ (perpendicular to ramp).</li>
+      <li>AP FRQ explicitly states: "draw a free-body diagram" — you must draw one to get those points.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ENERGY -->
+<section class="section" id="energy">
+  <div class="sec-header">
+    <div class="sec-tag">Physics 1 · Unit 3</div>
+    <div class="sec-title">Work, Energy &amp; Power</div>
+    <div class="exam-pct">~15–20% of Physics 1</div>
+  </div>
+  <div class="eq-grid">
+    <div class="eq-card ec-teal"><h3>Work</h3><span class="f">W = F·d·cos θ</span><p>θ = angle between F and displacement. Work is zero if F ⊥ displacement (like normal force, circular motion).</p></div>
+    <div class="eq-card ec-blue"><h3>Kinetic Energy</h3><span class="f">KE = ½mv²</span><p>Work-Energy Theorem: W_net = ΔKE = KE_f − KE_i</p></div>
+    <div class="eq-card ec-green"><h3>Gravitational PE</h3><span class="f">ΔPEg = mgh</span><p>h = height above reference point (choose any). Only change in PE matters.</p></div>
+    <div class="eq-card ec-yellow"><h3>Spring PE</h3><span class="f">PEs = ½kx²</span><p>x = displacement from equilibrium. k = spring constant.</p></div>
+    <div class="eq-card ec-orange"><h3>Power</h3><span class="f">P = W/t = Fv·cos θ</span><p>Units: watts (W) = J/s. Average power: P = ΔE/Δt</p></div>
+    <div class="eq-card ec-purple"><h3>Conservation of Energy</h3><span class="f">ΔKE + ΔPE + ΔE_therm = W_ext</span><p>In isolated system with no friction: KE + PE = constant. Friction converts mechanical energy to thermal energy.</p></div>
+  </div>
+</section>
+
+<!-- MOMENTUM -->
+<section class="section" id="momentum">
+  <div class="sec-header">
+    <div class="sec-tag">Physics 1 · Unit 4</div>
+    <div class="sec-title">Momentum &amp; Impulse</div>
+    <div class="exam-pct">~15–18% of Physics 1</div>
+  </div>
+  <div class="eq-grid">
+    <div class="eq-card ec-teal"><h3>Momentum</h3><span class="f">p = mv</span><p>Vector quantity. Units: kg·m/s. Direction = direction of velocity.</p></div>
+    <div class="eq-card ec-blue"><h3>Impulse</h3><span class="f">J = FΔt = Δp</span><p>Impulse equals change in momentum. Area under F-t graph = impulse.</p></div>
+    <div class="eq-card ec-green"><h3>Conservation of Momentum</h3><span class="f">p_before = p_after (no ext force)</span><p>Always conserved in collisions. Apply in vector form.</p></div>
+    <div class="eq-card ec-yellow"><h3>Elastic Collision</h3><span class="f">KE conserved AND momentum conserved</span><p>Bouncing without energy loss. Rare in real life.</p></div>
+    <div class="eq-card ec-orange"><h3>Inelastic Collision</h3><span class="f">Momentum conserved. KE NOT conserved.</span><p>Objects stick together: perfectly inelastic. KE lost → thermal/sound/deformation.</p></div>
+    <div class="eq-card ec-red"><h3>Center of Mass</h3><span class="f">x_cm = Σ(mᵢxᵢ) / Σmᵢ</span><p>Net external force on system = total mass × a_cm</p></div>
+  </div>
+  <div class="trap">
+    <div class="trap-tag">⚡ Common Mistake — Momentum is a Vector</div>
+    <p>In 2D collisions or when objects move in opposite directions, momentum can cancel. Always define a positive direction and assign signs. Don't just sum magnitudes.</p>
+  </div>
+</section>
+
+<!-- ROTATION -->
+<section class="section" id="rotation">
+  <div class="sec-header">
+    <div class="sec-tag">Physics 1 · Unit 5–6</div>
+    <div class="sec-title">Circular Motion &amp; Rotation</div>
+    <div class="exam-pct">~12–15% of Physics 1</div>
+  </div>
+  <div class="eq-grid">
+    <div class="eq-card ec-teal"><h3>Centripetal Acceleration</h3><span class="f">aᶜ = v²/r</span><p>Direction: always toward center of circle. Centripetal force is the NET force directed inward.</p></div>
+    <div class="eq-card ec-blue"><h3>Centripetal Force</h3><span class="f">Fc = mv²/r = mω²r</span><p>Not a new force — it IS the net inward force (gravity, tension, friction, etc.)</p></div>
+    <div class="eq-card ec-cyan"><h3>Torque</h3><span class="f">τ = rF sin θ = rF⊥</span><p>r = distance from pivot. F sin θ = perpendicular component of force. Causes angular acceleration.</p></div>
+    <div class="eq-card ec-green"><h3>Rotational Equilibrium</h3><span class="f">Στ = 0  (no net torque)</span><p>Clockwise torques = counterclockwise torques. Used for lever problems.</p></div>
+    <div class="eq-card ec-yellow"><h3>Angular Momentum</h3><span class="f">L = Iω = mvr (point mass)</span><p>Conserved when net torque = 0. Figure skater spins faster when arms pulled in: I↓, ω↑</p></div>
+    <div class="eq-card ec-orange"><h3>Moment of Inertia</h3><span class="f">Point: I = mr²</span><span class="f">Rod (center): I = (1/12)mL²</span><span class="f">Solid sphere: I = (2/5)mr²</span></div>
+  </div>
+</section>
+
+<!-- WAVES -->
+<section class="section" id="waves">
+  <div class="sec-header">
+    <div class="sec-tag">Physics 1 · Unit 10</div>
+    <div class="sec-title">Simple Harmonic Motion, Waves &amp; Sound</div>
+    <div class="exam-pct">~12–15% of Physics 1</div>
+  </div>
+  <div class="eq-grid">
+    <div class="eq-card ec-teal"><h3>Wave Speed</h3><span class="f">v = fλ</span><p>v = speed (m/s), f = frequency (Hz), λ = wavelength (m). Speed depends on medium, not source.</p></div>
+    <div class="eq-card ec-blue"><h3>Period &amp; Frequency</h3><span class="f">T = 1/f</span><span class="f">Pendulum: T = 2π√(L/g)</span><span class="f">Spring: T = 2π√(m/k)</span></div>
+    <div class="eq-card ec-green"><h3>Standing Waves — String</h3><span class="f">λₙ = 2L/n  (n = 1,2,3...)</span><span class="f">fₙ = nv/(2L)</span><p>n=1: fundamental. Nodes at fixed ends.</p></div>
+    <div class="eq-card ec-yellow"><h3>Standing Waves — Open Pipe</h3><span class="f">λₙ = 2L/n  (all harmonics)</span><p>Antinodes at open ends. Same formula as string.</p></div>
+    <div class="eq-card ec-orange"><h3>Standing Waves — Closed Pipe</h3><span class="f">λₙ = 4L/n  (n = 1,3,5 only)</span><p>Node at closed end, antinode at open. ODD harmonics only.</p></div>
+    <div class="eq-card ec-red"><h3>Doppler Effect</h3><span class="f">Observed f increases when source approaches</span><p>Source moves toward you: wavelengths compress → higher pitch. Moving away: lower pitch.</p></div>
+  </div>
+</section>
+
+<!-- ELECTRIC CHARGE (P1) -->
+<section class="section" id="electric-p1">
+  <div class="sec-header">
+    <div class="sec-tag">Physics 1 · Unit 7</div>
+    <div class="sec-title">Electric Charge &amp; Force</div>
+    <div class="exam-pct">~5–10% of Physics 1</div>
+  </div>
+  <div class="eq-grid">
+    <div class="eq-card ec-teal"><h3>Coulomb's Law</h3><span class="f">F = kq₁q₂/r²</span><p>k = 9×10⁹ N·m²/C². Like charges repel, opposite attract. Force direction along line joining charges.</p></div>
+    <div class="eq-card ec-blue"><h3>Conservation of Charge</h3><p>Total charge of an isolated system is conserved. Charge is quantized: q = ne where e = 1.6×10⁻¹⁹ C</p></div>
+  </div>
+</section>
+
+<!-- PHYSICS 2 BANNER -->
+<div style="padding:2rem 0 0;position:relative;z-index:1;">
+<hr class="divider-p2">
+<div class="phys-banner p2">★ AP PHYSICS 2 CONTENT BEGINS HERE — all topics below are Physics 2 only</div>
+</div>
+
+<!-- FLUIDS -->
+<section class="section" id="fluids">
+  <div class="sec-header">
+    <div class="sec-tag p2-tag">Physics 2 · Unit 1</div>
+    <div class="sec-title">Fluids</div>
+    <div class="exam-pct p2">~15–18% of Physics 2</div>
+  </div>
+  <div class="eq-grid">
+    <div class="eq-card ec-blue"><h3>Density</h3><span class="f">ρ = m/V</span><p>Units: kg/m³. Water: ρ = 1000 kg/m³. Density determines if object floats.</p></div>
+    <div class="eq-card ec-cyan"><h3>Pressure</h3><span class="f">P = F/A  ·  P = P₀ + ρgh</span><p>Pressure increases with depth. Pascal's Law: pressure applied at one point transmits equally throughout.</p></div>
+    <div class="eq-card ec-teal"><h3>Buoyancy — Archimedes</h3><span class="f">Fb = ρ_fluid · V_submerged · g</span><p>Buoyant force = weight of fluid displaced. Object floats when Fb ≥ Fg.</p></div>
+    <div class="eq-card ec-green"><h3>Continuity Equation</h3><span class="f">A₁v₁ = A₂v₂</span><p>For incompressible fluid. Narrow pipe → faster fluid (conservation of mass).</p></div>
+    <div class="eq-card ec-yellow"><h3>Bernoulli's Equation</h3><span class="f">P + ½ρv² + ρgh = constant</span><p>Fast fluid → lower pressure. Explains lift on airfoil, curveball. Incompressible, non-viscous flow.</p></div>
+  </div>
+</section>
+
+<!-- THERMO -->
+<section class="section" id="thermo">
+  <div class="sec-header">
+    <div class="sec-tag p2-tag">Physics 2 · Unit 2</div>
+    <div class="sec-title">Thermodynamics</div>
+    <div class="exam-pct p2">~12–15% of Physics 2</div>
+  </div>
+  <div class="eq-grid">
+    <div class="eq-card ec-orange"><h3>Ideal Gas Law</h3><span class="f">PV = nRT</span><p>n = moles, R = 8.314 J/(mol·K), T in Kelvin. Also: PV = NkT (k = Boltzmann constant)</p></div>
+    <div class="eq-card ec-red"><h3>First Law of Thermo</h3><span class="f">ΔU = Q − W</span><p>Q = heat added to system (+). W = work done BY system (+). ΔU = change in internal energy.</p></div>
+    <div class="eq-card ec-yellow"><h3>Thermodynamic Processes</h3><span class="f">Isothermal: ΔT=0, ΔU=0, Q=W</span><span class="f">Adiabatic: Q=0, ΔU=−W</span><span class="f">Isobaric: ΔP=0, W=PΔV</span><span class="f">Isochoric: ΔV=0, W=0</span></div>
+    <div class="eq-card ec-purple"><h3>Second Law &amp; Entropy</h3><p>Heat flows spontaneously from hot to cold. Entropy of an isolated system increases (or stays same). No perfectly efficient engine.</p></div>
+    <div class="eq-card ec-blue"><h3>Efficiency</h3><span class="f">e = W_out/Q_in = 1 − Q_cold/Q_hot</span><span class="f">Carnot: e_max = 1 − T_cold/T_hot</span></div>
+  </div>
+</section>
+
+<!-- E&M -->
+<section class="section" id="em">
+  <div class="sec-header">
+    <div class="sec-tag p2-tag">Physics 2 · Unit 3</div>
+    <div class="sec-title">Electric Fields, Potential &amp; Magnetism</div>
+    <div class="exam-pct p2">~25–30% of Physics 2</div>
+  </div>
+  <div class="eq-grid">
+    <div class="eq-card ec-blue"><h3>Electric Field</h3><span class="f">E = kq/r²  (point charge)</span><span class="f">F = qE</span><p>Direction: away from +, toward −. E points from high to low potential.</p></div>
+    <div class="eq-card ec-cyan"><h3>Electric Potential</h3><span class="f">V = kq/r  (point charge)</span><span class="f">ΔUE = qΔV</span><p>Scalar quantity. Equipotential lines ⊥ electric field lines.</p></div>
+    <div class="eq-card ec-teal"><h3>Capacitors</h3><span class="f">C = Q/V  ·  U = ½CV²</span><span class="f">Parallel plates: C = ε₀A/d</span><p>Series: 1/C = Σ1/Cᵢ. Parallel: C = ΣCᵢ</p></div>
+    <div class="eq-card ec-purple"><h3>Magnetic Force</h3><span class="f">F = qv × B  (magnitude: qvB sinθ)</span><span class="f">F = IL × B  (on current)</span><p>Use right-hand rule. F ⊥ both v and B → circular motion.</p></div>
+    <div class="eq-card ec-green"><h3>Magnetic Field Sources</h3><span class="f">Long wire: B = μ₀I/(2πr)</span><p>Right-hand rule: curl fingers in direction of current → B field direction wraps around.</p></div>
+    <div class="eq-card ec-yellow"><h3>Electromagnetic Induction</h3><span class="f">ε = −ΔΦ_B/Δt  (Faraday)</span><span class="f">Φ_B = BA cos θ</span><p>Changing B flux induces EMF. Lenz's Law: induced current opposes change in flux.</p></div>
+  </div>
+</section>
+
+<!-- CIRCUITS -->
+<section class="section" id="circuits">
+  <div class="sec-header">
+    <div class="sec-tag p2-tag">Physics 2 · Unit 4</div>
+    <div class="sec-title">DC Circuits</div>
+    <div class="exam-pct p2">~15–20% of Physics 2</div>
+  </div>
+  <div class="eq-grid">
+    <div class="eq-card ec-blue"><h3>Ohm's Law</h3><span class="f">V = IR</span><p>V = voltage (volts), I = current (amps), R = resistance (ohms). Only valid for ohmic resistors.</p></div>
+    <div class="eq-card ec-cyan"><h3>Power</h3><span class="f">P = IV = I²R = V²/R</span></div>
+    <div class="eq-card ec-green"><h3>Series Circuit</h3><span class="f">R_total = R₁ + R₂ + R₃</span><span class="f">Same current everywhere</span><span class="f">V = V₁ + V₂ + V₃</span></div>
+    <div class="eq-card ec-yellow"><h3>Parallel Circuit</h3><span class="f">1/R_total = 1/R₁ + 1/R₂</span><span class="f">Same voltage across each</span><span class="f">I = I₁ + I₂ + I₃</span></div>
+    <div class="eq-card ec-orange"><h3>Kirchhoff's Laws</h3><span class="f">Junction rule: ΣI_in = ΣI_out</span><span class="f">Loop rule: ΣV = 0 around loop</span></div>
+    <div class="eq-card ec-teal"><h3>Capacitors in Circuits</h3><span class="f">Charging: current decreases → 0</span><p>Fully charged capacitor: no current flows through it. Acts like open switch in steady state.</p></div>
+  </div>
+  <div class="trap">
+    <div class="trap-tag">⚡ Parallel Resistors — Total R is Less Than Smallest</div>
+    <p>Adding a resistor in parallel always DECREASES total resistance. In parallel, voltage is same across each; current splits. In series, current is same; voltage splits.</p>
+  </div>
+</section>
+
+<!-- OPTICS -->
+<section class="section" id="optics">
+  <div class="sec-header">
+    <div class="sec-tag p2-tag">Physics 2 · Unit 6</div>
+    <div class="sec-title">Geometric &amp; Physical Optics</div>
+    <div class="exam-pct p2">~12–15% of Physics 2</div>
+  </div>
+  <div class="eq-grid">
+    <div class="eq-card ec-teal"><h3>Snell's Law</h3><span class="f">n₁ sin θ₁ = n₂ sin θ₂</span><p>n = index of refraction. Light bends toward normal entering denser medium. Critical angle: sin θᶜ = n₂/n₁</p></div>
+    <div class="eq-card ec-blue"><h3>Mirror / Lens Equation</h3><span class="f">1/f = 1/dₒ + 1/dᵢ</span><span class="f">m = −dᵢ/dₒ = hᵢ/hₒ</span><p>f &gt; 0: converging (concave mirror, convex lens). f &lt; 0: diverging.</p></div>
+    <div class="eq-card ec-purple"><h3>Double-Slit Interference</h3><span class="f">Bright: d sin θ = mλ (m=0,±1,±2...)</span><span class="f">Dark: d sin θ = (m+½)λ</span></div>
+    <div class="eq-card ec-green"><h3>Single-Slit Diffraction</h3><span class="f">Dark: a sin θ = mλ (m=±1,±2...)</span><p>a = slit width. Wider central maximum with narrower slit.</p></div>
+  </div>
+</section>
+
+<!-- MODERN PHYSICS -->
+<section class="section" id="modern">
+  <div class="sec-header">
+    <div class="sec-tag p2-tag">Physics 2 · Unit 7</div>
+    <div class="sec-title">Modern Physics</div>
+    <div class="exam-pct p2">~10–15% of Physics 2</div>
+  </div>
+  <div class="eq-grid">
+    <div class="eq-card ec-purple"><h3>Photoelectric Effect</h3><span class="f">KE_max = hf − φ</span><p>h = 6.626×10⁻³⁴ J·s. φ = work function. No electrons below threshold frequency. Einstein won Nobel Prize for this.</p></div>
+    <div class="eq-card ec-blue"><h3>Photon Energy</h3><span class="f">E = hf = hc/λ</span><p>c = 3×10⁸ m/s. Higher frequency = higher energy photon.</p></div>
+    <div class="eq-card ec-cyan"><h3>de Broglie Wavelength</h3><span class="f">λ = h/p = h/(mv)</span><p>Every particle has a wavelength. Explains electron diffraction and atomic orbitals.</p></div>
+    <div class="eq-card ec-green"><h3>Radioactive Decay</h3><span class="f">N(t) = N₀ e^(−λt)</span><span class="f">t₁/₂ = ln(2)/λ = 0.693/λ</span><p>Alpha (α): loses 4 mass, 2 charge. Beta (β⁻): neutron → proton + electron. Gamma (γ): no mass/charge change.</p></div>
+    <div class="eq-card ec-orange"><h3>Mass-Energy Equivalence</h3><span class="f">E = mc²</span><p>Nuclear reactions convert tiny mass → enormous energy. Binding energy holds nucleus together.</p></div>
+  </div>
+</section>
+
+<!-- MCQ -->
+<section class="section" id="mcq">
+  <div class="sec-header"><div class="sec-tag">Practice</div><div class="sec-title">MCQ Practice</div></div>
+  <div class="question-box">
+    <div class="q-header"><span class="q-num">Q1</span><span class="q-type">Kinematics · Graphs</span></div>
+    <div class="q-body">
+      <p>A car accelerates from rest at 3 m/s² for 4 seconds, then moves at constant speed for 3 seconds. What is the total displacement?</p>
+      <ul class="q-choices">
+        <li onclick="reveal(this,'wrong','Q1: Phase 1: x=½at²=½(3)(16)=24m. Phase 2: v=at=12m/s, x=12×3=36m. Total=60m')">A) 36 m</li>
+        <li onclick="reveal(this,'wrong','Q1: Phase 1 displacement = ½(3)(4²) = 24m, not 12m')">B) 48 m</li>
+        <li onclick="reveal(this,'correct','✓ Phase 1: x=½(3)(4²)=24m. v=3×4=12m/s. Phase 2: x=12×3=36m. Total=60m')">C) 60 m</li>
+        <li onclick="reveal(this,'wrong','Q1: Check your calculation of phase 1 or phase 2')">D) 72 m</li>
+      </ul>
+    </div>
+    <div class="q-reveal" id="rev-Q1"><div class="q-answer"><strong>Answer: C) 60 m</strong><br>Phase 1 (accelerating): x = ½at² = ½(3)(16) = 24 m. Final speed = (3)(4) = 12 m/s.<br>Phase 2 (constant): x = vt = 12(3) = 36 m. Total = 24 + 36 = 60 m.</div></div>
+  </div>
+  <div class="question-box">
+    <div class="q-header"><span class="q-num">Q2</span><span class="q-type">Energy · Conservation</span></div>
+    <div class="q-body">
+      <p>A 2 kg ball is released from rest at height h = 5 m. Ignoring friction, what is its speed at the bottom?</p>
+      <ul class="q-choices">
+        <li onclick="reveal(this,'wrong','Q2: v = √(2gh) = √(2×10×5) = √100 = 10 m/s')">A) 5 m/s</li>
+        <li onclick="reveal(this,'correct','✓ mgh = ½mv² → v = √(2gh) = √(100) = 10 m/s')">B) 10 m/s</li>
+        <li onclick="reveal(this,'wrong','Q2: Check: mgh = ½mv², mass cancels, v=√(2×10×5)')">C) 7 m/s</li>
+        <li onclick="reveal(this,'wrong','Q2: Mass cancels out in energy conservation')">D) 14 m/s</li>
+      </ul>
+    </div>
+    <div class="q-reveal" id="rev-Q2"><div class="q-answer"><strong>Answer: B) 10 m/s</strong><br>Conservation of energy: mgh = ½mv². Mass cancels: v = √(2gh) = √(2×10×5) = √100 = 10 m/s.</div></div>
+  </div>
+  <div class="question-box">
+    <div class="q-header"><span class="q-num">Q3</span><span class="q-type">Circuits (P2)</span></div>
+    <div class="q-body">
+      <p>Two resistors, 4Ω and 12Ω, are connected in parallel. What is the equivalent resistance?</p>
+      <ul class="q-choices">
+        <li onclick="reveal(this,'wrong','Q3: Series would give 16Ω. These are in parallel.')">A) 16 Ω</li>
+        <li onclick="reveal(this,'wrong','Q3: 1/R = 1/4+1/12 = 3/12+1/12 = 4/12. R = 12/4 = 3Ω')">B) 8 Ω</li>
+        <li onclick="reveal(this,'correct','✓ 1/R = 1/4 + 1/12 = 3/12 + 1/12 = 4/12. R = 3 Ω')">C) 3 Ω</li>
+        <li onclick="reveal(this,'wrong','Q3: Parallel resistance is always less than the smallest individual resistor (4Ω)')">D) 6 Ω</li>
+      </ul>
+    </div>
+    <div class="q-reveal" id="rev-Q3"><div class="q-answer"><strong>Answer: C) 3 Ω</strong><br>1/R = 1/4 + 1/12 = 3/12 + 1/12 = 4/12 → R = 3 Ω. Parallel resistance is always less than the smallest resistor.</div></div>
+  </div>
+</section>
+
+<!-- FRQ -->
+<section class="section" id="frq">
+  <div class="sec-header"><div class="sec-tag">Practice</div><div class="sec-title">FRQ Practice</div></div>
+  <div class="callout">
+    <div class="callout-tag">Physics FRQ Strategy</div>
+    <ul>
+      <li>Draw labeled diagrams: FBD, energy diagrams, circuit diagrams — even if not asked, they help you organize thinking</li>
+      <li>Start every mechanics problem by defining a coordinate system with a positive direction</li>
+      <li>Write the general equation first (F=ma), then substitute — don't just write numbers</li>
+      <li>Show all algebra steps. Correct setup with arithmetic error gets partial credit; answer with no work gets zero</li>
+      <li>Include UNITS on every answer. "10" earns less than "10 m/s"</li>
+    </ul>
+  </div>
+  <div class="frq-box">
+    <div class="frq-header"><span class="frq-badge">FRQ 1</span><span class="frq-title">Newton's Laws — Atwood Machine</span></div>
+    <div class="frq-body">
+      <p>Two blocks are connected by a massless string over a frictionless pulley. Block A (m = 3 kg) hangs on the left; Block B (m = 5 kg) hangs on the right.</p>
+      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:3px;padding:0.9rem;margin:0.75rem 0;font-size:13px;color:var(--text2);">
+        <strong style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--teal);">Part A:</strong> Draw a free-body diagram for each block.<br>
+        <strong style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--teal);">Part B:</strong> Find the acceleration of the system.<br>
+        <strong style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--teal);">Part C:</strong> Find the tension in the string.
+      </div>
+      <button class="solution-toggle" onclick="toggleSolution(this)">▶ Show Full Solution</button>
+      <div class="solution-content">
+        <div class="eq-block">
+          <span class="label">Part A: FBD</span><br>
+          Block A: T upward, m_A·g downward<br>
+          Block B: T upward, m_B·g downward<br><br>
+          <span class="label">Part B: Apply Newton's 2nd Law (B descends, A ascends)</span><br>
+          For block B: m_B·g − T = m_B·a<br>
+          For block A: T − m_A·g = m_A·a<br>
+          Add equations: (m_B − m_A)g = (m_A + m_B)a<br>
+          a = (5−3)(10)/(5+3) = 20/8 = <span class="eq">2.5 m/s²</span><br><br>
+          <span class="label">Part C: Tension</span><br>
+          T = m_A(g + a) = 3(10 + 2.5) = 3(12.5) = <span class="eq">37.5 N</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="must-know">
+    <h4>⚡ Perfect Score Checklist</h4>
+    <ul>
+      <li><strong>FBD first, always</strong> — AP explicitly awards points for correct FBDs</li>
+      <li><strong>Mass ≠ Weight</strong>: W = mg. Mass in kg, weight in N</li>
+      <li><strong>Centripetal force is not a new force</strong> — it IS the net inward force</li>
+      <li><strong>Work by normal force = 0</strong> (perpendicular to motion). Gravity on circular motion = 0 at equator</li>
+      <li><strong>Elastic collision: KE AND momentum conserved. Inelastic: only momentum conserved.</strong></li>
+      <li><strong>Pressure increases with depth: P = P₀ + ρgh</strong></li>
+      <li><strong>Closed pipe: only odd harmonics (1,3,5...)</strong>. Open pipe and strings: all harmonics</li>
+      <li><strong>Current through capacitor = 0 in steady state</strong></li>
+      <li><strong>Parallel resistors: equivalent R &lt; smallest R</strong></li>
+      <li><strong>Lenz's Law direction: induced current opposes the change</strong> in flux that created it</li>
+      <li><strong>Photoelectric effect: frequency matters, not intensity</strong> for ejecting electrons</li>
+      <li><strong>Show units in every answer</strong> — graders dock points for missing units</li>
+    </ul>
+  </div>
+</section>
+
+</div>
+<footer class="footer">
+  <a href="index.html" style="color:inherit;text-decoration:none;">← Score Five Hub</a> · AP Physics 1 &amp; 2 · Mechanics · E&amp;M · Fluids · Thermodynamics · Optics · Modern Physics
+</footer>
+<script>
+function reveal(el,result,msg){
+  const body=el.closest('.q-body');
+  body.querySelectorAll('.q-choices li').forEach(li=>{li.onclick=null;li.style.cursor='default';});
+  el.classList.add(result);
+  const qBox=el.closest('.question-box');
+  const qNum=qBox.querySelector('.q-num').textContent;
+  const rev=document.getElementById('rev-'+qNum);
+  if(rev)rev.classList.add('show');
+}
+function toggleSolution(btn){
+  const c=btn.nextElementSibling;
+  if(c.classList.contains('show')){c.classList.remove('show');btn.textContent='▶ Show Full Solution';}
+  else{c.classList.add('show');btn.textContent='▼ Hide Solution';}
+}
+</script>
+</body>
+</html>

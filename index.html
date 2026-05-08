@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Five &amp; A+ | AP &amp; College Review by Arnav Sinha</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#080a10;--bg2:#0d1018;--bg3:#121620;--border:#1a2030;--border2:#243040;--text:#e8eef8;--text2:#607090;--text3:#384860;--gold:#f59e0b;--accent:#3b82f6;--green:#10b981;}
+*{box-sizing:border-box;margin:0;padding:0;}html{scroll-behavior:smooth;}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.6;}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 20% 20%,rgba(59,130,246,0.06) 0%,transparent 50%),radial-gradient(ellipse at 80% 80%,rgba(245,158,11,0.05) 0%,transparent 50%);pointer-events:none;z-index:0;}
+.navbar{position:sticky;top:0;z-index:200;background:rgba(8,10,16,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:60px;}
+.nav-brand{font-family:'Syne',sans-serif;font-size:1.25rem;font-weight:800;background:linear-gradient(135deg,#f59e0b,#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.nav-links{display:flex;gap:0.25rem;}
+.nav-links a{color:var(--text3);text-decoration:none;font-family:'Fira Code',monospace;font-size:11px;padding:0.35rem 0.65rem;border-radius:4px;transition:all 0.15s;}
+.nav-links a:hover{color:var(--gold);background:rgba(245,158,11,0.07);}
+@media(max-width:680px){.nav-links{display:none;}}
+.hero{max-width:1100px;margin:0 auto;padding:5rem 2rem 3.5rem;text-align:center;position:relative;z-index:1;}
+.hero-badge{font-family:'Fira Code',monospace;font-size:11px;color:var(--gold);letter-spacing:0.16em;background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);padding:0.3rem 1rem;border-radius:20px;display:inline-block;margin-bottom:1.5rem;}
+.hero h1{font-family:'Syne',sans-serif;font-size:clamp(2.8rem,7vw,5.5rem);font-weight:800;line-height:0.95;letter-spacing:-0.04em;margin-bottom:1.25rem;}
+.h1-l1{display:block;color:#fff;}
+.h1-l2{display:block;background:linear-gradient(135deg,#f59e0b,#3b82f6 70%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-sub{font-size:1.05rem;color:var(--text2);max-width:520px;margin:0 auto 2.5rem;line-height:1.75;}
+.stats-row{display:flex;flex-wrap:wrap;justify-content:center;gap:0.75rem;margin-bottom:2.75rem;}
+.stat{background:var(--bg2);border:1px solid var(--border2);border-radius:10px;padding:0.85rem 1.4rem;text-align:center;}
+.stat-n{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:#fff;line-height:1;}
+.stat-l{font-family:'Fira Code',monospace;font-size:10px;color:var(--text3);letter-spacing:0.08em;margin-top:0.2rem;}
+.cta-btn{display:inline-flex;align-items:center;gap:0.5rem;background:linear-gradient(135deg,rgba(245,158,11,0.18),rgba(59,130,246,0.14));border:1px solid rgba(245,158,11,0.35);color:var(--gold);font-family:'Fira Code',monospace;font-size:12px;padding:0.8rem 1.75rem;border-radius:6px;text-decoration:none;transition:all 0.2s;letter-spacing:0.07em;}
+.cta-btn:hover{background:linear-gradient(135deg,rgba(245,158,11,0.28),rgba(59,130,246,0.22));border-color:var(--gold);}
+.wrap{max-width:1100px;margin:0 auto;padding:0 2rem;}
+.sec{padding:2.5rem 0 0.5rem;position:relative;z-index:1;}
+.sec-h{display:flex;align-items:baseline;gap:1rem;margin-bottom:1.75rem;}
+.sec-tag{font-family:'Fira Code',monospace;font-size:10px;color:var(--text3);letter-spacing:0.14em;text-transform:uppercase;}
+.sec-title{font-family:'Syne',sans-serif;font-size:1.35rem;font-weight:800;letter-spacing:-0.02em;}
+.sec-line{flex:1;height:1px;background:var(--border);}
+.cat{margin-bottom:2.25rem;}
+.cat-lbl{font-family:'Fira Code',monospace;font-size:10px;color:var(--text3);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.75rem;}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+@media(max-width:880px){.grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:560px){.grid{grid-template-columns:1fr;}}
+.gc{background:var(--bg2);padding:1.4rem;text-decoration:none;display:block;transition:background 0.18s;position:relative;overflow:hidden;}
+.gc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--ac);transform:scaleX(0);transform-origin:left;transition:transform 0.25s;}
+.gc:hover{background:var(--bg3);}
+.gc:hover::before{transform:scaleX(1);}
+.gc.w2{grid-column:span 2;}
+@media(max-width:880px){.gc.w2{grid-column:span 1;}}
+.g-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.85rem;}
+.g-icon{width:38px;height:38px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:18px;background:var(--ic);flex-shrink:0;}
+.g-badge{font-family:'Fira Code',monospace;font-size:9px;padding:0.15rem 0.45rem;border-radius:3px;letter-spacing:0.05em;background:var(--tb);color:var(--ac);border:1px solid var(--tbd);}
+.g-title{font-size:1rem;font-weight:700;color:#fff;margin-bottom:0.2rem;line-height:1.2;}
+.g-sub{font-size:11.5px;color:var(--text2);line-height:1.5;margin-bottom:0.85rem;}
+.g-pills{display:flex;flex-wrap:wrap;gap:0.22rem;margin-bottom:0.85rem;}
+.gp{background:rgba(255,255,255,0.03);border:1px solid var(--border2);border-radius:2px;font-size:9.5px;color:var(--text3);padding:0.12rem 0.4rem;font-family:'Fira Code',monospace;}
+.g-foot{display:flex;justify-content:space-between;align-items:center;}
+.g-meta{font-size:10.5px;color:var(--text3);font-family:'Fira Code',monospace;}
+.g-arr{font-size:15px;color:var(--text3);transition:transform 0.2s,color 0.2s;}
+.gc:hover .g-arr{transform:translateX(4px);color:#fff;}
+.method-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0.85rem;}
+.mc{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:1.2rem;}
+.mc-icon{font-size:1.3rem;margin-bottom:0.55rem;}
+.mc-src{font-family:'Fira Code',monospace;font-size:9px;color:#f59e0b;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.2rem;}
+.mc-name{font-weight:700;font-size:0.9rem;margin-bottom:0.35rem;}
+.mc-desc{font-size:11.5px;color:var(--text2);line-height:1.6;}
+.how-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:0.85rem;}
+.hc{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:1.2rem;}
+.hc-n{font-family:'Fira Code',monospace;font-size:10px;color:var(--text3);letter-spacing:0.1em;margin-bottom:0.35rem;}
+.hc-t{font-weight:700;font-size:0.9rem;margin-bottom:0.3rem;}
+.hc-d{font-size:11.5px;color:var(--text2);line-height:1.6;}
+.dev-card{background:linear-gradient(135deg,var(--bg2),rgba(59,130,246,0.03));border:1px solid rgba(59,130,246,0.15);border-radius:12px;padding:2.5rem;display:grid;grid-template-columns:auto 1fr;gap:2rem;align-items:start;}
+@media(max-width:660px){.dev-card{grid-template-columns:1fr;}}
+.dev-avi{width:86px;height:86px;border-radius:12px;background:linear-gradient(135deg,rgba(245,158,11,0.22),rgba(59,130,246,0.22));display:flex;align-items:center;justify-content:center;font-size:2.6rem;border:1px solid rgba(245,158,11,0.25);flex-shrink:0;}
+.dev-name{font-family:'Syne',sans-serif;font-size:1.35rem;font-weight:800;letter-spacing:-0.02em;margin-bottom:0.12rem;}
+.dev-school{font-family:'Fira Code',monospace;font-size:10px;color:#f59e0b;letter-spacing:0.1em;margin-bottom:0.8rem;}
+.dev-bio{font-size:0.9rem;color:var(--text2);line-height:1.8;margin-bottom:0.9rem;}
+.dev-chips{display:flex;flex-wrap:wrap;gap:0.35rem;margin-bottom:0.9rem;}
+.chip{background:rgba(255,255,255,0.04);border:1px solid var(--border2);border-radius:4px;padding:0.27rem 0.65rem;font-family:'Fira Code',monospace;font-size:10px;color:var(--text2);}
+.chip strong{color:#f59e0b;}
+.dev-quote{padding:0.85rem 1rem;background:rgba(59,130,246,0.06);border:1px solid rgba(59,130,246,0.14);border-left:3px solid var(--accent);border-radius:0 5px 5px 0;font-size:13px;color:var(--text2);line-height:1.7;font-style:italic;}
+.rev-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:2.5rem;}
+.rev-intro{font-size:0.9rem;color:var(--text2);line-height:1.75;margin-bottom:1.5rem;max-width:500px;}
+.rform{display:grid;grid-template-columns:1fr 1fr;gap:0.9rem;}
+@media(max-width:580px){.rform{grid-template-columns:1fr;}}
+.fg{display:flex;flex-direction:column;gap:0.3rem;}
+.fg.full{grid-column:1/-1;}
+.fg label{font-family:'Fira Code',monospace;font-size:10px;color:var(--text3);letter-spacing:0.1em;text-transform:uppercase;}
+.fg input,.fg select,.fg textarea{background:var(--bg3);border:1px solid var(--border2);border-radius:5px;padding:0.65rem 0.85rem;color:var(--text);font-family:'Outfit',sans-serif;font-size:13.5px;outline:none;transition:border-color 0.15s;width:100%;}
+.fg input:focus,.fg select,.fg textarea:focus{border-color:#f59e0b;}
+.fg textarea{min-height:90px;resize:vertical;}
+.stars{display:flex;gap:0.35rem;padding:0.25rem 0;}
+.star{background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--border2);transition:color 0.12s;}
+.star.on,.star:hover{color:#f59e0b;}
+.r-sub{display:inline-flex;align-items:center;gap:0.45rem;background:rgba(245,158,11,0.15);border:1px solid rgba(245,158,11,0.3);color:#f59e0b;font-family:'Fira Code',monospace;font-size:11px;padding:0.65rem 1.4rem;border-radius:5px;cursor:pointer;transition:all 0.18s;letter-spacing:0.06em;margin-top:0.4rem;}
+.r-sub:hover{background:rgba(245,158,11,0.25);}
+.r-note{font-family:'Fira Code',monospace;font-size:10px;color:var(--text3);margin-top:0.4rem;}
+.r-ok{display:none;background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.22);border-radius:5px;padding:0.85rem 1rem;font-size:13px;color:#6ee7b7;margin-top:0.85rem;}
+.footer{background:var(--bg2);border-top:1px solid var(--border);padding:2.5rem 2rem;text-align:center;margin-top:4rem;}
+.f-brand{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;background:linear-gradient(135deg,#f59e0b,#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:0.35rem;}
+.f-sub{font-family:'Fira Code',monospace;font-size:10px;color:var(--text3);letter-spacing:0.08em;}
+.f-links{display:flex;flex-wrap:wrap;justify-content:center;gap:0.4rem;margin-top:0.9rem;}
+.f-links a{font-family:'Fira Code',monospace;font-size:10px;color:var(--text3);text-decoration:none;padding:0.22rem 0.45rem;border-radius:3px;transition:color 0.15s;}
+.f-links a:hover{color:#f59e0b;}
+</style></head>
+<body>
+<nav class="navbar"><div class="nav-brand">Five &amp; A+</div>
+<div class="nav-links"><a href="#ap">AP Guides</a><a href="#college">College</a><a href="#methods">Methods</a><a href="#dev">About</a><a href="#review">Reviews</a></div></nav>
+
+<div class="hero">
+<div class="hero-badge">★ &nbsp;Built by a student, for students — 100% free</div>
+<h1><span class="h1-l1">Score 5s.</span><span class="h1-l2">Score A's.</span></h1>
+<p class="hero-sub">Comprehensive AP and college course review guides built the way the best educators teach — current rubrics, step-by-step solutions, interactive quizzes, zero paywalls.</p>
+<div class="stats-row">
+<div class="stat"><div class="stat-n">15</div><div class="stat-l">AP Guides</div></div>
+<div class="stat"><div class="stat-n">2</div><div class="stat-l">College Courses</div></div>
+<div class="stat"><div class="stat-n">2025</div><div class="stat-l">Updated</div></div>
+<div class="stat"><div class="stat-n">100%</div><div class="stat-l">Free</div></div>
+</div>
+<a class="cta-btn" href="#ap">→ &nbsp;Browse All Guides</a>
+</div>
+
+<!-- AP COURSES -->
+<section class="sec" id="ap"><div class="wrap">
+<div class="sec-h"><span class="sec-tag">15 Guides</span><span class="sec-title">AP Exam Review</span><div class="sec-line"></div></div>
+
+<div class="cat"><div class="cat-lbl">History &amp; Social Science</div>
+<div class="grid">
+<a class="gc" href="apush.html" style="--ac:#c9a96e;--ic:rgba(201,169,110,0.1);--tb:rgba(201,169,110,0.08);--tbd:rgba(201,169,110,0.2);">
+<div class="g-top"><div class="g-icon">📜</div><span class="g-badge">HISTORY</span></div>
+<div class="g-title">AP U.S. History</div>
+<div class="g-sub">All 9 periods with current 2025 rubrics. 7-pt DBQ, 6-pt LEQ, SAQ. HIPP sourcing, Heimler thesis formula, Tom Richey contextualization.</div>
+<div class="g-pills"><span class="gp">7-pt DBQ</span><span class="gp">6-pt LEQ</span><span class="gp">HIPP</span><span class="gp">Unit Quizzes</span><span class="gp">FRQ Models</span></div>
+<div class="g-foot"><span class="g-meta">9 periods · P1–P9</span><span class="g-arr">→</span></div></a>
+
+<a class="gc" href="apworld.html" style="--ac:#f59e0b;--ic:rgba(245,158,11,0.1);--tb:rgba(245,158,11,0.08);--tbd:rgba(245,158,11,0.2);">
+<div class="g-top"><div class="g-icon">🌍</div><span class="g-badge">HISTORY</span></div>
+<div class="g-title">AP World History: Modern</div>
+<div class="g-sub">1200–present. Trade networks, gunpowder empires, Atlantic slave trade, revolutions, imperialism, decolonization, globalization. SPICE-T themes.</div>
+<div class="g-pills"><span class="gp">4 Periods</span><span class="gp">SPICE-T</span><span class="gp">DBQ/LEQ</span><span class="gp">Columbian Exchange</span><span class="gp">Quizzes</span></div>
+<div class="g-foot"><span class="g-meta">4 periods · 1200–present</span><span class="g-arr">→</span></div></a>
+
+<a class="gc" href="apgov.html" style="--ac:#60a5fa;--ic:rgba(96,165,250,0.1);--tb:rgba(96,165,250,0.08);--tbd:rgba(96,165,250,0.2);">
+<div class="g-top"><div class="g-icon">🏛️</div><span class="g-badge">SOCIAL SCIENCE</span></div>
+<div class="g-title">AP U.S. Government &amp; Politics</div>
+<div class="g-sub">All 15 required SCOTUS cases fully analyzed. 9 foundational documents. Argument essay, SCOTUS comparison, concept application FRQs.</div>
+<div class="g-pills"><span class="gp">15 SCOTUS</span><span class="gp">9 Docs</span><span class="gp">FRQ Types</span><span class="gp">Branches</span><span class="gp">Quizzes</span></div>
+<div class="g-foot"><span class="g-meta">5 units · Branches &amp; Rights</span><span class="g-arr">→</span></div></a>
+
+<a class="gc" href="appsych.html" style="--ac:#a855f7;--ic:rgba(168,85,247,0.1);--tb:rgba(168,85,247,0.08);--tbd:rgba(168,85,247,0.2);">
+<div class="g-top"><div class="g-icon">🧠</div><span class="g-badge">SOCIAL SCIENCE</span></div>
+<div class="g-title">AP Psychology</div>
+<div class="g-sub">7 perspectives, classical &amp; operant conditioning, memory models, Milgram/Asch/Zimbardo key studies, all disorders + treatment. Unit quizzes throughout.</div>
+<div class="g-pills"><span class="gp">Key Studies</span><span class="gp">Conditioning</span><span class="gp">Memory</span><span class="gp">Disorders</span><span class="gp">Quizzes</span></div>
+<div class="g-foot"><span class="g-meta">9 units · Milgram to CBT</span><span class="g-arr">→</span></div></a>
+</div></div>
+
+<div class="cat"><div class="cat-lbl">English Language Arts</div>
+<div class="grid">
+<a class="gc" href="aplang.html" style="--ac:#fb923c;--ic:rgba(251,146,60,0.1);--tb:rgba(251,146,60,0.08);--tbd:rgba(251,146,60,0.2);">
+<div class="g-top"><div class="g-icon">✍️</div><span class="g-badge">AP ENGLISH</span></div>
+<div class="g-title">AP Language &amp; Composition</div>
+<div class="g-sub">Current 2025 analytic rubric (1+4+1). SPACE-CAT rhetorical analysis. 30+ devices. Scored model essays for all 3 FRQ types with line-by-line annotation.</div>
+<div class="g-pills"><span class="gp">1+4+1 Rubric</span><span class="gp">SPACE-CAT</span><span class="gp">Synthesis</span><span class="gp">Rhet. Analysis</span><span class="gp">Argument</span></div>
+<div class="g-foot"><span class="g-meta">3 FRQ types · Analytic rubric</span><span class="g-arr">→</span></div></a>
+
+<a class="gc" href="aplit.html" style="--ac:#f472b6;--ic:rgba(244,114,182,0.1);--tb:rgba(244,114,182,0.08);--tbd:rgba(244,114,182,0.2);">
+<div class="g-top"><div class="g-icon">📖</div><span class="g-badge">AP ENGLISH</span></div>
+<div class="g-title">AP Literature &amp; Composition</div>
+<div class="g-sub">60+ literary devices. TPCASTT. Poetry analysis, prose fiction, literary argument FRQs with scored model responses and rubric annotation.</div>
+<div class="g-pills"><span class="gp">Poetry Analysis</span><span class="gp">Prose FRQ</span><span class="gp">Literary Terms</span><span class="gp">Novels</span><span class="gp">Quizzes</span></div>
+<div class="g-foot"><span class="g-meta">3 FRQ types · Poetry to prose</span><span class="g-arr">→</span></div></a>
+</div></div>
+
+<div class="cat"><div class="cat-lbl">STEM</div>
+<div class="grid">
+<a class="gc" href="apcsa.html" style="--ac:#5b9cf6;--ic:rgba(91,156,246,0.1);--tb:rgba(91,156,246,0.08);--tbd:rgba(91,156,246,0.2);">
+<div class="g-top"><div class="g-icon">⌨️</div><span class="g-badge">AP STEM</span></div>
+<div class="g-title">AP Computer Science A</div>
+<div class="g-sub">All 4 FRQ types with complete step-by-step solutions. Java syntax reference, OOP, arrays, ArrayLists, 2D arrays. Common traps. Per-unit quizzes.</div>
+<div class="g-pills"><span class="gp">4 FRQ Types</span><span class="gp">Java Reference</span><span class="gp">Step-by-Step</span><span class="gp">OOP</span><span class="gp">Unit Quizzes</span></div>
+<div class="g-foot"><span class="g-meta">10 units · Java</span><span class="g-arr">→</span></div></a>
+
+<a class="gc" href="apcsp.html" style="--ac:#f97316;--ic:rgba(249,115,22,0.1);--tb:rgba(249,115,22,0.08);--tbd:rgba(249,115,22,0.2);">
+<div class="g-top"><div class="g-icon">💻</div><span class="g-badge">AP STEM</span></div>
+<div class="g-title">AP Computer Science Principles</div>
+<div class="g-sub">5 Big Ideas: creative development, data, algorithms, systems/networks, impact. Full Create PT row-by-row breakdown with example responses.</div>
+<div class="g-pills"><span class="gp">Pseudocode</span><span class="gp">Binary</span><span class="gp">Networks</span><span class="gp">Create PT</span><span class="gp">Quizzes</span></div>
+<div class="g-foot"><span class="g-meta">5 Big Ideas · Create PT</span><span class="g-arr">→</span></div></a>
+
+<a class="gc" href="calcbc.html" style="--ac:#a78bfa;--ic:rgba(167,139,250,0.1);--tb:rgba(167,139,250,0.08);--tbd:rgba(167,139,250,0.2);">
+<div class="g-top"><div class="g-icon">∫</div><span class="g-badge">AP STEM</span></div>
+<div class="g-title">AP Calculus BC</div>
+<div class="g-sub">Limits through series. Every BC-only topic: Taylor/Maclaurin, parametric, polar, all convergence tests. Worked examples for every problem type.</div>
+<div class="g-pills"><span class="gp">Series Tests</span><span class="gp">Taylor/Maclaurin</span><span class="gp">Polar</span><span class="gp">FRQ Guide</span><span class="gp">Quizzes</span></div>
+<div class="g-foot"><span class="g-meta">10 units · AB + BC topics</span><span class="g-arr">→</span></div></a>
+
+<a class="gc" href="physics.html" style="--ac:#34d399;--ic:rgba(52,211,153,0.1);--tb:rgba(52,211,153,0.08);--tbd:rgba(52,211,153,0.2);">
+<div class="g-top"><div class="g-icon">⚡</div><span class="g-badge">AP STEM</span></div>
+<div class="g-title">AP Physics 1 &amp; 2</div>
+<div class="g-sub">Mechanics through modern physics. Every equation with worked examples. FBDs, rotational motion, E&amp;M, optics, thermodynamics, nuclear.</div>
+<div class="g-pills"><span class="gp">Equations</span><span class="gp">FBDs</span><span class="gp">Worked Examples</span><span class="gp">Lab Questions</span><span class="gp">Quizzes</span></div>
+<div class="g-foot"><span class="g-meta">Physics 1 + 2 combined</span><span class="g-arr">→</span></div></a>
+
+<a class="gc" href="apchem.html" style="--ac:#2dd4bf;--ic:rgba(45,212,191,0.1);--tb:rgba(45,212,191,0.08);--tbd:rgba(45,212,191,0.2);">
+<div class="g-top"><div class="g-icon">⚗️</div><span class="g-badge">AP STEM</span></div>
+<div class="g-title">AP Chemistry</div>
+<div class="g-sub">Atomic structure through electrochemistry. Every equation, ICE table walkthrough, titration, Henderson-Hasselbalch, Nernst. Step-by-step problem solving.</div>
+<div class="g-pills"><span class="gp">Kinetics</span><span class="gp">Equilibrium</span><span class="gp">Acid-Base</span><span class="gp">Electrochemistry</span><span class="gp">Quizzes</span></div>
+<div class="g-foot"><span class="g-meta">9 units · Calculations focus</span><span class="g-arr">→</span></div></a>
+
+<a class="gc" href="apbio.html" style="--ac:#4ade80;--ic:rgba(74,222,128,0.1);--tb:rgba(74,222,128,0.08);--tbd:rgba(74,222,128,0.2);">
+<div class="g-top"><div class="g-icon">🧬</div><span class="g-badge">AP STEM</span></div>
+<div class="g-title">AP Biology</div>
+<div class="g-sub">Chemistry of life through ecology. Photosynthesis/respiration ATP counts, genetics, gene expression, Hardy-Weinberg, evolution, ecology. FRQ experimental design.</div>
+<div class="g-pills"><span class="gp">Cell Biology</span><span class="gp">Genetics</span><span class="gp">Evolution</span><span class="gp">Ecology</span><span class="gp">Quizzes</span></div>
+<div class="g-foot"><span class="g-meta">8 units · All topics</span><span class="g-arr">→</span></div></a>
+
+<a class="gc" href="apes.html" style="--ac:#22c55e;--ic:rgba(34,197,94,0.1);--tb:rgba(34,197,94,0.08);--tbd:rgba(34,197,94,0.2);">
+<div class="g-top"><div class="g-icon">🌿</div><span class="g-badge">AP STEM</span></div>
+<div class="g-title">AP Environmental Science</div>
+<div class="g-sub">HIPPCO, Rule of 70, demographic transition, energy source comparison. Climate vs. ozone distinction. FRQ always includes a calculation — we show all of them.</div>
+<div class="g-pills"><span class="gp">HIPPCO</span><span class="gp">Rule of 70</span><span class="gp">Energy Sources</span><span class="gp">Climate</span><span class="gp">Quizzes</span></div>
+<div class="g-foot"><span class="g-meta">9 units · Earth systems</span><span class="g-arr">→</span></div></a>
+</div></div>
+
+<div class="cat"><div class="cat-lbl">Arts</div>
+<div class="grid">
+<a class="gc" href="arthistory.html" style="--ac:#c9a84c;--ic:rgba(201,168,76,0.1);--tb:rgba(201,168,76,0.08);--tbd:rgba(201,168,76,0.2);">
+<div class="g-top"><div class="g-icon">🖼️</div><span class="g-badge">AP ARTS</span></div>
+<div class="g-title">AP Art History</div>
+<div class="g-sub">All 10 content areas. OPTIC formal analysis, 40+ key works with full analysis, movements prehistoric through contemporary, contextual lenses, essay types.</div>
+<div class="g-pills"><span class="gp">OPTIC</span><span class="gp">40+ Works</span><span class="gp">Movements</span><span class="gp">Contextual Lenses</span><span class="gp">Quizzes</span></div>
+<div class="g-foot"><span class="g-meta">10 content areas</span><span class="g-arr">→</span></div></a>
+
+<a class="gc" href="musictheory.html" style="--ac:#e879f9;--ic:rgba(232,121,249,0.1);--tb:rgba(232,121,249,0.08);--tbd:rgba(232,121,249,0.2);">
+<div class="g-top"><div class="g-icon">🎵</div><span class="g-badge">AP ARTS</span></div>
+<div class="g-title">AP Music Theory</div>
+<div class="g-sub">Scales, intervals, chords, SATB voice leading rules (no parallel 5ths/octaves), cadences, circle of fifths, musical form, and aural skills strategy.</div>
+<div class="g-pills"><span class="gp">Circle of 5ths</span><span class="gp">Voice Leading</span><span class="gp">Cadences</span><span class="gp">SATB</span><span class="gp">Quizzes</span></div>
+<div class="g-foot"><span class="g-meta">Written + Aural sections</span><span class="g-arr">→</span></div></a>
+</div></div>
+</div></section>
+
+<!-- COLLEGE COURSES -->
+<section class="sec" id="college"><div class="wrap">
+<div class="sec-h"><span class="sec-tag">2 Guides</span><span class="sec-title">College Course Review</span><div class="sec-line"></div></div>
+<div class="cat"><div class="cat-lbl">Mathematics</div>
+<div class="grid">
+<a class="gc" href="collegealgebra.html" style="--ac:#38bdf8;--ic:rgba(56,189,248,0.1);--tb:rgba(56,189,248,0.08);--tbd:rgba(56,189,248,0.2);">
+<div class="g-top"><div class="g-icon">📐</div><span class="g-badge">COLLEGE MATH</span></div>
+<div class="g-title">College Algebra</div>
+<div class="g-sub">Number systems through functions, polynomials, rational functions, exponentials, logarithms, systems of equations, matrices, sequences &amp; series, conic sections.</div>
+<div class="g-pills"><span class="gp">Functions</span><span class="gp">Polynomials</span><span class="gp">Exponentials</span><span class="gp">Logarithms</span><span class="gp">Matrices</span><span class="gp">Conics</span><span class="gp">Unit Quizzes</span></div>
+<div class="g-foot"><span class="g-meta">8 units · Step-by-step</span><span class="g-arr">→</span></div></a>
+
+<a class="gc" href="collegetrig.html" style="--ac:#818cf8;--ic:rgba(129,140,248,0.1);--tb:rgba(129,140,248,0.08);--tbd:rgba(129,140,248,0.2);">
+<div class="g-top"><div class="g-icon">📊</div><span class="g-badge">COLLEGE MATH</span></div>
+<div class="g-title">College Trigonometry</div>
+<div class="g-sub">Unit circle mastery, all 6 trig functions and graphs, Pythagorean/sum-difference/double-angle identities, inverse trig, equations, Law of Sines &amp; Cosines, polar coordinates.</div>
+<div class="g-pills"><span class="gp">Unit Circle</span><span class="gp">All Identities</span><span class="gp">Inverse Trig</span><span class="gp">Law of Sines/Cosines</span><span class="gp">Polar</span><span class="gp">Quizzes</span></div>
+<div class="g-foot"><span class="g-meta">7 units · All identities</span><span class="g-arr">→</span></div></a>
+</div></div>
+</div></section>
+
+<!-- METHODS -->
+<section class="sec" id="methods"><div class="wrap">
+<div class="sec-h"><span class="sec-tag">Pedagogy</span><span class="sec-title">How We Teach</span><div class="sec-line"></div></div>
+<div class="method-grid">
+<div class="mc"><div class="mc-icon">📚</div><div class="mc-src">Heimler's History</div><div class="mc-name">Rubric-Led Writing</div><div class="mc-desc">Every AP History essay is broken down rubric point by point — thesis, context, evidence, sourcing, complexity — so you know exactly what earns each point before writing a word.</div></div>
+<div class="mc"><div class="mc-icon">🧮</div><div class="mc-src">The Organic Chemistry Tutor</div><div class="mc-name">Step-by-Step Problem Solving</div><div class="mc-desc">Every STEM concept is taught through fully worked examples — each algebraic and logical step narrated. You see the complete reasoning process, not just a final answer.</div></div>
+<div class="mc"><div class="mc-icon">✏️</div><div class="mc-src">Tom Richey</div><div class="mc-name">Contextualization First</div><div class="mc-desc">History essays require connecting evidence to a broader period. We model exactly how to write contextualization that earns the College Board point — not a vague mention.</div></div>
+<div class="mc"><div class="mc-icon">📝</div><div class="mc-src">Marco Learning</div><div class="mc-name">Official Rubric Transparency</div><div class="mc-desc">We publish current College Board rubric language verbatim, then annotate sample responses showing exactly how each point was earned or missed — same approach as AP Readers.</div></div>
+<div class="mc"><div class="mc-icon">🎯</div><div class="mc-src">Five &amp; A+ Original</div><div class="mc-name">Per-Unit Interactive Quizzes</div><div class="mc-desc">Every unit section ends with 5 interactive MCQs. Click to see if you're right, read the explanation, and track your score. Reset and retry until it's automatic.</div></div>
+<div class="mc"><div class="mc-icon">⚡</div><div class="mc-src">Five &amp; A+ Original</div><div class="mc-name">Must-Know Checklists</div><div class="mc-desc">Every guide ends with a high-yield checklist of the concepts most likely to appear on your exam. The 20% of content that earns 80% of the points.</div></div>
+</div>
+</div></section>
+
+<!-- HOW TO USE -->
+<section class="sec"><div class="wrap">
+<div class="sec-h"><span class="sec-tag">Getting Started</span><span class="sec-title">How to Use This Site</span><div class="sec-line"></div></div>
+<div class="how-grid">
+<div class="hc"><div class="hc-n">01 / NAVIGATE</div><div class="hc-t">Sticky nav on every guide</div><div class="hc-d">Each guide has a sticky topbar linking to every unit. Jump to any section instantly — no searching through content you already know.</div></div>
+<div class="hc"><div class="hc-n">02 / STUDY</div><div class="hc-t">Read, then practice</div><div class="hc-d">Each unit covers the concept first, then immediately follows with interactive MCQs. Learn it, then test yourself on the spot.</div></div>
+<div class="hc"><div class="hc-n">03 / REVIEW RUBRICS</div><div class="hc-t">Current official rubrics</div><div class="hc-d">Every essay guide contains the exact 2025 College Board rubric, annotated to show what each point actually requires from real scoring guidelines.</div></div>
+<div class="hc"><div class="hc-n">04 / DEPLOY</div><div class="hc-t">GitHub Pages compatible</div><div class="hc-d">All HTML files in one repo root. Enable GitHub Pages on main branch — all 17 links work instantly. Upload, push, done.</div></div>
+</div>
+</div></section>
+
+<!-- DEVELOPER -->
+<section class="sec" id="dev"><div class="wrap">
+<div class="sec-h"><span class="sec-tag">Creator</span><span class="sec-title">About the Developer</span><div class="sec-line"></div></div>
+<div class="dev-card">
+<div class="dev-avi">👨‍💻</div>
+<div>
+<div class="dev-name">Arnav Sinha</div>
+<div class="dev-school">WARWICK VALLEY HIGH SCHOOL &nbsp;·&nbsp; CLASS OF 2027 &nbsp;·&nbsp; NEW YORK</div>
+<p class="dev-bio">I built <strong>Five &amp; A+</strong> because I couldn't find a single free resource that was both comprehensive <em>and</em> current with actual College Board rubrics. Most review sites either use outdated rubrics, gloss over difficult content, or put everything behind a paywall.<br><br>As a student juggling <strong>11 AP courses</strong> and <strong>5 college classes</strong>, I know firsthand what real test preparation looks like. Every guide on this site reflects how I actually study — current rubrics, step-by-step reasoning, genuine practice, and the same frameworks used by the best AP educators online.</p>
+<div class="dev-chips">
+<div class="chip"><strong>11</strong> AP Courses</div>
+<div class="chip"><strong>5</strong> College Courses</div>
+<div class="chip">Class of <strong>2027</strong></div>
+<div class="chip">Warwick Valley HS</div>
+<div class="chip">New York</div>
+</div>
+<div class="dev-quote">"My goal is simple: every student who wants a 5 or an A should be able to get there — regardless of whether they can afford a tutor or a prep course. This site is my contribution to that."</div>
+</div></div>
+</div></section>
+
+<!-- REVIEW -->
+<section class="sec" id="review"><div class="wrap">
+<div class="sec-h"><span class="sec-tag">Community</span><span class="sec-title">Leave a Review</span><div class="sec-line"></div></div>
+<div class="rev-card">
+<p class="rev-intro">Did a guide help you prep for an exam? Share your experience — every piece of feedback shapes future updates. Reviews are private and go directly to the developer.</p>
+<form id="rf" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" onsubmit="submitReview(event)">
+<div class="rform">
+<div class="fg"><label>Your Name</label><input type="text" name="name" placeholder="First name or anonymous" required></div>
+<div class="fg"><label>Guide You Used</label>
+<select name="course" required style="background:#121620;border:1px solid #243040;border-radius:5px;padding:0.65rem 0.85rem;color:#e8eef8;font-family:Outfit,sans-serif;font-size:13.5px;outline:none;width:100%;">
+<option value="">Select a guide…</option>
+<optgroup label="AP Courses">
+<option>AP U.S. History</option><option>AP World History</option><option>AP U.S. Government</option><option>AP Psychology</option>
+<option>AP Language &amp; Composition</option><option>AP Literature &amp; Composition</option>
+<option>AP Computer Science A</option><option>AP CS Principles</option><option>AP Calculus BC</option>
+<option>AP Physics 1 &amp; 2</option><option>AP Chemistry</option><option>AP Biology</option>
+<option>AP Environmental Science</option><option>AP Art History</option><option>AP Music Theory</option>
+</optgroup>
+<optgroup label="College Courses"><option>College Algebra</option><option>College Trigonometry</option></optgroup>
+</select></div>
+<div class="fg full"><label>Rating</label>
+<div class="stars" id="stars">
+<button type="button" class="star" onclick="rate(1)">★</button>
+<button type="button" class="star" onclick="rate(2)">★</button>
+<button type="button" class="star" onclick="rate(3)">★</button>
+<button type="button" class="star" onclick="rate(4)">★</button>
+<button type="button" class="star" onclick="rate(5)">★</button>
+</div>
+<input type="hidden" name="rating" id="ri" value=""></div>
+<div class="fg"><label>Your Outcome (optional)</label><input type="text" name="outcome" placeholder="e.g. Scored a 5, Got an A"></div>
+<div class="fg"><label>School / Grade (optional)</label><input type="text" name="school" placeholder="e.g. Junior, Lincoln HS"></div>
+<div class="fg full"><label>Your Review</label><textarea name="review" placeholder="What was most helpful? What could be better? The more specific, the better." required></textarea></div>
+<div class="fg full"><button type="submit" class="r-sub">→ &nbsp;Submit Review</button><div class="r-note">Reviews are private — sent directly to the developer. Your info is never shared publicly.</div></div>
+</div></form>
+<div class="r-ok" id="rok">✓ &nbsp;Thank you! Your review has been received. This feedback genuinely helps improve the site for every student who uses it.</div>
+</div></div></section>
+
+<footer class="footer">
+<div class="f-brand">Five &amp; A+</div>
+<div class="f-sub">AP &amp; COLLEGE REVIEW &nbsp;·&nbsp; BUILT BY ARNAV SINHA &nbsp;·&nbsp; WARWICK VALLEY HS CLASS OF 2027</div>
+<div class="f-links">
+<a href="#ap">AP Guides</a><a href="#college">College</a><a href="#dev">About</a><a href="#review">Reviews</a>
+<a href="apush.html">APUSH</a><a href="aplang.html">AP Lang</a><a href="apcsa.html">AP CSA</a><a href="calcbc.html">Calc BC</a>
+<a href="apbio.html">AP Bio</a><a href="apchem.html">AP Chem</a><a href="apworld.html">AP World</a><a href="apgov.html">AP Gov</a>
+<a href="collegealgebra.html">College Algebra</a><a href="collegetrig.html">Trig</a>
+</div></footer>
+<script>
+function rate(v){document.getElementById('ri').value=v+' stars';document.querySelectorAll('.star').forEach((s,i)=>s.classList.toggle('on',i<v));}
+async function submitReview(e){e.preventDefault();const f=document.getElementById('rf');try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{'Accept':'application/json'}});if(r.ok){f.style.display='none';document.getElementById('rok').style.display='block';}else{alert('Submission error. Please try again.');}}catch{alert('Network error.');}}
+</script>
+</body></html>

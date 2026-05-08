@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AP Computer Science Principles — Score 5 Edition</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#070a10;--bg2:#0c1018;--bg3:#111820;--border:#182028;--border2:#202c38;--text:#d8e8f8;--text2:#507090;--text3:#284060;--orange:#f97316;--amber:#f59e0b;--blue:#60a5fa;--cyan:#22d3ee;--green:#4ade80;--purple:#a78bfa;--red:#f87171;--pink:#f472b6;}
+*{box-sizing:border-box;margin:0;padding:0;}html{scroll-behavior:smooth;}
+body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.7;overflow-x:hidden;}
+.masthead{background:var(--bg2);border-bottom:1px solid var(--border);padding:3.5rem 2rem 3rem;position:relative;z-index:1;}
+.masthead-inner{max-width:980px;margin:0 auto;}
+.back-btn{appearance:none;-webkit-appearance:none;font-family:'DM Mono',monospace;font-size:12px;color:var(--orange);letter-spacing:0.08em;display:inline-flex;align-items:center;gap:0.5rem;margin-bottom:1.5rem;padding:0.45rem 1rem;border:1px solid rgba(249,115,22,0.35);border-radius:3px;background:rgba(249,115,22,0.07);cursor:pointer;transition:all 0.18s;font-weight:500;line-height:1;position:relative;z-index:2;}
+.back-btn:hover{background:rgba(249,115,22,0.2);border-color:var(--orange);}
+.masthead-tag{font-family:'DM Mono',monospace;font-size:11px;color:var(--orange);letter-spacing:0.15em;margin-bottom:0.75rem;}
+.masthead h1{font-family:'Syne',sans-serif;font-size:clamp(2rem,5vw,3.8rem);font-weight:800;line-height:1;letter-spacing:-0.03em;margin-bottom:0.75rem;}.masthead h1 .accent{color:var(--orange);}
+.masthead-desc{color:var(--text2);font-size:0.95rem;max-width:520px;margin-bottom:1.5rem;}
+.unit-pills{display:flex;flex-wrap:wrap;gap:0.35rem;}
+.upill{background:var(--bg3);border:1px solid var(--border);color:var(--text3);font-family:'DM Mono',monospace;font-size:11px;padding:0.25rem 0.7rem;border-radius:2px;text-decoration:none;transition:all 0.15s;}
+.upill:hover{border-color:var(--orange);color:var(--orange);}
+.topnav{background:rgba(7,10,16,0.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0.6rem 2rem;display:flex;flex-wrap:wrap;gap:0;position:sticky;top:0;z-index:100;}
+.topnav a{color:var(--text3);text-decoration:none;font-family:'DM Mono',monospace;font-size:11px;padding:0.3rem 0.6rem;border-radius:2px;transition:all 0.15s;white-space:nowrap;}
+.topnav a:hover{color:var(--orange);background:rgba(249,115,22,0.06);}
+.container{max-width:980px;margin:0 auto;padding:0 2rem;}
+.section{padding:3rem 0 2rem;border-bottom:1px solid var(--border);}
+.section:last-child{border-bottom:none;}
+.sec-tag{font-family:'DM Mono',monospace;font-size:10px;color:var(--text3);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.3rem;}
+.sec-title{font-family:'Syne',sans-serif;font-size:1.9rem;font-weight:800;line-height:1.1;letter-spacing:-0.02em;}
+.exam-pct{display:inline-block;background:rgba(249,115,22,0.08);border:1px solid rgba(249,115,22,0.22);color:var(--orange);font-family:'DM Mono',monospace;font-size:10px;padding:0.2rem 0.5rem;border-radius:2px;margin-top:0.35rem;}
+h2.sub{font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:700;color:var(--text);margin:2rem 0 1rem;padding-bottom:0.4rem;border-bottom:1px solid var(--border);}
+h2.sub::before{content:'> ';font-family:'DM Mono',monospace;font-size:12px;color:var(--orange);}
+.code-block{background:var(--bg2);border:1px solid var(--border);border-left:3px solid var(--orange);border-radius:4px;padding:1.25rem 1.5rem;font-family:'DM Mono',monospace;font-size:13px;line-height:1.9;overflow-x:auto;margin:0.9rem 0;}
+.code-block .kw{color:var(--purple);}.code-block .str{color:var(--green);}.code-block .cmt{color:var(--text3);font-style:italic;font-size:12px;}.code-block .label{color:var(--orange);font-weight:500;}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:0.85rem;margin-bottom:1.25rem;}
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:4px;padding:1.1rem;}
+.card h3{font-family:'DM Mono',monospace;font-size:11px;color:var(--orange);letter-spacing:0.06em;margin-bottom:0.5rem;font-weight:500;}
+.card p,.card li{font-size:13px;color:var(--text2);line-height:1.6;}
+.card ul{padding-left:1.1rem;}
+.c-o{border-top:2px solid var(--orange);}.c-a{border-top:2px solid var(--amber);}.c-b{border-top:2px solid var(--blue);}.c-c{border-top:2px solid var(--cyan);}.c-g{border-top:2px solid var(--green);}.c-p{border-top:2px solid var(--purple);}.c-r{border-top:2px solid var(--red);}.c-pk{border-top:2px solid var(--pink);}
+.callout{background:rgba(245,158,11,0.05);border:1px solid rgba(245,158,11,0.18);border-left:3px solid var(--amber);padding:1rem 1.25rem;border-radius:0 4px 4px 0;margin:1.25rem 0;}
+.callout-tag{font-family:'DM Mono',monospace;font-size:10px;color:var(--amber);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.3rem;}
+.callout p,.callout li{font-size:14px;color:var(--text2);line-height:1.7;}
+.callout ul{padding-left:1.2rem;}
+.ctable{width:100%;border-collapse:collapse;margin-bottom:1.25rem;font-size:13px;display:block;overflow-x:auto;}
+.ctable th{background:var(--bg3);color:var(--text2);font-family:'DM Mono',monospace;font-size:11px;padding:0.6rem 0.9rem;text-align:left;border-bottom:1px solid var(--border2);white-space:nowrap;}
+.ctable td{padding:0.5rem 0.9rem;border-bottom:1px solid var(--border);color:var(--text2);vertical-align:top;line-height:1.5;font-size:13px;}
+.ctable tr:nth-child(even) td{background:rgba(255,255,255,0.012);}
+.ctable td:first-child{font-family:'DM Mono',monospace;font-size:11px;color:var(--orange);font-weight:500;}
+.must-know{background:linear-gradient(135deg,rgba(249,115,22,0.07),rgba(245,158,11,0.04));border:1px solid rgba(249,115,22,0.18);border-radius:4px;padding:1.25rem 1.5rem;margin:1.5rem 0;}
+.must-know h4{font-family:'DM Mono',monospace;font-size:11px;color:var(--orange);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.75rem;}
+.must-know ul{padding-left:1.2rem;}
+.must-know li{font-size:14px;color:var(--text2);line-height:1.9;}
+.must-know li strong{color:var(--text);}
+.footer{background:var(--bg2);border-top:1px solid var(--border);padding:2rem;text-align:center;font-family:'DM Mono',monospace;font-size:11px;color:var(--text3);margin-top:3rem;}
+</style>
+</head>
+<body>
+<header class="masthead"><div class="masthead-inner">
+<button class="back-btn" onclick="window.location.href='index.html'" onmouseover="this.style.background='rgba(249,115,22,0.2)'" onmouseout="this.style.background='rgba(249,115,22,0.07)'">← Back to Hub</button>
+<div class="masthead-tag">AP Computer Science Principles · Score 5 Master Reference</div>
+<h1>Computing.<br><span class="accent">Impact.</span> Innovation.</h1>
+<p class="masthead-desc">All 5 Big Ideas — creative development, data, algorithms, systems, and impact — plus Create PT strategy.</p>
+<div class="unit-pills">
+<a class="upill" href="#creative">Creative Development</a><a class="upill" href="#data">Data</a><a class="upill" href="#algorithms">Algorithms</a><a class="upill" href="#systems">Computing Systems</a><a class="upill" href="#impact">Impact of Computing</a><a class="upill" href="#creatept">Create PT</a>
+</div>
+</div></header>
+<nav class="topnav">
+<a href="index.html">← Hub</a><a href="#creative">Creative Dev</a><a href="#data">Data</a><a href="#algorithms">Algorithms</a><a href="#systems">Systems &amp; Networks</a><a href="#impact">Impact</a><a href="#creatept">Create PT</a>
+</nav>
+<div class="container">
+
+<section class="section" id="creative">
+<div class="sec-tag">Big Idea 1 · ~10–13% of exam</div>
+<div class="sec-title">Creative Development</div>
+<div class="card-grid">
+<div class="card c-o"><h3>Collaboration</h3><p>Effective collaboration in computing: diverse perspectives reduce bias and improve solutions. Pair programming, code review, version control (Git). Computing innovations are collaborative — acknowledge contributions and limitations.</p></div>
+<div class="card c-a"><h3>Program Development</h3><p>Iterative process: investigate → design → prototype → test → reflect → iterate. Errors: syntax (code won't run), runtime (crashes during execution), logic (runs but wrong result). Debugging = systematic process.</p></div>
+<div class="card c-b"><h3>Documentation</h3><p>Comments explain WHY not just what. Good documentation enables collaboration, maintenance, and reuse. Variables/functions should have meaningful names. Abstraction hides implementation details.</p></div>
+</div>
+</section>
+
+<section class="section" id="data">
+<div class="sec-tag">Big Idea 2 · ~17–22% of exam</div>
+<div class="sec-title">Data</div>
+<h2 class="sub">Binary &amp; Data Representation</h2>
+<div class="code-block">
+<span class="label">BINARY:</span>  base-2 number system (0s and 1s)<br>
+1 bit = one binary digit. 1 byte = 8 bits.<br>
+Binary 1010 = 1×8 + 0×4 + 1×2 + 0×1 = <span class="str">10 in decimal</span><br><br>
+<span class="label">DATA TYPES:</span><br>
+Text: ASCII (7-bit, 128 chars) → Unicode (millions of chars)<br>
+Images: pixels = color values (RGB triplets). More bits per pixel = higher color depth.<br>
+Sound: samples = measurements of wave amplitude over time. Higher sample rate = better quality.<br>
+Video: sequence of image frames + audio track.<br><br>
+<span class="label">DATA COMPRESSION:</span><br>
+Lossless: no data lost (ZIP, PNG, FLAC) — exact original recoverable<br>
+Lossy: some data permanently removed (JPEG, MP3, MP4) — smaller file, lower quality
+</div>
+<h2 class="sub">Data Analysis</h2>
+<div class="card-grid">
+<div class="card c-c"><h3>Metadata</h3><p>Data about data. EXIF data in photos (location, camera settings, timestamp). Enables searching and organization. Privacy concern: metadata can reveal sensitive info even if content seems innocuous.</p></div>
+<div class="card c-g"><h3>Bias in Data</h3><p>Sampling bias: non-representative sample → biased conclusions. Confirmation bias: seeking data that confirms existing beliefs. Algorithmic bias: training data reflects historical inequalities → biased predictions (facial recognition, hiring algorithms).</p></div>
+<div class="card c-p"><h3>Visualization</h3><p>Choosing wrong chart type can mislead. Bar charts for comparison, line graphs for trends over time, scatter plots for correlation. Truncated y-axis exaggerates differences. Statistical significance ≠ practical significance.</p></div>
+</div>
+</section>
+
+<section class="section" id="algorithms">
+<div class="sec-tag">Big Idea 3 · ~30–35% of exam</div>
+<div class="sec-title">Algorithms &amp; Programming</div>
+<h2 class="sub">Pseudocode Reference — AP CSP Style</h2>
+<div class="code-block">
+<span class="label">VARIABLES &amp; ASSIGNMENT:</span><br>
+x ← 5                   <span class="cmt">// assign value to variable</span><br>
+text ← "hello"<br><br>
+<span class="label">CONDITIONS:</span><br>
+<span class="kw">IF</span> (condition) {         <span class="cmt">// if-else structure</span><br>
+&nbsp;&nbsp;statements<br>
+} <span class="kw">ELSE</span> {<br>
+&nbsp;&nbsp;statements<br>
+}<br><br>
+<span class="label">LOOPS:</span><br>
+<span class="kw">REPEAT</span> n <span class="kw">TIMES</span> { }     <span class="cmt">// repeat n times</span><br>
+<span class="kw">REPEAT UNTIL</span> (cond) { } <span class="cmt">// loop until condition true</span><br><br>
+<span class="label">LISTS:</span><br>
+myList ← [1, 2, 3, 4]<br>
+myList[1]               <span class="cmt">// index starts at 1 in AP CSP!</span><br>
+<span class="kw">APPEND</span>(myList, 5)       <span class="cmt">// adds to end</span><br>
+<span class="kw">LENGTH</span>(myList)          <span class="cmt">// returns 4</span><br><br>
+<span class="label">PROCEDURES:</span><br>
+<span class="kw">PROCEDURE</span> myProc(param) {<br>
+&nbsp;&nbsp;<span class="kw">RETURN</span> value<br>
+}
+</div>
+
+<h2 class="sub">Algorithm Concepts</h2>
+<div class="card-grid">
+<div class="card c-o"><h3>Sequencing, Selection, Iteration</h3><p>All algorithms are built from these three. Sequencing = order matters. Selection (if/else) = decision. Iteration (loops) = repetition. Any algorithm can be expressed with just these three.</p></div>
+<div class="card c-a"><h3>Linear vs. Binary Search</h3><p>Linear: check each element — O(n). Works on unsorted lists. Binary: divide in half each time — O(log n). Requires sorted list. Binary search is dramatically faster for large datasets.</p></div>
+<div class="card c-b"><h3>Undecidable Problems</h3><p>Halting problem: impossible to write a program that correctly determines for ALL programs whether they will halt or run forever. Some problems are computationally intractable — no efficient solution exists.</p></div>
+<div class="card c-c"><h3>Efficiency &amp; Heuristics</h3><p>Not all problems can be solved efficiently. Heuristics find good-enough solutions quickly (GPS routing, game AI). Reasonable time = polynomial time. Exponential time algorithms impractical for large inputs.</p></div>
+</div>
+</section>
+
+<section class="section" id="systems">
+<div class="sec-tag">Big Idea 4 · ~11–15% of exam</div>
+<div class="sec-title">Computing Systems &amp; Networks</div>
+<h2 class="sub">The Internet — How It Works</h2>
+<div class="card-grid">
+<div class="card c-g"><h3>IP Addresses &amp; DNS</h3><p>Every device has IP address (IPv4: 32-bit; IPv6: 128-bit). DNS translates domain names (google.com) to IP addresses. DHCP assigns IP addresses dynamically. Routers direct packets between networks.</p></div>
+<div class="card c-p"><h3>Packets &amp; Protocols</h3><p>Data split into packets. Each packet: header (destination, source, sequence number) + data. TCP: reliable, ordered (web, email). UDP: fast, no guarantee (video streaming, gaming). Fault-tolerant: packets can take different routes.</p></div>
+<div class="card c-o"><h3>HTTP &amp; HTTPS</h3><p>HTTP: transfers web pages. HTTPS: encrypted with TLS/SSL. Browser sends request → server responds with content. Status codes: 200 (OK), 404 (not found), 500 (server error).</p></div>
+<div class="card c-a"><h3>Cybersecurity</h3><p>Phishing: fake communications steal credentials. Malware: viruses, ransomware, spyware. DDoS: flood server with requests. Defense: encryption, multi-factor authentication, software updates, firewalls. No system is perfectly secure.</p></div>
+</div>
+</section>
+
+<section class="section" id="impact">
+<div class="sec-tag">Big Idea 5 · ~21–26% of exam</div>
+<div class="sec-title">Impact of Computing</div>
+<div class="card-grid">
+<div class="card c-r"><h3>Privacy &amp; Data</h3><p>PII (Personally Identifiable Information): name, SSN, location, biometrics. COPPA protects children's data online. Terms of service grant companies data rights. Metadata reveals behavior patterns.</p></div>
+<div class="card c-pk"><h3>Intellectual Property</h3><p>Copyright: automatic protection. Creative Commons: flexible licensing. Open source: source code freely available. Plagiarism = using others' work without credit. Fair use: education, commentary, transformative use.</p></div>
+<div class="card c-b"><h3>Digital Divide</h3><p>Unequal access to computing and internet. Factors: economic, geographic, disability, age, education. Exacerbates existing inequality. Solutions: subsidized broadband, digital literacy programs, device access programs.</p></div>
+<div class="card c-g"><h3>Beneficial &amp; Harmful Impacts</h3><p>Same technology can be beneficial and harmful. Surveillance: safety vs. civil liberties. Social media: connection vs. misinformation. AI in medicine: diagnosis vs. bias. Automation: efficiency vs. job displacement.</p></div>
+</div>
+</section>
+
+<section class="section" id="creatept">
+<div class="sec-tag">Performance Task · 30% of exam score</div>
+<div class="sec-title">Create Performance Task</div>
+<div class="callout">
+<div class="callout-tag">Create PT Requirements</div>
+<ul>
+<li><strong>What you submit:</strong> Program file + video (≤1 min showing program running + explaining 1 feature) + Written Responses</li>
+<li><strong>Row 1 — Program Purpose &amp; Function:</strong> Describe what program does, what the video shows, how it works</li>
+<li><strong>Row 2 — Data Abstraction:</strong> Show a list/data structure, explain how it stores data, why a list was used (not individual variables)</li>
+<li><strong>Row 3 — Managing Complexity:</strong> Explain how your list MANAGES complexity — what would code look like without the list? Show it would be harder.</li>
+<li><strong>Row 4 — Procedural Abstraction:</strong> Show a procedure you wrote with a parameter. Explain what it does and how it contributes to program function.</li>
+<li><strong>Row 5 — Algorithm Implementation:</strong> Procedure must include sequencing + selection (if) + iteration (loop). Explain step-by-step.</li>
+<li><strong>Row 6 — Testing:</strong> Describe 2 different test cases (different inputs). What was the condition tested, expected result, and actual result.</li>
+</ul>
+</div>
+
+<div class="must-know">
+<h4>⚡ Perfect Score Checklist</h4>
+<ul>
+<li><strong>AP CSP lists are 1-indexed</strong> — myList[1] is the first element (unlike most languages)</li>
+<li><strong>Lossless vs. lossy compression</strong>: lossless = exact recovery (ZIP, PNG); lossy = permanent data loss (JPEG, MP3)</li>
+<li><strong>Binary search requires sorted data</strong>; linear search works on anything</li>
+<li><strong>Halting problem = undecidable</strong> — cannot write program to determine if all programs halt</li>
+<li><strong>Internet is fault-tolerant</strong>: packets can route around failures via different paths</li>
+<li><strong>Create PT: your procedure MUST have a parameter and include all three: sequence + selection + iteration</strong></li>
+<li><strong>Data abstraction: use a list AND explain why a list manages complexity better than individual variables</strong></li>
+<li><strong>Privacy: same data can be beneficial (research) and harmful (surveillance)</strong></li>
+<li><strong>Digital divide = unequal access</strong> to computing — not just hardware but skills and connectivity</li>
+<li><strong>Open source ≠ free</strong>: free as in freedom (to use, modify, distribute), may cost money</li>
+</ul>
+</div>
+</section>
+
+</div>
+<footer class="footer"><a href="index.html" style="color:inherit;text-decoration:none;">← Score Five Hub</a> · AP CS Principles · Data · Algorithms · Networks · Impact · Create PT</footer>
+</body>
+</html>

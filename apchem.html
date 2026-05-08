@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AP Chemistry — Score 5 Edition</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Mono:wght@400;500&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#060a0f;--bg2:#0a1018;--bg3:#0e1820;--border:#112030;--border2:#183040;--text:#c8e0f0;--text2:#5a8aaa;--text3:#2a4a60;--teal:#2dd4bf;--blue:#38bdf8;--cyan:#67e8f9;--green:#4ade80;--yellow:#fde047;--orange:#fb923c;--red:#f87171;--purple:#c084fc;}
+*{box-sizing:border-box;margin:0;padding:0;}html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.7;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(45,212,191,0.05) 0%,transparent 55%);pointer-events:none;z-index:0;}
+.masthead{background:var(--bg2);border-bottom:1px solid var(--border);padding:3.5rem 2rem 3rem;position:relative;z-index:1;}
+.masthead-inner{max-width:980px;margin:0 auto;}
+.back-btn{appearance:none;-webkit-appearance:none;font-family:'DM Mono',monospace;font-size:12px;color:var(--teal);letter-spacing:0.08em;display:inline-flex;align-items:center;gap:0.5rem;margin-bottom:1.5rem;padding:0.45rem 1rem;border:1px solid rgba(45,212,191,0.35);border-radius:3px;background:rgba(45,212,191,0.07);cursor:pointer;transition:all 0.18s;font-weight:500;line-height:1;position:relative;z-index:2;}
+.back-btn:hover{background:rgba(45,212,191,0.18);border-color:var(--teal);}
+.masthead-tag{font-family:'DM Mono',monospace;font-size:11px;color:var(--teal);letter-spacing:0.15em;margin-bottom:0.75rem;}
+.masthead h1{font-family:'Syne',sans-serif;font-size:clamp(2rem,5vw,3.8rem);font-weight:800;line-height:1;letter-spacing:-0.03em;margin-bottom:0.75rem;}
+.masthead h1 .accent{color:var(--teal);}
+.masthead-desc{color:var(--text2);font-size:0.95rem;max-width:520px;margin-bottom:1.5rem;}
+.unit-pills{display:flex;flex-wrap:wrap;gap:0.35rem;}
+.upill{background:var(--bg3);border:1px solid var(--border);color:var(--text3);font-family:'DM Mono',monospace;font-size:11px;padding:0.25rem 0.7rem;border-radius:2px;text-decoration:none;transition:all 0.15s;}
+.upill:hover{border-color:var(--teal);color:var(--teal);}
+.topnav{background:rgba(6,10,15,0.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0.6rem 2rem;display:flex;flex-wrap:wrap;gap:0;position:sticky;top:0;z-index:100;}
+.topnav a{color:var(--text3);text-decoration:none;font-family:'DM Mono',monospace;font-size:11px;padding:0.3rem 0.6rem;border-radius:2px;transition:all 0.15s;white-space:nowrap;}
+.topnav a:hover{color:var(--teal);background:rgba(45,212,191,0.06);}
+.container{max-width:980px;margin:0 auto;padding:0 2rem;}
+.section{padding:3rem 0 2rem;border-bottom:1px solid var(--border);}
+.section:last-child{border-bottom:none;}
+.sec-tag{font-family:'DM Mono',monospace;font-size:10px;color:var(--text3);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.3rem;}
+.sec-title{font-family:'Syne',sans-serif;font-size:1.9rem;font-weight:800;line-height:1.1;letter-spacing:-0.02em;}
+.exam-pct{display:inline-block;background:rgba(45,212,191,0.08);border:1px solid rgba(45,212,191,0.22);color:var(--teal);font-family:'DM Mono',monospace;font-size:10px;padding:0.2rem 0.5rem;border-radius:2px;margin-top:0.35rem;}
+h2.sub{font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:700;color:var(--text);margin:2rem 0 1rem;padding-bottom:0.4rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:0.6rem;}
+h2.sub::before{content:'⚗';color:var(--teal);font-size:13px;}
+.eq-block{background:var(--bg2);border:1px solid var(--border);border-left:3px solid var(--teal);border-radius:4px;padding:1.25rem 1.5rem;font-family:'DM Mono',monospace;font-size:13px;line-height:2;overflow-x:auto;margin:0.9rem 0;}
+.eq-block .f{color:var(--cyan);}.eq-block .cmt{color:var(--text3);font-style:italic;font-size:12px;}.eq-block .label{color:var(--teal);font-weight:500;}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:0.85rem;margin-bottom:1.25rem;}
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:4px;padding:1.1rem;}
+.card h3{font-family:'DM Mono',monospace;font-size:11px;color:var(--teal);letter-spacing:0.06em;margin-bottom:0.5rem;font-weight:500;}
+.card p,.card li{font-size:13px;color:var(--text2);line-height:1.6;}
+.card ul{padding-left:1.1rem;}
+.c-teal{border-top:2px solid var(--teal);}.c-blue{border-top:2px solid var(--blue);}.c-green{border-top:2px solid var(--green);}.c-yellow{border-top:2px solid var(--yellow);}.c-orange{border-top:2px solid var(--orange);}.c-red{border-top:2px solid var(--red);}.c-purple{border-top:2px solid var(--purple);}
+.callout{background:rgba(253,224,71,0.05);border:1px solid rgba(253,224,71,0.18);border-left:3px solid var(--yellow);padding:1rem 1.25rem;border-radius:0 4px 4px 0;margin:1.25rem 0;}
+.callout-tag{font-family:'DM Mono',monospace;font-size:10px;color:var(--yellow);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.3rem;}
+.callout p,.callout li{font-size:14px;color:var(--text2);line-height:1.7;}
+.callout ul{padding-left:1.2rem;}
+.trap{background:rgba(248,113,113,0.05);border:1px solid rgba(248,113,113,0.18);border-left:3px solid var(--red);padding:1rem 1.25rem;border-radius:0 4px 4px 0;margin:1.25rem 0;}
+.trap-tag{font-family:'DM Mono',monospace;font-size:10px;color:var(--red);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.3rem;}
+.trap p,.trap li{font-size:14px;color:var(--text2);line-height:1.7;}
+.trap ul{padding-left:1.2rem;}
+.ctable{width:100%;border-collapse:collapse;margin-bottom:1.25rem;font-size:13px;display:block;overflow-x:auto;}
+.ctable th{background:var(--bg3);color:var(--text2);font-family:'DM Mono',monospace;font-size:11px;padding:0.6rem 0.9rem;text-align:left;border-bottom:1px solid var(--border2);white-space:nowrap;}
+.ctable td{padding:0.5rem 0.9rem;border-bottom:1px solid var(--border);color:var(--text2);vertical-align:top;line-height:1.5;}
+.ctable tr:nth-child(even) td{background:rgba(255,255,255,0.012);}
+.ctable td:first-child{font-family:'DM Mono',monospace;font-size:11px;color:var(--teal);font-weight:500;}
+.question-box{background:var(--bg2);border:1px solid var(--border2);border-radius:4px;margin-bottom:1.25rem;overflow:hidden;}
+.q-header{background:var(--bg3);padding:0.75rem 1.25rem;display:flex;align-items:center;gap:0.75rem;border-bottom:1px solid var(--border);}
+.q-num{font-family:'DM Mono',monospace;font-size:11px;background:rgba(45,212,191,0.1);color:var(--teal);padding:0.2rem 0.6rem;border-radius:2px;font-weight:600;}
+.q-type{font-family:'DM Mono',monospace;font-size:10px;color:var(--text3);letter-spacing:0.06em;text-transform:uppercase;}
+.q-body{padding:1.25rem;}
+.q-body p{font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:0.75rem;}
+.q-choices{list-style:none;padding:0;margin:0.75rem 0;}
+.q-choices li{padding:0.5rem 0.75rem;margin:0.3rem 0;border:1px solid var(--border);border-radius:3px;font-family:'DM Mono',monospace;font-size:12px;color:var(--text2);cursor:pointer;transition:all 0.15s;background:var(--bg);}
+.q-choices li:hover{border-color:var(--teal);color:var(--teal);}
+.q-choices li.correct{border-color:var(--green);color:var(--green);background:rgba(74,222,128,0.05);}
+.q-choices li.wrong{border-color:var(--red);color:var(--red);background:rgba(248,113,113,0.05);}
+.q-reveal{display:none;padding:0 1.25rem 1.25rem;}
+.q-reveal.show{display:block;}
+.q-answer{background:rgba(74,222,128,0.05);border:1px solid rgba(74,222,128,0.18);border-radius:3px;padding:0.75rem 1rem;font-size:13px;color:var(--text2);line-height:1.7;}
+.must-know{background:linear-gradient(135deg,rgba(45,212,191,0.07),rgba(56,189,248,0.04));border:1px solid rgba(45,212,191,0.18);border-radius:4px;padding:1.25rem 1.5rem;margin:1.5rem 0;}
+.must-know h4{font-family:'DM Mono',monospace;font-size:11px;color:var(--teal);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.75rem;}
+.must-know ul{padding-left:1.2rem;}
+.must-know li{font-size:14px;color:var(--text2);line-height:1.9;}
+.must-know li strong{color:var(--text);}
+.footer{background:var(--bg2);border-top:1px solid var(--border);padding:2rem;text-align:center;font-family:'DM Mono',monospace;font-size:11px;color:var(--text3);margin-top:3rem;}
+</style>
+</head>
+<body>
+<header class="masthead"><div class="masthead-inner">
+<button class="back-btn" onclick="window.location.href='index.html'" onmouseover="this.style.background='rgba(45,212,191,0.2)'" onmouseout="this.style.background='rgba(45,212,191,0.07)'">← Back to Hub</button>
+<div class="masthead-tag">AP Chemistry · Score 5 Master Reference</div>
+<h1>Atoms.<br><span class="accent">Bonds.</span> Reactions.</h1>
+<p class="masthead-desc">All 9 units — atomic structure through electrochemistry. Every equation, every concept, FRQ strategies.</p>
+<div class="unit-pills">
+<a class="upill" href="#atomic">Atomic Structure</a><a class="upill" href="#bonding">Bonding</a><a class="upill" href="#imf">IMFs</a><a class="upill" href="#kinetics">Kinetics</a><a class="upill" href="#equilibrium">Equilibrium</a><a class="upill" href="#acidbase">Acids &amp; Bases</a><a class="upill" href="#thermo">Thermodynamics</a><a class="upill" href="#electrochem">Electrochemistry</a><a class="upill" href="#mcq">MCQ</a>
+</div>
+</div></header>
+<nav class="topnav">
+<a href="index.html">← Hub</a><a href="#atomic">Atomic</a><a href="#bonding">Bonding</a><a href="#imf">IMF</a><a href="#kinetics">Kinetics</a><a href="#equilibrium">Equil.</a><a href="#acidbase">Acids</a><a href="#thermo">Thermo</a><a href="#electrochem">Electrochem</a><a href="#mcq">MCQ</a>
+</nav>
+<div class="container">
+
+<section class="section" id="atomic">
+<div class="sec-tag">Unit 1 · ~7–9% of exam</div>
+<div class="sec-title">Atomic Structure &amp; Properties</div>
+<h2 class="sub">Electron Configuration &amp; Periodic Trends</h2>
+<div class="eq-block">
+<span class="label">ELECTRON CONFIGURATION:</span><br>
+<span class="f">1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ ...</span>   <span class="cmt">// fill lowest energy first (Aufbau)</span><br>
+Hund's Rule: one e⁻ per orbital before pairing in same subshell<br>
+Pauli Exclusion: no two electrons same 4 quantum numbers<br><br>
+<span class="label">EXCEPTIONS (memorize):</span><br>
+Cr: [Ar] 3d⁵ 4s¹  <span class="cmt">// half-filled 3d is stable</span><br>
+Cu: [Ar] 3d¹⁰ 4s¹ <span class="cmt">// full 3d is stable</span>
+</div>
+<h2 class="sub">Periodic Trends</h2>
+<table class="ctable">
+<tr><th>Property</th><th>Across Period (L→R)</th><th>Down Group</th><th>Reason</th></tr>
+<tr><td>Atomic Radius</td><td>Decreases</td><td>Increases</td><td>More protons pull electrons in; more shells add distance</td></tr>
+<tr><td>Ionization Energy</td><td>Increases</td><td>Decreases</td><td>Harder to remove electron from smaller, more positive nucleus</td></tr>
+<tr><td>Electronegativity</td><td>Increases</td><td>Decreases</td><td>F is most electronegative (3.98); Cs is least</td></tr>
+<tr><td>Electron Affinity</td><td>Generally increases</td><td>Decreases</td><td>Halogens (Group 17) have highest EA</td></tr>
+<tr><td>Metallic Character</td><td>Decreases</td><td>Increases</td><td>Metals = left/bottom; nonmetals = right/top</td></tr>
+</table>
+</section>
+
+<section class="section" id="bonding">
+<div class="sec-tag">Unit 2 · ~7–9% of exam</div>
+<div class="sec-title">Chemical Bonding &amp; Molecular Structure</div>
+<h2 class="sub">Bond Types &amp; VSEPR</h2>
+<div class="card-grid">
+<div class="card c-teal"><h3>Ionic Bonds</h3><p>Metal + nonmetal. Electron transfer. Lattice energy — higher charge/smaller radius = stronger lattice. Forms crystalline solids. High mp/bp. Conduct electricity when molten or dissolved.</p></div>
+<div class="card c-blue"><h3>Covalent Bonds</h3><p>Nonmetal + nonmetal. Electron sharing. Bond order = # of shared pairs. Higher bond order → shorter bond, stronger bond, higher bond energy.</p></div>
+<div class="card c-green"><h3>VSEPR Theory</h3><p>Electron pairs repel → maximize separation. Lone pairs repel MORE than bonding pairs. Determines molecular geometry (not electron geometry). Know: linear, trigonal planar, bent, tetrahedral, trigonal pyramidal, seesaw, T-shape, octahedral, square planar.</p></div>
+<div class="card c-yellow"><h3>Polarity</h3><p>Polar bond: ΔEN &gt; 0.4. Polar molecule: polar bonds + asymmetric geometry. Symmetric molecules (CO₂, CCl₄, BF₃) = nonpolar despite polar bonds. Dipole moment = μ = qd.</p></div>
+<div class="card c-orange"><h3>Resonance</h3><p>When Lewis structure has equivalent positions for double bonds. Actual structure is average — all bond lengths equal. Delocalized electrons = greater stability (resonance energy).</p></div>
+<div class="card c-purple"><h3>Formal Charge</h3><p>FC = valence e⁻ − nonbonding e⁻ − ½(bonding e⁻). Best Lewis structure: minimize FC, negative FC on most electronegative atom.</p></div>
+</div>
+</section>
+
+<section class="section" id="imf">
+<div class="sec-tag">Unit 3 · ~7–9% of exam</div>
+<div class="sec-title">Intermolecular Forces &amp; Properties</div>
+<h2 class="sub">IMF Types — Weakest to Strongest</h2>
+<div class="eq-block">
+<span class="label">LONDON DISPERSION FORCES (LDF)</span>  <span class="cmt">// all molecules have these</span><br>
+Temporary dipole-induced dipole. Strength ∝ molar mass and surface area.<br>
+Larger, more polarizable molecule → stronger LDF<br><br>
+<span class="label">DIPOLE-DIPOLE</span><br>
+Permanent dipoles attract. Only polar molecules. Stronger than LDF for similar-size molecules.<br><br>
+<span class="label">HYDROGEN BONDING</span>  <span class="cmt">// strongest IMF between neutral molecules</span><br>
+H bonded to N, O, or F attracting lone pair on N, O, or F.<br>
+Explains: water's high bp, surface tension, ice density anomaly, DNA base pairing.<br><br>
+<span class="label">ION-DIPOLE</span>  <span class="cmt">// strongest overall — why ionic compounds dissolve in water</span><br>
+Ion + polar molecule. Basis of hydration/solvation.
+</div>
+<div class="callout">
+<div class="callout-tag">IMF → Properties Rule</div>
+<ul>
+<li>Stronger IMF = higher boiling point, higher viscosity, higher surface tension, lower vapor pressure</li>
+<li>Compare molecules of similar size: use dipole-dipole or H-bonding to distinguish</li>
+<li>Compare molecules same type: use molar mass (LDF) to distinguish</li>
+<li>Water's anomalously high bp (100°C vs. H₂S −60°C) = hydrogen bonding</li>
+</ul>
+</div>
+</section>
+
+<section class="section" id="kinetics">
+<div class="sec-tag">Unit 5 · ~7–9% of exam</div>
+<div class="sec-title">Chemical Kinetics</div>
+<h2 class="sub">Rate Laws &amp; Integrated Rate Laws</h2>
+<div class="eq-block">
+<span class="label">RATE LAW:</span>  rate = k[A]ᵐ[B]ⁿ<br>
+m, n = reaction orders (determined experimentally, NOT from coefficients)<br>
+k = rate constant (temperature dependent)<br><br>
+<span class="label">INTEGRATED RATE LAWS:</span><br>
+<span class="f">Zero order:   [A] = [A]₀ − kt          </span>   <span class="cmt">// linear: [A] vs t</span><br>
+<span class="f">First order:  ln[A] = ln[A]₀ − kt      </span>   <span class="cmt">// linear: ln[A] vs t</span><br>
+<span class="f">Second order: 1/[A] = 1/[A]₀ + kt     </span>   <span class="cmt">// linear: 1/[A] vs t</span><br><br>
+<span class="label">HALF-LIFE:</span><br>
+<span class="f">First order:  t₁/₂ = 0.693/k          </span>   <span class="cmt">// constant, independent of [A]₀</span><br>
+<span class="f">Second order: t₁/₂ = 1/(k[A]₀)        </span>   <span class="cmt">// depends on [A]₀</span>
+</div>
+<div class="card-grid">
+<div class="card c-teal"><h3>Activation Energy &amp; Arrhenius</h3><p>k = Ae^(−Ea/RT). Higher Ea → slower reaction. Catalyst lowers Ea (provides alternate pathway). ln(k₂/k₁) = (Ea/R)(1/T₁ − 1/T₂).</p></div>
+<div class="card c-blue"><h3>Reaction Mechanisms</h3><p>Rate-determining step (slowest step) determines overall rate law. Intermediates: produced then consumed. Catalysts: present before and after. Rate law for mechanism must match experimental.</p></div>
+<div class="card c-green"><h3>Collision Theory</h3><p>Molecules must collide with (1) sufficient energy ≥ Ea and (2) proper orientation. Factors increasing rate: ↑ concentration, ↑ temperature, catalyst, ↑ surface area.</p></div>
+</div>
+</section>
+
+<section class="section" id="equilibrium">
+<div class="sec-tag">Unit 7 · ~7–9% of exam</div>
+<div class="sec-title">Equilibrium</div>
+<h2 class="sub">Equilibrium Expressions &amp; Le Chatelier's Principle</h2>
+<div class="eq-block">
+<span class="label">EQUILIBRIUM CONSTANT:</span><br>
+<span class="f">Kc = [products]^coeff / [reactants]^coeff</span>   <span class="cmt">// pure solids and liquids omitted</span><br>
+<span class="f">Kp = Kc(RT)^Δn</span>   <span class="cmt">// Δn = moles gas products − moles gas reactants</span><br><br>
+<span class="label">REACTION QUOTIENT Q:</span><br>
+Q &lt; K → reaction proceeds forward (more products)<br>
+Q &gt; K → reaction proceeds reverse (more reactants)<br>
+Q = K → at equilibrium<br><br>
+<span class="label">ICE TABLE:</span>  Initial → Change → Equilibrium<br>
+Change row: use stoichiometric ratios. Solve for x.
+</div>
+<div class="callout">
+<div class="callout-tag">Le Chatelier's Principle</div>
+<ul>
+<li><strong>Add reactant/remove product:</strong> shifts right (toward products)</li>
+<li><strong>Add product/remove reactant:</strong> shifts left (toward reactants)</li>
+<li><strong>Increase pressure:</strong> shifts toward fewer moles of gas</li>
+<li><strong>Increase temperature:</strong> shifts toward endothermic side (treats heat as reactant/product)</li>
+<li><strong>Add catalyst:</strong> equilibrium position unchanged — just reaches it faster</li>
+<li><strong>Add inert gas (constant volume):</strong> no shift — partial pressures unchanged</li>
+</ul>
+</div>
+</section>
+
+<section class="section" id="acidbase">
+<div class="sec-tag">Unit 8 · ~11–15% of exam</div>
+<div class="sec-title">Acids, Bases &amp; Buffers</div>
+<h2 class="sub">Key Equations</h2>
+<div class="eq-block">
+<span class="f">pH = −log[H⁺]            pOH = −log[OH⁻]          pH + pOH = 14</span><br>
+<span class="f">Ka × Kb = Kw = 1×10⁻¹⁴   (at 25°C)</span><br>
+<span class="f">pKa = −log(Ka)            stronger acid = smaller pKa</span><br><br>
+<span class="label">BUFFER (Henderson-Hasselbalch):</span><br>
+<span class="f">pH = pKa + log([A⁻]/[HA])</span><br>
+Buffer resists pH change. Most effective when pH ≈ pKa (equal concentrations).<br>
+Buffer capacity: more concentrated = better capacity.
+</div>
+<div class="card-grid">
+<div class="card c-teal"><h3>Strong Acids (memorize)</h3><p>HCl, HBr, HI, HNO₃, H₂SO₄, HClO₄, HClO₃. Fully dissociate. [H⁺] = [acid].</p></div>
+<div class="card c-blue"><h3>Weak Acids</h3><p>Ka &lt; 1. Use ICE table. [H⁺] = √(Ka·C) when x &lt;&lt; C. Percent ionization = [H⁺]/C × 100%.</p></div>
+<div class="card c-green"><h3>Titration Curves</h3><p>Strong-strong: equivalence point pH = 7. Weak acid-strong base: pH &gt; 7 at equivalence (conjugate base). Half-equivalence: pH = pKa.</p></div>
+<div class="card c-yellow"><h3>Ksp &amp; Solubility</h3><p>Ksp = [cations]^m[anions]^n. Common ion effect: adding a common ion decreases solubility. pH affects solubility of salts with basic/acidic anions.</p></div>
+</div>
+</section>
+
+<section class="section" id="thermo">
+<div class="sec-tag">Unit 9 · ~7–9% of exam</div>
+<div class="sec-title">Thermodynamics</div>
+<div class="eq-block">
+<span class="label">GIBBS FREE ENERGY:</span><br>
+<span class="f">ΔG = ΔH − TΔS</span>   <span class="cmt">// ΔG &lt; 0 → spontaneous</span><br>
+<span class="f">ΔG° = −RT ln K = −nFE°</span><br><br>
+<span class="label">SIGN RULES:</span><br>
+ΔH &lt; 0 (exothermic) + ΔS &gt; 0 → always spontaneous<br>
+ΔH &gt; 0 (endothermic) + ΔS &lt; 0 → never spontaneous<br>
+ΔH &lt; 0 + ΔS &lt; 0 → spontaneous at low T<br>
+ΔH &gt; 0 + ΔS &gt; 0 → spontaneous at high T<br><br>
+<span class="label">HESS'S LAW:</span>  ΔH°rxn = Σ ΔH°f(products) − Σ ΔH°f(reactants)<br>
+Reverse reaction: flip sign. Multiply reaction: multiply ΔH.
+</div>
+</section>
+
+<section class="section" id="electrochem">
+<div class="sec-tag">Unit 9 · ~7–9% of exam</div>
+<div class="sec-title">Electrochemistry</div>
+<div class="eq-block">
+<span class="label">GALVANIC CELL:</span>   oxidation at anode (−), reduction at cathode (+)<br>
+<span class="f">E°cell = E°cathode − E°anode</span>   <span class="cmt">// positive E°cell = spontaneous</span><br>
+<span class="f">ΔG° = −nFE°cell</span>   <span class="cmt">// n = moles of electrons, F = 96485 C/mol</span><br>
+<span class="f">Nernst equation: E = E° − (RT/nF)ln Q = E° − (0.0592/n)log Q  (at 25°C)</span><br><br>
+<span class="label">ELECTROLYSIS:</span>   external current forces non-spontaneous reaction<br>
+Moles e⁻ = It/F   (I = current in amps, t = time in seconds)
+</div>
+<div class="trap">
+<div class="trap-tag">⚡ Exam Traps</div>
+<ul>
+<li>Reaction orders come from EXPERIMENT, never from balanced equation coefficients</li>
+<li>Temperature ALWAYS shifts equilibrium — pressure shift only matters for gases</li>
+<li>Catalyst does NOT change K or ΔG° — only changes activation energy and rate</li>
+<li>At half-equivalence point in titration: pH = pKa (use this to find Ka)</li>
+<li>In galvanic cell: oxidation at anode. In electrolytic: also oxidation at anode (anode always oxidation)</li>
+</ul>
+</div>
+</section>
+
+<section class="section" id="mcq">
+<div class="sec-tag">Practice</div><div class="sec-title">MCQ Practice</div>
+<div class="question-box">
+<div class="q-header"><span class="q-num">Q1</span><span class="q-type">Kinetics · Rate Law</span></div>
+<div class="q-body">
+<p>A reaction A + B → C is first order in A and second order in B. If [A] is doubled and [B] is halved, the rate will:</p>
+<ul class="q-choices">
+<li onclick="reveal(this,'wrong','Q1: rate = k[A][B]². Double A multiplies by 2. Halve B multiplies by (1/2)² = 1/4. Net = 2×(1/4) = 1/2')">A) Double</li>
+<li onclick="reveal(this,'correct','✓ rate = k[A][B]². New rate = k(2A)(B/2)² = k·2A·B²/4 = rate/2')">B) Decrease by half</li>
+<li onclick="reveal(this,'wrong','Q1: The combined effect is 2 × (1/4) = 1/2')">C) Stay the same</li>
+<li onclick="reveal(this,'wrong','Q1: Second order in B means [B]² in rate law')">D) Quadruple</li>
+</ul>
+</div>
+<div class="q-reveal" id="rev-Q1"><div class="q-answer"><strong>Answer: B</strong> — rate = k[A][B]². New rate = k(2[A])([B]/2)² = k·2[A]·[B]²/4 = rate/2. The second-order dependence on B dominates.</div></div>
+</div>
+<div class="question-box">
+<div class="q-header"><span class="q-num">Q2</span><span class="q-type">Equilibrium · Le Chatelier</span></div>
+<div class="q-body">
+<p>For N₂(g) + 3H₂(g) ⇌ 2NH₃(g)  ΔH = −92 kJ/mol. Which change increases NH₃ yield?</p>
+<ul class="q-choices">
+<li onclick="reveal(this,'wrong','Q2: Increasing temperature shifts an exothermic reaction LEFT — less product')">A) Increasing temperature</li>
+<li onclick="reveal(this,'correct','✓ Increasing pressure favors fewer moles of gas: 4 mol gas → 2 mol. Shifts right → more NH₃')">B) Increasing pressure</li>
+<li onclick="reveal(this,'wrong','Q2: Removing NH₃ shifts right but "decreasing pressure" shifts left (toward more gas moles)')">C) Decreasing pressure</li>
+<li onclick="reveal(this,'wrong','Q2: A catalyst increases the rate of reaching equilibrium but does not change the equilibrium position or yield')">D) Adding a catalyst</li>
+</ul>
+</div>
+<div class="q-reveal" id="rev-Q2"><div class="q-answer"><strong>Answer: B</strong> — Haber process insight. 4 mol gas on left → 2 mol on right. Increasing pressure favors fewer gas moles → shifts right → more NH₃. (In practice, temperature is a tradeoff: low T = good yield but slow rate.)</div></div>
+</div>
+<div class="must-know">
+<h4>⚡ Perfect Score Checklist</h4>
+<ul>
+<li><strong>Reaction order from experiment, never from coefficients</strong></li>
+<li><strong>First-order half-life is constant</strong> — independent of initial concentration</li>
+<li><strong>Stronger acid = smaller Ka, smaller pKa</strong></li>
+<li><strong>pH = pKa at half-equivalence point</strong> in weak acid titration</li>
+<li><strong>ΔG &lt; 0 = spontaneous; E°cell &gt; 0 = spontaneous; K &gt; 1 = products favored</strong> — all three equivalent</li>
+<li><strong>Catalyst: lowers Ea, increases rate, does NOT change K or ΔG°</strong></li>
+<li><strong>Common ion effect decreases solubility</strong></li>
+<li><strong>Hydrogen bonding requires H bonded to N, O, or F</strong></li>
+<li><strong>Anode = oxidation (always)</strong> in both galvanic and electrolytic</li>
+<li><strong>Hess's Law: reverse = flip sign; multiply = scale ΔH</strong></li>
+</ul>
+</div>
+</section>
+
+</div>
+<footer class="footer"><a href="index.html" style="color:inherit;text-decoration:none;">← Score Five Hub</a> · AP Chemistry · Atomic Structure · Kinetics · Equilibrium · Thermodynamics</footer>
+<script>
+function reveal(el,result,msg){const body=el.closest('.q-body');body.querySelectorAll('.q-choices li').forEach(li=>{li.onclick=null;li.style.cursor='default';});el.classList.add(result);const qBox=el.closest('.question-box');const qNum=qBox.querySelector('.q-num').textContent;const rev=document.getElementById('rev-'+qNum);if(rev)rev.classList.add('show');}
+</script>
+</body>
+</html>

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AP Music Theory — Score 5 Edition</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,700;1,400;1,700&family=DM+Mono:wght@400;500&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#080608;--bg2:#100c10;--bg3:#181218;--border:#261e26;--border2:#342830;--text:#f0e8f5;--text2:#907090;--text3:#504060;--gold:#c9a84c;--cream:#f5e6c8;--rose:#e879a9;--violet:#8b5cf6;--teal:#2dd4bf;--blue:#60a5fa;--green:#4ade80;--orange:#fb923c;}
+*{box-sizing:border-box;margin:0;padding:0;}html{scroll-behavior:smooth;}
+body{font-family:'Lora',Georgia,serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.8;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(201,168,76,0.04) 0%,transparent 60%);pointer-events:none;z-index:0;}
+.masthead{background:var(--bg2);border-bottom:1px solid var(--border);padding:3.5rem 2rem 3rem;position:relative;z-index:1;}
+.masthead-inner{max-width:980px;margin:0 auto;}
+.back-btn{appearance:none;-webkit-appearance:none;font-family:'DM Mono',monospace;font-size:12px;color:var(--gold);letter-spacing:0.08em;display:inline-flex;align-items:center;gap:0.5rem;margin-bottom:1.5rem;padding:0.45rem 1rem;border:1px solid rgba(201,168,76,0.4);border-radius:3px;background:rgba(201,168,76,0.08);cursor:pointer;transition:all 0.18s;font-weight:500;line-height:1;position:relative;z-index:2;}
+.back-btn:hover{background:rgba(201,168,76,0.22);border-color:var(--gold);}
+.masthead-tag{font-family:'DM Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:0.15em;margin-bottom:0.75rem;}
+.masthead h1{font-family:'Syne',sans-serif;font-size:clamp(2rem,5vw,3.8rem);font-weight:800;line-height:1;letter-spacing:-0.02em;margin-bottom:0.75rem;}.masthead h1 .accent{color:var(--gold);}
+.masthead-desc{color:var(--text2);font-size:0.95rem;max-width:520px;margin-bottom:1.5rem;}
+.unit-pills{display:flex;flex-wrap:wrap;gap:0.35rem;}
+.upill{background:var(--bg3);border:1px solid var(--border);color:var(--text3);font-family:'DM Mono',monospace;font-size:11px;padding:0.25rem 0.7rem;border-radius:2px;text-decoration:none;transition:all 0.15s;}
+.upill:hover{border-color:var(--gold);color:var(--gold);}
+.topnav{background:rgba(8,6,8,0.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0.6rem 2rem;display:flex;flex-wrap:wrap;gap:0;position:sticky;top:0;z-index:100;}
+.topnav a{color:var(--text3);text-decoration:none;font-family:'DM Mono',monospace;font-size:11px;padding:0.3rem 0.6rem;border-radius:2px;transition:all 0.15s;white-space:nowrap;}
+.topnav a:hover{color:var(--gold);background:rgba(201,168,76,0.07);}
+.container{max-width:980px;margin:0 auto;padding:0 2rem;}
+.section{padding:3rem 0 2rem;border-bottom:1px solid var(--border);}
+.section:last-child{border-bottom:none;}
+.sec-tag{font-family:'DM Mono',monospace;font-size:10px;color:var(--text3);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.3rem;}
+.sec-title{font-family:'Syne',sans-serif;font-size:1.9rem;font-weight:800;line-height:1.1;letter-spacing:-0.02em;}
+.exam-pct{display:inline-block;background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.22);color:var(--gold);font-family:'DM Mono',monospace;font-size:10px;padding:0.2rem 0.5rem;border-radius:2px;margin-top:0.35rem;}
+h2.sub{font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:700;color:var(--text);margin:2rem 0 1rem;padding-bottom:0.4rem;border-bottom:1px solid var(--border);}
+h2.sub::before{content:'♩ ';color:var(--gold);font-size:14px;}
+.theory-block{background:var(--bg2);border:1px solid var(--border);border-left:3px solid var(--gold);border-radius:4px;padding:1.25rem 1.5rem;font-family:'DM Mono',monospace;font-size:13px;line-height:1.9;overflow-x:auto;margin:0.9rem 0;}
+.theory-block .f{color:var(--cream);}.theory-block .cmt{color:var(--text3);font-style:italic;font-size:12px;}.theory-block .label{color:var(--gold);font-weight:500;}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:0.85rem;margin-bottom:1.25rem;}
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:4px;padding:1.1rem;}
+.card h3{font-family:'DM Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:0.06em;margin-bottom:0.5rem;font-weight:500;}
+.card p,.card li{font-size:13px;color:var(--text2);line-height:1.6;}
+.card ul{padding-left:1.1rem;}
+.c-g{border-top:2px solid var(--gold);}.c-r{border-top:2px solid var(--rose);}.c-v{border-top:2px solid var(--violet);}.c-t{border-top:2px solid var(--teal);}.c-b{border-top:2px solid var(--blue);}.c-gr{border-top:2px solid var(--green);}.c-o{border-top:2px solid var(--orange);}
+.callout{background:rgba(201,168,76,0.05);border:1px solid rgba(201,168,76,0.18);border-left:3px solid var(--gold);padding:1rem 1.25rem;border-radius:0 4px 4px 0;margin:1.25rem 0;}
+.callout-tag{font-family:'DM Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.3rem;}
+.callout p,.callout li{font-size:14px;color:var(--text2);line-height:1.7;}
+.callout ul{padding-left:1.2rem;}
+.ctable{width:100%;border-collapse:collapse;margin-bottom:1.25rem;font-size:13px;display:block;overflow-x:auto;}
+.ctable th{background:var(--bg3);color:var(--text2);font-family:'DM Mono',monospace;font-size:11px;padding:0.6rem 0.9rem;text-align:left;border-bottom:1px solid var(--border2);white-space:nowrap;}
+.ctable td{padding:0.5rem 0.9rem;border-bottom:1px solid var(--border);color:var(--text2);vertical-align:top;line-height:1.5;font-size:13px;}
+.ctable tr:nth-child(even) td{background:rgba(255,255,255,0.012);}
+.ctable td:first-child{font-family:'DM Mono',monospace;font-size:11px;color:var(--gold);font-weight:500;}
+.must-know{background:linear-gradient(135deg,rgba(201,168,76,0.08),rgba(232,121,169,0.04));border:1px solid rgba(201,168,76,0.18);border-radius:4px;padding:1.25rem 1.5rem;margin:1.5rem 0;}
+.must-know h4{font-family:'DM Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.75rem;}
+.must-know ul{padding-left:1.2rem;}
+.must-know li{font-size:14px;color:var(--text2);line-height:1.9;}
+.must-know li strong{color:var(--text);}
+.staff-ex{background:var(--bg2);border:1px solid var(--border);border-radius:4px;padding:1.25rem;margin:0.75rem 0;text-align:center;font-family:'DM Mono',monospace;font-size:12px;color:var(--text3);letter-spacing:0.05em;}
+.footer{background:var(--bg2);border-top:1px solid var(--border);padding:2rem;text-align:center;font-family:'DM Mono',monospace;font-size:11px;color:var(--text3);margin-top:3rem;}
+</style>
+</head>
+<body>
+<header class="masthead"><div class="masthead-inner">
+<button class="back-btn" onclick="window.location.href='index.html'" onmouseover="this.style.background='rgba(201,168,76,0.22)'" onmouseout="this.style.background='rgba(201,168,76,0.08)'">← Back to Hub</button>
+<div class="masthead-tag">AP Music Theory · Score 5 Master Reference</div>
+<h1>Pitch. Rhythm.<br><span class="accent">Harmony.</span></h1>
+<p class="masthead-desc">Fundamentals through voice leading, harmony, and musical form. Aural skills, written theory, and FRQ strategies.</p>
+<div class="unit-pills">
+<a class="upill" href="#fundamentals">Fundamentals</a><a class="upill" href="#scales">Scales &amp; Keys</a><a class="upill" href="#intervals">Intervals</a><a class="upill" href="#chords">Chords</a><a class="upill" href="#progressions">Progressions</a><a class="upill" href="#voice-leading">Voice Leading</a><a class="upill" href="#rhythm">Rhythm &amp; Meter</a><a class="upill" href="#form">Form &amp; Analysis</a><a class="upill" href="#aural">Aural Skills</a>
+</div>
+</div></header>
+<nav class="topnav">
+<a href="index.html">← Hub</a><a href="#fundamentals">Fundamentals</a><a href="#scales">Scales</a><a href="#intervals">Intervals</a><a href="#chords">Chords</a><a href="#progressions">Progressions</a><a href="#voice-leading">Voice Leading</a><a href="#rhythm">Rhythm</a><a href="#form">Form</a><a href="#aural">Aural</a>
+</nav>
+<div class="container">
+
+<section class="section" id="fundamentals">
+<div class="sec-tag">Unit 1 · Foundation</div>
+<div class="sec-title">Music Notation Fundamentals</div>
+<h2 class="sub">Staff, Clefs &amp; Ledger Lines</h2>
+<div class="card-grid">
+<div class="card c-g"><h3>Treble Clef (G clef)</h3><p>Curls around G4 (second line from bottom). Lines (low to high): <strong>E G B D F</strong> — "Every Good Boy Does Fine." Spaces: <strong>F A C E</strong> (face). Used for higher-pitched instruments, right hand piano.</p></div>
+<div class="card c-r"><h3>Bass Clef (F clef)</h3><p>Dots bracket F3 (fourth line from bottom). Lines: <strong>G B D F A</strong> — "Good Boys Do Fine Always." Spaces: <strong>A C E G</strong> — "All Cars Eat Gas." Left hand piano, low strings, tuba.</p></div>
+<div class="card c-v"><h3>Alto/Tenor Clef (C clef)</h3><p>C clef middle C on different lines. <strong>Alto clef:</strong> middle C on middle (3rd) line — viola. <strong>Tenor clef:</strong> middle C on 4th line — cello, trombone (upper range). Used to avoid excessive ledger lines.</p></div>
+<div class="card c-t"><h3>Accidentals</h3><p>Sharp (♯): raises pitch one half step. Flat (♭): lowers one half step. Natural (♮): cancels previous accidental. Double sharp (𝄪): raises two half steps. Double flat (𝄫): lowers two half steps. Apply for entire measure unless canceled.</p></div>
+</div>
+</section>
+
+<section class="section" id="scales">
+<div class="sec-tag">Unit 2 · Core Content</div>
+<div class="sec-title">Scales &amp; Key Signatures</div>
+<h2 class="sub">Major &amp; Minor Scales — Patterns</h2>
+<div class="theory-block">
+<span class="label">MAJOR SCALE:</span>  W W H W W W H  (whole-half step pattern)<br>
+C major: C D E F G A B C  (all white keys)<br>
+<span class="cmt">// Every major scale = same interval pattern starting from different pitch</span><br><br>
+<span class="label">NATURAL MINOR:</span>  W H W W H W W<br>
+A natural minor: A B C D E F G A  (all white keys)<br>
+<span class="cmt">// Relative minor = 6th scale degree of major scale</span><br><br>
+<span class="label">HARMONIC MINOR:</span>  natural minor with raised 7th<br>
+A harmonic minor: A B C D E F G♯ A<br>
+<span class="cmt">// Creates leading tone → stronger pull to tonic. V7 chord usable.</span><br><br>
+<span class="label">MELODIC MINOR:</span>  ascending: raised 6th + 7th; descending: natural minor<br>
+A melodic minor: A B C D E F♯ G♯ A (asc) / A G F E D C B A (desc)
+</div>
+
+<h2 class="sub">Circle of Fifths</h2>
+<table class="ctable">
+<tr><th>Sharps</th><th>Key</th><th>Flats</th><th>Key</th></tr>
+<tr><td>0</td><td>C major / a minor</td><td>0</td><td>C major / a minor</td></tr>
+<tr><td>1 (F♯)</td><td>G major / e minor</td><td>1 (B♭)</td><td>F major / d minor</td></tr>
+<tr><td>2 (F♯ C♯)</td><td>D major / b minor</td><td>2 (B♭ E♭)</td><td>B♭ major / g minor</td></tr>
+<tr><td>3 (F♯ C♯ G♯)</td><td>A major / f♯ minor</td><td>3 (B♭ E♭ A♭)</td><td>E♭ major / c minor</td></tr>
+<tr><td>4 (F♯ C♯ G♯ D♯)</td><td>E major / c♯ minor</td><td>4 (B♭ E♭ A♭ D♭)</td><td>A♭ major / f minor</td></tr>
+<tr><td>5</td><td>B major / g♯ minor</td><td>5</td><td>D♭ major / b♭ minor</td></tr>
+<tr><td>6</td><td>F♯ major / d♯ minor</td><td>6</td><td>G♭ major / e♭ minor</td></tr>
+<tr><td>7</td><td>C♯ major / a♯ minor</td><td>7</td><td>C♭ major / a♭ minor</td></tr>
+</table>
+<div class="callout">
+<div class="callout-tag">Key Signature Tricks</div>
+<ul>
+<li><strong>Sharps order:</strong> F C G D A E B — "Father Charles Goes Down And Ends Battle"</li>
+<li><strong>Flats order:</strong> B E A D G C F — reverse of sharps (or: "Battle Ends And Down Goes Charles' Father")</li>
+<li><strong>Major key with sharps:</strong> name of key = one half step above last sharp</li>
+<li><strong>Major key with flats:</strong> name of key = second-to-last flat</li>
+<li><strong>Relative minor:</strong> down a minor 3rd (or up a major 6th) from major tonic = relative minor tonic</li>
+</ul>
+</div>
+</section>
+
+<section class="section" id="intervals">
+<div class="sec-tag">Unit 3 · Critical Skill</div>
+<div class="sec-title">Intervals</div>
+<h2 class="sub">Interval Quality &amp; Size</h2>
+<div class="theory-block">
+<span class="label">SIZE:</span>  count every letter name (including both endpoints)<br>
+C→E = 3rd (C D E), C→G = 5th (C D E F G)<br><br>
+<span class="label">MAJOR SCALE INTERVALS (from tonic):</span><br>
+2nd: Major 2nd (M2 = 2 half steps)<br>
+3rd: Major 3rd (M3 = 4 half steps)<br>
+4th: Perfect 4th (P4 = 5 half steps)<br>
+5th: Perfect 5th (P5 = 7 half steps)<br>
+6th: Major 6th (M6 = 9 half steps)<br>
+7th: Major 7th (M7 = 11 half steps)<br>
+8th: Perfect Octave (P8 = 12 half steps)<br><br>
+<span class="label">QUALITY RULES:</span><br>
+Perfect − 1 hs = diminished  |  Perfect + 1 hs = augmented<br>
+Major − 1 hs = minor  |  Minor − 1 hs = diminished  |  Major + 1 hs = augmented<br><br>
+<span class="label">INVERSIONS:</span><br>
+Interval + its inversion = 9. Quality: P↔P, M↔m, d↔A
+</div>
+<div class="card-grid">
+<div class="card c-g"><h3>Consonance vs. Dissonance</h3><p>Consonant: Unison, octave, P5, P4 (in context), M/m 3rd, M/m 6th. Dissonant: M/m 2nd, M/m 7th, tritone (d5/A4 = devil's interval). Dissonances need resolution.</p></div>
+<div class="card c-r"><h3>Tritone</h3><p>Augmented 4th = diminished 5th = 6 half steps = exactly half an octave. Most dissonant interval. Divides octave in half. Creates tension that demands resolution. Found in dominant 7th chord (F and B in G7 in C major).</p></div>
+</div>
+</section>
+
+<section class="section" id="chords">
+<div class="sec-tag">Unit 4 · Core Harmony</div>
+<div class="sec-title">Chords &amp; Inversions</div>
+<h2 class="sub">Triads &amp; Seventh Chords</h2>
+<div class="theory-block">
+<span class="label">TRIAD TYPES:</span><br>
+Major (M): M3 + m3 from root  (e.g., C E G)<br>
+Minor (m): m3 + M3 from root  (e.g., C E♭ G)<br>
+Diminished (d): m3 + m3       (e.g., C E♭ G♭)<br>
+Augmented (A): M3 + M3        (e.g., C E G♯)<br><br>
+<span class="label">SEVENTH CHORD TYPES:</span><br>
+Major 7th (MM7): M triad + M7  (e.g., C E G B)<br>
+Dominant 7th (Mm7): M triad + m7  (e.g., G B D F — V7 in C major)<br>
+Minor 7th (mm7): m triad + m7<br>
+Half-dim 7th (dm7 / ø7): d triad + m7<br>
+Fully dim 7th (dd7 / °7): d triad + d7  (all m3s stacked)<br><br>
+<span class="label">INVERSIONS:</span><br>
+Root position: root on bottom (5/3 figured bass = omit)<br>
+First inversion: 3rd on bottom (6/3 figured bass = "6")<br>
+Second inversion: 5th on bottom (6/4 figured bass)<br>
+For 7th chords: third inversion = 7th on bottom (4/2 or "2")
+</div>
+
+<h2 class="sub">Diatonic Chords in Major &amp; Minor</h2>
+<table class="ctable">
+<tr><th>Scale Degree</th><th>Major</th><th>Natural Minor</th><th>Function</th></tr>
+<tr><td>I / i</td><td>Major</td><td>Minor</td><td>Tonic — home, rest</td></tr>
+<tr><td>ii / ii°</td><td>Minor</td><td>Diminished</td><td>Predominant — leads to V</td></tr>
+<tr><td>III / III</td><td>Minor</td><td>Major</td><td>Tonic function in minor</td></tr>
+<tr><td>IV / iv</td><td>Major</td><td>Minor</td><td>Predominant — strong motion to V</td></tr>
+<tr><td>V / V</td><td>Major</td><td>Major (harm. minor)</td><td>Dominant — strongest drive to I</td></tr>
+<tr><td>vi / VI</td><td>Minor</td><td>Major</td><td>Tonic function / relative major</td></tr>
+<tr><td>vii° / vii°</td><td>Diminished</td><td>Diminished (harm.)</td><td>Leading tone — drives to I</td></tr>
+</table>
+</section>
+
+<section class="section" id="voice-leading">
+<div class="sec-tag">Unit 5 · Written Composition</div>
+<div class="sec-title">Voice Leading (SATB)</div>
+<div class="callout">
+<div class="callout-tag">SATB Voice Ranges</div>
+<ul>
+<li><strong>Soprano:</strong> B3–G5</li>
+<li><strong>Alto:</strong> G3–D5</li>
+<li><strong>Tenor:</strong> C3–G4</li>
+<li><strong>Bass:</strong> E2–C4</li>
+</ul>
+</div>
+<div class="callout">
+<div class="callout-tag">Voice Leading Rules — MEMORIZE THESE</div>
+<ul>
+<li><strong>No parallel 5ths or octaves</strong> — voices cannot move in the same direction to a P5 or P8</li>
+<li><strong>No direct (hidden) 5ths or octaves</strong> in outer voices (soprano/bass) if soprano leaps</li>
+<li><strong>Resolve tendency tones:</strong> Leading tone (7̂) must resolve up to tonic (8̂). Chordal 7th must resolve down by step.</li>
+<li><strong>Avoid voice crossing</strong> — voices should maintain their relative positions</li>
+<li><strong>Prefer contrary motion</strong> — voices moving in opposite directions is strongest</li>
+<li><strong>Double the root</strong> in root position chords (usually). In first inversion, usually double the soprano or bass note.</li>
+<li><strong>Avoid doubling the 7th</strong> — it would force awkward resolution</li>
+<li><strong>Bass moves by step or leap; inner voices prefer stepwise motion</strong></li>
+<li><strong>Avoid large leaps in inner voices</strong> — especially augmented intervals</li>
+</ul>
+</div>
+</section>
+
+<section class="section" id="rhythm">
+<div class="sec-tag">Unit 1 · Fundamentals</div>
+<div class="sec-title">Rhythm &amp; Meter</div>
+<div class="theory-block">
+<span class="label">NOTE VALUES:</span><br>
+Whole → Half → Quarter → Eighth → Sixteenth → Thirty-second<br>
+Each = half the value of previous. Dotted note = 1.5× its value.<br><br>
+<span class="label">SIMPLE METER:</span>  top # = beats per measure; bottom = beat unit<br>
+4/4 = 4 quarter-note beats. 3/4 = 3 quarter-note beats. 2/4 = 2 quarter-note beats.<br>
+Simple meter: each beat divides into 2.<br><br>
+<span class="label">COMPOUND METER:</span>  each beat divides into 3<br>
+6/8 = 2 dotted-quarter beats (felt in 2, counted 1-2-3 4-5-6)<br>
+9/8 = 3 dotted-quarter beats. 12/8 = 4 dotted-quarter beats.<br><br>
+<span class="label">SYNCOPATION:</span>  accent on normally weak beat or off-beat<br>
+<span class="label">HEMIOLA:</span>  temporary 3-against-2 metric displacement
+</div>
+</section>
+
+<section class="section" id="progressions">
+<div class="sec-tag">Unit 5 · Harmony</div>
+<div class="sec-title">Harmonic Progressions &amp; Cadences</div>
+<h2 class="sub">Cadence Types</h2>
+<table class="ctable">
+<tr><th>Cadence</th><th>Chords</th><th>Character</th><th>Notes</th></tr>
+<tr><td>Authentic (PAC)</td><td>V or V7 → I (root position both)</td><td>Most final, conclusive</td><td>Soprano must be 1̂ in final chord</td></tr>
+<tr><td>Imperfect Authentic (IAC)</td><td>V → I but inverted or non-scale degree in soprano</td><td>Somewhat conclusive</td><td>Less final than PAC</td></tr>
+<tr><td>Half Cadence (HC)</td><td>Any → V (ends on V)</td><td>Suspenseful, questioning</td><td>Like a musical comma</td></tr>
+<tr><td>Plagal Cadence</td><td>IV → I</td><td>Gentle, "Amen" feeling</td><td>Frequently follows PAC</td></tr>
+<tr><td>Deceptive Cadence</td><td>V → vi (or VI in minor)</td><td>Surprising, extended</td><td>Prolongs music; avoids expected rest</td></tr>
+</table>
+
+<h2 class="sub">Common Chord Progressions</h2>
+<div class="theory-block">
+<span class="label">FUNCTIONAL PROGRESSION:</span><br>
+Tonic → Predominant → Dominant → Tonic<br>
+I → IV or ii → V → I  (strongest cadential motion)<br><br>
+<span class="label">COMMON PROGRESSIONS:</span><br>
+I − V − vi − IV  (pop music backbone: C G Am F)<br>
+I − IV − V − I   (standard blues/folk)<br>
+ii − V − I       (jazz standard progression)<br>
+I − vi − IV − V  (50s doo-wop progression)<br><br>
+<span class="label">SECONDARY DOMINANTS:</span><br>
+V/V = dominant of the dominant (e.g., D major chord in C major)<br>
+Creates temporary tonicization — brief pivot to new key center
+</div>
+</section>
+
+<section class="section" id="form">
+<div class="sec-tag">Unit 6 · Analysis</div>
+<div class="sec-title">Musical Form &amp; Analysis</div>
+<div class="card-grid">
+<div class="card c-g"><h3>Binary Form (AB)</h3><p>Two sections, each often repeated (||: A :||: B :||). Simple binary: B grows from A material. Rounded binary: B ends with return of A material. Common in Baroque dances (minuets, gavottes).</p></div>
+<div class="card c-r"><h3>Ternary Form (ABA)</h3><p>Three sections — B contrasts with A, then A returns. A is complete, B contrasts (different key, mood, material). Common in da capo arias, marches, scherzo movements.</p></div>
+<div class="card c-v"><h3>Sonata Form</h3><p>Exposition (P theme - tonic; T; S theme - dominant; coda), Development (fragmentation, modulation, tension), Recapitulation (both themes in tonic). Hallmark of Classical symphony movements.</p></div>
+<div class="card c-t"><h3>Rondo Form</h3><p>ABACADA... Refrain (A) alternates with contrasting episodes. Common in final movements (rondeau). Cheerful, dance-like character. Episodes in related keys.</p></div>
+<div class="card c-b"><h3>Theme &amp; Variations</h3><p>Theme stated, then repeated with changes (rhythm, harmony, texture, key, mode). Beethoven Op. 109, Copland Appalachian Spring, Handel Harmonious Blacksmith.</p></div>
+<div class="card c-o"><h3>Phrase Structure</h3><p>Period: antecedent phrase (ends HC) + consequent phrase (ends PAC). Parallel period: both phrases begin with same material. Contrasting period: consequent differs. Phrase = 4–8 measures.</p></div>
+</div>
+</section>
+
+<section class="section" id="aural">
+<div class="sec-tag">Exam Component · ~45% of score</div>
+<div class="sec-title">Aural Skills</div>
+<div class="callout">
+<div class="callout-tag">AP Music Theory Exam Structure</div>
+<ul>
+<li><strong>Section I Written:</strong> Multiple Choice (45 questions, 45 min) + MCQ Aural (30 questions, 45 min)</li>
+<li><strong>Section II Written:</strong> FRQ — voice leading, composition, analysis, harmonization</li>
+<li><strong>Section II Aural:</strong> Melodic dictation, harmonic dictation, sight singing</li>
+</ul>
+</div>
+<div class="card-grid">
+<div class="card c-g"><h3>Melodic Dictation</h3><p>Listen for: starting pitch, rhythmic pattern, stepwise vs. leap, interval quality. Process: notate rhythm first, then pitches. Use scale degree numbers to track tonal context. Repeat listenings: big picture → details → check.</p></div>
+<div class="card c-r"><h3>Harmonic Dictation</h3><p>Listen for: bass movement (steps vs. leaps = inversions), cadences (PAC, HC, deceptive). Identify Roman numerals and inversions. Common patterns: I-IV-V-I, ii-V-I, deceptive V-vi. Bass line is often most distinctive voice.</p></div>
+<div class="card c-v"><h3>Sight Singing Tips</h3><p>Use solfège (do re mi...) or scale degrees (1 2 3...). Establish tonal center first. Scan for difficult intervals, plan them ahead. Subdivide complex rhythms. Maintain steady tempo even if pitch uncertain. Sing confidently — hesitation loses points.</p></div>
+<div class="card c-t"><h3>Interval Recognition</h3><p>Associate each interval with a familiar melody: m2 = Jaws, M2 = Happy Birthday (2nd note), m3 = Greensleeves, M3 = When the Saints, P4 = Wedding March, P5 = Star Wars, m6 = The Entertainer, M6 = My Bonnie, m7 = Star Trek, M7 = Take On Me.</p></div>
+</div>
+
+<div class="must-know">
+<h4>⚡ Perfect Score Checklist</h4>
+<ul>
+<li><strong>No parallel 5ths or octaves</strong> — most common voice-leading error on exam</li>
+<li><strong>Leading tone (7̂) resolves UP to tonic</strong> — never double the leading tone</li>
+<li><strong>Chordal 7th resolves DOWN by step</strong></li>
+<li><strong>V7 in minor requires harmonic minor</strong> — raise the 7th scale degree</li>
+<li><strong>PAC: root position V or V7 → root position I, soprano ends on 1̂</strong></li>
+<li><strong>6/4 chords are unstable</strong>: I⁶⁄₄ is a dissonant chord — use only as cadential (resolving to V)</li>
+<li><strong>Sharps order: F C G D A E B. Flats: reverse of that.</strong></li>
+<li><strong>Relative minor = same key signature as major, starts on 6̂</strong></li>
+<li><strong>Harmonic minor raises 7̂; melodic minor raises 6̂ and 7̂ ascending only</strong></li>
+<li><strong>In compound meter, count in dotted notes</strong>: 6/8 = 2 beats, each a dotted quarter</li>
+</ul>
+</div>
+</section>
+
+</div>
+<footer class="footer"><a href="index.html" style="color:inherit;text-decoration:none;">← Score Five Hub</a> · AP Music Theory · Scales · Harmony · Voice Leading · Form · Aural Skills</footer>
+</body>
+</html>

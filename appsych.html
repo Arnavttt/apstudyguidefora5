@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AP Psychology — Score 5 Edition</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#08050f;--bg2:#0f0818;--bg3:#160c22;--border:#221530;--border2:#2e1e40;--text:#e8d8f8;--text2:#8860a8;--text3:#4a3060;--purple:#a855f7;--violet:#8b5cf6;--pink:#e879f9;--blue:#60a5fa;--green:#4ade80;--yellow:#fde047;--orange:#fb923c;--red:#f87171;--teal:#2dd4bf;}
+*{box-sizing:border-box;margin:0;padding:0;}html{scroll-behavior:smooth;}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.7;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 60% 20%,rgba(168,85,247,0.06) 0%,transparent 55%);pointer-events:none;z-index:0;}
+.masthead{background:var(--bg2);border-bottom:1px solid var(--border);padding:3.5rem 2rem 3rem;position:relative;z-index:1;}
+.masthead-inner{max-width:980px;margin:0 auto;}
+.back-btn{appearance:none;-webkit-appearance:none;font-family:'DM Mono',monospace;font-size:12px;color:var(--purple);letter-spacing:0.08em;display:inline-flex;align-items:center;gap:0.5rem;margin-bottom:1.5rem;padding:0.45rem 1rem;border:1px solid rgba(168,85,247,0.35);border-radius:3px;background:rgba(168,85,247,0.07);cursor:pointer;transition:all 0.18s;font-weight:500;line-height:1;position:relative;z-index:2;}
+.back-btn:hover{background:rgba(168,85,247,0.2);border-color:var(--purple);}
+.masthead-tag{font-family:'DM Mono',monospace;font-size:11px;color:var(--purple);letter-spacing:0.15em;margin-bottom:0.75rem;}
+.masthead h1{font-family:'Syne',sans-serif;font-size:clamp(2rem,5vw,3.8rem);font-weight:800;line-height:1;letter-spacing:-0.03em;margin-bottom:0.75rem;}.masthead h1 .accent{color:var(--purple);}
+.masthead-desc{color:var(--text2);font-size:0.95rem;max-width:520px;margin-bottom:1.5rem;}
+.unit-pills{display:flex;flex-wrap:wrap;gap:0.35rem;}
+.upill{background:var(--bg3);border:1px solid var(--border);color:var(--text3);font-family:'DM Mono',monospace;font-size:11px;padding:0.25rem 0.7rem;border-radius:2px;text-decoration:none;transition:all 0.15s;}
+.upill:hover{border-color:var(--purple);color:var(--purple);}
+.topnav{background:rgba(8,5,15,0.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0.6rem 2rem;display:flex;flex-wrap:wrap;gap:0;position:sticky;top:0;z-index:100;}
+.topnav a{color:var(--text3);text-decoration:none;font-family:'DM Mono',monospace;font-size:11px;padding:0.3rem 0.6rem;border-radius:2px;transition:all 0.15s;white-space:nowrap;}
+.topnav a:hover{color:var(--purple);background:rgba(168,85,247,0.06);}
+.container{max-width:980px;margin:0 auto;padding:0 2rem;}
+.section{padding:3rem 0 2rem;border-bottom:1px solid var(--border);}
+.section:last-child{border-bottom:none;}
+.sec-tag{font-family:'DM Mono',monospace;font-size:10px;color:var(--text3);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.3rem;}
+.sec-title{font-family:'Syne',sans-serif;font-size:1.9rem;font-weight:800;line-height:1.1;letter-spacing:-0.02em;}
+.exam-pct{display:inline-block;background:rgba(168,85,247,0.08);border:1px solid rgba(168,85,247,0.22);color:var(--purple);font-family:'DM Mono',monospace;font-size:10px;padding:0.2rem 0.5rem;border-radius:2px;margin-top:0.35rem;}
+h2.sub{font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:700;color:var(--text);margin:2rem 0 1rem;padding-bottom:0.4rem;border-bottom:1px solid var(--border);}
+h2.sub::before{content:'🧠 ';font-size:13px;}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:0.85rem;margin-bottom:1.25rem;}
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:4px;padding:1.1rem;}
+.card h3{font-family:'DM Mono',monospace;font-size:11px;color:var(--purple);letter-spacing:0.06em;margin-bottom:0.5rem;font-weight:500;}
+.card p,.card li{font-size:13px;color:var(--text2);line-height:1.6;}
+.card ul{padding-left:1.1rem;}
+.c-p{border-top:2px solid var(--purple);}.c-v{border-top:2px solid var(--violet);}.c-pk{border-top:2px solid var(--pink);}.c-b{border-top:2px solid var(--blue);}.c-g{border-top:2px solid var(--green);}.c-y{border-top:2px solid var(--yellow);}.c-o{border-top:2px solid var(--orange);}.c-t{border-top:2px solid var(--teal);}
+.callout{background:rgba(253,224,71,0.05);border:1px solid rgba(253,224,71,0.18);border-left:3px solid var(--yellow);padding:1rem 1.25rem;border-radius:0 4px 4px 0;margin:1.25rem 0;}
+.callout-tag{font-family:'DM Mono',monospace;font-size:10px;color:var(--yellow);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.3rem;}
+.callout p,.callout li{font-size:14px;color:var(--text2);line-height:1.7;}
+.callout ul{padding-left:1.2rem;}
+.ctable{width:100%;border-collapse:collapse;margin-bottom:1.25rem;font-size:13px;display:block;overflow-x:auto;}
+.ctable th{background:var(--bg3);color:var(--text2);font-family:'DM Mono',monospace;font-size:11px;padding:0.6rem 0.9rem;text-align:left;border-bottom:1px solid var(--border2);white-space:nowrap;}
+.ctable td{padding:0.5rem 0.9rem;border-bottom:1px solid var(--border);color:var(--text2);vertical-align:top;line-height:1.5;font-size:13px;}
+.ctable tr:nth-child(even) td{background:rgba(255,255,255,0.012);}
+.ctable td:first-child{font-family:'DM Mono',monospace;font-size:11px;color:var(--purple);font-weight:500;}
+.question-box{background:var(--bg2);border:1px solid var(--border2);border-radius:4px;margin-bottom:1.25rem;overflow:hidden;}
+.q-header{background:var(--bg3);padding:0.75rem 1.25rem;display:flex;align-items:center;gap:0.75rem;border-bottom:1px solid var(--border);}
+.q-num{font-family:'DM Mono',monospace;font-size:11px;background:rgba(168,85,247,0.1);color:var(--purple);padding:0.2rem 0.6rem;border-radius:2px;font-weight:600;}
+.q-type{font-family:'DM Mono',monospace;font-size:10px;color:var(--text3);letter-spacing:0.06em;text-transform:uppercase;}
+.q-body{padding:1.25rem;}
+.q-body p{font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:0.75rem;}
+.q-choices{list-style:none;padding:0;margin:0.75rem 0;}
+.q-choices li{padding:0.5rem 0.75rem;margin:0.3rem 0;border:1px solid var(--border);border-radius:3px;font-size:13px;color:var(--text2);cursor:pointer;transition:all 0.15s;background:var(--bg);}
+.q-choices li:hover{border-color:var(--purple);color:var(--purple);}
+.q-choices li.correct{border-color:#4ade80;color:#4ade80;background:rgba(74,222,128,0.05);}
+.q-choices li.wrong{border-color:#f87171;color:#f87171;background:rgba(248,113,113,0.05);}
+.q-reveal{display:none;padding:0 1.25rem 1.25rem;}
+.q-reveal.show{display:block;}
+.q-answer{background:rgba(74,222,128,0.05);border:1px solid rgba(74,222,128,0.18);border-radius:3px;padding:0.75rem 1rem;font-size:13px;color:var(--text2);line-height:1.7;}
+.must-know{background:linear-gradient(135deg,rgba(168,85,247,0.08),rgba(232,121,249,0.04));border:1px solid rgba(168,85,247,0.18);border-radius:4px;padding:1.25rem 1.5rem;margin:1.5rem 0;}
+.must-know h4{font-family:'DM Mono',monospace;font-size:11px;color:var(--purple);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.75rem;}
+.must-know ul{padding-left:1.2rem;}
+.must-know li{font-size:14px;color:var(--text2);line-height:1.9;}
+.must-know li strong{color:var(--text);}
+.footer{background:var(--bg2);border-top:1px solid var(--border);padding:2rem;text-align:center;font-family:'DM Mono',monospace;font-size:11px;color:var(--text3);margin-top:3rem;}
+</style>
+</head>
+<body>
+<header class="masthead"><div class="masthead-inner">
+<button class="back-btn" onclick="window.location.href='index.html'" onmouseover="this.style.background='rgba(168,85,247,0.2)'" onmouseout="this.style.background='rgba(168,85,247,0.07)'">← Back to Hub</button>
+<div class="masthead-tag">AP Psychology · Score 5 Master Reference</div>
+<h1>Mind.<br><span class="accent">Behavior.</span> Science.</h1>
+<p class="masthead-desc">All 9 units — history through treatment. Key studies, disorders, research methods, and FRQ strategies.</p>
+<div class="unit-pills">
+<a class="upill" href="#history">History &amp; Approaches</a><a class="upill" href="#bio">Biological Bases</a><a class="upill" href="#sensation">Sensation &amp; Perception</a><a class="upill" href="#states">States of Consciousness</a><a class="upill" href="#learning">Learning</a><a class="upill" href="#cognition">Cognition &amp; Memory</a><a class="upill" href="#devmot">Development &amp; Motivation</a><a class="upill" href="#social">Social Psychology</a><a class="upill" href="#abnormal">Abnormal &amp; Treatment</a>
+</div>
+</div></header>
+<nav class="topnav">
+<a href="index.html">← Hub</a><a href="#history">History</a><a href="#bio">Biology</a><a href="#sensation">Sensation</a><a href="#states">Consciousness</a><a href="#learning">Learning</a><a href="#cognition">Cognition</a><a href="#devmot">Development</a><a href="#social">Social</a><a href="#abnormal">Abnormal</a>
+</nav>
+<div class="container">
+
+<section class="section" id="history">
+<div class="sec-tag">Unit 1 · ~3–5% of exam</div>
+<div class="sec-title">History, Perspectives &amp; Research Methods</div>
+<h2 class="sub">Major Psychological Perspectives</h2>
+<table class="ctable">
+<tr><th>Perspective</th><th>Focus</th><th>Key Figures</th><th>Strengths/Limits</th></tr>
+<tr><td>Psychoanalytic/Psychodynamic</td><td>Unconscious drives, early childhood, id/ego/superego</td><td>Freud, Jung, Adler</td><td>Highlights unconscious; hard to test scientifically</td></tr>
+<tr><td>Behavioral</td><td>Observable behavior, conditioning, environment shapes all</td><td>Watson, Skinner, Pavlov</td><td>Scientific, measurable; ignores cognition and biology</td></tr>
+<tr><td>Humanistic</td><td>Free will, growth, self-actualization, positive potential</td><td>Maslow, Rogers</td><td>Optimistic; criticized as vague/unscientific</td></tr>
+<tr><td>Cognitive</td><td>Mental processes: memory, thinking, problem-solving</td><td>Piaget, Beck, Chomsky</td><td>Dominant today; basis for CBT</td></tr>
+<tr><td>Biological/Neuroscience</td><td>Brain, genetics, nervous system, hormones</td><td>Broca, Wernicke, modern neuroscientists</td><td>Scientific, reductionist; ignores social factors</td></tr>
+<tr><td>Sociocultural</td><td>Culture, social norms, group influence on behavior</td><td>Vygotsky, cross-cultural researchers</td><td>Explains cultural variation; complex</td></tr>
+<tr><td>Evolutionary</td><td>Natural selection shaped behavior for survival/reproduction</td><td>Darwin legacy, Buss</td><td>Explains adaptive behaviors; difficult to test</td></tr>
+</table>
+<h2 class="sub">Research Methods</h2>
+<div class="card-grid">
+<div class="card c-p"><h3>Correlation vs. Causation</h3><p>Correlation shows relationship between variables (−1 to +1). Does NOT prove causation. Confounding variables explain many correlations. Only experiment can establish causation.</p></div>
+<div class="card c-v"><h3>Experimental Method</h3><p>Independent variable (manipulated) → Dependent variable (measured). Control group vs. experimental group. Random assignment controls confounds. Double-blind: neither subjects nor researchers know condition.</p></div>
+<div class="card c-b"><h3>Key Research Concepts</h3><p>Reliability: consistent results. Validity: measures what it claims to. Operational definition: precise definition of variables. Sampling bias: non-representative sample → cannot generalize.</p></div>
+<div class="card c-g"><h3>Ethics in Research</h3><p>IRB approval, informed consent, debriefing, right to withdraw. Animal research: minimize suffering. Milgram and Zimbardo studies raised major ethical concerns → modern standards.</p></div>
+</div>
+</section>
+
+<section class="section" id="bio">
+<div class="sec-tag">Unit 2 · ~8–10% of exam</div>
+<div class="sec-title">Biological Bases of Behavior</div>
+<h2 class="sub">Neurons &amp; Neurotransmitters</h2>
+<div class="card-grid">
+<div class="card c-p"><h3>Neuron Structure</h3><p>Dendrites (receive) → Cell body → Axon → Terminal buttons → Synapse. Action potential: all-or-nothing. Myelin sheath speeds transmission. Refractory period after firing.</p></div>
+<div class="card c-v"><h3>Key Neurotransmitters</h3><p><strong>Dopamine:</strong> reward, movement (low → Parkinson's; excess → schizophrenia). <strong>Serotonin:</strong> mood, sleep (low → depression). <strong>Norepinephrine:</strong> alertness, arousal. <strong>GABA:</strong> inhibitory, calming. <strong>Acetylcholine:</strong> memory, muscle movement. <strong>Endorphins:</strong> pain relief, pleasure.</p></div>
+<div class="card c-b"><h3>Brain Regions</h3><p><strong>Limbic system:</strong> amygdala (fear/emotion), hippocampus (memory formation). <strong>Frontal lobe:</strong> planning, judgment, personality. <strong>Parietal:</strong> spatial processing, touch. <strong>Occipital:</strong> vision. <strong>Temporal:</strong> hearing, language. <strong>Broca's area:</strong> speech production. <strong>Wernicke's:</strong> language comprehension.</p></div>
+<div class="card c-g"><h3>Nervous System</h3><p>CNS (brain + spinal cord) vs. PNS. Somatic (voluntary) vs. Autonomic. Sympathetic (fight-or-flight: ↑HR, ↑breathing) vs. Parasympathetic (rest-and-digest: ↓HR, restores). Reflex arcs bypass brain.</p></div>
+</div>
+</section>
+
+<section class="section" id="learning">
+<div class="sec-tag">Unit 4 · ~7–10% of exam</div>
+<div class="sec-title">Learning</div>
+<h2 class="sub">Classical Conditioning (Pavlov)</h2>
+<div class="callout">
+<div class="callout-tag">Classical Conditioning Terms</div>
+<ul>
+<li><strong>UCS (Unconditioned Stimulus):</strong> naturally causes response (food)</li>
+<li><strong>UCR (Unconditioned Response):</strong> natural response (salivation)</li>
+<li><strong>CS (Conditioned Stimulus):</strong> neutral stimulus paired with UCS (bell)</li>
+<li><strong>CR (Conditioned Response):</strong> learned response to CS (salivation to bell)</li>
+<li><strong>Extinction:</strong> CR weakens when CS presented without UCS</li>
+<li><strong>Spontaneous Recovery:</strong> extinguished CR reappears after rest period</li>
+<li><strong>Generalization:</strong> responding to stimuli similar to CS</li>
+<li><strong>Discrimination:</strong> responding only to specific CS</li>
+</ul>
+</div>
+<h2 class="sub">Operant Conditioning (Skinner)</h2>
+<table class="ctable">
+<tr><th>Type</th><th>Stimulus</th><th>Effect on Behavior</th><th>Example</th></tr>
+<tr><td>Positive Reinforcement</td><td>Add pleasant stimulus</td><td>Increases behavior</td><td>Give candy for good behavior</td></tr>
+<tr><td>Negative Reinforcement</td><td>Remove unpleasant stimulus</td><td>Increases behavior</td><td>Turn off alarm when you wake up</td></tr>
+<tr><td>Positive Punishment</td><td>Add unpleasant stimulus</td><td>Decreases behavior</td><td>Speeding ticket</td></tr>
+<tr><td>Negative Punishment</td><td>Remove pleasant stimulus</td><td>Decreases behavior</td><td>Take away phone privileges</td></tr>
+</table>
+<div class="card-grid">
+<div class="card c-p"><h3>Reinforcement Schedules</h3><p>Fixed ratio (FR): after set # responses — high, steady rate. Variable ratio (VR): unpredictable # — highest rate, most resistant to extinction (slot machines). Fixed interval (FI): scallop pattern. Variable interval (VI): steady, slow rate.</p></div>
+<div class="card c-v"><h3>Observational Learning (Bandura)</h3><p>Bobo Doll experiment. Modeling — learning by watching others. Vicarious reinforcement. Requires: attention, retention, reproduction, motivation. Media violence debate.</p></div>
+</div>
+</section>
+
+<section class="section" id="cognition">
+<div class="sec-tag">Unit 5 · ~13–17% of exam</div>
+<div class="sec-title">Cognition, Memory &amp; Language</div>
+<h2 class="sub">Memory Model</h2>
+<div class="card-grid">
+<div class="card c-pk"><h3>Sensory Memory</h3><p>Brief, high capacity. Iconic (visual, ~0.5s), Echoic (auditory, ~3–4s). Most info lost immediately; attended info moves to STM.</p></div>
+<div class="card c-p"><h3>Short-Term / Working Memory</h3><p>7±2 chunks (Miller). ~20–30 seconds without rehearsal. Maintenance rehearsal keeps info. Elaborative rehearsal → LTM. Working memory = active manipulation (Baddeley).</p></div>
+<div class="card c-v"><h3>Long-Term Memory</h3><p>Explicit/Declarative: episodic (personal events) + semantic (facts). Implicit: procedural (skills), classical conditioning. Hippocampus = explicit memory. Cerebellum = procedural.</p></div>
+<div class="card c-b"><h3>Memory Failures</h3><p>Encoding failure (never stored). Decay. Interference: proactive (old blocks new), retroactive (new blocks old). Source amnesia. Misinformation effect (Loftus). Anterograde/retrograde amnesia.</p></div>
+</div>
+</section>
+
+<section class="section" id="social">
+<div class="sec-tag">Unit 8 · ~8–10% of exam</div>
+<div class="sec-title">Social Psychology — Key Studies</div>
+<table class="ctable">
+<tr><th>Study</th><th>Researcher</th><th>Finding</th><th>Concept</th></tr>
+<tr><td>Obedience study</td><td>Milgram</td><td>65% administered max shock when authority figure present</td><td>Obedience to authority; situational factors override personal morality</td></tr>
+<tr><td>Prison study</td><td>Zimbardo</td><td>Normal students adopted guard/prisoner roles rapidly</td><td>Power of situation; deindividuation; role conformity</td></tr>
+<tr><td>Conformity (lines)</td><td>Asch</td><td>75% conformed to obviously wrong group answer at least once</td><td>Social conformity; normative influence</td></tr>
+<tr><td>Bystander effect</td><td>Darley &amp; Latané</td><td>More bystanders → less likely any one helps (diffusion of responsibility)</td><td>Bystander apathy; pluralistic ignorance</td></tr>
+<tr><td>Fundamental Attribution Error</td><td>Ross</td><td>We overestimate personality, underestimate situation for others' behavior</td><td>Attribution; actor-observer bias</td></tr>
+</table>
+</section>
+
+<section class="section" id="abnormal">
+<div class="sec-tag">Unit 9 · ~12–14% of exam</div>
+<div class="sec-title">Psychological Disorders &amp; Treatment</div>
+<h2 class="sub">Major Disorders</h2>
+<div class="card-grid">
+<div class="card c-p"><h3>Mood Disorders</h3><p><strong>Major Depression:</strong> sad mood, loss of interest, 2+ weeks. Biopsychosocial model — serotonin, norepinephrine. <strong>Bipolar:</strong> manic + depressive episodes. Mania: elevated mood, grandiosity, reduced sleep. Treated with lithium.</p></div>
+<div class="card c-v"><h3>Anxiety Disorders</h3><p>GAD (pervasive worry). Panic disorder. Phobias (specific, social). OCD (obsessions + compulsions, now separate category). PTSD (trauma-related). All involve exaggerated fear response.</p></div>
+<div class="card c-pk"><h3>Schizophrenia</h3><p>Positive symptoms (add): hallucinations, delusions, disorganized speech. Negative symptoms (subtract): flat affect, poverty of speech, avolition. Dopamine hypothesis (excess). Antipsychotics block dopamine receptors.</p></div>
+<div class="card c-b"><h3>Personality Disorders</h3><p>Cluster A (odd): paranoid, schizoid. Cluster B (dramatic): antisocial (no empathy, manipulative), borderline (unstable relationships, identity, mood), narcissistic, histrionic. Cluster C (anxious): avoidant, dependent, OCD.</p></div>
+</div>
+<h2 class="sub">Treatment Approaches</h2>
+<table class="ctable">
+<tr><th>Treatment</th><th>Basis</th><th>Method</th><th>Treats</th></tr>
+<tr><td>Psychoanalytic</td><td>Psychodynamic</td><td>Free association, dream analysis, explore unconscious</td><td>Neuroses, personality issues</td></tr>
+<tr><td>CBT</td><td>Cognitive + behavioral</td><td>Identify/challenge distorted thoughts + behavioral activation</td><td>Depression, anxiety, phobias</td></tr>
+<tr><td>Exposure Therapy</td><td>Behavioral (extinction)</td><td>Gradual exposure to feared stimulus (systematic desensitization)</td><td>Phobias, PTSD, OCD</td></tr>
+<tr><td>Humanistic (person-centered)</td><td>Rogers</td><td>Unconditional positive regard, empathy, active listening</td><td>Self-esteem, growth</td></tr>
+<tr><td>Drug Therapy (biomedical)</td><td>Biological</td><td>SSRIs (depression), benzodiazepines (anxiety), antipsychotics (schizophrenia)</td><td>Most disorders have a drug option</td></tr>
+</table>
+</section>
+
+<section class="section">
+<div class="question-box">
+<div class="q-header"><span class="q-num">Q1</span><span class="q-type">Operant Conditioning</span></div>
+<div class="q-body">
+<p>A parent stops nagging a child every time the child cleans their room. The child cleans their room more often as a result. This is an example of:</p>
+<ul class="q-choices">
+<li onclick="reveal(this,'wrong','Q1: Positive reinforcement adds a pleasant stimulus')">A) Positive reinforcement</li>
+<li onclick="reveal(this,'correct','✓ Negative reinforcement: removing the unpleasant stimulus (nagging) increases the desired behavior (cleaning). Remember: negative reinforcement INCREASES behavior.')">B) Negative reinforcement</li>
+<li onclick="reveal(this,'wrong','Q1: Punishment decreases behavior')">C) Positive punishment</li>
+<li onclick="reveal(this,'wrong','Q1: Negative punishment removes something pleasant to decrease behavior')">D) Negative punishment</li>
+</ul>
+</div>
+<div class="q-reveal" id="rev-Q1"><div class="q-answer"><strong>Answer: B</strong> — Negative reinforcement = removing an aversive stimulus (nagging) to INCREASE a behavior (cleaning). The "negative" refers to removal, not something bad. Both types of reinforcement increase behavior.</div></div>
+</div>
+
+<div class="must-know">
+<h4>⚡ Perfect Score Checklist</h4>
+<ul>
+<li><strong>Negative reinforcement INCREASES behavior</strong> (removing aversive stimulus) — most common confusion on exam</li>
+<li><strong>Correlation ≠ causation</strong> — only experiment establishes cause</li>
+<li><strong>Independent variable = manipulated; dependent variable = measured</strong></li>
+<li><strong>Dopamine = reward + movement; Serotonin = mood; GABA = inhibitory; Acetylcholine = memory</strong></li>
+<li><strong>Hippocampus = memory formation (not storage); amygdala = fear/emotion</strong></li>
+<li><strong>Variable ratio schedule = most resistant to extinction</strong> (gambling/slot machines)</li>
+<li><strong>Bystander effect: more witnesses = less helping</strong> (diffusion of responsibility)</li>
+<li><strong>Fundamental Attribution Error: overestimate disposition, underestimate situation for OTHERS</strong></li>
+<li><strong>CBT is the most evidence-based treatment</strong> for most anxiety and mood disorders</li>
+<li><strong>Anterograde amnesia = cannot form new memories</strong> (hippocampus damage)</li>
+</ul>
+</div>
+</section>
+
+</div>
+<footer class="footer"><a href="index.html" style="color:inherit;text-decoration:none;">← Score Five Hub</a> · AP Psychology · All 9 Units · Key Studies · Disorders · Treatment</footer>
+<script>
+function reveal(el,result,msg){const body=el.closest('.q-body');body.querySelectorAll('.q-choices li').forEach(li=>{li.onclick=null;li.style.cursor='default';});el.classList.add(result);const qBox=el.closest('.question-box');const qNum=qBox.querySelector('.q-num').textContent;const rev=document.getElementById('rev-'+qNum);if(rev)rev.classList.add('show');}
+</script>
+</body>
+</html>

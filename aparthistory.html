@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AP Art History — Score 5 Edition</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Mono:wght@400;500&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0f0a08;--bg2:#16100d;--bg3:#1e1610;--bg4:#261c13;--border:#3a2a1e;--border2:#4a3828;--text:#f0e6d8;--text2:#b89a7a;--text3:#6a4a30;--terra:#c2714f;--terra2:#e8956b;--gold:#d4a017;--gold2:#f0c040;--cream:#f5e8d0;--green:#86efac;--blue:#93c5fd;--red:#fca5a5;}
+*{box-sizing:border-box;margin:0;padding:0;}html{scroll-behavior:smooth;}
+body{font-family:'Cormorant Garamond',Georgia,serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.8;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 30% 20%,rgba(194,113,79,0.07) 0%,transparent 55%);pointer-events:none;z-index:0;}
+.masthead{background:var(--bg2);border-bottom:1px solid var(--border);padding:3.5rem 2rem 3rem;position:relative;z-index:1;overflow:hidden;}
+.masthead::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c2714f' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");pointer-events:none;}
+.masthead-inner{max-width:980px;margin:0 auto;position:relative;z-index:2;}
+.masthead h1{font-size:clamp(2rem,5vw,3.8rem);font-weight:600;line-height:1;letter-spacing:-0.01em;margin-bottom:0.75rem;font-style:italic;}
+.masthead h1 .accent{color:var(--terra2);font-style:normal;}
+.masthead-desc{color:var(--text2);font-size:1rem;max-width:520px;margin-bottom:1.5rem;}
+.masthead-tag{font-family:'DM Mono',monospace;font-size:11px;color:var(--terra);letter-spacing:0.15em;margin-bottom:0.75rem;}
+.unit-pills{display:flex;flex-wrap:wrap;gap:0.35rem;}
+.upill{background:var(--bg3);border:1px solid var(--border);color:var(--text3);font-family:'DM Mono',monospace;font-size:11px;padding:0.25rem 0.7rem;border-radius:2px;text-decoration:none;transition:all 0.15s;}
+.upill:hover{border-color:var(--terra);color:var(--terra);}
+.topnav{background:rgba(15,10,8,0.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0.6rem 2rem;display:flex;flex-wrap:wrap;gap:0;position:sticky;top:0;z-index:100;}
+.topnav a{color:var(--text3);text-decoration:none;font-family:'DM Mono',monospace;font-size:11px;padding:0.3rem 0.6rem;border-radius:2px;transition:all 0.15s;white-space:nowrap;}
+.topnav a:hover{color:var(--terra);background:rgba(194,113,79,0.07);}
+.container{max-width:980px;margin:0 auto;padding:0 2rem;}
+.section{padding:3rem 0 2.5rem;border-bottom:1px solid var(--border);}
+.section:last-child{border-bottom:none;}
+.sec-tag{font-family:'DM Mono',monospace;font-size:10px;color:var(--text3);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.3rem;}
+.sec-title{font-family:'Syne',sans-serif;font-size:1.9rem;font-weight:800;line-height:1.1;letter-spacing:-0.02em;}
+.exam-pct{display:inline-block;background:rgba(194,113,79,0.1);border:1px solid rgba(194,113,79,0.25);color:var(--terra2);font-family:'DM Mono',monospace;font-size:10px;padding:0.2rem 0.5rem;border-radius:2px;margin-top:0.35rem;}
+h2.sub{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;color:var(--text);margin:2rem 0 1rem;padding-bottom:0.4rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:0.6rem;}
+h2.sub::before{content:'◆';color:var(--terra);font-size:10px;}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:0.85rem;margin-bottom:1.25rem;}
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:4px;padding:1.1rem 1.25rem;}
+.card h3{font-family:'Syne',sans-serif;font-size:0.95rem;font-weight:700;margin-bottom:0.5rem;color:var(--text);}
+.card p,.card li{font-size:14px;color:var(--text2);line-height:1.6;}
+.card ul{padding-left:1.1rem;}
+.ct{border-top:2px solid var(--terra);}
+.cg{border-top:2px solid var(--gold);}
+.cc{border-top:2px solid var(--cream);}
+.cb{border-top:2px solid var(--blue);}
+.callout{background:rgba(212,160,23,0.06);border:1px solid rgba(212,160,23,0.2);border-left:3px solid var(--gold);padding:1rem 1.25rem;border-radius:0 4px 4px 0;margin:1.25rem 0;}
+.callout-tag{font-family:'DM Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.3rem;}
+.callout p,.callout li{font-size:14px;color:var(--text2);line-height:1.6;}
+.callout ul{padding-left:1.2rem;}
+.ctable{width:100%;border-collapse:collapse;margin-bottom:1.25rem;font-size:13px;display:block;overflow-x:auto;}
+.ctable th{background:var(--bg3);color:var(--text2);font-family:'DM Mono',monospace;font-size:11px;padding:0.6rem 0.9rem;text-align:left;border-bottom:1px solid var(--border2);}
+.ctable td{padding:0.5rem 0.9rem;border-bottom:1px solid var(--border);color:var(--text2);vertical-align:top;line-height:1.5;}
+.ctable tr:nth-child(even) td{background:rgba(255,255,255,0.015);}
+.ctable td:first-child{font-family:'DM Mono',monospace;font-size:11px;color:var(--terra2);}
+.work-card{background:var(--bg2);border:1px solid var(--border);border-left:3px solid var(--terra);border-radius:4px;padding:1rem 1.15rem;margin-bottom:0.75rem;}
+.work-title{font-style:italic;font-weight:600;color:var(--cream);font-size:15px;margin-bottom:0.2rem;}
+.work-meta{font-family:'DM Mono',monospace;font-size:10px;color:var(--text3);margin-bottom:0.4rem;letter-spacing:0.04em;}
+.work-analysis{font-size:13px;color:var(--text2);line-height:1.6;}
+.question-box{background:var(--bg2);border:1px solid var(--border2);border-radius:4px;margin-bottom:1.25rem;overflow:hidden;}
+.q-header{background:var(--bg3);padding:0.75rem 1.25rem;display:flex;align-items:center;gap:0.75rem;border-bottom:1px solid var(--border);}
+.q-num{font-family:'DM Mono',monospace;font-size:11px;background:rgba(194,113,79,0.12);color:var(--terra2);padding:0.2rem 0.6rem;border-radius:2px;font-weight:600;}
+.q-type{font-family:'DM Mono',monospace;font-size:10px;color:var(--text3);letter-spacing:0.06em;text-transform:uppercase;}
+.q-body{padding:1.25rem;}
+.q-body p{font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:0.75rem;}
+.q-choices{list-style:none;padding:0;margin:0.75rem 0;}
+.q-choices li{padding:0.5rem 0.75rem;margin:0.3rem 0;border:1px solid var(--border);border-radius:3px;font-size:13px;color:var(--text2);cursor:pointer;transition:all 0.15s;background:var(--bg);}
+.q-choices li:hover{border-color:var(--terra);color:var(--terra);background:rgba(194,113,79,0.04);}
+.q-choices li.correct{border-color:var(--green);color:var(--green);background:rgba(134,239,172,0.05);}
+.q-choices li.wrong{border-color:var(--red);color:var(--red);background:rgba(252,165,165,0.05);}
+.q-reveal{display:none;padding:0 1.25rem 1.25rem;}
+.q-reveal.show{display:block;}
+.q-answer{background:rgba(134,239,172,0.05);border:1px solid rgba(134,239,172,0.18);border-radius:3px;padding:0.75rem 1rem;font-size:13px;color:var(--text2);line-height:1.7;}
+.q-answer strong{color:var(--green);}
+.frq-box{background:var(--bg2);border:1px solid var(--border2);border-radius:4px;margin-bottom:1.5rem;overflow:hidden;}
+.frq-header{background:var(--bg3);padding:0.9rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:1rem;flex-wrap:wrap;}
+.frq-badge{font-family:'DM Mono',monospace;font-size:11px;background:rgba(194,113,79,0.12);color:var(--terra2);padding:0.25rem 0.7rem;border-radius:2px;font-weight:600;}
+.frq-title{font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:700;color:var(--text);}
+.frq-body{padding:1.5rem;}
+.frq-body p{font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:0.75rem;}
+.sol-btn{background:transparent;border:1px solid var(--border2);color:var(--text3);font-family:'DM Mono',monospace;font-size:11px;padding:0.4rem 0.9rem;border-radius:2px;cursor:pointer;transition:all 0.15s;margin-top:0.75rem;}
+.sol-btn:hover{border-color:var(--terra);color:var(--terra);}
+.sol-content{display:none;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border);}
+.sol-content.show{display:block;}
+.must-know{background:linear-gradient(135deg,rgba(194,113,79,0.08),rgba(212,160,23,0.05));border:1px solid rgba(194,113,79,0.18);border-radius:4px;padding:1.25rem 1.5rem;margin:1.5rem 0;}
+.must-know h4{font-family:'DM Mono',monospace;font-size:11px;color:var(--terra2);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.75rem;}
+.must-know ul{padding-left:1.2rem;}
+.must-know li{font-size:14px;color:var(--text2);line-height:1.9;}
+.must-know li strong{color:var(--text);}
+.footer{background:var(--bg2);border-top:1px solid var(--border);padding:2rem;text-align:center;font-family:'DM Mono',monospace;font-size:11px;color:var(--text3);margin-top:3rem;}
+</style>
+</head>
+<body>
+<header class="masthead">
+<div class="masthead-inner">
+<div class="masthead-tag">AP Art History · Score 5 Master Reference</div>
+<h1><em>Form follows</em><br><span class="accent">Function</span></h1>
+<p class="masthead-desc">All 10 content areas, formal analysis (FACA), key works, comparison strategies, and essay structures.</p>
+<div class="unit-pills">
+<a class="upill" href="#faca">FACA Analysis</a>
+<a class="upill" href="#global-pre">Global Prehistory</a>
+<a class="upill" href="#ancient-med">Ancient Mediterranean</a>
+<a class="upill" href="#early-europe">Early Europe</a>
+<a class="upill" href="#later-europe">Later Europe</a>
+<a class="upill" href="#indigenous">Indigenous Americas</a>
+<a class="upill" href="#africa">Africa</a>
+<a class="upill" href="#asia">Asia &amp; Pacific</a>
+<a class="upill" href="#global-con">Global Contemporary</a>
+<a class="upill" href="#essays">Essay Types</a>
+<a class="upill" href="#mcq">MCQ Practice</a>
+</div>
+<button onclick="window.location.href='index.html'" style="appearance:none;-webkit-appearance:none;font-family:'DM Mono',monospace;font-size:12px;color:var(--terra2);letter-spacing:0.08em;display:inline-flex;align-items:center;gap:0.5rem;margin-top:1.5rem;padding:0.45rem 1rem;border:1px solid rgba(194,113,79,0.45);border-radius:3px;background:rgba(194,113,79,0.08);cursor:pointer;transition:all 0.18s;font-weight:500;line-height:1;position:relative;z-index:2;" onmouseover="this.style.background='rgba(194,113,79,0.22)';this.style.borderColor='#e8956b';" onmouseout="this.style.background='rgba(194,113,79,0.08)';this.style.borderColor='rgba(194,113,79,0.45)';">← Back to Hub</button>
+</div>
+</header>
+<nav class="topnav">
+<a href="#" onclick="window.location.href='index.html';return false;" style="color:var(--terra2);border:1px solid rgba(194,113,79,0.3);border-radius:2px;background:rgba(194,113,79,0.08);">← Hub</a>
+<a href="#faca">FACA</a><a href="#global-pre">Prehistory</a><a href="#ancient-med">Ancient Med</a>
+<a href="#early-europe">Early EU</a><a href="#later-europe">Later EU</a><a href="#indigenous">Americas</a>
+<a href="#africa">Africa</a><a href="#asia">Asia</a><a href="#global-con">Contemporary</a>
+<a href="#essays">Essays</a><a href="#mcq">MCQ</a>
+</nav>
+<div class="container">
+
+<section class="section" id="faca">
+<div class="sec-tag">Core Skill</div>
+<div class="sec-title">Formal Analysis — FACA Framework</div>
+<div class="exam-pct">Every question requires formal analysis first</div>
+<h2 class="sub">FACA — The 4 Steps of Art Analysis</h2>
+<div class="card-grid">
+<div class="card ct"><h3>F — Form</h3><p>The physical, visual elements: line, shape, color, texture, space, scale, composition, medium, technique. What do you literally see? How is it made?</p></div>
+<div class="card cg"><h3>A — Artwork Info</h3><p>Title, artist (if known), culture/civilization, date/period, medium/materials, location (original context vs. current). Always establish this first.</p></div>
+<div class="card cc"><h3>C — Context</h3><p>Historical, religious, political, social, and cultural context. Why was it made? For whom? What was happening in this society at this time?</p></div>
+<div class="card cb"><h3>A — Analysis</h3><p>How do the formal elements SERVE the context? Connect what you see to why it was made. This is where interpretation happens.</p></div>
+</div>
+<div class="callout">
+<div class="callout-tag">💡 The Key Principle</div>
+<p>Every formal choice is a meaning-making choice. A figure shown larger than others signals power (hierarchy of scale). Frontal pose = timelessness and authority. Twisted pose = movement and humanity. Always ask: <strong>why did this artist make this formal choice in this context?</strong></p>
+</div>
+<h2 class="sub">Key Formal Terms Every Student Must Know</h2>
+<div class="card-grid">
+<div class="card ct"><h3>Hierarchical Scale</h3><p>Important figures shown larger than others regardless of spatial position. Common in Egyptian, Byzantine, and Mesoamerican art. Signals power, divinity, or social status.</p></div>
+<div class="card cg"><h3>Contrapposto</h3><p>The natural weight-shift pose with one hip raised. Invented by Greeks. Shows naturalism and the human body as capable of natural movement. Revived in Renaissance.</p></div>
+<div class="card cc"><h3>Chiaroscuro</h3><p>Dramatic use of light and dark to model form. Associated with Baroque (Caravaggio). Creates volume, drama, and psychological intensity.</p></div>
+<div class="card cb"><h3>Foreshortening</h3><p>Objects depicted at an angle to create illusion of depth. Shows mastery of perspective. Distorts the "true" shape of a figure to simulate recession in space.</p></div>
+<div class="card ct"><h3>Atmospheric Perspective</h3><p>Objects farther away appear lighter, bluer, and less detailed. Creates illusion of deep space without geometric perspective. Common in Chinese landscape painting and European painting.</p></div>
+<div class="card cg"><h3>Encaustic / Fresco / Tempera</h3><p>Encaustic: pigment in wax (Fayum portraits). Fresco: pigment on wet plaster (Sistine Chapel). Tempera: pigment in egg yolk (before oil). Medium shapes appearance and permanence.</p></div>
+</div>
+</section>
+
+<section class="section" id="global-pre">
+<div class="sec-tag">Content Area 1 · ~4% of exam</div>
+<div class="sec-title">Global Prehistory (30,000–500 BCE)</div>
+<h2 class="sub">Key Works</h2>
+<div class="work-card"><div class="work-title">Woman of Willendorf</div><div class="work-meta">c. 28,000–25,000 BCE · Limestone · 4.4 inches tall</div><div class="work-analysis">Exaggerated sexual characteristics (large breasts, belly, hips) → fertility, abundance, or female identity. Lack of face, emphasis on reproductive features. Portable = personal use, not monumental display. Purpose debated: fertility goddess, self-portrait, idealized female form.</div></div>
+<div class="work-card"><div class="work-title">Stonehenge</div><div class="work-meta">c. 2500–1600 BCE · Salisbury Plain, England · Sarsen sandstone + bluestones</div><div class="work-analysis">Astronomical alignment with solstices → ritual calendar. Monumental effort suggests organized society, ritual importance. Post-and-lintel construction (trilithons). Transformation from natural material into sacred space through human effort.</div></div>
+<div class="work-card"><div class="work-title">Hall of the Bulls (Lascaux)</div><div class="work-meta">c. 17,000 BCE · Lascaux, France · Cave painting, mineral pigments</div><div class="work-analysis">Deep cave location (not living areas) → ritual purpose, not decoration. Twisted perspective on animals (profile body, frontal horns) = composite view showing most recognizable features. Possible hunting magic, shamanic practice, or clan identity marking.</div></div>
+</section>
+
+<section class="section" id="ancient-med">
+<div class="sec-tag">Content Areas 2–4 · ~15% of exam</div>
+<div class="sec-title">Ancient Mediterranean</div>
+<h2 class="sub">Egyptian Art — Key Conventions</h2>
+<div class="card-grid">
+<div class="card ct"><h3>Composite View</h3><p>Head in profile, eye frontal, shoulders frontal, waist in profile, legs in profile. Shows most recognizable view of each body part. Not an attempt at naturalism — this is about completeness, not perception.</p></div>
+<div class="card cg"><h3>Ka & Permanence</h3><p>Art made for the Ka (soul) of the deceased. Must last forever → hard stone, standardized poses, damage = danger to the ka. Formula repeated for centuries because deviation was spiritually dangerous.</p></div>
+<div class="card cc"><h3>Hierarchy of Scale</h3><p>Pharaoh always largest. Enemies shown tiny underfoot. Gods shown huge. Social rank = visual scale. Not about spatial relationships.</p></div>
+</div>
+<h2 class="sub">Key Works — Ancient Med</h2>
+<div class="work-card"><div class="work-title">Palette of King Narmer</div><div class="work-meta">c. 3000–2920 BCE · Egypt · Greywacke · Hierakonpolis</div><div class="work-analysis">Commemorates unification of Upper and Lower Egypt. Narmer shown in hierarchical scale dominating enemies. Registers (horizontal bands) organize narrative. First example of many Egyptian conventions (composite view, hierarchy, registers). Palette = cosmetic grinding palette used for ritual eye makeup of gods.</div></div>
+<div class="work-card"><div class="work-title">Great Pyramids of Giza</div><div class="work-meta">c. 2551–2472 BCE · Giza, Egypt · Limestone, granite</div><div class="work-analysis">Royal tombs for Khufu, Khafre, Menkaure. Perfect geometric form = cosmic order (Ma'at). Aligned to cardinal directions. Massive labor force = royal power. Still the largest stone structures on Earth. Mortuary complex includes sphinx, temples, causeways — entire landscape transformed for the afterlife.</div></div>
+<div class="work-card"><div class="work-title">Kritios Boy</div><div class="work-meta">c. 480 BCE · Greece · Marble</div><div class="work-analysis">Transitional work between Archaic and Classical periods. First use of contrapposto in Greek sculpture — natural weight shift, slightly bent knee. Moves away from rigid "Kouros" pose. Marks beginning of naturalistic Greek sculpture. Eyes once had inlaid irises — originally more lifelike than current appearance.</div></div>
+</section>
+
+<section class="section" id="early-europe">
+<div class="sec-tag">Content Area 5 · ~16% of exam</div>
+<div class="sec-title">Early Europe &amp; Colonial Americas (200–1750 CE)</div>
+<h2 class="sub">Medieval — Byzantine to Gothic</h2>
+<div class="card-grid">
+<div class="card ct"><h3>Byzantine Art</h3><p>Hierarchical scale, gold backgrounds (heaven, not earthly space), frontal poses (timeless, not momentary), elongated figures (spiritual over physical). Iconoclasm controversy (726–843 CE) — debate over images led to destruction and then revival of icon painting.</p></div>
+<div class="card cg"><h3>Romanesque</h3><p>Heavy walls, rounded arches, thick piers, small windows. Sculpture returns to church portals. Tympanum over doorways = visual Bible for illiterate. Pilgrimage roads shape art distribution.</p></div>
+<div class="card cc"><h3>Gothic</h3><p>Pointed arches, flying buttresses (push weight outward), ribbed vaults → walls can be thin → stained glass windows → light = divine presence (theology of light). Chartres Cathedral exemplary. Increasing naturalism in sculpture.</p></div>
+</div>
+<h2 class="sub">Renaissance — Key Works</h2>
+<div class="work-card"><div class="work-title">Arnolfini Portrait — Jan van Eyck</div><div class="work-meta">1434 · Oil on panel · National Gallery, London</div><div class="work-analysis">Early Netherlandish mastery of oil paint — unprecedented detail in textures (fur, wood, fabric, chandelier). Convex mirror in background shows two witnesses → legal document of marriage? Or posthumous memorial? Hidden symbols debated: dog (fidelity), candle (divine witness), shoes removed (holy ground). Van Eyck's signature on wall = first artist "selfie" in Western art.</div></div>
+<div class="work-card"><div class="work-title">School of Athens — Raphael</div><div class="work-meta">1509–1511 · Fresco · Vatican, Stanza della Segnatura</div><div class="work-analysis">Plato (points up = ideal forms) and Aristotle (points down = earthly reality) at center. All major ancient philosophers portrayed with faces of Renaissance contemporaries — Plato = Leonardo, Heraclitus = Michelangelo. One-point perspective directs eye to Plato and Aristotle. Represents synthesis of pagan learning and Christian humanism. Architecture inspired by Roman basilicas (Bramante designed it).</div></div>
+</section>
+
+<section class="section" id="later-europe">
+<div class="sec-tag">Content Area 6 · ~16% of exam</div>
+<div class="sec-title">Later Europe &amp; Americas (1750–1980 CE)</div>
+<h2 class="sub">Major Movements — Cheat Sheet</h2>
+<table class="ctable">
+<tr><th>Movement</th><th>Period</th><th>Key Characteristics</th><th>Key Artists</th></tr>
+<tr><td>Neoclassicism</td><td>1750–1850</td><td>Classical subject matter, idealized forms, moral virtue, response to Baroque excess and Rococo frivolity</td><td>David, Ingres, Canova</td></tr>
+<tr><td>Romanticism</td><td>1780–1850</td><td>Emotion over reason, sublime nature, individual expression, exotic subjects, dark drama</td><td>Géricault, Delacroix, Turner, Friedrich</td></tr>
+<tr><td>Realism</td><td>1840–1900</td><td>Ordinary people and daily life, uniidealized subjects, social critique, photography's influence</td><td>Courbet, Daumier, Millet</td></tr>
+<tr><td>Impressionism</td><td>1860–1886</td><td>Capturing light/moment, loose brushwork, everyday modern life, painting outdoors (en plein air)</td><td>Monet, Renoir, Degas, Morisot</td></tr>
+<tr><td>Post-Impressionism</td><td>1886–1910</td><td>Personal emotional/symbolic use of color and form; each artist developed individual style</td><td>Cézanne, Van Gogh, Gauguin, Seurat</td></tr>
+<tr><td>Cubism</td><td>1907–1920s</td><td>Multiple viewpoints simultaneously, fragmented forms, rejection of single-point perspective</td><td>Picasso, Braque</td></tr>
+<tr><td>Surrealism</td><td>1920s–1940s</td><td>Unconscious mind, dreams, irrational juxtapositions, Freudian influence</td><td>Dalí, Magritte, Kahlo, Ernst</td></tr>
+<tr><td>Abstract Expressionism</td><td>1940s–1950s</td><td>Non-representational, gestural mark-making, emotional intensity, process as meaning</td><td>Pollock, de Kooning, Rothko, Krasner</td></tr>
+</table>
+</section>
+
+<section class="section" id="indigenous">
+<div class="sec-tag">Content Area 7 · ~6% of exam</div>
+<div class="sec-title">Indigenous Americas</div>
+<h2 class="sub">Key Works</h2>
+<div class="work-card"><div class="work-title">Great Serpent Mound</div><div class="work-meta">c. 1000 CE · Adams County, Ohio · Earthwork</div><div class="work-analysis">Effigy mound: uncoiling serpent (1,348 feet long) with oval (egg or sun?) in mouth. Aligned to solstices and equinoxes. No burials found → ceremonial, not funerary. Transforms landscape itself into monument — art and earth become one. Mississippian or Adena culture, debated.</div></div>
+<div class="work-card"><div class="work-title">Sun Stone (Aztec Calendar Stone)</div><div class="work-meta">1427–1479 CE · Mexico · Basalt · 11.75 feet diameter</div><div class="work-analysis">Not a calendar but a cosmological map. Central face = Tonatiuh (sun god). Inner ring = four previous suns (world ages, each destroyed). Outer rings = 20-day signs, year signs, serpents. Demonstrates Aztec belief in cyclical time, cosmic sacrifice (sun requires blood to continue moving), and their role as "People of the Sun."</div></div>
+</section>
+
+<section class="section" id="africa">
+<div class="sec-tag">Content Area 8 · ~6% of exam</div>
+<div class="sec-title">Africa</div>
+<h2 class="sub">Key Works &amp; Concepts</h2>
+<div class="work-card"><div class="work-title">Seated Man and Woman (Dogon)</div><div class="work-meta">c. 18th–20th century · Mali · Wood</div><div class="work-analysis">Elongated forms emphasize spiritual over physical (opposite of Greek naturalism). Man and woman shown in parallel poses = equal partnership, complementarity. Figures likely used in ancestral shrines. Dogon cosmology: world created through paired, complementary forces.</div></div>
+<div class="work-card"><div class="work-title">Benin Plaques (Kingdom of Benin)</div><div class="work-meta">16th–17th century CE · Nigeria · Brass (lost-wax casting)</div><div class="work-analysis">Commemorated military victories and court ceremonies. Hierarchical scale: Oba (king) shown largest. Lost-wax (cire-perdue) casting technique = sophisticated metallurgy. Portuguese soldiers sometimes depicted = evidence of early contact with Europeans. Looted by British in 1897 Punitive Expedition — ongoing repatriation debate.</div></div>
+<div class="callout">
+<div class="callout-tag">Context Alert — African Art</div>
+<p>Many African works were made for specific ritual functions and should not be evaluated purely by Western aesthetic standards. A "mask" worn in ceremony is not meant to be displayed on a wall. Context (performance, ritual, social function) is inseparable from meaning. The word "primitive" is never appropriate — these works reflect sophisticated cosmological, social, and technical traditions.</p>
+</div>
+</section>
+
+<section class="section" id="asia">
+<div class="sec-tag">Content Areas 9–10 · ~8% of exam</div>
+<div class="sec-title">South, East &amp; Southeast Asia · The Pacific</div>
+<h2 class="sub">Key Works</h2>
+<div class="work-card"><div class="work-title">Borobudur Temple</div><div class="work-meta">c. 750–850 CE · Java, Indonesia · Volcanic stone</div><div class="work-analysis">Buddhist mandala in architectural form. Nine stacked platforms (6 square, 3 circular, 1 stupa). Pilgrims walk clockwise upward through 2,672 relief panels depicting Buddhist teachings → physical journey = spiritual progress. Top = nirvana (formlessness, circular platform, no reliefs). Architecture as embodied religious instruction.</div></div>
+<div class="work-card"><div class="work-title">Nan Madol</div><div class="work-meta">c. 1200–1600 CE · Pohnpei, Micronesia · Basalt logs + coral</div><div class="work-analysis">Artificial island city built entirely on a reef — no natural land. 92 man-made islets connected by canals. Saudeleur dynasty's seat of power. Demonstrates extraordinary engineering and social organization. Basalt logs (up to 50 tons) transported by canoe. Political and religious center; common people forbidden from entering.</div></div>
+</section>
+
+<section class="section" id="global-con">
+<div class="sec-tag">Content Area 11 · ~4% of exam</div>
+<div class="sec-title">Global Contemporary (1980–present)</div>
+<h2 class="sub">Key Themes &amp; Works</h2>
+<div class="card-grid">
+<div class="card ct"><h3>Identity &amp; the Body</h3><p>Kara Walker: cut-paper silhouettes confronting slavery's visual legacy. Cindy Sherman: self-portraits as cultural archetypes (women in media). Yinka Shonibare: Victorian dress + African fabric = colonial critique.</p></div>
+<div class="card cg"><h3>Postcolonialism</h3><p>Art that addresses the legacy of colonialism, cultural hybridity, and contested identities. Artists work globally, are educated in multiple traditions, and resist being labeled by nationality alone.</p></div>
+<div class="card cc"><h3>Environmental Art</h3><p>Christo's wrapped landscapes, Smithson's Spiral Jetty (earthwork that changes with water levels), Andy Goldsworthy's ephemeral natural sculptures. Nature as medium AND subject.</p></div>
+</div>
+</section>
+
+<section class="section" id="essays">
+<div class="sec-tag">FRQ Types</div>
+<div class="sec-title">Essay Types &amp; Strategies</div>
+<h2 class="sub">The 3 FRQ Types</h2>
+<table class="ctable">
+<tr><th>Type</th><th>Format</th><th>Key Strategy</th></tr>
+<tr><td>Long Essay (LEQ)</td><td>Compare/contrast 2 works; one required, one you choose</td><td>Choose your work wisely — pick one you can discuss formally AND contextually. Use FACA on both. Direct comparison in every paragraph.</td></tr>
+<tr><td>Short Essay (SEQ)</td><td>Analyze one provided image in 1–2 paragraphs</td><td>Identify the work completely (culture, period, materials). Formal analysis first, then meaning/function. Always connect form to context.</td></tr>
+<tr><td>MCQ Image-Based</td><td>Identify work + answer analytical questions</td><td>Even if you don't recognize the work, FACA the style: does it look Egyptian? Greek? Baroque? Formal cues narrow the options dramatically.</td></tr>
+</table>
+<div class="frq-box">
+<div class="frq-header"><span class="frq-badge">LEQ Model</span><span class="frq-title">Comparing Two Works: Power &amp; Ruler Representation</span></div>
+<div class="frq-body">
+<p><strong>Prompt:</strong> Compare the Palette of King Narmer with one other work of art from a different culture that also uses visual strategies to communicate the power and authority of a ruler.</p>
+<button class="sol-btn" onclick="toggleSol(this)">▶ Show Model Response</button>
+<div class="sol-content">
+<div style="background:var(--bg3);border:1px solid var(--border);border-radius:3px;padding:1.25rem;font-size:14px;color:var(--text2);line-height:1.8;">
+<p><strong>Chosen comparison:</strong> Standard of Ur (Mesopotamia, c. 2600 BCE)</p><br>
+<p>Both the Palette of King Narmer (Egypt, c. 3000 BCE) and the Standard of Ur (Mesopotamia, c. 2600 BCE) use hierarchical scale and composite conventions to naturalize the political authority of their rulers, yet differ significantly in the social contexts for which each object was created.</p><br>
+<p>The Palette of Narmer employs hierarchical scale as its primary communicator of royal power: the pharaoh towers over enemies and attendants, his body rendered in the canonical composite view (profile head, frontal shoulders, profile legs) that would define Egyptian representation for three millennia. This visual formula is not artlessness — it is a deliberate statement that the pharaoh occupies a different ontological category than other humans. Similarly, the "War" panel of the Standard of Ur places the ruler at the far right, seated and largest, receiving prisoners who grow progressively smaller as they approach him, enacting submission through diminishing scale.</p><br>
+<p>The key difference lies in function: the Palette was likely a ceremonial object deposited in a temple as a votive offering, permanently recording Narmer's unification of Egypt for divine audiences. The Standard of Ur was discovered in a royal tomb at Ur — a portable object that traveled to the afterlife with its owner, suggesting it commemorated specific military victories for eternal memory rather than immediate public display. Both works demonstrate that visual hierarchies of scale were not naive — they were sophisticated political technologies for communicating and naturalizing power across ancient cultures.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="section" id="mcq">
+<div class="sec-tag">Practice</div>
+<div class="sec-title">MCQ Practice</div>
+<div class="question-box">
+<div class="q-header"><span class="q-num">Q1</span><span class="q-type">Formal Analysis</span></div>
+<div class="q-body"><p>An artwork shows a standing figure with the left leg slightly forward, weight on the right leg, causing a subtle hip tilt. This formal technique is best described as:</p>
+<ul class="q-choices">
+<li onclick="reveal(this,'wrong','Foreshortening involves depicting forms at an angle for depth illusion, not weight distribution')">A) Foreshortening</li>
+<li onclick="reveal(this,'correct','✓ Contrapposto is the natural weight-shift stance with one hip raised, developed by Greek sculptors in the Classical period')">B) Contrapposto</li>
+<li onclick="reveal(this,'wrong','Chiaroscuro refers to dramatic light/shadow modeling, not body pose')">C) Chiaroscuro</li>
+<li onclick="reveal(this,'wrong','Hierarchical scale refers to size differences based on importance, not body position')">D) Hierarchical scale</li>
+</ul></div>
+<div class="q-reveal" id="rev-Q1"><div class="q-answer"><strong>Answer: B</strong> — Contrapposto (Italian: counterpose) is the natural weight-shift stance first developed in Classical Greek sculpture, most clearly seen in the Kritios Boy (c. 480 BCE). It signals naturalism and humanistic interest in the body.</div></div>
+</div>
+<div class="question-box">
+<div class="q-header"><span class="q-num">Q2</span><span class="q-type">Context — Egyptian Art</span></div>
+<div class="q-body"><p>Egyptian sculpture repeatedly used the same formal conventions for over 3,000 years primarily because:</p>
+<ul class="q-choices">
+<li onclick="reveal(this,'wrong','Egyptian artists were highly skilled — the repetition was intentional, not a limitation')">A) Egyptian artists lacked the technical skill to innovate</li>
+<li onclick="reveal(this,'wrong','Greek influence was minimal for most of Egyptian history')">B) Egyptian rulers demanded Greek-style naturalism</li>
+<li onclick="reveal(this,'correct','✓ Artistic conventions were tied to religious function — deviation risked harming the ka (soul). Standardization was spiritually required, not culturally conservative.')">C) Artistic formulas were linked to religious function; deviation was spiritually dangerous</li>
+<li onclick="reveal(this,'wrong','Trade with Rome came late in Egyptian history and did not drive the 3,000-year convention')">D) Trade with Rome discouraged artistic experimentation</li>
+</ul></div>
+<div class="q-reveal" id="rev-Q2"><div class="q-answer"><strong>Answer: C</strong> — Egyptian art's consistency was spiritually motivated. Art served the ka (soul) and had to be perfect and permanent. Established formulas guaranteed the artwork would function correctly. Innovation = risk.</div></div>
+</div>
+<div class="question-box">
+<div class="q-header"><span class="q-num">Q3</span><span class="q-type">Style Identification</span></div>
+<div class="q-body"><p>An artwork features dramatic diagonal compositions, intense chiaroscuro, emotional figures in theatrical poses, and large scale intended for church altarpieces. This work is most likely from the:</p>
+<ul class="q-choices">
+<li onclick="reveal(this,'wrong','Renaissance favored balance, symmetry, idealized calm — not theatrical drama')">A) Italian Renaissance (1400–1600)</li>
+<li onclick="reveal(this,'correct','✓ All features — diagonal composition, chiaroscuro, emotional drama, large altarpieces — are hallmarks of the Baroque period')">B) Baroque (1600–1750)</li>
+<li onclick="reveal(this,'wrong','Neoclassicism emphasized calm, rationality, and classical order — the opposite of this description')">C) Neoclassicism (1750–1850)</li>
+<li onclick="reveal(this,'wrong','Impressionism used loose brushwork and everyday subjects, not theatrical religious scenes')">D) Impressionism (1860–1886)</li>
+</ul></div>
+<div class="q-reveal" id="rev-Q3"><div class="q-answer"><strong>Answer: B</strong> — Baroque art (Caravaggio, Rubens, Bernini) is defined by dramatic chiaroscuro, diagonal composition, emotional intensity, and theatrical religiosity designed to inspire Counter-Reformation faith.</div></div>
+</div>
+<div class="must-know">
+<h4>⚡ Perfect Score Checklist</h4>
+<ul>
+<li><strong>Always identify the work completely</strong> before analyzing: culture, period, medium, function</li>
+<li><strong>FACA every work</strong>: Form → Artwork info → Context → Analysis</li>
+<li><strong>Connect formal choices to meaning</strong> — never just list elements</li>
+<li><strong>Hierarchical scale ≠ naturalism</strong>: size communicates importance, not spatial position</li>
+<li><strong>Know the difference between style periods</strong>: Baroque (drama/chiaroscuro) vs. Renaissance (harmony/balance) vs. Neoclassical (order/virtue)</li>
+<li><strong>Non-Western art: function and context first</strong> — don't apply Western aesthetic standards</li>
+<li><strong>Contrapposto = Classical Greek naturalism</strong>; composite view = Egyptian completeness</li>
+<li><strong>LEQ: choose a comparison work you can analyze formally AND contextually</strong></li>
+<li><strong>Repatriation debate</strong>: many works in Western museums were taken under colonial conditions — this is an active issue</li>
+<li><strong>Never say "primitive"</strong> — use "non-Western," "ancient," or name the specific culture</li>
+</ul>
+</div>
+</section>
+</div>
+<footer class="footer"><a href="index.html" style="color:inherit;text-decoration:none;">← Score Five Hub</a> · AP Art History · FACA · 10 Content Areas · Global Art · Essay Strategies</footer>
+<script>
+function reveal(el,r,m){const b=el.closest('.q-body');b.querySelectorAll('.q-choices li').forEach(l=>{l.onclick=null;l.style.cursor='default';});el.classList.add(r);const q=el.closest('.question-box');const n=q.querySelector('.q-num').textContent;const rv=document.getElementById('rev-'+n);if(rv)rv.classList.add('show');}
+function toggleSol(btn){const c=btn.nextElementSibling;if(c.classList.contains('show')){c.classList.remove('show');btn.textContent='▶ Show Model Response';}else{c.classList.add('show');btn.textContent='▼ Hide';}}
+</script>
+</body>
+</html>

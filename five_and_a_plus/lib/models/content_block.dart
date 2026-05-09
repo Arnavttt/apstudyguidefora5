@@ -1,0 +1,108 @@
+// lib/models/content_block.dart
+//
+// Sealed class hierarchy representing every type of content block that can
+// appear on a subject page. All subclasses use const constructors so Flutter
+// can skip rebuilds for unchanged subtrees.
+
+import 'package:flutter/foundation.dart';
+
+// ---------------------------------------------------------------------------
+// Supporting value types
+// ---------------------------------------------------------------------------
+
+enum CodeSpanKind { keyword, string, number, comment, highlight, plain }
+
+@immutable
+class CodeSpan {
+  const CodeSpan(this.text, {this.kind = CodeSpanKind.plain});
+  final String text;
+  final CodeSpanKind kind;
+}
+
+@immutable
+class ContentCardData {
+  const ContentCardData({required this.title, required this.body, this.icon});
+  final String title;
+  final String body;
+  final String? icon; // emoji or null
+}
+
+@immutable
+class RubricRow {
+  const RubricRow({required this.label, required this.points, required this.description});
+  final String label;
+  final String points;
+  final String description;
+}
+
+@immutable
+class QuizChoice {
+  const QuizChoice({required this.text, required this.isCorrect, this.explanation = ''});
+  final String text;
+  final bool isCorrect;
+  final String explanation;
+}
+
+@immutable
+class QuizQuestion {
+  const QuizQuestion({required this.question, required this.choices});
+  final String question;
+  final List<QuizChoice> choices;
+}
+
+// ---------------------------------------------------------------------------
+// Sealed ContentBlock hierarchy
+// ---------------------------------------------------------------------------
+
+sealed class ContentBlock {
+  const ContentBlock();
+}
+
+final class CardRowBlock extends ContentBlock {
+  const CardRowBlock(this.cards);
+  final List<ContentCardData> cards;
+}
+
+final class CalloutBlock extends ContentBlock {
+  const CalloutBlock({required this.title, required this.items});
+  final String title;
+  final List<String> items;
+}
+
+final class WarnBlock extends ContentBlock {
+  const WarnBlock({required this.title, required this.items});
+  final String title;
+  final List<String> items;
+}
+
+final class CodeBlock extends ContentBlock {
+  const CodeBlock(this.spans);
+  final List<CodeSpan> spans;
+}
+
+final class DataTableBlock extends ContentBlock {
+  const DataTableBlock({required this.headers, required this.rows});
+  final List<String> headers;
+  final List<List<String>> rows;
+}
+
+final class StepBoxBlock extends ContentBlock {
+  const StepBoxBlock({required this.title, required this.steps});
+  final String title;
+  final List<String> steps;
+}
+
+final class RubricBoxBlock extends ContentBlock {
+  const RubricBoxBlock(this.rows);
+  final List<RubricRow> rows;
+}
+
+final class QuizBlock extends ContentBlock {
+  const QuizBlock(this.questions);
+  final List<QuizQuestion> questions;
+}
+
+final class MustKnowBlock extends ContentBlock {
+  const MustKnowBlock(this.items);
+  final List<String> items;
+}

@@ -4,9 +4,10 @@ import 'theme/app_theme.dart';
 import 'router.dart';
 
 void main() {
-  // Disable runtime font fetching — bundle fonts via google_fonts package cache.
-  // For production, also add font files to assets/fonts/ and set this to false.
-  GoogleFonts.config.allowRuntimeFetching = true;
+  // Disable runtime font fetching so the app does not depend on network
+  // availability for fonts. Google Fonts are cached by the package at build
+  // time; add font files to assets/fonts/ to fully bundle them offline.
+  GoogleFonts.config.allowRuntimeFetching = false;
 
   runApp(const FiveAndAPlusApp());
 }

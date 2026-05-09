@@ -332,12 +332,12 @@ class _EmptyState extends StatelessWidget {
             Text('📚', style: const TextStyle(fontSize: 48)),
             const SizedBox(height: 16),
             Text(
-              'Content coming in a later stage',
+              'Coming Soon',
               style: GoogleFonts.syne(fontSize: 18, fontWeight: FontWeight.w800, color: AppColors.text),
             ),
             const SizedBox(height: 8),
             Text(
-              'This subject\'s units will be populated in Stage 2–5 of the migration.',
+              'Full content for this guide is on the way — check back soon!',
               style: GoogleFonts.outfit(fontSize: 14, color: AppColors.text2),
               textAlign: TextAlign.center,
             ),

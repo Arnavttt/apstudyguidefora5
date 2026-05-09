@@ -56,6 +56,8 @@ class PageFooter extends StatelessWidget {
               letterSpacing: 0.08,
             ),
             textAlign: TextAlign.center,
+            softWrap: true,
+            overflow: TextOverflow.visible,
           ),
           const SizedBox(height: 16),
           // Footer nav links

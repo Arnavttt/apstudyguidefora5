@@ -127,9 +127,7 @@ class _DataRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: isEven
-            ? AppColors.bg2
-            : AppColors.bg2.withAlpha(30), // slight alternating shade
+        color: isEven ? AppColors.bg2 : AppColors.bg3, // alternating stripe
         border: isLast
             ? null
             : const Border(

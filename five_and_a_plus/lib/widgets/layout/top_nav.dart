@@ -140,10 +140,26 @@ class _UnitNavLinkState extends State<_UnitNavLink> {
 // ---------------------------------------------------------------------------
 
 class HomeTopNav extends StatelessWidget {
-  const HomeTopNav({super.key});
+  const HomeTopNav({
+    super.key,
+    this.onMenuTap,
+    required this.onScrollTo,
+    required this.catalogKey,
+    required this.methodsKey,
+    required this.devKey,
+    required this.reviewKey,
+  });
+
+  final VoidCallback? onMenuTap;
+  final void Function(GlobalKey) onScrollTo;
+  final GlobalKey catalogKey;
+  final GlobalKey methodsKey;
+  final GlobalKey devKey;
+  final GlobalKey reviewKey;
 
   @override
   Widget build(BuildContext context) {
+    final isNarrow = MediaQuery.of(context).size.width <= 680;
     return Container(
       height: 60,
       decoration: const BoxDecoration(
@@ -166,18 +182,23 @@ class HomeTopNav extends StatelessWidget {
             ),
           ),
           const Spacer(),
-          // Nav links (hidden on narrow screens)
-          MediaQuery.of(context).size.width > 680
-              ? Row(
-                  children: [
-                    _HomeNavLink(label: 'AP Guides', anchor: '#ap'),
-                    _HomeNavLink(label: 'College', anchor: '#college'),
-                    _HomeNavLink(label: 'Methods', anchor: '#methods'),
-                    _HomeNavLink(label: 'About', anchor: '#dev'),
-                    _HomeNavLink(label: 'Reviews', anchor: '#review'),
-                  ],
-                )
-              : const SizedBox.shrink(),
+          // Nav links on wide screens; hamburger on narrow screens
+          if (isNarrow)
+            IconButton(
+              onPressed: onMenuTap,
+              icon: const Icon(Icons.menu, color: AppColors.text3),
+              tooltip: 'Open navigation',
+            )
+          else
+            Row(
+              children: [
+                _HomeNavLink(label: 'AP Guides', onTap: () => onScrollTo(catalogKey)),
+                _HomeNavLink(label: 'College', onTap: () => onScrollTo(catalogKey)),
+                _HomeNavLink(label: 'Methods', onTap: () => onScrollTo(methodsKey)),
+                _HomeNavLink(label: 'About', onTap: () => onScrollTo(devKey)),
+                _HomeNavLink(label: 'Reviews', onTap: () => onScrollTo(reviewKey)),
+              ],
+            ),
         ],
       ),
     );
@@ -185,9 +206,9 @@ class HomeTopNav extends StatelessWidget {
 }
 
 class _HomeNavLink extends StatefulWidget {
-  const _HomeNavLink({required this.label, required this.anchor});
+  const _HomeNavLink({required this.label, required this.onTap});
   final String label;
-  final String anchor;
+  final VoidCallback onTap;
 
   @override
   State<_HomeNavLink> createState() => _HomeNavLinkState();
@@ -204,7 +225,7 @@ class _HomeNavLinkState extends State<_HomeNavLink> {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 2),
         child: TextButton(
-          onPressed: () {}, // scroll anchors handled by home screen
+          onPressed: widget.onTap,
           style: TextButton.styleFrom(
             backgroundColor: _hovered ? AppColors.gold.withValues(alpha: 0.07) : Colors.transparent,
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),

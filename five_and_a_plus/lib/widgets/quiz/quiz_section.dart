@@ -87,8 +87,8 @@ class _QuizSectionBody extends StatelessWidget {
                 // Score display
                 Text(
                   answeredCount == 0
-                      ? '0/0 correct'
-                      : '$correctCount/$answeredCount correct ($totalCount total)',
+                      ? '0/$totalCount answered'
+                      : '$correctCount/$answeredCount correct',
                   style: GoogleFonts.firaCode(fontSize: 11, color: AppColors.text3),
                 ),
                 const SizedBox(width: 12),

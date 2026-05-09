@@ -13,32 +13,158 @@ import '../widgets/layout/page_footer.dart';
 // HomeScreen
 // ---------------------------------------------------------------------------
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final _scrollController = ScrollController();
+
+  // Section keys used for scroll-to-section navigation.
+  final _catalogKey = GlobalKey();
+  final _methodsKey = GlobalKey();
+  final _devKey = GlobalKey();
+  final _reviewKey = GlobalKey();
+
+  void _scrollTo(GlobalKey key) {
+    final ctx = key.currentContext;
+    if (ctx == null) return;
+    Scrollable.ensureVisible(
+      ctx,
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.easeInOut,
+      alignment: 0.0,
+    );
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.bg,
-      body: Column(
-        children: [
-          const HomeTopNav(),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  const _HeroSection(),
-                  const _SubjectCatalog(),
-                  const _MethodsSection(),
-                  const _HowToUseSection(),
-                  const _DeveloperSection(),
-                  const _ReviewSection(),
-                  const PageFooter(),
-                ],
+      endDrawer: _MobileNavDrawer(onScrollTo: _scrollTo, catalogKey: _catalogKey, methodsKey: _methodsKey, devKey: _devKey, reviewKey: _reviewKey),
+      body: Builder(
+        builder: (context) => Column(
+          children: [
+            HomeTopNav(
+              onMenuTap: () => Scaffold.of(context).openEndDrawer(),
+              onScrollTo: _scrollTo,
+              catalogKey: _catalogKey,
+              methodsKey: _methodsKey,
+              devKey: _devKey,
+              reviewKey: _reviewKey,
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                controller: _scrollController,
+                child: Column(
+                  children: [
+                    _HeroSection(onBrowse: () => _scrollTo(_catalogKey)),
+                    _SubjectCatalog(key: _catalogKey),
+                    _MethodsSection(key: _methodsKey),
+                    const _HowToUseSection(),
+                    _DeveloperSection(key: _devKey),
+                    _ReviewSection(key: _reviewKey),
+                    const PageFooter(),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Mobile nav drawer
+// ---------------------------------------------------------------------------
+
+class _MobileNavDrawer extends StatelessWidget {
+  const _MobileNavDrawer({
+    required this.onScrollTo,
+    required this.catalogKey,
+    required this.methodsKey,
+    required this.devKey,
+    required this.reviewKey,
+  });
+
+  final void Function(GlobalKey) onScrollTo;
+  final GlobalKey catalogKey;
+  final GlobalKey methodsKey;
+  final GlobalKey devKey;
+  final GlobalKey reviewKey;
+
+  @override
+  Widget build(BuildContext context) {
+    final links = [
+      ('AP Guides', catalogKey),
+      ('College', catalogKey),
+      ('Methods', methodsKey),
+      ('About', devKey),
+      ('Reviews', reviewKey),
+    ];
+
+    return Drawer(
+      backgroundColor: AppColors.bg2,
+      child: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Header
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+              decoration: const BoxDecoration(
+                border: Border(bottom: BorderSide(color: AppColors.border)),
+              ),
+              child: Text(
+                'Five & A+',
+                style: GoogleFonts.syne(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w800,
+                  foreground: Paint()
+                    ..shader = const LinearGradient(
+                      colors: [AppColors.gold, AppColors.accent],
+                    ).createShader(const Rect.fromLTWH(0, 0, 120, 24)),
+                ),
+              ),
+            ),
+            // Nav links
+            for (final link in links)
+              InkWell(
+                onTap: () {
+                  Navigator.of(context).pop();
+                  // Small delay so the drawer closes before scrolling
+                  Future.delayed(const Duration(milliseconds: 200), () => onScrollTo(link.$2));
+                },
+                child: Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                  decoration: const BoxDecoration(
+                    border: Border(bottom: BorderSide(color: AppColors.border)),
+                  ),
+                  child: Text(
+                    link.$1,
+                    style: GoogleFonts.firaCode(
+                      fontSize: 13,
+                      color: AppColors.text2,
+                      letterSpacing: 0.06,
+                    ),
+                  ),
+                ),
+              ),
+          ],
+        ),
       ),
     );
   }
@@ -49,7 +175,8 @@ class HomeScreen extends StatelessWidget {
 // ---------------------------------------------------------------------------
 
 class _HeroSection extends StatelessWidget {
-  const _HeroSection();
+  const _HeroSection({required this.onBrowse});
+  final VoidCallback onBrowse;
 
   @override
   Widget build(BuildContext context) {
@@ -137,7 +264,7 @@ class _HeroSection extends StatelessWidget {
               ),
               const SizedBox(height: 36),
               // CTA
-              _CtaButton(label: '→  Browse All Guides', onTap: () {}),
+              _CtaButton(label: '→  Browse All Guides', onTap: onBrowse),
             ],
           ),
         ),
@@ -239,7 +366,7 @@ class _CtaButtonState extends State<_CtaButton> {
 // ---------------------------------------------------------------------------
 
 class _SubjectCatalog extends StatelessWidget {
-  const _SubjectCatalog();
+  const _SubjectCatalog({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -304,13 +431,16 @@ class _SectionHeader extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 12),
-          Text(
-            title,
-            style: GoogleFonts.syne(
-              fontSize: 22,
-              fontWeight: FontWeight.w800,
-              color: AppColors.text,
-              letterSpacing: -0.02 * 22,
+          Flexible(
+            child: Text(
+              title,
+              style: GoogleFonts.syne(
+                fontSize: 22,
+                fontWeight: FontWeight.w800,
+                color: AppColors.text,
+                letterSpacing: -0.02 * 22,
+              ),
+              overflow: TextOverflow.ellipsis,
             ),
           ),
           const SizedBox(width: 12),
@@ -367,34 +497,37 @@ class _SubjectGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: AppColors.border,
-        border: Border.all(color: AppColors.border),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(8),
-        child: Wrap(
-          spacing: 1,
-          runSpacing: 1,
-          children: [
-            for (final subject in subjects)
-              SizedBox(
-                width: _cardWidth(context, columns),
-                child: SubjectCard(subject: subject),
-              ),
-          ],
-        ),
-      ),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final cardWidth = _cardWidth(constraints.maxWidth, columns);
+        return Container(
+          decoration: BoxDecoration(
+            color: AppColors.border,
+            border: Border.all(color: AppColors.border),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: Wrap(
+              spacing: 1,
+              runSpacing: 1,
+              children: [
+                for (final subject in subjects)
+                  SizedBox(
+                    width: cardWidth,
+                    child: SubjectCard(subject: subject),
+                  ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 
-  double _cardWidth(BuildContext context, int columns) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final available = (screenWidth - 48).clamp(0.0, 1100.0);
-    // account for 1px gaps
-    return (available - (columns - 1)) / columns;
+  double _cardWidth(double availableWidth, int columns) {
+    // account for 1px gaps between columns
+    return (availableWidth - (columns - 1)) / columns;
   }
 }
 
@@ -558,7 +691,7 @@ class _SubjectCardState extends State<SubjectCard> {
 // ---------------------------------------------------------------------------
 
 class _MethodsSection extends StatelessWidget {
-  const _MethodsSection();
+  const _MethodsSection({super.key});
 
   static const _methods = [
     (icon: '📚', src: "Heimler's History", name: 'Rubric-Led Writing', desc: 'Every AP History essay is broken down rubric point by point — thesis, context, evidence, sourcing, complexity — so you know exactly what earns each point before writing a word.'),
@@ -576,20 +709,30 @@ class _MethodsSection extends StatelessWidget {
         constraints: const BoxConstraints(maxWidth: 1100),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _SectionHeader(tag: 'Pedagogy', title: 'How We Teach'),
-              Wrap(
-                spacing: 12,
-                runSpacing: 12,
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              final available = constraints.maxWidth;
+              final cardWidth = available > 880
+                  ? ((available - 60) / 3)
+                  : available > 560
+                      ? ((available - 12) / 2)
+                      : available;
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  for (final m in _methods)
-                    _MethodCard(icon: m.icon, src: m.src, name: m.name, desc: m.desc),
+                  _SectionHeader(tag: 'Pedagogy', title: 'How We Teach'),
+                  Wrap(
+                    spacing: 12,
+                    runSpacing: 12,
+                    children: [
+                      for (final m in _methods)
+                        _MethodCard(icon: m.icon, src: m.src, name: m.name, desc: m.desc, cardWidth: cardWidth),
+                    ],
+                  ),
+                  const SizedBox(height: 40),
                 ],
-              ),
-              const SizedBox(height: 40),
-            ],
+              );
+            },
           ),
         ),
       ),
@@ -598,21 +741,15 @@ class _MethodsSection extends StatelessWidget {
 }
 
 class _MethodCard extends StatelessWidget {
-  const _MethodCard({required this.icon, required this.src, required this.name, required this.desc});
+  const _MethodCard({required this.icon, required this.src, required this.name, required this.desc, required this.cardWidth});
   final String icon;
   final String src;
   final String name;
   final String desc;
+  final double cardWidth;
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
-    final cardWidth = width > 880
-        ? (((width - 48).clamp(0.0, 1100.0) - 60) / 3)
-        : width > 560
-            ? ((width - 48 - 12) / 2)
-            : width - 48.0;
-
     return SizedBox(
       width: cardWidth,
       child: Container(
@@ -659,7 +796,7 @@ class _HowToUseSection extends StatelessWidget {
     ('01 / NAVIGATE', 'Sticky nav on every guide', 'Each guide has a sticky topbar linking to every unit. Jump to any section instantly — no searching through content you already know.'),
     ('02 / STUDY', 'Read, then practice', 'Each unit covers the concept first, then immediately follows with interactive MCQs. Learn it, then test yourself on the spot.'),
     ('03 / REVIEW RUBRICS', 'Current official rubrics', 'Every essay guide contains the exact 2025 College Board rubric, annotated to show what each point actually requires from real scoring guidelines.'),
-    ('04 / DEPLOY', 'GitHub Pages compatible', 'All HTML files in one repo root. Enable GitHub Pages on main branch — all 17 links work instantly. Upload, push, done.'),
+    ('04 / REVIEW', 'Must-Know checklists', 'Every guide ends with a high-yield checklist of the concepts most likely to appear on your exam. Tick each item as you master it — reset before exam day.'),
   ];
 
   @override
@@ -669,20 +806,30 @@ class _HowToUseSection extends StatelessWidget {
         constraints: const BoxConstraints(maxWidth: 1100),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _SectionHeader(tag: 'Getting Started', title: 'How to Use This Site'),
-              Wrap(
-                spacing: 12,
-                runSpacing: 12,
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              final available = constraints.maxWidth;
+              final cardWidth = available > 760
+                  ? ((available - 36) / 4)
+                  : available > 480
+                      ? ((available - 12) / 2)
+                      : available;
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  for (final s in _steps)
-                    _HowCard(number: s.$1, title: s.$2, desc: s.$3),
+                  _SectionHeader(tag: 'Getting Started', title: 'How to Use This Site'),
+                  Wrap(
+                    spacing: 12,
+                    runSpacing: 12,
+                    children: [
+                      for (final s in _steps)
+                        _HowCard(number: s.$1, title: s.$2, desc: s.$3, cardWidth: cardWidth),
+                    ],
+                  ),
+                  const SizedBox(height: 40),
                 ],
-              ),
-              const SizedBox(height: 40),
-            ],
+              );
+            },
           ),
         ),
       ),
@@ -691,20 +838,14 @@ class _HowToUseSection extends StatelessWidget {
 }
 
 class _HowCard extends StatelessWidget {
-  const _HowCard({required this.number, required this.title, required this.desc});
+  const _HowCard({required this.number, required this.title, required this.desc, required this.cardWidth});
   final String number;
   final String title;
   final String desc;
+  final double cardWidth;
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
-    final cardWidth = width > 760
-        ? (((width - 48).clamp(0.0, 1100.0) - 36) / 4)
-        : width > 480
-            ? ((width - 48 - 12) / 2)
-            : width - 48.0;
-
     return SizedBox(
       width: cardWidth,
       child: Container(
@@ -734,7 +875,7 @@ class _HowCard extends StatelessWidget {
 // ---------------------------------------------------------------------------
 
 class _DeveloperSection extends StatelessWidget {
-  const _DeveloperSection();
+  const _DeveloperSection({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -923,7 +1064,7 @@ class _Chip extends StatelessWidget {
 // ---------------------------------------------------------------------------
 
 class _ReviewSection extends StatefulWidget {
-  const _ReviewSection();
+  const _ReviewSection({super.key});
 
   @override
   State<_ReviewSection> createState() => _ReviewSectionState();
@@ -1153,7 +1294,13 @@ class _ReviewForm extends StatelessWidget {
               return wide
                   ? Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: fields.map((f) => Expanded(child: Padding(padding: const EdgeInsets.only(right: 12), child: f))).toList(),
+                      children: [
+                        for (int i = 0; i < fields.length; i++)
+                          Expanded(child: Padding(
+                            padding: EdgeInsets.only(right: i < fields.length - 1 ? 12 : 0),
+                            child: fields[i],
+                          )),
+                      ],
                     )
                   : Column(children: fields.map((f) => Padding(padding: const EdgeInsets.only(bottom: 12), child: f)).toList());
             }),
@@ -1188,7 +1335,13 @@ class _ReviewForm extends StatelessWidget {
               return wide
                   ? Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: fields.map((f) => Expanded(child: Padding(padding: const EdgeInsets.only(right: 12), child: f))).toList(),
+                      children: [
+                        for (int i = 0; i < fields.length; i++)
+                          Expanded(child: Padding(
+                            padding: EdgeInsets.only(right: i < fields.length - 1 ? 12 : 0),
+                            child: fields[i],
+                          )),
+                      ],
                     )
                   : Column(children: fields.map((f) => Padding(padding: const EdgeInsets.only(bottom: 12), child: f)).toList());
             }),

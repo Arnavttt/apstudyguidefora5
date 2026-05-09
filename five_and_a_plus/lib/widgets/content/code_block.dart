@@ -30,30 +30,48 @@ class CodeBlockWidget extends StatelessWidget {
     final accent = Theme.of(context).extension<AccentTheme>()?.accentColor ??
         AppColors.accent;
 
+    // Flutter prohibits borderRadius when border sides have different colors.
+    // Work-around: use a uniform border + ClipRRect for the rounded corners,
+    // and paint the accent left bar with a Positioned overlay inside a Stack.
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8),
-      decoration: BoxDecoration(
-        color: AppColors.bg3,
-        border: Border(
-          left: BorderSide(color: accent, width: 3),
-          top: BorderSide(color: AppColors.border, width: 1),
-          right: BorderSide(color: AppColors.border, width: 1),
-          bottom: BorderSide(color: AppColors.border, width: 1),
-        ),
+      child: ClipRRect(
         borderRadius: const BorderRadius.horizontal(right: Radius.circular(5)),
-      ),
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-        child: RichText(
-          text: TextSpan(
-            style: GoogleFonts.firaCode(
-              fontSize: 12.5,
-              height: 1.85,
-              color: AppColors.text,
+        child: Stack(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                color: AppColors.bg3,
+                border: Border.all(color: AppColors.border, width: 1),
+                borderRadius:
+                    const BorderRadius.horizontal(right: Radius.circular(5)),
+              ),
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                padding: const EdgeInsets.fromLTRB(23, 16, 20, 16),
+                child: RichText(
+                  text: TextSpan(
+                    style: GoogleFonts.firaCode(
+                      fontSize: 12.5,
+                      height: 1.85,
+                      color: AppColors.text,
+                    ),
+                    children: block.spans.map(_buildSpan).toList(),
+                  ),
+                ),
+              ),
             ),
-            children: block.spans.map(_buildSpan).toList(),
-          ),
+            // Accent left bar — 3px wide, full height.
+            Positioned(
+              top: 0,
+              bottom: 0,
+              left: 0,
+              child: Container(
+                width: 3,
+                color: accent,
+              ),
+            ),
+          ],
         ),
       ),
     );

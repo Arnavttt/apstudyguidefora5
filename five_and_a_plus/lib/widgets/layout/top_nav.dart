@@ -53,16 +53,23 @@ class TopNav extends StatelessWidget {
           // Brand / back-to-home
           GestureDetector(
             onTap: onHome ?? () => context.go('/'),
-            child: Text(
-              'Five & A+',
-              style: GoogleFonts.syne(
-                fontSize: 16,
-                fontWeight: FontWeight.w800,
-                foreground: Paint()
-                  ..shader = const LinearGradient(
-                    colors: [AppColors.gold, AppColors.accent],
-                  ).createShader(const Rect.fromLTWH(0, 0, 100, 20)),
-              ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Icon(Icons.arrow_back_ios, size: 12, color: AppColors.text3),
+                const SizedBox(width: 4),
+                Text(
+                  'Five & A+',
+                  style: GoogleFonts.syne(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w800,
+                    foreground: Paint()
+                      ..shader = const LinearGradient(
+                        colors: [AppColors.gold, AppColors.accent],
+                      ).createShader(const Rect.fromLTWH(0, 0, 100, 20)),
+                  ),
+                ),
+              ],
             ),
           ),
           const SizedBox(width: 16),

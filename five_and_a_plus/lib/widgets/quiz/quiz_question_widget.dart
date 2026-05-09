@@ -140,7 +140,7 @@ class QuizQuestionWidget extends StatelessWidget {
           AnimatedSize(
             duration: const Duration(milliseconds: 250),
             curve: Curves.easeOut,
-            child: answered && explanation.isNotEmpty
+            child: answered
                 ? Padding(
                     padding: const EdgeInsets.only(top: 8),
                     child: Container(
@@ -153,7 +153,7 @@ class QuizQuestionWidget extends StatelessWidget {
                         ),
                       ),
                       child: Text(
-                        explanation,
+                        explanation.isNotEmpty ? explanation : 'No explanation provided.',
                         style: GoogleFonts.outfit(
                           fontSize: 12.5,
                           color: AppColors.text2,

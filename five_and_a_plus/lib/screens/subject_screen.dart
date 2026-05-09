@@ -13,6 +13,7 @@ import '../widgets/content/code_block.dart';
 import '../widgets/content/data_table_widget.dart';
 import '../widgets/content/step_box.dart';
 import '../widgets/content/rubric_box.dart';
+import '../widgets/content/lesson_widget.dart';
 import '../widgets/quiz/quiz_section.dart';
 
 // ---------------------------------------------------------------------------
@@ -175,6 +176,8 @@ class _UnitSection extends StatelessWidget {
         RubricBoxBlock b => RubricBox(block: b),
         QuizBlock b => QuizSection(block: b),
         MustKnowBlock b => _MustKnowWidget(block: b),
+        LessonBlock b => LessonWidget(block: b),
+        FreeResponseBlock b => FreeResponseWidget(block: b),
       };
 }
 

@@ -258,7 +258,7 @@ class _HeroSection extends StatelessWidget {
                 children: const [
                   _StatChip(number: '15', label: 'AP Guides'),
                   _StatChip(number: '2', label: 'College Courses'),
-                  _StatChip(number: '2025', label: 'Updated'),
+                  _StatChip(number: '2026', label: 'Updated'),
                   _StatChip(number: '100%', label: 'Free'),
                 ],
               ),
@@ -376,6 +376,9 @@ class _SubjectCatalog extends StatelessWidget {
       byCategory.putIfAbsent(s.category, () => []).add(s);
     }
 
+    final apCount = subjectsRegistry.where((s) => s.category != 'College Math').length;
+    final collegeCount = subjectsRegistry.where((s) => s.category == 'College Math').length;
+
     return Center(
       child: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 1100),
@@ -384,7 +387,7 @@ class _SubjectCatalog extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _SectionHeader(tag: '15 Guides', title: 'AP Exam Review'),
+              _SectionHeader(tag: '$apCount Guides', title: 'AP Exam Review'),
               const SizedBox(height: 8),
               // AP categories
               for (final category in ['History & Social Science', 'English Language Arts', 'STEM', 'Arts'])
@@ -396,7 +399,7 @@ class _SubjectCatalog extends StatelessWidget {
                   const SizedBox(height: 24),
                 ],
               const SizedBox(height: 8),
-              _SectionHeader(tag: '2 Guides', title: 'College Course Review'),
+              _SectionHeader(tag: '$collegeCount Guides', title: 'College Course Review'),
               const SizedBox(height: 8),
               _CategoryGroup(
                 label: 'Mathematics',
@@ -548,13 +551,15 @@ class _SubjectCardState extends State<SubjectCard> {
     return MouseRegion(
       onEnter: (_) => setState(() => _hovered = true),
       onExit: (_) => setState(() => _hovered = false),
-      child: GestureDetector(
-        onTap: () => context.push('/subject/${s.id}'),
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 180),
-          decoration: BoxDecoration(
-            color: _hovered ? AppColors.bg3 : AppColors.bg2,
-          ),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 180),
+        decoration: BoxDecoration(
+          color: _hovered ? AppColors.bg3 : AppColors.bg2,
+        ),
+        child: InkWell(
+          onTap: () => context.push('/subject/${s.id}'),
+          splashColor: s.accentColor.withValues(alpha: 0.08),
+          highlightColor: s.accentColor.withValues(alpha: 0.05),
           child: Stack(
             children: [
               // Accent top border (animated scale)
@@ -905,14 +910,14 @@ class _DeveloperSection extends StatelessWidget {
                     ? Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          _DevAvatar(),
+                          const _DevAvatar(),
                           const SizedBox(width: 32),
                           const Expanded(child: _DevContent()),
                         ],
                       )
                     : Column(
                         children: [
-                          _DevAvatar(),
+                          const _DevAvatar(),
                           const SizedBox(height: 20),
                           const _DevContent(),
                         ],
@@ -928,6 +933,8 @@ class _DeveloperSection extends StatelessWidget {
 }
 
 class _DevAvatar extends StatelessWidget {
+  const _DevAvatar();
+
   @override
   Widget build(BuildContext context) {
     return Container(

@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'screens/home_screen.dart';
 import 'screens/subject_screen.dart';
 import 'data/subjects_registry.dart';
+import 'theme/app_theme.dart';
 
 // ---------------------------------------------------------------------------
 // AppRouter — go_router configuration
@@ -40,7 +41,7 @@ class _NotFoundScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF0f172a),
+      backgroundColor: AppColors.bg,
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,

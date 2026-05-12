@@ -106,3 +106,46 @@ final class MustKnowBlock extends ContentBlock {
   const MustKnowBlock(this.items);
   final List<String> items;
 }
+
+// ---------------------------------------------------------------------------
+// Free-response lesson format (from chunked HTML study guides)
+// ---------------------------------------------------------------------------
+
+@immutable
+class TopicNote {
+  const TopicNote({required this.topic, required this.body});
+  final String topic;
+  final String body;
+}
+
+@immutable
+class FreeResponseQuestion {
+  const FreeResponseQuestion({required this.stem, required this.modelPoints});
+  final String stem;
+  final List<String> modelPoints;
+}
+
+/// One lesson within a unit — title, topic notes, skill lists, and 5 FRQs.
+final class LessonBlock extends ContentBlock {
+  const LessonBlock({
+    required this.title,
+    required this.topics,
+    this.objectives = const [],
+    this.howTested = const [],
+    this.practice = const [],
+    this.questions = const [],
+  });
+  final String title;
+  final List<TopicNote> topics;
+  final List<String> objectives;
+  final List<String> howTested;
+  final List<String> practice;
+  final List<FreeResponseQuestion> questions;
+}
+
+/// A stand-alone bank of free-response questions (unit or course level).
+final class FreeResponseBlock extends ContentBlock {
+  const FreeResponseBlock({required this.title, required this.questions});
+  final String title;
+  final List<FreeResponseQuestion> questions;
+}

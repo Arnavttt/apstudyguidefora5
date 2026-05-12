@@ -273,6 +273,7 @@ UNITS = [
       ('A heritability estimate of 0.50 means that',
        ['Half of any individual\'s trait level comes from genes', '50% of variance in a trait across the population is associated with genetic differences', 'The trait is equally influenced by genes in all individuals', 'Genetic factors are more important than environmental factors for that trait']),
     ],
+    'review_video': 'https://www.youtube.com/watch?v=vo4pMVb0R6M',
   },
 
   {
@@ -473,6 +474,7 @@ UNITS = [
       ('An algorithm differs from a heuristic in that an algorithm',
        ['Is faster but less reliable than a heuristic', 'Guarantees a correct solution if followed correctly, unlike shortcuts that may fail', 'Relies on intuitive pattern matching rather than systematic rules', 'Works only for mathematical problems while heuristics apply broadly']),
     ],
+    'review_video': 'https://www.youtube.com/watch?v=vo4pMVb0R6M',
   },
 
   {
@@ -673,6 +675,7 @@ UNITS = [
       ('Cross-sectional research showing older adults score lower on fluid intelligence tests may reflect',
        ['Inevitable biological deterioration from aging', 'Cohort effects—younger generations may have had better educational or nutritional advantages', 'Older adults\'s lower motivation on standardized tests', 'Test bias favoring younger adults\' cultural references']),
     ],
+    'review_video': 'https://www.youtube.com/watch?v=vo4pMVb0R6M',
   },
 
   {
@@ -873,6 +876,7 @@ UNITS = [
       ('The actor-observer bias explains why people attribute their own behavior to situations because',
        ['They are more motivated to protect their own self-esteem than others\'', 'They have more information about the situational pressures they face than observers do', 'They have been trained by culture to emphasize situational causes', 'They are less biased in general than when observing others']),
     ],
+    'review_video': 'https://www.youtube.com/watch?v=vo4pMVb0R6M',
   },
 
   {
@@ -1073,5 +1077,6 @@ UNITS = [
       ('A person with high conscientiousness (Big Five) would most likely',
        ['Score high on the neuroticism dimension as well', 'Engage in more consistent health-promoting behaviors like exercise and regular medical checkups', 'Show lower academic performance due to rigidity', 'Have difficulty forming social relationships due to over-organization']),
     ],
+    'review_video': 'https://www.youtube.com/watch?v=vo4pMVb0R6M',
   },
 ]

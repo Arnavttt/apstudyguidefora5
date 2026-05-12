@@ -95,6 +95,7 @@ UNITS = [
                  ['f(0)', '3', 'the leading coefficient of f']),
                ]),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=9OOrhA2iKak',
     },
 
     {
@@ -176,6 +177,7 @@ UNITS = [
                  ['polynomials have higher degree so they grow faster', 'exponential functions have smaller derivatives than polynomials', 'only exponential functions are continuous']),
                ]),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=9OOrhA2iKak',
     },
 
     {
@@ -257,5 +259,6 @@ UNITS = [
                  ['AB is always larger than BA', 'only square matrices can be multiplied', 'the determinant changes sign when you swap order']),
                ]),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=9OOrhA2iKak',
     },
 ]

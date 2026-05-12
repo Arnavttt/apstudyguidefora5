@@ -210,6 +210,7 @@ UNITS = [
       ('Bryan\'s failure in the 1896 election most directly revealed',
        ['That farmers\' economic concerns were not legitimate', 'That the coalition of eastern workers and western farmers Populists sought could not be built', 'That the Democratic Party had permanently abandoned agrarian interests', 'That the monetary supply had no effect on agricultural prices']),
     ],
+    'review_video': 'https://www.youtube.com/watch?v=DNOs1lHnHho',
   },
 
   {
@@ -410,6 +411,7 @@ UNITS = [
       ('The atomic bomb\'s use in 1945 most immediately',
        ['Led to Germany\'s surrender ending the European theater', 'Ended the Pacific War and prevented a planned land invasion of Japan', 'Demonstrated the U.S. commitment to multilateral action through the UN', 'Created the Cold War by provoking Soviet nuclear weapons development']),
     ],
+    'review_video': 'https://www.youtube.com/watch?v=NvwTfCaWK8s',
   },
 
   {
@@ -610,6 +612,7 @@ UNITS = [
       ('The Voting Rights Act (1965) was necessary beyond the 15th Amendment because',
        ['The 15th Amendment had expired after 50 years', 'Southern states had systematically used legal tools (literacy tests, poll taxes) to disenfranchise Black voters despite the amendment', 'The 15th Amendment was ruled unconstitutional in 1896', 'Federal enforcement of the 15th Amendment required specific new legislation']),
     ],
+    'review_video': 'https://www.youtube.com/watch?v=j7v3_wmnEfI',
   },
 
   {
@@ -810,5 +813,6 @@ UNITS = [
       ('Income inequality\'s growth since the 1970s most directly reflects',
        ['Government welfare programs discouraging work', 'Technological change, globalization, and tax policy creating gains concentrated among the wealthiest', 'Declining educational achievement among American workers', 'Immigration increasing labor supply and suppressing wages for all workers']),
     ],
+    'review_video': 'https://www.youtube.com/watch?v=mn3-S4FHW5U',
   },
 ]

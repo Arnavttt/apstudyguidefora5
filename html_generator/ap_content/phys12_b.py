@@ -115,6 +115,7 @@ UNITS = [
       ('Two tuning forks produce 3 beats per second. One is at 512 Hz. What are the possible frequencies of the other?', ['f_beat=|f₁−f₂|=3', 'f₂=512+3=515 Hz or f₂=512−3=509 Hz', 'Either value gives 3 beats/s', 'Need more info to determine which']),
       ('A wave hits a fixed boundary. Is the reflected wave in phase or out of phase?', ['Fixed boundary → inverted reflection', 'Reflected wave is 180° out of phase (inverted)', 'Crest reflects as trough', 'Free boundary: reflects in phase']),
   ],
+    'review_video': 'https://www.youtube.com/watch?v=Hn7IIBHXN3U',
 },
 
 {
@@ -217,6 +218,7 @@ UNITS = [
       ('Explain why a neutral cork is attracted to a charged plastic rod.', ['Rod polarizes cork: near side gets opposite charge, far side same', 'Attraction from near side > repulsion from far side (closer=stronger)', 'Net attractive force without charge transfer', 'Polarization explains attraction of neutral objects']),
       ('An electron enters perpendicular to a uniform E field of 3000 N/C. Find its vertical acceleration.', ['F=eE=1.6×10⁻¹⁹(3000)=4.8×10⁻¹⁶ N', 'a=F/m=4.8×10⁻¹⁶/9.11×10⁻³¹≈5.27×10¹⁴ m/s²', 'Parabolic trajectory (like projectile)', 'a≈5.3×10¹⁴ m/s²']),
   ],
+    'review_video': 'https://www.youtube.com/watch?v=Hn7IIBHXN3U',
 },
 
 {
@@ -319,6 +321,7 @@ UNITS = [
       ('Describe the energy transformation in a simple resistor circuit (battery + resistor).', ['Battery: chemical energy → electrical energy', 'Resistor: electrical energy → thermal energy (heat)', 'Energy conserved throughout', 'Power input by battery = power dissipated in resistor']),
       ('An RC circuit has τ=0.5 s. How long until capacitor is effectively fully charged?', ['Effectively fully charged after 5τ=5(0.5)=2.5 s', 'At 5τ, 99.3% of maximum charge', 'Charging follows exponential curve', '2.5 seconds'])
   ],
+    'review_video': 'https://www.youtube.com/watch?v=Hn7IIBHXN3U',
 },
 
 {
@@ -420,5 +423,6 @@ UNITS = [
       ('A generator spins faster. How does this affect induced EMF?', ['Faster spin → faster change in flux (ΔΦ/Δt increases)', 'EMF=NΔΦ/Δt → larger EMF', 'Frequency of AC output also increases', 'More mechanical input → more electrical output']),
       ('Explain why a stationary charge in a magnetic field experiences no force.', ['F=qvBsinθ; if v=0, F=0', 'Magnetic force requires charge to be moving', 'Stationary charge: no current, no deflection', 'Electric field needed to exert force on stationary charge']),
   ],
+    'review_video': 'https://www.youtube.com/watch?v=Hn7IIBHXN3U',
 },
 ]

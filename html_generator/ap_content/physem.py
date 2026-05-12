@@ -225,7 +225,8 @@ UNITS = [
              ['W = qΔV = (1×10⁻⁶)(500-200) = 3×10⁻⁴ J = 0.3 mJ', 'KE_f = KE_i + W = 0 + 0.3 mJ = 0.3 mJ', 'Positive charge moves from high to low potential — E does positive work', 'Speed: v = √(2KE/m); need mass for speed']),
             ('Use Gauss\'s law to show that E = 0 everywhere inside a hollow conducting spherical shell with charge Q on its outer surface.',
              ['Draw Gaussian sphere of radius r < R (inner radius) inside the conductor', 'No charge is enclosed by this surface (charge is only on the outer surface)', 'Gauss: Φ = Q_enc/ε₀ = 0; by symmetry E is constant on surface', 'E(4πr²) = 0 → E = 0 inside the cavity'])
-        ]
+        ],
+    'review_video': 'https://www.youtube.com/watch?v=Yd1RgfCjLC8',
     },
 
     {
@@ -372,7 +373,8 @@ UNITS = [
              ['Initial: U_i = Q²/(2C₀); after: C = 2C₀, U_f = Q²/(2×2C₀) = U_i/2', 'Energy decreases by factor 2', 'Where did energy go? The dielectric is pulled in — work done by the electric force', 'Energy transferred to kinetic/thermal energy of the dielectric slab']),
             ('A spherical conductor of radius R has charge Q. Find V at r = R, r = 2R, and r = 0.',
              ['r > R: V = kQ/r (point charge); at r = 2R: V = kQ/(2R)', 'At r = R: V = kQ/R', 'Inside conductor (0 < r < R): V = kQ/R (constant, same as surface)', 'V is continuous at r = R; E = 0 inside → V constant inside'])
-        ]
+        ],
+    'review_video': 'https://www.youtube.com/watch?v=Hn7IIBHXN3U',
     },
 
     {
@@ -519,6 +521,7 @@ UNITS = [
              ['I = V/(R₁+R₂) = 50/50 = 1 A', 'P₁ = I²R₁ = 10 W; P₂ = I²R₂ = 40 W', 'P_total = 50 W = IV = 1 × 50 ✓', 'Energy balance: power in = power out']),
             ('An RC circuit has τ = 2 s. At t = 0 the capacitor is fully charged to V₀ = 10 V. Find V_C at t = 1 s, 2 s, 4 s.',
              ['V_C(t) = V₀e^{-t/τ}', 'V_C(1) = 10e^{-0.5} = 10 × 0.607 = 6.07 V', 'V_C(2) = 10e^{-1} = 10 × 0.368 = 3.68 V', 'V_C(4) = 10e^{-2} = 10 × 0.135 = 1.35 V'])
-        ]
+        ],
+    'review_video': 'https://www.youtube.com/watch?v=Yd1RgfCjLC8',
     },
 ]

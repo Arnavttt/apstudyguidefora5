@@ -177,6 +177,7 @@ UNITS = [
       ('A 2 kg ball on a 1 m string swings in a vertical circle. At top, v=4 m/s. Find tension at top (g=10).', ['At top: both T and mg point toward center (downward)', 'T+mg=mv²/r', 'T=mv²/r−mg=2(16)/1−2(10)=32−20=12 N', 'Tension=12 N']),
       ('An object moves right at constant speed. From inertial frame, is it in equilibrium?', ['Constant velocity means zero acceleration', 'By Newton\'s first law, net force = 0', 'Object is in equilibrium (dynamic)', 'Forces balance but object is in motion']),
   ],
+    'review_video': 'https://www.youtube.com/watch?v=Yd1RgfCjLC8',
 },
 
 {
@@ -278,6 +279,7 @@ UNITS = [
       ('A 5 kg block slides down a 30° ramp with μ_k=0.2. Find acceleration (g=10).', ['FN=mg cos30°=5(10)(√3/2)≈43.3 N', 'f_k=0.2(43.3)≈8.66 N', 'F_net=mg sin30°−f_k=25−8.66≈16.34 N', 'a=16.34/5≈3.27 m/s²']),
       ('Explain the difference between mass and weight using the Moon as context.', ['Mass is invariant; same on Moon and Earth', 'Weight = mg; on Moon g≈1.6 m/s² → weight is 1/6 of Earth weight', 'A 60 kg person weighs 600 N on Earth, 96 N on Moon', 'Mass (60 kg) unchanged']),
   ],
+    'review_video': 'https://www.youtube.com/watch?v=Yd1RgfCjLC8',
 },
 
 {
@@ -379,6 +381,7 @@ UNITS = [
       ('A 2 kg block falls from rest, hits the ground at 10 m/s, and stops. Find work done by the ground (g=10).', ['KE just before impact=½(2)(100)=100 J', 'Ground brings it to rest: W_ground=ΔKE=0−100=−100 J', 'Ground exerts a large force over short distance', 'Work = −100 J (force opposite to motion)']),
       ('Compare: which requires more power — lifting 100 kg at 2 m/s or 50 kg at 5 m/s? (g=10)', ['P₁=Fv=mg·v=100(10)(2)=2000 W', 'P₂=50(10)(5)=2500 W', '50 kg at 5 m/s requires more power', 'Higher speed has greater power even with less mass']),
   ],
+    'review_video': 'https://www.youtube.com/watch?v=Yd1RgfCjLC8',
 },
 
 {
@@ -480,6 +483,7 @@ UNITS = [
       ('A 3 kg cart at 6 m/s east collides and sticks with a 2 kg cart moving at 3 m/s west. Find final velocity.', ['p=3(6)+2(−3)=18−6=12 kg·m/s east', 'v_f=12/5=2.4 m/s east', 'Stays eastward', 'Heavier object dominates']),
       ('How does seatbelt physics use the impulse-momentum theorem?', ['Momentum change is fixed: Δp=m·Δv=same for any stopping method', 'Seatbelt extends stopping time (large Δt)', 'F_avg=Δp/Δt: larger Δt → smaller F_avg', 'Smaller force means less injury']),
   ],
+    'review_video': 'https://www.youtube.com/watch?v=Yd1RgfCjLC8',
 },
 
 {
@@ -581,5 +585,6 @@ UNITS = [
       ('Explain why a diver pulls into a tuck position during a flip.', ['In tuck: arms/legs close to body → smaller I', 'Conservation of L: Iω=constant', 'Smaller I → larger ω (faster spin)', 'Can complete more rotations before entering water']),
       ('A 5 m uniform 50 kg beam is supported by a rope at the right end and a pivot at the left. Find rope tension (g=10).', ['Take τ about left pivot (eliminate pivot force)', 'Rope tension T acts upward at right end', 'T(5)=mg(2.5)=50(10)(2.5)=1250', 'T=250 N']),
   ],
+    'review_video': 'https://www.youtube.com/watch?v=Yd1RgfCjLC8',
 },
 ]

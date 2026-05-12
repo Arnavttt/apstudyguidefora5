@@ -90,6 +90,7 @@ def _unit(num, title, filename, desc, gateway_pts, lesson_title, topic_title, to
                        [('Why We Study Art — Crash Course Art History', topic_title+' AP® Art History', 'https://www.youtube.com/watch?v=t6Wc7OMks4U')],
                        exit_list)],
         'unit_qs': unit_qs_list,
+        'review_video': 'https://www.youtube.com/watch?v=t6Wc7OMks4U',
     }
 
 UNITS = [

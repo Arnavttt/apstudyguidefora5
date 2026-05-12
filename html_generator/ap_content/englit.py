@@ -193,6 +193,7 @@ UNITS = [
             ('Explain the significance of ambiguous endings in literary short fiction.',
              ['Ambiguous endings withhold clear resolution, leaving the reader uncertain about outcomes or what the events mean.', 'They reflect literary realism — life rarely resolves cleanly, and ambiguity reflects that truth.', 'They also engage the reader actively in meaning-making: what you decide the ending means says something about your interpretation of the whole story.', 'AP®: don\'t try to resolve the ambiguity — instead, analyze what specific interpretive possibilities the ending creates and which are best supported by the text.']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=MSYw502dJNY',
     },
     {
         'num': 2,
@@ -309,6 +310,7 @@ UNITS = [
             ('What is the significance of a poem ending without resolution?',
              ['Open endings in poetry (as in fiction) reflect the irreducibility of complex experience to neat conclusions.', 'A poem that ends in tension, ambiguity, or question invites the reader to hold the complexity rather than resolving it.', 'Keats\'s "Ode to a Nightingale" ends with the speaker uncertain whether his experience was real or visionary — this unresolved ambiguity is the poem\'s statement about the nature of imagination.', 'AP®: don\'t try to resolve ambiguous endings; instead, analyze what interpretive possibilities they create and which are best supported by the whole poem.']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=MSYw502dJNY',
     },
     {
         'num': 3,
@@ -423,6 +425,7 @@ UNITS = [
             ('How does historical context enhance literary analysis without replacing textual analysis?',
              ['Context explains what was at stake for the work in its moment — what was transgressive, what was impossible, what was contested.', 'Example: knowing that "The Awakening" (1899) was published when women\'s public independence was deeply controversial explains why Edna\'s awakening is radical, not trivial.', 'But the context is a lens for reading the text, not a substitute for it — analysis must still explain how specific textual elements create meaning.', 'AP®: use one sentence of context to frame a reading, then spend the rest of the paragraph on specific textual evidence.']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=MSYw502dJNY',
     },
     {
         'num': 4,
@@ -539,6 +542,7 @@ UNITS = [
             ('Explain what a narrative gap reveals about a character\'s psychology.',
              ['A gap in narration — something a character consistently avoids, a memory they won\'t approach, a topic they deflect — reveals the psychological terrain of that which is too painful, shameful, or threatening to confront.', 'The gap itself becomes a psychological portrait: the shape of what is avoided tells us about the character\'s fears and wounds.', '"The remains of the Day": Stevens\'s inability to acknowledge his love for Miss Kenton, his complicity with fascism — the evasions are the portrait.', 'AP®: identify the gap, analyze what the avoidance reveals, and connect to the work\'s central theme.']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=MSYw502dJNY',
     },
     {
         'num': 5,
@@ -656,5 +660,6 @@ UNITS = [
             ('What is a thesis for a poetry FRQ and what must it include?',
              ['A poetry FRQ thesis must make a claim about how specific poetic choices contribute to the poem\'s meaning — not just identify the topic or list devices.', 'Weak: "This poem uses imagery, metaphor, and structure to explore death."', 'Strong: "By juxtaposing images of violent natural destruction with the speaker\'s controlled formal language, the poem argues that confronting mortality requires containing grief within imposed form."', 'The strong thesis: names specific elements, explains their relationship to meaning, and makes a claim about what the poem argues or reveals.']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=MSYw502dJNY',
     },
 ]

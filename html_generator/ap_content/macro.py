@@ -282,6 +282,7 @@ UNITS = [
    ('Economic growth is illustrated on a PPC diagram as',
     ['A movement from inside the curve to a point on it', 'An outward shift of the entire curve', 'A change in the slope of the curve without shifting it', 'A movement along the curve']),
   ],
+    'review_video': 'https://www.youtube.com/watch?v=MKO1icFVtDc',
  },
 
  {
@@ -490,6 +491,7 @@ UNITS = [
    ('An unexpected rise in inflation benefits borrowers because',
     ['They receive higher nominal wages', 'They repay loans in dollars with lower purchasing power than when they borrowed', 'Banks lower interest rates during inflation', 'Their debt is forgiven by the government']),
   ],
+    'review_video': 'https://www.youtube.com/watch?v=e18RXFFoL9c',
  },
 
  {
@@ -698,6 +700,7 @@ UNITS = [
    ('A supply shock (sudden rise in oil prices) shifts',
     ['AD left, reducing output and prices', 'SRAS left, reducing output and raising prices (stagflation)', 'LRAS left permanently', 'Both AD and SRAS left simultaneously']),
   ],
+    'review_video': 'https://www.youtube.com/watch?v=xg0Frqvh3T0',
  },
 
  {
@@ -906,6 +909,7 @@ UNITS = [
    ('The real interest rate differs from the nominal interest rate in that it',
     ['Is set by the Federal Reserve', 'Is adjusted for inflation, reflecting the true cost of borrowing', 'Determines the exchange rate', 'Applies only to government bonds']),
   ],
+    'review_video': 'https://www.youtube.com/watch?v=yjfSGwUcPG8',
  },
 
  {
@@ -1114,6 +1118,7 @@ UNITS = [
    ('The zero lower bound limits monetary policy because',
     ['Negative nominal rates are economically impossible', 'The Fed cannot lower rates below zero using conventional tools, reducing its ability to stimulate further', 'The Fed is prohibited by law from using QE', 'Fiscal policy automatically takes over at zero rates']),
   ],
+  'review_video': 'https://www.youtube.com/watch?v=yjfSGwUcPG8',
  },
 
  {
@@ -1322,5 +1327,6 @@ UNITS = [
    ('Expansionary monetary policy affects net exports by',
     ['Raising interest rates, appreciating the dollar, reducing exports', 'Lowering interest rates, depreciating the dollar, and making exports more competitive', 'Having no effect on exchange rates or trade', 'Increasing imports through higher consumer incomes only']),
   ],
+  'review_video': 'https://www.youtube.com/watch?v=yjfSGwUcPG8',
  },
 ]

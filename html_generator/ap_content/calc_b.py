@@ -114,6 +114,7 @@ UNITS = [
       ('Find A\'(3) where A(x)=∫_1^x (t²−4)dt, then state whether A is increasing or decreasing at x=3.', ['A\'(x)=x²−4 by FTC Part 1', 'A\'(3)=9−4=5>0', 'A is increasing at x=3', 'Because f(3)=5>0']),
       ('Evaluate ∫_0^{π/4} sec²(x)dx.', ['Antiderivative: tan(x)', '[tan x]_0^{π/4}=tan(π/4)−tan(0)=1−0=1', 'Result: 1', 'Standard trig antiderivative']),
   ],
+    'review_video': 'https://www.youtube.com/watch?v=fYyARMqiaag',
 },
 
 {
@@ -215,6 +216,7 @@ UNITS = [
       ('Sketch and describe the solution curves to dy/dx=1 (slope field).', ['dy/dx=1 everywhere → all slopes equal 1', 'Slope field has identical 45° segments', 'Solution curves are lines y=x+C', 'Parallel lines shifted vertically by C']),
       ('A tank has Q(t) satisfying dQ/dt=5−Q/20. What is the long-term amount of substance?', ['At equilibrium: dQ/dt=0 → 5=Q/20 → Q=100', 'Q approaches 100 as t→∞', 'This is the steady-state concentration', 'Rate in equals rate out at equilibrium']),
   ],
+    'review_video': 'https://www.youtube.com/watch?v=fYyARMqiaag',
 },
 
 {
@@ -316,6 +318,7 @@ UNITS = [
       ('Find total distance of v(t)=t−2 on [0,4].', ['v=0 at t=2; v<0 on (0,2), v>0 on (2,4)', '∫_0^2(2−t)dt=[2t−t²/2]_0^2=2', '∫_2^4(t−2)dt=[t²/2−2t]_2^4=2', 'Total distance=2+2=4']),
       ('Set up surface area when y=sin(x) on [0,π] is rotated around x-axis.', ['f\'(x)=cos x; (f\')²=cos²x', 'S=2π∫_0^π sin(x)√(1+cos²x)dx', 'Cannot evaluate in closed form without calculator', 'Setup is complete; numerical value ≈ 14.42']),
   ],
+    'review_video': 'https://www.youtube.com/watch?v=fYyARMqiaag',
 },
 
 {
@@ -417,6 +420,7 @@ UNITS = [
       ('Test Σ(−1)ⁿ/n! for absolute convergence.', ['Σ1/n!: ratio test: (1/(n+1)!·n!)=1/(n+1)→0<1', 'Σ1/n! converges absolutely', 'Σ(−1)ⁿ/n! converges absolutely', 'Sum of |aₙ| converges → absolute convergence']),
       ('Integrate Maclaurin series for 1/(1−x) to find the series for −ln(1−x).', ['1/(1−x)=Σxⁿ for |x|<1', '∫1/(1−x)dx=−ln(1−x)+C=Σx^{n+1}/(n+1)+C', 'So −ln(1−x)=Σx^{n+1}/(n+1)=x+x²/2+x³/3+...', 'Valid for |x|<1; at x=−1 converges by AST']),
   ],
+    'review_video': 'https://www.youtube.com/watch?v=fYyARMqiaag',
 },
 
 {
@@ -518,5 +522,6 @@ UNITS = [
       ('A particle has v(t)=⟨2,3t⟩ and r(0)=⟨0,1⟩. Find r(2).', ['r(t)=∫v dt=⟨2t,3t²/2⟩+C', 'r(0)=⟨0,0⟩+C=⟨0,1⟩ → C=⟨0,1⟩', 'r(t)=⟨2t,3t²/2+1⟩', 'r(2)=⟨4,7⟩']),
       ('Find slope of r=2+sin θ at θ=π.', ['y=r sin θ=(2+sin θ)sin θ; dy/dθ=cos θ sin θ+(2+sin θ)cos θ=cos θ(2+2sin θ)', 'x=r cos θ=(2+sin θ)cos θ; dx/dθ=cos θ cos θ+(2+sin θ)(−sin θ)=cos²θ−2sin θ−sin²θ', 'At θ=π: dy/dθ=(−1)(2+0)=−2; dx/dθ=1−0−0=1', 'dy/dx=−2/1=−2']),
   ],
+    'review_video': 'https://www.youtube.com/watch?v=fYyARMqiaag',
 },
 ]

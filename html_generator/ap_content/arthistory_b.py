@@ -97,6 +97,7 @@ UNITS = [
              'that African artistic traditions persisted in diaspora contexts, informing Brazilian candomblé objects and Caribbean ironwork',
              ['African metalworking disappeared entirely after the slave trade', 'enslaved Africans had no opportunity to practice art forms', 'diaspora traditions have no connection to African originals']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=t6Wc7OMks4U',
     },
 
     {
@@ -182,6 +183,7 @@ UNITS = [
              'combined decorative and symbolic functions — geometric patterns suggest divine order and infinity, covering surfaces in immersive all-over pattern',
              ['a purely structural function of holding walls together', 'a narrative function depicting Islamic history', 'a commercial function identifying the building\'s patron']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=t6Wc7OMks4U',
     },
 
     {
@@ -267,6 +269,7 @@ UNITS = [
              'treated as a living divine presence — the worshipper receives blessings by seeing and being seen by the god\'s image',
              ['a purely decorative object with no ritual function', 'used only in private meditation', 'a representation of the deceased ruler']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=t6Wc7OMks4U',
     },
 
     {
@@ -352,6 +355,7 @@ UNITS = [
              'agricultural practice can itself be an artistic and ritual act — growing ceremonially important giant yams displays spiritual power, blurring the boundary between art and life',
              ['yam cultivation is purely agricultural with no artistic or ritual dimension', 'the primary Abelam art form is ceramic yam containers', 'yam fibers are the main Abelam prestige textile material']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=t6Wc7OMks4U',
     },
 
     {
@@ -437,5 +441,6 @@ UNITS = [
              'skepticism toward master narratives, recognition of multiple equally valid traditions, attention to power relationships in what gets displayed, and questioning of aesthetic absolutes',
              ['celebrating the superiority of Western artistic achievement over all other traditions', 'returning to Renaissance ideals of beauty and proportion', 'rejecting all interpretation of art in favor of purely formal description']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=t6Wc7OMks4U',
     },
 ]

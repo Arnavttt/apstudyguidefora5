@@ -178,6 +178,7 @@ UNITS = [
       ('Evaluate lim_{x→0⁺} x·ln(x).', ['Rewrite as ln(x)/(1/x) → −∞/∞; apply L\'Hôpital', 'Differentiate: (1/x)/(−1/x²)=−x', 'lim_{x→0⁺}(−x)=0', 'Limit = 0']),
       ('Does ∫_0^1 1/√x dx converge? Evaluate if yes.', ['Rewrite as lim_{t→0⁺}∫_t^1 x^{−1/2} dx', 'Antiderivative: 2√x; evaluate from t to 1', '2√1−2√t=2−2√t; as t→0⁺, gives 2', 'Converges to 2']),
   ],
+    'review_video': 'https://www.youtube.com/watch?v=fYyARMqiaag',
 },
 
 {
@@ -279,6 +280,7 @@ UNITS = [
       ('Find the derivative of y=arcsin(3x).', ['d/dx[arcsin u]=1/√(1−u²)·u\', u=3x', 'u\'=3', 'y\'=3/√(1−9x²)', 'Domain restricted to |3x|<1']),
       ('Use logarithmic differentiation to find dy/dx for y=(sin x)^x.', ['ln y=x·ln(sin x)', 'Differentiate: y\'/y=ln(sin x)+x·cos(x)/sin(x)', 'y\'/y=ln(sin x)+x·cot x', 'y\'=(sin x)^x·[ln(sin x)+x cot x]']),
   ],
+    'review_video': 'https://www.youtube.com/watch?v=fYyARMqiaag',
 },
 
 {
@@ -380,6 +382,7 @@ UNITS = [
       ('Use Rolle\'s Theorem to argue that f(x)=x⁴−2x² has a critical point in (0,√2).', ['f(0)=0 and f(√2)=(4−4)=0; f(0)=f(√2)', 'f is continuous and differentiable', 'By Rolle\'s, ∃c∈(0,√2) with f\'(c)=0', 'f\'(x)=4x³−4x=4x(x²−1); c=1∈(0,√2) ✓']),
       ('Find d²y/dx² for y=sin(x) at x=π.', ['y\'=cos x; y\'\'=−sin x', 'At x=π: y\'\'=−sin(π)=0', 'Neither concave up nor down at this specific point', 'Check nearby values to describe concavity']),
   ],
+    'review_video': 'https://www.youtube.com/watch?v=fYyARMqiaag',
 },
 
 {
@@ -481,6 +484,7 @@ UNITS = [
       ('Find absolute max and min of f(x)=x³−3x+2 on [−2,2].', ['f\'(x)=3x²−3=0 → x=±1', 'Evaluate: f(−2)=0, f(−1)=4, f(1)=0, f(2)=4', 'Absolute max: 4 at x=−1 and x=2', 'Absolute min: 0 at x=−2 and x=1']),
       ('An object\'s velocity v(t) is positive and decreasing. Describe the motion.', ['Positive velocity: moving in positive direction', 'Decreasing velocity: a(t)<0 (negative acceleration)', 'Object is slowing down (v and a have opposite signs)', 'Speed is decreasing even though position is increasing']),
   ],
+    'review_video': 'https://www.youtube.com/watch?v=fYyARMqiaag',
 },
 
 {
@@ -582,5 +586,6 @@ UNITS = [
       ('Determine if f(x)=x⁵ has an inflection point at x=0.', ['f\'\'(x)=20x³; f\'\'(0)=0', 'Sign: f\'\'(x)<0 for x<0, f\'\'(x)>0 for x>0', 'f\'\' changes sign at x=0', 'Inflection point at x=0 ✓']),
       ('A curve is defined by x=e^t, y=te^t. Find the tangent line at t=0.', ['dx/dt=eᵗ; dy/dt=eᵗ+teᵗ=eᵗ(1+t)', 'dy/dx=(1+t)', 'At t=0: slope=1; point=(1,0)', 'Tangent line: y−0=1(x−1) → y=x−1']),
   ],
+    'review_video': 'https://www.youtube.com/watch?v=fYyARMqiaag',
 },
 ]

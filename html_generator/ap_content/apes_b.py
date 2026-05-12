@@ -132,6 +132,7 @@ UNITS = [
             ('High-level nuclear waste requires:', ['Storage isolated from the environment for thousands of years', 'Only a few decades of storage', 'Burial in the ocean', 'Immediate incineration', 'Conversion to low-level waste']),
             ('Mountaintop removal coal mining is criticized for:', ['Destroying habitats and causing water pollution from mining waste', 'Emitting CO₂ only', 'Being underground', 'Using fracking', 'Producing radioactive waste']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=6IDLSvCNPTs',
     },
     {
         'num': 7,
@@ -250,6 +251,7 @@ UNITS = [
             ('Industrial smog differs from photochemical smog in that it forms from:', ['SO₂ and particulates from coal in cold humid conditions', 'NOₓ and VOCs in hot sunny conditions', 'CFCs and ozone reactions', 'Radon and CO₂', 'Natural sources']),
             ('Fine particulate matter (PM2.5) causes the most harm by:', ['Penetrating deeply into lungs and entering the bloodstream', 'Blocking sunlight only', 'Causing acid rain', 'Reacting with ozone', 'Reflecting heat']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=6IDLSvCNPTs',
     },
     {
         'num': 8,
@@ -368,6 +370,7 @@ UNITS = [
             ('Phytoremediation is best used to clean up:', ['Heavy metal contaminated soil', 'Organic chemical spills in oceans', 'Air pollution', 'Sewage in water treatment', 'Radioactive gas leaks']),
             ('E-waste in developing countries is a problem because:', ['Informal recycling exposes workers to toxic heavy metals from electronics', 'Electronic devices are hard to disassemble', 'Developing countries lack electricity', 'It produces microplastics only', 'It contains radioactive materials exclusively']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=6IDLSvCNPTs',
     },
     {
         'num': 9,
@@ -486,5 +489,6 @@ UNITS = [
             ('Environmental justice recognizes that:', ['Environmental burdens fall disproportionately on low-income and minority communities', 'Rich nations bear most climate impacts', 'All communities face equal environmental risks', 'Only developing nations create pollution', 'Pollution affects only nonhuman species']),
             ('A positive climate feedback:', ['Amplifies initial warming (e.g., melting ice → lower albedo → more warming)', 'Counteracts warming', 'Has beneficial effects on ecosystems', 'Reduces CO₂ in the atmosphere', 'Is produced by renewable energy']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=6IDLSvCNPTs',
     },
 ]

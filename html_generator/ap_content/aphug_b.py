@@ -210,6 +210,7 @@ UNITS = [
       ('Which geographic feature is most commonly used to establish physical boundaries?',
        ['Deserts only', 'Mountain ranges and rivers', 'Latitudinal parallels', 'Population density contours']),
     ],
+    'review_video': 'https://www.youtube.com/watch?v=SUKIVu133s4',
   },
 
   {
@@ -410,6 +411,7 @@ UNITS = [
       ('Monoculture farming systems are particularly vulnerable to',
        ['Overproduction of diverse food types', 'Crop disease and environmental disruption due to lack of diversity', 'Excessive water retention in soils', 'High labor costs compared to diversified farms']),
     ],
+    'review_video': 'https://www.youtube.com/watch?v=dO6mREMniUo',
   },
 
   {
@@ -610,6 +612,7 @@ UNITS = [
       ('The Latin American city model differs from Western models in that it typically shows',
        ['Exclusively industrial zones surrounding the CBD', 'A spine of elite commercial development extending from the CBD', 'No central business district', 'Uniform concentric rings of decreasing wealth']),
     ],
+    'review_video': 'https://www.youtube.com/watch?v=fzFJtpovOiE',
   },
 
   {
@@ -810,5 +813,6 @@ UNITS = [
       ('Improving women\'s education in LDCs most directly affects development by',
        ['Increasing agricultural subsistence output only', 'Reducing birth rates, improving child health, and expanding economic participation', 'Encouraging emigration of skilled female workers', 'Primarily benefiting urban areas and ignoring rural populations']),
     ],
+    'review_video': 'https://www.youtube.com/watch?v=lku6fhr0q1c',
   },
 ]

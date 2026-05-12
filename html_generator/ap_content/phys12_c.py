@@ -152,7 +152,8 @@ UNITS = [
             ('A student claims amplitude affects the period of a mass-spring system. How would you refute this?', ['Period formula: T = 2π√(m/k) — amplitude A is absent', 'Experimental evidence: period is same for large and small amplitudes', 'Mathematically: larger amplitude means larger force over larger distance — effects cancel', 'This is a defining property of SHM']),
             ('A spring system has angular frequency ω = 8 rad/s and amplitude 0.25 m. Find v_max and a_max.', ['v_max = Aω = 0.25 × 8 = 2.0 m/s', 'a_max = Aω² = 0.25 × 64 = 16 m/s²', 'v_max at x = 0; a_max at x = ±A', 'These are the extremes of velocity and acceleration']),
             ('Explain resonance using an example from everyday life.', ['Resonance occurs when driving frequency matches natural frequency', 'Example: pushing a swing at its natural period amplifies motion', 'Example: Tacoma Narrows Bridge — wind matched natural frequency', 'At resonance, small periodic forces produce large oscillations']),
-        ]
+        ],
+    'review_video': 'https://www.youtube.com/watch?v=Hn7IIBHXN3U',
     },
 
     {
@@ -299,7 +300,8 @@ UNITS = [
              ['Equal pressure at the bottom interface: ρ₁gh₁ = ρ₂gh₂', 'h₁/h₂ = ρ₂/ρ₁ = 1200/800 = 1.5', 'The lighter fluid (ρ₁) has the taller column', 'Heights are inversely proportional to densities']),
             ('Explain how atmospheric pressure is measured with a mercury barometer and why the diameter of the tube does not matter.',
              ['Mercury is pushed up by atmospheric pressure; vacuum above holds no air', 'Height h of mercury column satisfies P_atm = ρ_Hg × g × h', 'Wider tube has more weight but also more area; pressure is weight/area — area cancels', 'Standard atmosphere = 760 mm Hg regardless of tube width']),
-        ]
+        ],
+    'review_video': 'https://www.youtube.com/watch?v=Hn7IIBHXN3U',
     },
 
     {
@@ -446,7 +448,8 @@ UNITS = [
              ['Squeezing bulb forces air rapidly across the top of a narrow tube', 'Fast-moving air has lower pressure (Bernoulli)', 'Atmospheric pressure below pushes liquid up the tube', 'Liquid meets the fast air stream and is atomized into fine droplets']),
             ('Describe the velocity profile in a viscous pipe and contrast it with ideal flow.',
              ['Ideal flow: uniform (plug) velocity across entire cross-section', 'Viscous flow: parabolic profile — maximum at center, zero at walls', 'No-slip condition: fluid velocity = 0 at pipe wall', 'Average velocity in viscous flow is half the centerline maximum velocity'])
-        ]
+        ],
+    'review_video': 'https://www.youtube.com/watch?v=Hn7IIBHXN3U',
     },
 
     {
@@ -593,6 +596,7 @@ UNITS = [
              ['Sweat evaporates from skin surface → phase change (liquid to gas)', 'Evaporation requires latent heat of vaporization (≈ 2.43 MJ/kg for water)', 'This latent heat comes from body surface, cooling the skin', 'Forced convection (wind) speeds evaporation → greater cooling']),
             ('A heat engine absorbs 2000 J from a hot reservoir at 500 K and rejects heat to a cold reservoir at 250 K. If it operates at 80% of Carnot efficiency, find W and Q_C.',
              ['e_Carnot = 1 - 250/500 = 0.50; actual e = 0.80 × 0.50 = 0.40', 'W = e × Q_H = 0.40 × 2000 = 800 J', 'Q_C = Q_H - W = 2000 - 800 = 1200 J rejected', 'Even at 80% of Carnot, 60% of input heat becomes waste'])
-        ]
+        ],
+    'review_video': 'https://www.youtube.com/watch?v=Hn7IIBHXN3U',
     },
 ]

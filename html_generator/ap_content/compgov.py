@@ -195,6 +195,7 @@ UNITS = [
             ('What role does ethnicity play in Nigerian politics?',
              ['Nigeria has over 250 ethnic groups; the three largest (Hausa-Fulani, Yoruba, Igbo) dominate national politics.', 'The federal structure was partly designed to manage this ethnic diversity.', 'Ethnic identity frequently shapes voting behavior, often overriding party ideology.', 'The north-south religious divide (predominantly Muslim north vs. Christian south) generates persistent political tension, including conflict with Boko Haram.']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=FepoztzFG4E',
     },
     {
         'num': 2,
@@ -311,6 +312,7 @@ UNITS = [
             ('How has Russia\'s federal structure changed under Putin?',
              ['Russia\'s 1993 constitution establishes 89 federal subjects with governors and regional legislatures.', 'After 1999-2000, Putin systematically recentralized: he created 7 (later 8) federal districts with presidential envoys, and in 2004 made regional governors presidential appointees (changed back to elections in 2012 under pressure, then again constrained).', 'The Federation Council (upper house) became dominated by Kremlin allies, rubber-stamping federal legislation.', 'Nominal federalism persists formally, but actual federal autonomy has been significantly reduced since 2000.']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=JNgEnW3vkTE',
     },
     {
         'num': 3,
@@ -427,6 +429,7 @@ UNITS = [
             ('How do social movements face different constraints in democratic vs. authoritarian contexts?',
              ['In democracies (UK, Mexico, Nigeria), protests are legally protected; groups can lobby, litigate, and campaign without facing imprisonment for political activity.', 'In authoritarian states (China, Russia, Iran), organizers risk arrest, and internet/communication surveillance makes coordination difficult.', 'However, even democracies limit some protest: the UK has restricted disruptive protests; Nigeria has used security forces against protesters.', 'The key variable is whether movement leaders face systematic criminal prosecution for political activity — the definitive feature of authoritarian repression.']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=R2h8CrX84Eo',
     },
     {
         'num': 4,
@@ -543,6 +546,7 @@ UNITS = [
             ('Compare the role of Islamic law in Iranian and Nigerian politics.',
              ['Iran: Islamic law is constitutionally supreme; all legislation must comply with Islamic principles as interpreted by the Guardian Council and Supreme Leader.', 'Nigeria: no national state religion; however, 12 northern states adopted Sharia law for personal status and criminal matters after the 1999 democratic transition.', 'Iran: Islam is the basis of regime legitimacy — the Supreme Leader is a religious authority.', 'Nigeria: Sharia in the north reflects regional religious autonomy within the federal system, not a national theocratic structure.']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=R2h8CrX84Eo',
     },
     {
         'num': 5,
@@ -659,5 +663,6 @@ UNITS = [
             ('Compare women\'s political representation across three AP® countries.',
              ['UK: women constitute roughly 35% of the House of Commons (2024); the UK has had two female Prime Ministers (Thatcher, Truss).', 'Mexico: gender parity laws require parties to field equal numbers of male and female candidates; female legislative representation exceeds 50% in the Chamber of Deputies.', 'Nigeria: women hold approximately 4-6% of National Assembly seats — one of the lowest rates globally, reflecting cultural norms, electoral violence, and campaign finance barriers.', 'Formal representation (having women in office) does not automatically produce substantive policy changes for women; context and policy priorities matter.']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=R2h8CrX84Eo',
     },
 ]

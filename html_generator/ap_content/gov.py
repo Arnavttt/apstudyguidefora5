@@ -289,6 +289,7 @@ UNITS = [
             ('The Great Compromise at the Constitutional Convention created',
              ['a bicameral Congress with proportional House representation and equal Senate representation', 'the Electoral College', 'the Three-Fifths Compromise', 'the amendment process']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=FepoztzFG4E',
     },
     {
         'num': 2,
@@ -500,6 +501,7 @@ UNITS = [
             ('The conference committee in the legislative process is needed when',
              ['the House and Senate pass different versions of the same bill', 'the president vetoes a bill', 'a bill fails in committee', 'the filibuster is invoked']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=JNgEnW3vkTE',
     },
     {
         'num': 3,
@@ -711,6 +713,7 @@ UNITS = [
             ('Obergefell v. Hodges (2015) recognized same-sex marriage as a right under',
              ['the 14th Amendment\'s Due Process and Equal Protection Clauses', 'the 1st Amendment', 'an Equal Rights Amendment', 'the 9th Amendment']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=R2h8CrX84Eo',
     },
     {
         'num': 4,
@@ -922,6 +925,7 @@ UNITS = [
             ('Retrospective voting theory suggests that voters',
              ['base their vote on the incumbent\'s past performance rather than future promises alone', 'always support incumbents', 'vote based only on economic conditions', 'evaluate only foreign policy record']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=jhZzz4z1VIU',
     },
     {
         'num': 5,
@@ -1133,5 +1137,6 @@ UNITS = [
             ('Voter turnout in the U.S. is comparatively low because of structural factors including',
              ['voter registration requirements, weekday elections, and non-compulsory voting', 'a lack of competitive elections', 'low civic education in schools', 'inadequate media coverage of elections']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=r8HygE9RVDs',
     },
 ]

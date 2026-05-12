@@ -162,7 +162,8 @@ UNITS = [
              ['Electric: ∮E·dA = Q_enc/ε₀; flux ≠ 0 if charge enclosed', 'Magnetic: ∮B·dA = 0; always zero (no magnetic monopoles)', 'There are no isolated magnetic charges — every magnet has N and S', 'All magnetic field lines are closed loops; no starting or ending point']),
             ('Explain why a solenoid with 1000 turns and 1 A in 0.1 m has the same B as one with 2000 turns and 0.5 A in 0.2 m.',
              ['Both have same n and I: n₁ = 1000/0.1 = 10 000 m⁻¹, I₁ = 1 A → nI = 10 000', 'n₂ = 2000/0.2 = 10 000 m⁻¹, I₂ = 0.5 A → nI = 5000 (different!)', 'Actually nI = 10 000 vs 5000 — they are NOT the same; second has B = half', 'B = μ₀nI depends on turns per meter (n), not total turns'])
-        ]
+        ],
+    'review_video': 'https://www.youtube.com/watch?v=Yd1RgfCjLC8',
     },
 
     {
@@ -310,7 +311,8 @@ UNITS = [
              ['u = B²/(2μ₀) = (2)²/(2 × 4π×10⁻⁷)', 'u = 4/(8π×10⁻⁷) = 4/(2.513×10⁻⁶) = 1.59×10⁶ J/m³', 'u ≈ 1.59 MJ/m³ — enormous energy density', 'MRI machine stores this energy in the superconducting solenoid']),
             ('An RLC circuit has R = 20 Ω, L = 0.5 H, C = 500 μF driven at resonance. Find I_max for ε₀ = 50 V peak.',
              ['At resonance: Z = R = 20 Ω (reactive terms cancel)', 'I_max = ε₀/Z = 50/20 = 2.5 A', 'V_L and V_C are both large but cancel: V_L = I_max ω₀L, V_C = I_max/(ω₀C)', 'Q factor = ω₀L/R = (200)(0.5)/20 = 5; voltage across L or C = QV_source'])
-        ]
+        ],
+    'review_video': 'https://www.youtube.com/watch?v=Yd1RgfCjLC8',
     },
 
     {
@@ -457,6 +459,7 @@ UNITS = [
              ['E₀ = √(2Iμ₀c) = √(2 × 500 × 4π×10⁻⁷ × 3×10⁸) = √(376.9) ≈ 614 V/m', 'B₀ = E₀/c = 614/(3×10⁸) = 2.05 μT', 'P_rad = I/c = 500/(3×10⁸) = 1.67 μPa', 'F = P_rad × A = 1.67×10⁻⁶ × 1 = 1.67 μN']),
             ('Describe the operation of a three-phase induction motor from first principles.',
              ['Three coil sets in stator, driven by three-phase AC (120° apart in phase)', 'At each instant, currents create a resultant rotating magnetic field in the stator', 'Rotating B induces currents in the short-circuited squirrel-cage rotor (Faraday)', 'Induced currents and rotating B create torque (Lenz) — rotor follows the field'])
-        ]
+        ],
+    'review_video': 'https://www.youtube.com/watch?v=Hn7IIBHXN3U',
     },
 ]

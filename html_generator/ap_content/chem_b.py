@@ -132,6 +132,7 @@ UNITS = [
             ('In a bomb calorimeter (constant volume), the measured quantity is:', ['ΔE (internal energy)', 'ΔH (enthalpy)', 'ΔG (free energy)', 'ΔS (entropy)', 'ΔHf°']),
             ('The Second Law of Thermodynamics states:', ['Entropy of the universe increases in spontaneous processes', 'Energy is conserved', 'Entropy is zero at 0 K', 'Enthalpy drives all reactions', 'ΔG = ΔH at constant T']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=DsgDoSHmq4c',
     },
     {
         'num': 7,
@@ -250,6 +251,7 @@ UNITS = [
             ('For an endothermic reaction, increasing temperature:', ['Increases K', 'Decreases K', 'Does not change K', 'Shifts equilibrium left', 'Increases activation energy']),
             ('The relationship between K and ΔG° is:', ['ΔG° = −RT ln K', 'ΔG° = RT ln K', 'ΔG° = nFE°', 'ΔG° = ΔH − TΔS', 'ΔG° = −nRT']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=DsgDoSHmq4c',
     },
     {
         'num': 8,
@@ -368,6 +370,7 @@ UNITS = [
             ('In a weak base-strong acid titration, the equivalence point pH is:', ['Below 7', 'Exactly 7', 'Above 7', 'Equal to pKb', 'Equal to 14']),
             ('The Henderson-Hasselbalch equation is a rearrangement of:', ['The Ka expression for weak acid equilibrium', 'The Nernst equation', 'Le Chatelier\'s principle', 'The Arrhenius equation', 'Hess\'s law']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=DsgDoSHmq4c',
     },
     {
         'num': 9,
@@ -486,5 +489,6 @@ UNITS = [
             ('ΔG° = −nFE°cell. For n = 2 and E°cell = +0.46 V, ΔG° =', ['−88.8 kJ', '+88.8 kJ', '−44.4 kJ', '+44.4 kJ', '−177.6 kJ']),
             ('In electrolysis of molten NaCl, sodium metal forms at the:', ['Cathode (reduction of Na⁺)', 'Anode', 'Salt bridge', 'Positive electrode', 'Power source']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=DsgDoSHmq4c',
     },
 ]

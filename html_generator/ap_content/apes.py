@@ -195,6 +195,7 @@ UNITS = [
             ('The 10% rule means a tertiary consumer obtains what fraction of producer energy?', ['0.1% (10% × 10% × 10%)', '10%', '1%', '30%', '0.01%']),
             ('Which process adds carbon to the atmosphere?', ['Cellular respiration and combustion', 'Photosynthesis', 'Nitrogen fixation', 'Weathering', 'Ocean absorption']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=6IDLSvCNPTs',
     },
     {
         'num': 2,
@@ -313,6 +314,7 @@ UNITS = [
             ('Climax community is determined primarily by:', ['Regional climate', 'Soil type alone', 'Human land use', 'Pioneer species composition', 'Disturbance frequency']),
             ('An endemic species is one that:', ['Is found only in one specific geographic area', 'Is invasive in multiple regions', 'Has been introduced by humans', 'Is at risk of extinction everywhere', 'Can live in any biome']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=6IDLSvCNPTs',
     },
     {
         'num': 3,
@@ -431,6 +433,7 @@ UNITS = [
             ('Which DTM stage has the highest rate of population growth?', ['Stage 2 (death rates fall, birth rates still high)', 'Stage 1', 'Stage 3', 'Stage 4', 'Stage 0']),
             ('Intraspecific competition intensifies as population density increases; this makes it a:', ['Density-dependent factor', 'Density-independent factor', 'Abiotic factor', 'Climatic factor', 'Biotic but density-independent factor']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=6IDLSvCNPTs',
     },
     {
         'num': 4,
@@ -549,6 +552,7 @@ UNITS = [
             ('Thermohaline circulation could be disrupted by:', ['Increased freshwater input from glacial melt reducing salinity and density', 'Decreased wind speed', 'Colder tropics', 'More volcanic eruptions', 'Increased trade wind strength']),
             ('The A horizon (topsoil) is important to agriculture because it:', ['Contains the most organic matter and nutrients', 'Is the deepest layer', 'Is made of bedrock', 'Has the lowest infiltration', 'Contains the most clay']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=6IDLSvCNPTs',
     },
     {
         'num': 5,
@@ -667,5 +671,6 @@ UNITS = [
             ('Monoculture farming is associated with:', ['Higher short-term yield but greater vulnerability to pests', 'Greater biodiversity', 'Less fertilizer use', 'More resilient food systems', 'Lower energy inputs']),
             ('Dams fragment river habitat by:', ['Blocking fish migration and altering downstream flow and sediment', 'Increasing sediment downstream', 'Improving water quality', 'Reducing flood risk with no ecological cost', 'Warming water upstream only']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=6IDLSvCNPTs',
     },
 ]

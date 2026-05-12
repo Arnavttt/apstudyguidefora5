@@ -287,6 +287,7 @@ UNITS = [
             ('Lattice energy increases as ion charge increases because',
              ['Coulomb\'s law: force ∝ q₁q₂/r²; higher charges produce stronger electrostatic attraction between ions', 'higher charges mean lighter ions', 'higher charges increase ionic radius', 'higher charges reduce the number of ions needed']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=DsgDoSHmq4c',
     },
     {
         'num': 2,
@@ -498,6 +499,7 @@ UNITS = [
             ('Formal charge on oxygen in a water molecule (O with 2 bonds and 2 lone pairs) is',
              ['0 (FC = 6 − 4 − ½×4 = 0)', '+2', '-2', '+1']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=DsgDoSHmq4c',
     },
     {
         'num': 3,
@@ -709,6 +711,7 @@ UNITS = [
             ('The Clausius-Clapeyron equation relates',
              ['vapor pressure to temperature using the enthalpy of vaporization; allows ΔHvap calculation from two T-P data points', 'boiling point to pressure directly', 'surface tension to temperature', 'IMF strength to molecular weight']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=DsgDoSHmq4c',
     },
     {
         'num': 4,
@@ -920,6 +923,7 @@ UNITS = [
             ('To solve a limiting reagent problem, you must first',
              ['convert all given masses to moles using molar masses', 'compare masses directly', 'identify which reactant is in excess', 'write the net ionic equation']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=DsgDoSHmq4c',
     },
     {
         'num': 5,
@@ -1131,5 +1135,6 @@ UNITS = [
             ('The units of k for a second-order reaction are',
              ['L/mol·s (or M⁻¹s⁻¹); units are determined by rate = k[A]², so k = rate/[A]² = (M/s)/M² = M⁻¹s⁻¹', 's⁻¹', 'M·s', 'M²/s']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=DsgDoSHmq4c',
     },
 ]

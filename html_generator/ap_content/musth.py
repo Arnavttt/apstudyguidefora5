@@ -178,6 +178,7 @@ UNITS = [
              'relative major scale but starts and ends on the 6th degree of that major scale',
              ['parallel major scale but with a flatted 3rd', 'tonic major scale with all degrees lowered by a half step', 'harmonic minor scale without the raised 7th']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=rgaTLrZGlk0',
     },
     {
         'num': 2,
@@ -280,6 +281,7 @@ UNITS = [
              'harmonic interval (also called a dyad)',
              ['melodic interval', 'chord', 'polyphonic texture']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=rgaTLrZGlk0',
     },
     {
         'num': 3,
@@ -353,6 +355,7 @@ UNITS = [
              'hold the note longer than its written value (duration at the performer\'s or conductor\'s discretion)',
              ['play the note at half its written speed', 'skip the note', 'play the note very loudly (fortissimo)']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=rgaTLrZGlk0',
     },
     {
         'num': 4,
@@ -455,6 +458,7 @@ UNITS = [
              'Scale degree 7̂ (the leading tone), which creates the strongest resolution pull',
              ['Scale degree 2̂', 'Scale degree 6̂ (in minor)', 'Scale degree 4̂']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=rgaTLrZGlk0',
     },
     {
         'num': 5,
@@ -557,5 +561,6 @@ UNITS = [
              'the last chord of one phrase serves simultaneously as the first chord of the next phrase',
              ['the same chord is repeated for two full measures', 'a phrase ends with a half cadence', 'two voices exchange melodies']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=rgaTLrZGlk0',
     },
 ]

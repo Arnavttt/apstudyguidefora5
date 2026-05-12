@@ -195,6 +195,7 @@ UNITS = [
             ('New World silver from Potosí caused the Price Revolution by:', ['Increasing money supply faster than goods, causing inflation', 'Funding wars that destroyed crops', 'Being hoarded by monarchs, reducing circulation', 'Replacing gold as the standard', 'Funding exploration that opened new markets']),
             ('The primary historical significance of the printing press for the Reformation was:', ['Allowing rapid spread of Luther\'s ideas beyond Church control', 'Enabling Catholics to respond to criticism quickly', 'Being used only by Protestant reformers', 'Creating literacy among peasants immediately', 'Replacing oral tradition entirely']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=O3z33xz74pM',
     },
     {
         'num': 2,
@@ -313,6 +314,7 @@ UNITS = [
             ('The Thirty Years\' War was devastating to Central Europe because:', ['Prolonged fighting caused mass death from combat, disease, and famine, reducing German population significantly', 'It used new weapons like gunpowder for the first time', 'Religious conversion was forced on all populations', 'It destroyed all urban centers in Germany', 'France invaded Germany and stayed for 30 years']),
             ('The Peace of Westphalia\'s concept of sovereignty meant:', ['Rulers had supreme authority within their territories, free from outside interference including the Pope and Emperor', 'All states were equal in power', 'The Holy Roman Emperor gained more authority', 'Religion was removed from politics', 'Democratic governments were established']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=Zp5FJ9AyPdg',
     },
     {
         'num': 3,
@@ -431,6 +433,7 @@ UNITS = [
             ('Louis XIV\'s revocation of the Edict of Nantes harmed France by:', ['Driving 200,000 skilled Huguenot artisans and merchants to rival Protestant nations', 'Triggering immediate revolution', 'Causing the Catholic Church to condemn France', 'Removing France\'s military officers', 'Creating a Protestant rebellion in Paris']),
             ('The Peace of Westphalia (1648) is foundational for modern international relations because:', ['It established state sovereignty as the organizing principle of the international system', 'It created the United Nations', 'It ended all European religious wars permanently', 'It established free trade between European states', 'It recognized the Pope as the ultimate arbiter of disputes']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=aU_EjlRaxcc',
     },
     {
         'num': 4,
@@ -549,6 +552,7 @@ UNITS = [
             ('Voltaire\'s primary political target was:', ['Religious intolerance and Church persecution of individuals for belief', 'Absolute monarchy itself', 'Economic inequality', 'Women\'s exclusion from public life', 'Aristocratic privilege']),
             ('The Enlightenment\'s view of human nature differed from the medieval view by:', ['Asserting humans could improve society through reason, progress, and education', 'Rejecting the concept of natural law', 'Denying that humans had souls', 'Supporting feudal hierarchy as natural', 'Arguing that human nature was purely evil']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=nkfUZeBiGtI',
     },
     {
         'num': 5,
@@ -667,5 +671,6 @@ UNITS = [
             ('The American Revolution was conservative compared to the French because:', ['It restored traditional rights of Englishmen rather than creating an entirely new social order', 'Americans rejected all Enlightenment ideas', 'The American Revolution had no lasting political consequences', 'American revolutionaries were less influenced by Locke', 'It resulted in a monarchy']),
             ('Revolutionary ideology and practice were contradictory because:', ['Both American and French Revolutions proclaimed universal rights while maintaining slavery and excluding women', 'Revolutionary leaders were insincere in their ideals', 'Enlightenment thinkers opposed extending rights broadly', 'Economic constraints made equality impossible', 'Rights were fully extended immediately to all']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=zuMmi1i74h0',
     },
 ]

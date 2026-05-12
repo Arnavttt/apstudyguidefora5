@@ -213,7 +213,8 @@ UNITS = [
             ('What is the difference between a compiler and an interpreter?', ['Compiler: translates entire program to machine code before running', 'Interpreter: translates and executes one line at a time at runtime', 'Compiler produces a standalone executable; interpreter requires itself at runtime', 'Python uses interpreter; C uses compiler; Java uses compiler then JVM interpreter']),
             ('A function computeTax(price, rate) is called in 20 places. What is the abstraction benefit?', ['Change the tax calculation logic in ONE place', 'All 20 callers automatically get the updated logic', 'Each call site is cleaner (no repeated tax formula)', 'Encapsulates the concept: "tax on a price at a given rate"']),
             ('List three edge cases to test for a function that checks if a number is prime.', ['n=0 and n=1: neither is prime (special cases)', 'n=2: smallest prime; must return true', 'Negative numbers: should return false', 'n = large prime vs large composite: verify for bigger inputs'])
-        ]
+        ],
+    'review_video': 'https://www.youtube.com/watch?v=O5nskjZ_GoI',
     },
     {
         'num': 2,
@@ -350,7 +351,8 @@ UNITS = [
             ('What are two ways a dataset could be biased?', ['Sampling bias: only certain groups are surveyed (e.g., only online users)', 'Labeling bias: human annotators apply their own assumptions when labeling data', 'Also: historical bias (training on past data that reflects past discrimination)', 'Survivorship bias: only data from successful outcomes is collected']),
             ('What does "correlation does not imply causation" mean? Give an original example.', ['Two variables can trend together for a third reason, not because one causes the other', 'Example: shoe size and reading ability correlate in children (lurking variable: age)', 'As children age, both shoe size and reading ability increase', 'Age causes both; larger shoes do not cause better reading']),
             ('Why is it difficult to truly anonymize data?', ['Combining multiple "anonymous" fields can uniquely identify individuals', 'Example: zip code + birth date + gender identifies ~87% of Americans (Sweeney, 2000)', 'Location data reveals home and workplace even without name', 'True anonymization requires removing or generalizing many fields, reducing data utility'])
-        ]
+        ],
+    'review_video': 'https://www.youtube.com/watch?v=O5nskjZ_GoI',
     },
     {
         'num': 3,
@@ -487,7 +489,8 @@ UNITS = [
             ('What is a heuristic and why is it used instead of an exact algorithm?', ['Heuristic: finds a good-enough solution quickly without guaranteeing optimality', 'Used when exact solution would take too long (exponential time)', 'Trade-off: speed vs quality of answer', 'Examples: GPS routing, spell check, scheduling algorithms']),
             ('A process repeats forever. Can it be called an algorithm? Why or why not?', ['No — algorithms must terminate (be finite)', 'An infinite loop never produces a final answer', 'It may be a useful program (e.g., an OS or server loop) but not an "algorithm" by definition', 'Algorithms must halt for all valid inputs']),
             ('Convert to pseudocode: "repeat until the user enters a number between 1 and 10".', ['REPEAT UNTIL (num >= 1 AND num <= 10)', '  num ← INPUT()', 'END REPEAT', 'Collects input at least once; exits when valid'])
-        ]
+        ],
+    'review_video': 'https://www.youtube.com/watch?v=O5nskjZ_GoI',
     },
     {
         'num': 4,
@@ -624,7 +627,8 @@ UNITS = [
             ('Why is encryption not sufficient protection against all cybersecurity threats?', ['Encryption protects data in transit but not at the endpoint', 'If user gives credentials to a phishing site, encryption is irrelevant', 'Malware on endpoint can read data before it is encrypted', 'Encryption is one layer; defense requires multiple layers']),
             ('What is Amdahl\'s Law and what does it imply for parallel computing?', ['Speedup limited by sequential portion: max speedup = 1/(sequential fraction)', 'If 10% must be sequential, max speedup is 10× regardless of cores', 'Implication: optimize the sequential bottleneck to get more from parallelism', 'Adding more cores beyond the limit yields diminishing returns']),
             ('Name two benefits and two risks of cloud computing.', ['Benefits: scalability (easily scale up/down); cost (no hardware to buy)', 'Also: global access; automatic backups; managed security', 'Risks: data privacy (data on third-party servers); vendor outage causes downtime', 'Also: vendor lock-in; ongoing subscription cost'])
-        ]
+        ],
+    'review_video': 'https://www.youtube.com/watch?v=O5nskjZ_GoI',
     },
     {
         'num': 5,
@@ -761,6 +765,7 @@ UNITS = [
             ('What is machine learning and how is it different from traditional programming?', ['Traditional: programmer writes explicit rules for every case', 'Machine learning: system learns patterns from data automatically', 'No explicit rules coded — model adjusts from examples', 'Enables tasks too complex to hand-code: image recognition, language translation']),
             ('Evaluate: "Encryption helps criminals and should have government backdoors."', ['True: encryption can protect criminal communications', 'Counter: backdoors create vulnerabilities that criminals and foreign governments can also exploit', 'Security experts: backdoors fundamentally weaken encryption for everyone', 'Strong encryption protects citizens, businesses, and critical infrastructure']),
             ('A company collects full location history from a fitness app. What privacy principles does this potentially violate?', ['Data minimization: is full location history necessary for a fitness app?', 'Purpose limitation: using location data for advertising violates the fitness purpose', 'Informed consent: users likely do not know their location is permanently stored', 'This is exactly what many fitness apps have been criticized for'])
-        ]
+        ],
+    'review_video': 'https://www.youtube.com/watch?v=O5nskjZ_GoI',
     }
 ]

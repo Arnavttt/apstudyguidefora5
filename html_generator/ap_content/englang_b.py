@@ -132,6 +132,7 @@ UNITS = [
             ('How do you detect omission in an argument?',
              ['After reading an argument, ask: "What evidence would someone who disagrees with this claim cite? Does the writer address it?"', 'Look for the argument\'s strongest possible opposition: if the writer doesn\'t address the most obvious challenge, that is suspicious.', 'Consider: what groups or perspectives are absent from the argument? Whose voices or experiences are not represented?', 'AP® synthesis: deliberately identify the sources in the prompt that challenge your thesis — if you haven\'t addressed them, your essay omits important evidence.']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=GNw8ij8rejM',
     },
     {
         'num': 7,
@@ -248,6 +249,7 @@ UNITS = [
             ('How do openings and closings function rhetorically?',
              ['Openings: establish tone, position the reader relative to the subject (as insider/outsider, expert/layperson, stakeholder/observer), and signal what kind of argument follows.', 'A text that opens with a statistic says "this is a rational argument about data"; one that opens with a story says "this is about real people."', 'Closings: determine the reader\'s final impression — what thought or feeling they leave with, and what action or belief the writer hopes they will adopt.', 'AP®: analyze openings and closings as deliberate choices, not just as structural requirements.']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=GNw8ij8rejM',
     },
     {
         'num': 8,
@@ -364,6 +366,7 @@ UNITS = [
             ('What does it mean for sources to "interact" in an advanced synthesis paragraph?',
              ['Sources interact when the writer explicitly shows their relationship: "Source A\'s data on aggregate social media use is complicated by Source C\'s finding that impact varies significantly by use type — passive consumption versus active communication."', 'This is different from citing both sources in the same paragraph without connecting them.', 'Interactions can be: agreement ("Both A and B demonstrate..."); contrast ("While A suggests X, B reveals Y..."); complication ("A\'s finding requires qualification given B\'s evidence that...").', 'Each type of interaction serves a different argumentative purpose; choose the one that advances your line of reasoning.']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=GNw8ij8rejM',
     },
     {
         'num': 9,
@@ -480,5 +483,6 @@ UNITS = [
             ('How do you build an effective review strategy for the AP® Language exam?',
              ['Identify weak areas by scoring past practice essays against the rubric — don\'t just review what you feel confident in.', 'For each weak area, do targeted practice: if you miss thesis points, practice writing and evaluating thesis statements; if you miss evidence/commentary points, practice writing commentary paragraphs.', 'Do at least two full timed practice exams under real conditions — timed, no notes, writing by hand if that\'s the format.', 'Read released scored essays and commentary to calibrate your understanding of what each score level requires.']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=GNw8ij8rejM',
     },
 ]

@@ -195,6 +195,7 @@ UNITS = [
             ('Explain what "line of reasoning" means in an AP® Language essay.',
              ['Line of reasoning is the logical sequence of claims, evidence, and reasoning that moves from the thesis to the conclusion.', 'A well-developed line of reasoning doesn\'t just list evidence — it explains how each piece of evidence connects to the overall argument.', 'AP® rubric (sophistication) rewards students who explain how their argument\'s parts relate to each other rather than simply presenting them in sequence.', 'Example: a student arguing that a speech\'s use of emotional appeals succeeds must show why those specific emotions are effective for that specific audience — that\'s a line of reasoning.']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=GNw8ij8rejM',
     },
     {
         'num': 2,
@@ -311,6 +312,7 @@ UNITS = [
             ('Describe the ad hominem fallacy and give an example.',
              ['Ad hominem (Latin: "against the person") attacks the character or identity of the person making the argument rather than engaging with the argument itself.', 'Example: "You shouldn\'t listen to her argument about education reform — she never even went to a public school."', 'This is a fallacy because the argument\'s validity is independent of the arguer\'s biography.', 'AP® analysis: identify ad hominem in passages and explain how it signals argumentative weakness — the writer couldn\'t refute the evidence, so they attacked the source.']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=GNw8ij8rejM',
     },
     {
         'num': 3,
@@ -427,6 +429,7 @@ UNITS = [
             ('What makes the sophistication point difficult to earn?',
              ['It requires "complex understanding" — not just correct grammar or sophisticated vocabulary, but genuine engagement with the complexity of the issue.', 'Ways to earn it: seriously engage with a counterargument and explain why it doesn\'t outweigh your position; explain implications of your argument beyond the specific context; situate the argument within a broader social or historical context.', 'Ways NOT to earn it: using complex words, writing a long essay, or mentioning multiple perspectives without developing them.', 'Released scored essays show that sophistication is most reliably earned through the counterargument engagement route.']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=GNw8ij8rejM',
     },
     {
         'num': 4,
@@ -543,6 +546,7 @@ UNITS = [
             ('How do writers use tone shifts to mark rhetorical turning points?',
              ['A shift from analytical to emotional signals the writer\'s most deeply felt concern.', 'A shift from somber to hopeful can signal that the argument has moved from problem to solution.', 'A shift from formal to informal can create a moment of intimacy that personalizes an abstract argument.', 'AP® FRQ: identify what triggers the shift, what the new tone is, and what rhetorical purpose the shift serves at that specific moment in the text.']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=GNw8ij8rejM',
     },
     {
         'num': 5,
@@ -659,5 +663,6 @@ UNITS = [
             ('What makes the synthesis essay\'s sophistication point different from just using good vocabulary?',
              ['Sophistication requires demonstrating complex understanding of the issue — not complex language.', 'Ways to earn it: acknowledge a genuine tension in the evidence and explain how your thesis accounts for it; explore the implications of your argument beyond the specific context; situate the argument in a broader debate.', 'Using sophisticated vocabulary or long sentences does not earn the sophistication point.', 'The rubric language says "demonstrates a complex understanding" — this is about the quality of thinking, not the quality of prose style.']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=GNw8ij8rejM',
     },
 ]

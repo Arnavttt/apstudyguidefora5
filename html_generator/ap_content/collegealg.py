@@ -157,6 +157,7 @@ UNITS = [
                  ['√(a+b)', 'a·b', '√(a/b)']),
                ]),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=9OOrhA2iKak',
     },
 
     {
@@ -237,6 +238,7 @@ UNITS = [
                  ['x = 8', 'x = 5', 'x = 2']),
                ]),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=9OOrhA2iKak',
     },
 
     {
@@ -318,5 +320,6 @@ UNITS = [
                  ['[4, ∞)', 'all real numbers', '[-4, 4]']),
                ]),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=9OOrhA2iKak',
     },
 ]

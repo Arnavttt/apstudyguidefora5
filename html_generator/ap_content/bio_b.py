@@ -224,6 +224,7 @@ UNITS = [
             ('In a dihybrid cross (AaBb × AaBb), what fraction of offspring will be homozygous recessive for both traits (aabb)?',
              ['1/16', '1/4', '3/16', '9/16']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=QnQe0xW_JY4',
     },
     {
         'num': 6,
@@ -435,6 +436,7 @@ UNITS = [
             ('The Okazaki fragments formed during DNA replication are later joined by',
              ['DNA ligase, which catalyzes the formation of phosphodiester bonds between fragments', 'DNA polymerase extending the fragments', 'helicase', 'RNA primase']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=QnQe0xW_JY4',
     },
     {
         'num': 7,
@@ -646,6 +648,7 @@ UNITS = [
             ('A species that evolved by polyploidy (e.g., a hexaploid grass) is reproductively isolated from its diploid ancestors because',
              ['the polyploid produces gametes with a different chromosome number, making hybrids sterile', 'it has a different phenotype', 'it lives in a different geographic area', 'it evolved a different behavioral mating ritual']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=_0afKWu4yVg',
     },
     {
         'num': 8,
@@ -857,5 +860,6 @@ UNITS = [
             ('Habitat corridors help prevent extinction of fragmented populations by',
              ['allowing migration and gene flow between patches, reducing inbreeding and demographic stochasticity', 'eliminating edge effects', 'increasing carrying capacity of each patch', 'preventing invasive species entry']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=te--qLowH2s',
     },
 ]

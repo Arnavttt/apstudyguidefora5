@@ -281,7 +281,8 @@ UNITS = [
     ['Historically, geographic knowledge was produced by states, militaries, and professional cartographers','VGI platforms like OpenStreetMap allow anyone with a smartphone to contribute spatial data','This democratizes mapping — remote or crisis areas get mapped by local volunteers faster than official agencies','However, digital divides mean VGI still underrepresents areas with low internet access']),
    ('Explain what is meant by "the death of distance" and evaluate whether it is occurring.',
     ['"Death of distance": technology (internet, air travel) eliminates geographic barriers to interaction','Evidence for: global e-commerce, remote work, and video calling reduce the cost of distance','Evidence against: distance decay persists — local businesses still outperform distant ones for fresh goods and services','Conclusion: distance is reduced but not eliminated — Tobler\'s First Law still holds in modified form']),
-  ]},
+  ],
+  'review_video': 'https://www.youtube.com/watch?v=MKBhd3XTXyg',},
 
  {'num':2,'title':'Population and Migration Patterns and Processes',
   'file':'ap-human-geography-2-unit-2-population-and-migration-patterns-and-processes.html',
@@ -490,7 +491,8 @@ UNITS = [
     ['A refugee crisis occurs when displacement exceeds the capacity of host systems to respond','Example: Syrian Civil War (2011–present) — over 6 million Syrians became refugees','Push factors: government violence, barrel bombing, ISIS, economic collapse','Host countries: Turkey (3.5M), Lebanon (1.5M) faced overwhelming strain; EU received ~1M in 2015 peak year']),
    ('How do pronatalist and antinatalist policies attempt to change natural increase rates?',
     ['Pronatalist: government encourages higher birth rates — used in Stage 4/5 countries (France, Sweden) via paid parental leave, child benefits, tax incentives','Antinatalist: government discourages birth rates — used in Stage 2/3 countries with rapid growth (India\'s family planning campaigns, China\'s One-Child Policy 1980–2015)','Effectiveness varies: Sweden\'s policies modestly increased TFR; China\'s One-Child Policy dramatically reduced TFR but created gender imbalance','Population policy is contested — involves reproductive rights, gender equality, and cultural values']),
-  ]},
+  ],
+  'review_video': 'https://www.youtube.com/watch?v=Ss6zuk6iToo',},
 
  {'num':3,'title':'Cultural Patterns and Processes',
   'file':'ap-human-geography-3-unit-3-cultural-patterns-and-processes.html',
@@ -699,7 +701,8 @@ UNITS = [
     ['Colonial borders drawn at Berlin Conference (1884–85) followed geometric lines, ignoring ethnic, linguistic, and religious distributions','Borders split ethnic groups (Somali people across four countries), created ethnically fragmented states (Nigeria: 250+ ethnic groups)','This created centrifugal forces — ethnic conflict, civil wars, separatist movements — in post-colonial African states','Example: the Yoruba, Igbo, and Hausa peoples were combined in Nigeria despite centuries of distinct cultural development']),
    ('Evaluate whether globalization is creating a global monoculture or a more complex multicultural world.',
     ['Evidence for monoculture: English dominance, American brands, Western media homogenize surface-level culture','Evidence for multiculturalism: diaspora communities preserve and revitalize home cultures globally; social media amplifies minority cultures','Reality: globalization creates simultaneous homogenization AND heterogenization — global brands coexist with local revival movements','Example: Welsh language revival (dying under English dominance) now thrives partly due to digital tools that globalization enabled']),
-  ]},
+  ],
+  'review_video': 'https://www.youtube.com/watch?v=gSNFT_5M9yo',},
 ]
 
 # Units 4–7 continue in aphug part 2 — loaded as aphug_b.py

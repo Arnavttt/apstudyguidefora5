@@ -122,6 +122,7 @@ UNITS = [
             ('Atmosphere in a prose passage is best analyzed by examining:', ['How setting details, diction, and sensory imagery combine to create a specific emotional effect in the reader', 'Whether the narrator explicitly states the emotional mood of the scene', 'The length of the passage and number of descriptive adjectives', 'Whether dialogue or narration dominates the passage']),
             ('A defensible AP® Literature FRQ thesis must:', ['Make a specific, arguable claim about how a literary technique functions to create meaning or develop character', 'Name all literary devices present in the passage', 'Include the author\'s name, title, and publication date', 'Be at least two sentences long to be fully defensible']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=MSYw502dJNY',
     },
     {
         'num': 7,
@@ -228,6 +229,7 @@ UNITS = [
             ('A focused AP® Literature FRQ essay is better than a comprehensive one because:', ['A well-developed argument about one or two literary elements earns more points than a survey of all devices', 'Teachers prefer shorter, more focused essays', 'Comprehensive essays always exceed the recommended length', 'The rubric only rewards analysis of two literary elements maximum']),
             ('The AP® Literature FRQ sophistication point is earned by:', ['Demonstrating complex understanding: acknowledging ambiguity, connecting to broader context, or offering an insightful interpretation beyond the obvious', 'Using advanced vocabulary and complex sentence structures', 'Quoting from the text more than five times in the essay', 'Having a thesis that agrees with the teacher\'s interpretation']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=MSYw502dJNY',
     },
     {
         'num': 8,
@@ -334,6 +336,7 @@ UNITS = [
             ('Analyzing form and content together in a poetry essay is important because:', ['Formal choices are not separable from meaning — how a poem is built is inseparable from what it communicates', 'AP® examiners require at least one paragraph about formal elements', 'Form is more important than content in poetry', 'Content is easier to analyze than form']),
             ('The AP® Literature FRQ sophistication point in poetry analysis is earned by:', ['Demonstrating complex understanding: acknowledging ambiguity, connecting the poem to a broader context, or offering an insightful interpretation that goes beyond the obvious', 'Writing longer paragraphs than the average student', 'Using terms like "juxtaposition" and "volta" correctly', 'Having a thesis that no other student would have written']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=MSYw502dJNY',
     },
     {
         'num': 9,
@@ -440,5 +443,6 @@ UNITS = [
             ('The AP® Literature Section I multiple-choice section is best prepared for by:', ['Practicing timed close reading of prose and poetry passages and analyzing error patterns', 'Memorizing literary terminology and author biographies', 'Rereading all works studied in the AP® Literature course', 'Only writing FRQ essays, since they are worth more points']),
             ('The AP® Literature FRQ sophistication point is most reliably earned by:', ['Writing an essay that synthesizes analysis of multiple literary elements into a complex, unified argument about the whole work', 'Having the longest essay in the class', 'Using the most literary terms correctly in the essay', 'Choosing an unusual or obscure work for FRQ 3']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=MSYw502dJNY',
     },
 ]

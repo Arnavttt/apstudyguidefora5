@@ -213,7 +213,8 @@ UNITS = [
             ('What is the difference between System.out.print and System.out.println?', ['print outputs text without a newline at the end', 'println outputs text and then moves to the next line', 'Multiple print calls produce output on same line', 'println is equivalent to print + "\\n"']),
             ('What does Math.abs(-7.5) return?', ['Math.abs returns the absolute value', 'abs(-7.5) = 7.5', 'Return type is double (matches parameter type)', 'Math.abs(int) returns int; Math.abs(double) returns double']),
             ('A method requires precondition: index >= 0 && index < array.length. Should the method body check index bounds again?', ['No — the precondition guarantees the index is valid', 'Caller is responsible for satisfying preconditions', 'You may include a check for safety but it is not required by AP® FRQ', 'Relying on preconditions simplifies code'])
-        ]
+        ],
+    'review_video': 'https://www.youtube.com/watch?v=DO7C-H1Y5N4',
     },
     {
         'num': 2,
@@ -350,7 +351,8 @@ UNITS = [
             ('What does !(a > 5 || b < 3) simplify to by De Morgan\'s Laws?', ['!(a>5 || b<3) = !(a>5) && !(b<3)', '= (a<=5) && (b>=3)', 'True only when a is at most 5 AND b is at least 3', 'De Morgan: !(A||B) = !A && !B']),
             ('Trace: String s="hello"; int cnt=0; for(int i=0;i<s.length();i++) if(s.charAt(i)==\'l\') cnt++; System.out.println(cnt);', ['"hello" has l at index 2 and 3', 'Loop counts chars equal to \'l\'', 'cnt increments twice', 'Output: 2']),
             ('When is a while loop preferred over a for loop? Give an example.', ['While is preferred when the number of iterations is unknown', 'Example: reading user input until a sentinel like -1', 'int x = scanner.nextInt(); while(x != -1) { process(x); x = scanner.nextInt(); }', 'For loop suits counting; while suits event-driven termination'])
-        ]
+        ],
+    'review_video': 'https://www.youtube.com/watch?v=DO7C-H1Y5N4',
     },
     {
         'num': 3,
@@ -487,7 +489,8 @@ UNITS = [
             ('What happens if you forget this.name = name in a constructor parameter named name?', ['name = name assigns the parameter to itself — the instance field is unchanged', 'Field retains its default value (null for String)', 'this.name refers to instance field; name alone refers to the parameter', 'Common FRQ mistake; graders check for this']),
             ('A method has signature: public int sumToN(int n). What must every path in the body include?', ['A return statement returning an int', 'If there is an if-else, both branches must return', 'If there is no return on some path, compile error: missing return', 'Example: return n*(n+1)/2; as a single-line formula']),
             ('What does @Override before toString() mean?', ['It tells the compiler this method is intended to override an inherited method', 'If the signature is wrong, compiler reports an error — helps catch typos', 'toString() is inherited from Object class', '@Override is optional but strongly recommended for clarity and safety'])
-        ]
+        ],
+    'review_video': 'https://www.youtube.com/watch?v=DO7C-H1Y5N4',
     },
     {
         'num': 4,
@@ -624,6 +627,7 @@ UNITS = [
             ('Why does ArrayList<int> not compile but ArrayList<Integer> does?', ['ArrayList requires reference (object) types', 'int is a primitive; Integer is the wrapper class', 'Java generics do not support primitives', 'Autoboxing converts int ↔ Integer automatically when needed']),
             ('Write a sequential search for String target in String[] arr.', ['public int search(String[] arr, String target) {', '  for (int i=0; i<arr.length; i++) {', '    if (arr[i].equals(target)) return i;', '  }', '  return -1;', '}']),
             ('After selection sort pass 2 on {5,3,1,4,2}, what are the first two positions?', ['Pass 1: find min(5,3,1,4,2)=1 at index 2; swap with index 0: {1,3,5,4,2}', 'Pass 2: find min(3,5,4,2)=2 at index 4; swap with index 1: {1,2,5,4,3}', 'First two positions: 1, 2', 'Both are in their final sorted positions'])
-        ]
+        ],
+    'review_video': 'https://www.youtube.com/watch?v=DO7C-H1Y5N4',
     }
 ]

@@ -161,7 +161,8 @@ UNITS = [
              ['As students walk in: r_student decreases → I_students decreases', 'Total I = I_plank + 2(m_student)(r_student²)', 'If L conserved (no external torque): ω increases as I decreases', 'Eventually when both at center: I = I_plank only → ω is maximum']),
             ('Angular momentum is a vector. For a spinning top, L is along the spin axis. If gravity exerts a torque on the top, explain what happens (precession).',
              ['τ = dL/dt; gravity torque τ = r × Mg perpendicular to L', 'dL = τ dt is perpendicular to L → L changes direction, not magnitude', 'L vector precesses (rotates) around vertical axis', 'Precession angular velocity: Ω = Mgr/(Lω) — faster spin → slower precession'])
-        ]
+        ],
+    'review_video': 'https://www.youtube.com/watch?v=Yd1RgfCjLC8',
     },
 
     {
@@ -308,7 +309,8 @@ UNITS = [
              ['At resonance: A = F₀/(bω₀) for linear damping', 'Lower damping b → larger amplitude at resonance', 'In the limit b → 0: A → ∞ (unrealistic; materials fail first)', 'Higher damping reduces and broadens the resonance peak (lower Q)']),
             ('Show that the power dissipated by linear damping is P = bv².',
              ['Damping force: F_d = -bv', 'Power: P = F · v = F_d × v = (-bv)(v) = -bv²', 'Negative sign: power removed from oscillator (dissipated)', 'Average power over one cycle: <P> = ½bω²A²e^(-bt/m) (for underdamped)'])
-        ]
+        ],
+    'review_video': 'https://www.youtube.com/watch?v=Yd1RgfCjLC8',
     },
 
     {
@@ -455,6 +457,7 @@ UNITS = [
              ['Each star orbits at r = d from CM; gravity provides centripetal force', 'F = GM²/(2d)² = GM²/(4d²)', 'F = Mv²/d → v² = GM/(4d)', 'T = 2πd/v = 2πd/√(GM/(4d)) = 2π√(4d³/GM) = 4π√(d³/GM)']),
             ('Explain physically why satellites closer to Earth orbit faster but have less total energy.',
              ['Faster orbit: v = √(GM/r); smaller r → larger v', 'KE = GMm/(2r) is larger at smaller r', 'PE = -GMm/r is more negative (lower) at smaller r', 'E = -GMm/(2r) more negative at smaller r → less total energy (more tightly bound)'])
-        ]
+        ],
+    'review_video': 'https://www.youtube.com/watch?v=Hn7IIBHXN3U',
     },
 ]

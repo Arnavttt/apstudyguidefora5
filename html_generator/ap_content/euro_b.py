@@ -132,6 +132,7 @@ UNITS = [
             ('Railway construction contributed to industrialization primarily by:', ['Integrating markets and reducing transportation costs, stimulating demand for coal and iron', 'Creating millions of jobs directly in factories', 'Replacing river transport immediately', 'Being profitable without government support', 'Connecting Britain to continental Europe directly']),
             ('Italian and German unification both relied on:', ['A powerful state (Piedmont, Prussia) leading unification rather than popular democratic revolution', 'Popular referenda choosing unification', 'Foreign intervention from France', 'Catholic Church support', 'Nationalist ideologues who became heads of state']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=HXiq5VLWXug',
     },
     {
         'num': 7,
@@ -250,6 +251,7 @@ UNITS = [
             ('The women\'s suffrage movement in Britain succeeded partly because:', ['World War I demonstrated women\'s contributions to the national effort, making exclusion harder to justify', 'Pankhurst\'s militant tactics immediately convinced Parliament', 'Men universally supported women\'s voting rights', 'International pressure forced Britain to act', 'British law already recognized women as equal citizens']),
             ('Scientific racism was dangerous because:', ['It used the prestige of science to legitimize racial hierarchy and justify colonial exploitation', 'It was based on valid biological research', 'It was rejected by all European governments', 'It applied only to African peoples', 'It was a fringe theory with no mainstream acceptance']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=MrK2tFDsiMA',
     },
     {
         'num': 8,
@@ -368,6 +370,7 @@ UNITS = [
             ('Mussolini\'s fascism in Italy differed from Hitler\'s Nazism primarily in:', ['Nazism\'s explicit racial ideology and systematic genocide; Italian fascism initially lacked racial ideology', 'Mussolini being more democratic', 'Italy being more economically successful', 'Hitler opposing all aspects of Mussolini\'s program', 'Nazism being less authoritarian']),
             ('The Munich Agreement (1938) is considered a failure of appeasement because:', ['Hitler violated it immediately, showing that concessions emboldened rather than satisfied aggressive dictators', 'Britain gained nothing from the agreement', 'Hitler had not made any demands at Munich', 'France refused to honor the agreement', 'The Soviet Union warned it would fail']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=vffI7U8ZSto',
     },
     {
         'num': 9,
@@ -486,5 +489,6 @@ UNITS = [
             ('Contemporary European populism is most associated with:', ['Opposition to immigration, distrust of EU institutions, and nationalist identity politics', 'Support for more European integration', 'Economic socialism and redistribution', 'Military expansion and confrontation with Russia', 'Youth-led climate activism']),
             ('The 1989 revolutions were mostly peaceful because:', ['Gorbachev abandoned the Brezhnev Doctrine and Soviet troops did not intervene', 'Communist regimes immediately accepted democratic transition', 'Western Europe provided military guarantees', 'Eastern European militaries joined the revolution', 'The U.S. ultimatums prevented Soviet intervention']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=xnsx6xwRchk',
     },
 ]

@@ -95,6 +95,7 @@ UNITS = [
                  ['sin^2θ + cos^2θ = 1 (missing the cross terms)', 'sin^2(2θ)', '2 + sin(2θ)']),
                ]),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=9OOrhA2iKak',
     },
 
     {
@@ -176,6 +177,7 @@ UNITS = [
                  ['2', '1', '6']),
                ]),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=9OOrhA2iKak',
     },
 
     {
@@ -257,5 +259,6 @@ UNITS = [
                  ['⟨1/3, 1/4⟩', '⟨4/5, 3/5⟩', '⟨3, 4⟩/5 is not a unit vector']),
                ]),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=9OOrhA2iKak',
     },
 ]

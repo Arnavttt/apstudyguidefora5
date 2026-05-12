@@ -214,7 +214,8 @@ UNITS = [
             ('Identify the hole in f(x) = (x²−9)/(x−3).', ['Numerator: (x−3)(x+3); denominator: (x−3)', 'Common factor (x−3) cancels → hole at x = 3', 'Simplified: f(x) = x+3 (for x ≠ 3)', 'Hole at (3, 6): substitute x=3 into simplified form']),
             ('A degree-6 polynomial with real coefficients has zeros 1+2i, 3 (double), and −1. How many more zeros are needed?', ['1+2i → conjugate 1−2i also a zero (2 complex zeros)', '3 (double) → counts as 2 zeros', '−1 → 1 zero', 'Total so far: 5 zeros; need 1 more (real, since complex come in pairs)']),
             ('List rational zero candidates for f(x) = 3x³ + x² − 4.', ['Constant term: −4; factors: ±1, ±2, ±4', 'Leading coefficient: 3; factors: ±1, ±3', 'Candidates p/q: ±1, ±2, ±4, ±1/3, ±2/3, ±4/3', 'Test each; f(1) = 3+1−4 = 0 → x=1 is a zero'])
-        ]
+        ],
+    'review_video': 'https://www.youtube.com/watch?v=9OOrhA2iKak',
     },
     {
         'num': 2,
@@ -351,7 +352,8 @@ UNITS = [
             ('f(x) = 3x−2 and g(x) = x²+1. Find g(f(x)) and f(g(x)).', ['g(f(x)) = g(3x−2) = (3x−2)²+1 = 9x²−12x+5', 'f(g(x)) = f(x²+1) = 3(x²+1)−2 = 3x²+1', 'These are different — composition is not commutative', 'Always apply the inner function first']),
             ('Data has constant ratios of 2. Which model fits, and what is the base?', ['Constant ratios → exponential model y = ab^x', 'Ratio of 2 → base b = 2', 'Form: y = a·2^x where a is the initial value', 'Check: first differences would not be constant for exponential']),
             ('Why must you check solutions to log equations for extraneous values?', ['Log is only defined for positive arguments', 'Algebraic manipulation can produce solutions that make log arguments negative or zero', 'Example: solution x=−5 rejected if log(x+5) appears (x+5 would be 0)', 'Always substitute back and verify all log arguments are positive'])
-        ]
+        ],
+    'review_video': 'https://www.youtube.com/watch?v=9OOrhA2iKak',
     },
     {
         'num': 3,
@@ -488,7 +490,8 @@ UNITS = [
             ('How many petals does r = 3sin(4θ) have?', ['n=4, even → 2n = 8 petals', 'r = a sin(nθ): same petal rule as cos', '8 petals symmetrically arranged', 'Maximum r = 3 at each petal tip']),
             ('Evaluate: arctan(−1).', ['arctan range is (−π/2, π/2)', 'tan(π/4) = 1; tan(−π/4) = −1', 'arctan(−1) = −π/4', 'Equivalent to −45°']),
             ('Describe the symmetry of r = 3 + 3sinθ (cardioid).', ['Test θ → π−θ: sin(π−θ) = sinθ → r unchanged', 'Symmetric about θ = π/2 (vertical axis)', 'This cardioid opens upward (sin-based)', 'Maximum r = 6 at θ=π/2; r=0 at θ=3π/2'])
-        ]
+        ],
+    'review_video': 'https://www.youtube.com/watch?v=9OOrhA2iKak',
     },
     {
         'num': 4,
@@ -597,6 +600,7 @@ UNITS = [
             ('Compute AB: A = [[1,2],[3,4]], B = [[0,1],[2,3]].', ['Row 1 of A × columns of B: [1·0+2·2, 1·1+2·3] = [4, 7]', 'Row 2 of A × columns of B: [3·0+4·2, 3·1+4·3] = [8, 15]', 'AB = [[4,7],[8,15]]', 'Check: (2×2)(2×2)=(2×2) ✓']),
             ('A force F = ⟨6,8⟩ N acts on an object. What is its magnitude and the angle it makes with the x-axis?', ['|F| = √(36+64) = √100 = 10 N', 'tanθ = 8/6 = 4/3 → θ = arctan(4/3) ≈ 53.1°', 'Both components positive → Q1: angle ≈ 53.1° from positive x-axis', 'Unit vector: ⟨0.6, 0.8⟩']),
             ('Why does f(x) = x³ have an inverse but f(x) = x² does not (without restriction)?', ['x³ is strictly increasing everywhere → one-to-one → invertible', 'x² has f(2)=f(−2)=4 → not one-to-one over all reals', 'Horizontal line test: x³ never hit by a horizontal line twice; x² is', 'f(x)=x² restricted to [0,∞) is invertible with inverse √x'])
-        ]
+        ],
+    'review_video': 'https://www.youtube.com/watch?v=9OOrhA2iKak',
     }
 ]

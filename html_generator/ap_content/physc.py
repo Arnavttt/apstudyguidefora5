@@ -225,7 +225,8 @@ UNITS = [
              ['Crossing time: t = width/v_boat = 60/4 = 15 s', 'Drift = v_current × t = 2 × 15 = 30 m downstream', 'Actual path length: √(60² + 30²) = √4500 ≈ 67 m', 'The boat does NOT head at an angle — it goes straight across']),
             ('An object has position x(t) = cos(ωt). Find when velocity is zero and when acceleration is maximum in magnitude.',
              ['v(t) = -ω sin(ωt); v = 0 when sin(ωt) = 0 → t = 0, π/ω, 2π/ω, ...', 'a(t) = -ω² cos(ωt); |a| max when |cos| = 1 → t = 0, π/ω, 2π/ω, ...', 'Velocity is zero exactly when acceleration is maximum', 'These are the turning points of oscillatory motion'])
-        ]
+        ],
+    'review_video': 'https://www.youtube.com/watch?v=Yd1RgfCjLC8',
     },
 
     {
@@ -372,7 +373,8 @@ UNITS = [
              ['At bottom: N - mg = mv²/r → N = m(g + v²/r) > mg → apparent weight > real weight', 'At top: N + mg = mv²/r → N = m(v²/r - g) < mg → apparent weight < real weight', 'Apparent weight = normal force, not gravity', 'At v = √(gR) at top, N = 0 → apparent weightlessness']),
             ('Two identical spheres of mass m are 10 cm apart. The gravitational force is F. If the distance is halved, what is the new force?',
              ['F = Gm²/r²; halving r: F_new = Gm²/(r/2)² = 4Gm²/r² = 4F', 'Force is quadrupled', 'This is the inverse square law: F ∝ 1/r²', 'Halving distance → 4× force'])
-        ]
+        ],
+    'review_video': 'https://www.youtube.com/watch?v=Hn7IIBHXN3U',
     },
 
     {
@@ -519,7 +521,8 @@ UNITS = [
              ['E_total = -GMm/(2r) < 0 means the satellite is gravitationally bound', 'To escape, energy must be increased to E = 0 (at r → ∞)', 'Binding energy = |E| = GMm/(2r) — energy needed to free the satellite', 'Positive E would mean unbound (hyperbolic) trajectory']),
             ('A variable force F(x) = 10/x² N acts on a 0.5 kg object moving from x = 1 m to x = 5 m. Find the work and final speed if v(1) = 2 m/s.',
              ['W = ∫₁⁵ (10/x²)dx = [-10/x]₁⁵ = (-2) - (-10) = 8 J', 'KE_i = ½(0.5)(4) = 1 J; KE_f = KE_i + W = 1 + 8 = 9 J', 'v_f = √(2 × 9/0.5) = √36 = 6 m/s', 'This type of force (1/x²) models gravity in 1D'])
-        ]
+        ],
+    'review_video': 'https://www.youtube.com/watch?v=Yd1RgfCjLC8',
     },
 
     {
@@ -666,6 +669,7 @@ UNITS = [
              ['p_i = 2(5) + 2(-3) = 10 - 6 = 4 kg·m/s', 'p_f = (2+2)v_f = 4 → v_f = 1 m/s (rightward)', 'KE_i = ½(2)(25) + ½(2)(9) = 25 + 9 = 34 J', 'KE_f = ½(4)(1) = 2 J; KE lost = 32 J']),
             ('A uniform semicircular rod of mass M and radius R. Find the y-coordinate of its center of mass.',
              ['Parameterize: x = R cosθ, y = R sinθ, 0 ≤ θ ≤ π', 'dm = (M/πR) R dθ = (M/π) dθ', 'y_cm = (1/M)∫y dm = (1/M)∫₀^π R sinθ (M/π) dθ', 'y_cm = (R/π)[-cosθ]₀^π = (R/π)(2) = 2R/π ≈ 0.637R above diameter'])
-        ]
+        ],
+    'review_video': 'https://www.youtube.com/watch?v=Hn7IIBHXN3U',
     },
 ]

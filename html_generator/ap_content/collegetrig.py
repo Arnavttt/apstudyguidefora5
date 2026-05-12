@@ -157,6 +157,7 @@ UNITS = [
                  ['Quadrant I', 'Quadrant II', 'Quadrant III']),
                ]),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=9OOrhA2iKak',
     },
 
     {
@@ -238,6 +239,7 @@ UNITS = [
                  ['60° and 300°', '120° only', '150° and 210°']),
                ]),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=9OOrhA2iKak',
     },
 
     {
@@ -319,5 +321,6 @@ UNITS = [
                  ['secant has a minimum of -1', 'secant has a vertical asymptote', 'secant has a value of 0']),
                ]),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=9OOrhA2iKak',
     },
 ]

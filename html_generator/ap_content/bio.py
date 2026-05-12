@@ -287,6 +287,7 @@ UNITS = [
             ('Which functional group makes molecules that have it act as bases (proton acceptors)?',
              ['Amino group (–NH2)', 'Carboxyl group (–COOH)', 'Phosphate group', 'Hydroxyl group (–OH)']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=QnQe0xW_JY4',
     },
     {
         'num': 2,
@@ -498,6 +499,7 @@ UNITS = [
             ('Channel proteins and carrier proteins both enable facilitated diffusion but differ in that',
              ['channel proteins form open pores while carriers change shape (conformational change) to move molecules', 'carrier proteins require ATP while channel proteins do not', 'channel proteins only move large molecules', 'they are found in different cell types']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=QnQe0xW_JY4',
     },
     {
         'num': 3,
@@ -709,6 +711,7 @@ UNITS = [
             ('Blocking ATP synthase in the inner mitochondrial membrane would',
              ['cause the proton gradient to build up and halt the ETC, stopping NADH oxidation and ATP production', 'stop glycolysis immediately', 'directly stop the Krebs cycle', 'cause fermentation in the mitochondria']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=_0afKWu4yVg',
     },
     {
         'num': 4,
@@ -920,5 +923,6 @@ UNITS = [
             ('Cyclin proteins regulate the cell cycle by',
              ['rising and falling in concentration to activate CDKs at appropriate times, advancing the cell through checkpoints', 'directly repairing DNA damage', 'activating growth factor receptors', 'preventing centromere splitting']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=_0afKWu4yVg',
     },
 ]

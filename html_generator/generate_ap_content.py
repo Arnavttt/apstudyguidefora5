@@ -141,7 +141,7 @@ def quiz_section_html(bank_id, label, questions_html, total_qs):
 
 def render_unit(course_name, course_slug, abbrev, unit_num, unit_title,
                 unit_desc, gateway, lessons, unit_qs, course_html_file,
-                accent_color='#4ade80', is_non_ap=False):
+                accent_color='#4ade80', is_non_ap=False, unit_review_video=None):
 
     acfaint = accent_color  # will generate rgba below
     # parse hex to rgb for --ACfaint
@@ -210,12 +210,12 @@ def render_unit(course_name, course_slug, abbrev, unit_num, unit_title,
             yt = re.search(r'(?:v=|youtu\.be/)([A-Za-z0-9_-]{11})', url)
             vid_id = yt.group(1) if yt else None
             if vid_id and vid_id in _seen:
-                # Already embedded in this unit — show a plain link instead
+                # Already embedded in this unit — show a plain fallback card instead
                 watch_url = f'https://www.youtube.com/watch?v={vid_id}'
                 return (
                     f'<a class="res video" target="_blank" rel="noopener" href="{watch_url}">'
                     f'<b>{title}</b>'
-                    f'<span>Unit review video — Watch on YouTube</span>'
+                    f'<span>See the Full Unit Review below for this topic.</span>'
                     f'<code>youtu.be/{vid_id}</code></a>'
                 )
             if vid_id:
@@ -284,6 +284,42 @@ def render_unit(course_name, course_slug, abbrev, unit_num, unit_title,
 
     unit_quiz = quiz_section_html(ubank_id, f'Unit {unit_num} Review — 10 questions', uqs_html, 10)
 
+    # ── unit review video section (placed after unit MCQ block)
+    urv_html = ''
+    if unit_review_video:
+        v = unit_review_video
+        if isinstance(v, (list, tuple)) and len(v) >= 3:
+            urv_t, urv_d, urv_u = v[0], v[1], v[2]
+        elif isinstance(v, (list, tuple)) and len(v) == 2:
+            urv_t, urv_d, urv_u = v[0], '', v[1]
+        elif isinstance(v, str):
+            urv_t, urv_d, urv_u = 'Full Unit Review', '', v
+        else:
+            urv_t = urv_d = urv_u = None
+        if urv_u:
+            yt_urv = re.search(r'(?:v=|youtu\.be/)([A-Za-z0-9_-]{11})', urv_u)
+            urv_vid_id = yt_urv.group(1) if yt_urv else None
+            if urv_vid_id and urv_vid_id in seen_vids_in_unit:
+                # Same video already embedded in a lesson — show as plain link card
+                watch_url = f'https://www.youtube.com/watch?v={urv_vid_id}'
+                urv_html = (
+                    f'<div class="watch unit-review-wrap">'
+                    f'<h5>Full Unit Review</h5>'
+                    f'<div class="resources">'
+                    f'<a class="res video" target="_blank" rel="noopener" href="{watch_url}">'
+                    f'<b>{urv_t}</b>'
+                    f'<span>Watch the full unit review on YouTube ↗</span>'
+                    f'<code>youtu.be/{urv_vid_id}</code></a>'
+                    f'</div></div>'
+                )
+            else:
+                urv_html = (
+                    f'<div class="watch unit-review-wrap">'
+                    f'<h5>Full Unit Review</h5>'
+                    f'<div class="resources">{make_video(urv_t, urv_d, urv_u)}</div>'
+                    f'</div>'
+                )
+
     non_ap_badge = '<span class="badge non-ap">Non-AP® / Non-standardized</span>' if is_non_ap else ''
 
     return (
@@ -291,7 +327,10 @@ def render_unit(course_name, course_slug, abbrev, unit_num, unit_title,
         f'<head><meta charset="utf-8">'
         f'<meta name="viewport" content="width=device-width,initial-scale=1">'
         f'<title>{course_name} — {unit_title} | Five &amp; A+</title>'
-        f'<link rel="stylesheet" href="../assets/site.css"></head>'
+        f'<link rel="stylesheet" href="../assets/site.css">'
+        f'<script>MathJax={{tex:{{inlineMath:[["\\\\(","\\\\)"]],displayMath:[["\\\\[","\\\\]"]]}},options:{{skipHtmlTags:["script","noscript","style","textarea","pre"]}}}}</script>'
+        f'<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>'
+        f'</head>'
         f'<body style="--AC:{accent_color};--ACfaint:{acfaint_val};">'
         f'{topnav_html(course_name, course_slug, course_html_file)}'
         f'<div class="masthead">'
@@ -313,6 +352,7 @@ def render_unit(course_name, course_slug, abbrev, unit_num, unit_title,
         f'<div class="gateway"><h4>Unit learning gateway</h4><ul>{gw_html}</ul></div>'
         f'{lessons_html}'
         f'{unit_quiz}'
+        f'{urv_html}'
         f'</div>'
         f'{footer_html()}'
         f'<script src="../assets/app.js"></script>'
@@ -372,7 +412,10 @@ def render_course(course_name, course_slug, abbrev, units, course_qs,
         f'<head><meta charset="utf-8">'
         f'<meta name="viewport" content="width=device-width,initial-scale=1">'
         f'<title>{course_name} | Five &amp; A+</title>'
-        f'<link rel="stylesheet" href="../assets/site.css"></head>'
+        f'<link rel="stylesheet" href="../assets/site.css">'
+        f'<script>MathJax={{tex:{{inlineMath:[["\\\\(","\\\\)"]],displayMath:[["\\\\[","\\\\]"]]}},options:{{skipHtmlTags:["script","noscript","style","textarea","pre"]}}}}</script>'
+        f'<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>'
+        f'</head>'
         f'<body style="--AC:{accent_color};--ACfaint:{acfaint_val};">'
         f'<nav class="topnav">'
         f'<a class="nav-brand-link" href="../index.html">Five &amp; A+</a>'
@@ -447,18 +490,19 @@ def generate(filter_slugs=None):
         # Write unit pages
         for unit in all_units:
             html = render_unit(
-                course_name      = course_name,
-                course_slug      = course_slug,
-                abbrev           = abbrev,
-                unit_num         = unit['num'],
-                unit_title       = unit['title'],
-                unit_desc        = unit['desc'],
-                gateway          = unit['gateway'],
-                lessons          = unit['lessons'],
-                unit_qs          = unit.get('unit_qs', []),
-                course_html_file = course_html_file,
-                accent_color     = accent_color,
-                is_non_ap        = is_non_ap,
+                course_name        = course_name,
+                course_slug        = course_slug,
+                abbrev             = abbrev,
+                unit_num           = unit['num'],
+                unit_title         = unit['title'],
+                unit_desc          = unit['desc'],
+                gateway            = unit['gateway'],
+                lessons            = unit['lessons'],
+                unit_qs            = unit.get('unit_qs', []),
+                course_html_file   = course_html_file,
+                accent_color       = accent_color,
+                is_non_ap          = is_non_ap,
+                unit_review_video  = unit.get('review_video'),
             )
             out_path = os.path.join(UNITS_DIR, unit['file'])
             with open(out_path, 'w', encoding='utf-8') as f:

@@ -87,6 +87,7 @@ UNITS = [
              'approached by leap (not prepared), while a suspension is held from the previous chord',
              ['resolved upward while a suspension resolves downward', 'always in the soprano voice', 'longer in duration than a suspension']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=rgaTLrZGlk0',
     },
     {
         'num': 7,
@@ -161,6 +162,7 @@ UNITS = [
              'an IAC uses V→I but the soprano does not end on 1̂ (or the chords are inverted)',
              ['an IAC does not include the dominant chord', 'an IAC ends on the subdominant', 'a PAC requires the tonic chord in first inversion']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=rgaTLrZGlk0',
     },
     {
         'num': 8,
@@ -262,5 +264,6 @@ UNITS = [
              'singing the tonic triad or scale from the given pitch, then finding the starting note\'s scale degree',
              ['humming any comfortable pitch', 'reading the time signature only', 'looking at the final bar line first']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=rgaTLrZGlk0',
     },
 ]

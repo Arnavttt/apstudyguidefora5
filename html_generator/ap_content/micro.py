@@ -287,6 +287,7 @@ UNITS = [
             ('A mixed economy combines elements of',
              ['both command and market systems', 'only free markets and international trade', 'government ownership and foreign investment only', 'traditional practices and modern technology only']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=1UxA6JzoT-4',
     },
     {
         'num': 2,
@@ -498,6 +499,7 @@ UNITS = [
             ('A price ceiling set above equilibrium is',
              ['non-binding and has no effect on the market', 'binding and creates a shortage', 'binding and creates a surplus', 'non-binding and lowers producer surplus']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=1UxA6JzoT-4',
     },
     {
         'num': 3,
@@ -709,6 +711,7 @@ UNITS = [
             ('Accounting profit differs from economic profit in that accounting profit',
              ['ignores implicit opportunity costs', 'includes implicit costs', 'is always larger than economic profit', 'is irrelevant to business decisions']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=1UxA6JzoT-4',
     },
     {
         'num': 4,
@@ -920,6 +923,7 @@ UNITS = [
             ('Natural monopoly is regulated using average cost pricing to ensure',
              ['P = ATC, allowing the firm to break even without subsidies', 'P = MC, achieving allocative efficiency', 'P = minimum AVC', 'zero profit is earned']),
         ],
+    'review_video': 'https://www.youtube.com/watch?v=1UxA6JzoT-4',
     },
     {
         'num': 5,
@@ -1131,6 +1135,7 @@ UNITS = [
             ('Under monopsony, the marginal resource cost of labor exceeds the wage because',
              ['hiring more workers requires raising wages for all existing workers', 'the monopsonist pays above-market wages', 'the labor supply curve is horizontal', 'workers are perfectly mobile']),
         ],
+        'review_video': 'https://www.youtube.com/watch?v=1UxA6JzoT-4',
     },
     {
         'num': 6,
@@ -1342,5 +1347,6 @@ UNITS = [
             ('A progressive tax system',
              ['takes a higher percentage of income from higher earners, reducing income inequality', 'takes the same percentage from all income levels', 'takes a higher percentage from lower earners', 'eliminates income inequality completely']),
         ],
+        'review_video': 'https://www.youtube.com/watch?v=1UxA6JzoT-4',
     },
 ]

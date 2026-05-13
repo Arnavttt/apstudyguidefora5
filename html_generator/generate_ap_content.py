@@ -137,6 +137,23 @@ def quiz_section_html(bank_id, label, questions_html, total_qs):
         f'</div>'
     )
 
+# ── Formula supplement cache (loaded once per abbrev from *_formulas.py) ───────
+_formula_cache = {}
+
+def _load_formula_supplement(abbrev):
+    """Return {lesson_title: [(name, latex_str), ...]} for abbrev, or {}."""
+    if abbrev in _formula_cache:
+        return _formula_cache[abbrev]
+    fpath = os.path.join(CONTENT_DIR, f'{abbrev}_formulas.py')
+    if os.path.exists(fpath):
+        spec = importlib.util.spec_from_file_location(f'{abbrev}_formulas', fpath)
+        fmod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(fmod)
+        _formula_cache[abbrev] = getattr(fmod, 'FORMULAS', {})
+    else:
+        _formula_cache[abbrev] = {}
+    return _formula_cache[abbrev]
+
 # ── Unit renderer ─────────────────────────────────────────────────────────────
 
 def render_unit(course_name, course_slug, abbrev, unit_num, unit_title,
@@ -225,7 +242,8 @@ def render_unit(course_name, course_slug, abbrev, unit_num, unit_title,
 
         # Optional lesson enrichment fields (backward-compatible — absent = no output)
         frq_note     = L.get('frq_note', '')
-        key_formulas = L.get('key_formulas', [])
+        _fsupp       = _load_formula_supplement(abbrev)
+        key_formulas = _fsupp.get(L['title'], L.get('key_formulas', []))
         exam_tip     = L.get('exam_tip', '')
         frq_html = (
             f'<div class="frq-note"><h5>FRQ / Essay Strategy</h5><p>{frq_note}</p></div>'
@@ -465,6 +483,9 @@ def generate(filter_slugs=None):
             continue
         mod = load_course(slug)
         if mod is None:
+            continue
+        # Skip formula supplement files (they have no NAME / UNITS)
+        if not hasattr(mod, 'NAME') or not hasattr(mod, 'UNITS'):
             continue
         course_slug = getattr(mod, 'SLUG', slug)
         if course_slug not in course_mods:

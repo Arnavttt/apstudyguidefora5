@@ -44,7 +44,7 @@
 ::-webkit-scrollbar { width: 8px; height: 8px; }
 ::-webkit-scrollbar-track { background: var(--parchment2); }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+::-webkit-scrollbar-thumb:hover { background: var(--AC); }
 
 /* ══════════════════════════════════════════════════════════════════════════
    RESET & BASE
@@ -73,7 +73,7 @@ img, iframe { max-width: 100%; border: 0; }
   top: 0;
   z-index: 200;
   background: var(--ink2);
-  border-bottom: 3px solid var(--gold);
+  border-bottom: 3px solid var(--AC);
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -85,7 +85,7 @@ img, iframe { max-width: 100%; border: 0; }
   font-family: 'Comfortaa', sans-serif;
   font-size: 13px;
   font-weight: 700;
-  color: var(--gold2);
+  color: var(--AC);
   text-decoration: none;
   padding: .45rem .7rem .45rem 0;
   margin-right: 1rem;
@@ -107,8 +107,8 @@ img, iframe { max-width: 100%; border: 0; }
   margin-right: 1rem;
 }
 .topnav a:not(.nav-brand-link):hover {
-  color: var(--gold2);
-  border-bottom-color: var(--gold2);
+  color: var(--AC);
+  border-bottom-color: var(--AC);
 }
 .topnav-right { margin-left: auto; display: flex; align-items: center; gap: .5rem; }
 .topnav-right input {
@@ -124,7 +124,7 @@ img, iframe { max-width: 100%; border: 0; }
   transition: border-color var(--dur) var(--ease);
 }
 .topnav-right input::placeholder { color: rgba(250,246,238,0.35); }
-.topnav-right input:focus { border-color: var(--gold); }
+.topnav-right input:focus { border-color: var(--AC); }
 
 /* ══════════════════════════════════════════════════════════════════════════
    MASTHEAD  — ink bg + diagonal stripe pattern
@@ -166,14 +166,14 @@ img, iframe { max-width: 100%; border: 0; }
   margin-bottom: 0.75rem;
 }
 .mh-breadcrumb a { color: rgba(250,246,238,0.45); }
-.mh-breadcrumb a:hover { color: var(--gold2); }
+.mh-breadcrumb a:hover { color: var(--AC); }
 .mh-tag {
   display: inline-block;
   font-family: 'Comfortaa', sans-serif;
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.25em;
-  color: var(--gold2);
+  color: var(--AC);
   text-transform: uppercase;
   margin-bottom: 0.75rem;
 }
@@ -186,7 +186,7 @@ img, iframe { max-width: 100%; border: 0; }
   margin-bottom: 0.5rem;
   color: var(--parchment);
 }
-.mh-title .acc { color: var(--gold2); }
+.mh-title .acc { color: var(--AC); }
 .mh-sub {
   color: rgba(250,246,238,0.6);
   font-style: italic;
@@ -251,7 +251,7 @@ img, iframe { max-width: 100%; border: 0; }
   font-weight: 700;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: var(--gold2);
+  color: var(--AC);
   margin-bottom: 1.1rem;
   position: relative;
   z-index: 1;
@@ -276,7 +276,7 @@ img, iframe { max-width: 100%; border: 0; }
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--gold2);
+  color: var(--AC);
   margin-bottom: 0.5rem;
 }
 .overview-card p {
@@ -286,7 +286,7 @@ img, iframe { max-width: 100%; border: 0; }
   font-family: 'Comfortaa', sans-serif;
 }
 .overview-card.quick-start { border-color: rgba(212,160,23,0.35); background: rgba(212,160,23,0.08); }
-.overview-card.quick-start h3 { color: var(--gold2); }
+.overview-card.quick-start h3 { color: var(--AC); }
 
 /* ══════════════════════════════════════════════════════════════════════════
    DASHBOARD BAR
@@ -473,7 +473,7 @@ img, iframe { max-width: 100%; border: 0; }
 .gateway {
   background: #fff;
   border: 1px solid var(--border);
-  border-left: 4px solid var(--gold);
+  border-left: 4px solid var(--AC);
   border-radius: var(--r-sm);
   padding: 1.1rem 1.25rem;
   margin-bottom: 1.5rem;
@@ -802,7 +802,7 @@ details[open].answer summary::before { content: '▾  '; }
   margin-right: .3rem;
 }
 .badge.non-ap {
-  background: var(--gold);
+  background: #b8860b;
   color: #fff;
 }
 
@@ -825,7 +825,7 @@ body.global-unmarked .iq.right,.iq.wrong             { display: none; }
 .site-footer {
   background: var(--ink);
   color: var(--parchment3);
-  border-top: 3px solid var(--gold);
+  border-top: 3px solid var(--AC);
   padding: 2rem 1.75rem;
   text-align: center;
   margin-top: 3rem;
@@ -836,7 +836,7 @@ body.global-unmarked .iq.right,.iq.wrong             { display: none; }
   font-family: 'Comfortaa', sans-serif;
   font-size: 1rem;
   font-weight: 700;
-  color: var(--gold2);
+  color: var(--AC);
   font-style: normal;
   display: inline-block;
   margin-bottom: .45rem;
@@ -883,7 +883,7 @@ h5 { font-family: 'Comfortaa', sans-serif; font-size: 10px; font-weight: 700; le
    ══════════════════════════════════════════════════════════════════════════ */
 .top {
   background: var(--ink);
-  border-bottom: 3px solid var(--gold);
+  border-bottom: 3px solid var(--AC);
   padding: 1.5rem 1.25rem 1.15rem;
   color: var(--parchment);
 }
@@ -919,7 +919,7 @@ h5 { font-family: 'Comfortaa', sans-serif; font-size: 10px; font-weight: 700; le
   margin-top: .45rem;
   transition: border-color var(--dur) var(--ease);
 }
-#q:focus { border-color: var(--gold); }
+#q:focus { border-color: var(--AC); }
 .breadcrumb { font-family: 'Comfortaa', sans-serif; font-size: 10px; font-weight: 600; color: var(--ink3); margin-bottom: .65rem; letter-spacing: 0.04em; }
 .breadcrumb a { color: var(--ink3); }
 .breadcrumb a:hover { color: var(--AC); }
@@ -932,7 +932,7 @@ h5 { font-family: 'Comfortaa', sans-serif; font-size: 10px; font-weight: 700; le
    ══════════════════════════════════════════════════════════════════════════ */
 /* frq-note → callout (gold) */
 .frq-note {
-  border-left: 4px solid var(--gold);
+  border-left: 4px solid var(--AC);
   background: var(--parchment2);
   padding: .9rem 1.15rem;
   margin: 1rem 0;
@@ -943,7 +943,7 @@ h5 { font-family: 'Comfortaa', sans-serif; font-size: 10px; font-weight: 700; le
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.15em;
-  color: var(--gold);
+  color: var(--AC);
   text-transform: uppercase;
   margin-bottom: .38rem;
 }
@@ -1015,7 +1015,7 @@ h5 { font-family: 'Comfortaa', sans-serif; font-size: 10px; font-weight: 700; le
   font-family: 'Comfortaa', sans-serif;
   font-size: 11px;
   font-weight: 700;
-  color: var(--gold2);
+  color: var(--AC);
   letter-spacing: 0.15em;
   text-transform: uppercase;
   display: flex;
@@ -1093,7 +1093,7 @@ h5 { font-family: 'Comfortaa', sans-serif; font-size: 10px; font-weight: 700; le
   border-bottom: 1px solid var(--parchment3);
 }
 .warn-list li:last-child { border-bottom: none; }
-.warn-list li::before { content: '⚠'; position: absolute; left: 0; font-size: 11px; top: .3em; color: var(--gold); }
+.warn-list li::before { content: '⚠'; position: absolute; left: 0; font-size: 11px; top: .3em; color: var(--AC); }
 
 /* ══════════════════════════════════════════════════════════════════════════
    EXAM TIPS SECTION (unit-exam-tips)

@@ -8,8 +8,8 @@
   /* Base — deep slate, not pure black */
   --bg:      #0f1117;
   --bg2:     #13161f;
-  --bg3:     #181c28;
-  --bg4:     #1e2235;
+  --bg3:     #1a1f2e;
+  --bg4:     #1e2438;
 
   /* Borders — translucent white for glass feel */
   --border:  rgba(255,255,255,.07);
@@ -150,7 +150,7 @@ img, iframe { max-width: 100%; border: 0; }
 }
 .topnav-right { margin-left: auto; display: flex; align-items: center; gap: .5rem; }
 .topnav-right input {
-  background: rgba(255,255,255,.04);
+  background: #1e2438;
   border: 1px solid var(--border2);
   border-radius: var(--r-sm);
   padding: .3rem .7rem;
@@ -165,6 +165,33 @@ img, iframe { max-width: 100%; border: 0; }
   border-color: var(--AC);
   box-shadow: 0 0 0 3px var(--ACfaint);
 }
+
+
+/* ══════════════════════════════════════════════════════════════════════════
+   COURSE BANNER IMAGE
+   ══════════════════════════════════════════════════════════════════════════ */
+.course-banner {
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+  position: relative;
+}
+.course-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  filter: brightness(.75) saturate(1.1);
+}
+.course-banner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 30%, rgba(13,17,23,.85));
+  pointer-events: none;
+}
+@media(max-width:640px) { .course-banner { height: 150px; } }
 
 /* ══════════════════════════════════════════════════════════════════════════
    MASTHEAD  — animated glow + gradient text
@@ -251,7 +278,7 @@ img, iframe { max-width: 100%; border: 0; }
 .mh-sub { font-size: .92rem; color: var(--text2); max-width: 580px; margin-bottom: 1.2rem; line-height: 1.7; }
 .mh-pills { display: flex; flex-wrap: wrap; gap: .35rem; }
 .mh-pill {
-  background: rgba(255,255,255,.04);
+  background: #1e2438;
   border: 1px solid var(--border2);
   color: var(--text3);
   font-family: 'Fira Code', monospace;
@@ -272,17 +299,15 @@ img, iframe { max-width: 100%; border: 0; }
    DASHBOARD BAR
    ══════════════════════════════════════════════════════════════════════════ */
 .dashboard {
-  background: rgba(255,255,255,.03);
+  background: #1a1f2e;
   border: 1px solid var(--border2);
   border-radius: var(--r-md);
   padding: 1rem 1.25rem;
   margin-bottom: 1.75rem;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
 }
 .dash-row { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: .65rem; }
 .dash-card {
-  background: rgba(255,255,255,.04);
+  background: #1e2438;
   border: 1px solid var(--border);
   border-radius: var(--r-sm);
   padding: .55rem .95rem;
@@ -313,7 +338,7 @@ img, iframe { max-width: 100%; border: 0; }
   font-family: 'Fira Code', monospace;
   font-size: 10px;
   color: var(--text3);
-  background: rgba(255,255,255,.03);
+  background: #1a1f2e;
   border: 1px solid var(--border);
   border-radius: var(--r-sm);
   padding: .28rem .65rem;
@@ -326,16 +351,14 @@ img, iframe { max-width: 100%; border: 0; }
    QUIZ SECTIONS
    ══════════════════════════════════════════════════════════════════════════ */
 .quiz-section {
-  background: rgba(255,255,255,.025);
+  background: #181d2a;
   border: 1px solid var(--border2);
   border-radius: var(--r-md);
   overflow: hidden;
   margin: 1.75rem 0;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
 }
 .quiz-header {
-  background: rgba(255,255,255,.04);
+  background: #1e2438;
   padding: .85rem 1.1rem;
   display: flex;
   align-items: center;
@@ -398,7 +421,7 @@ img, iframe { max-width: 100%; border: 0; }
   color: var(--text2);
   cursor: pointer;
   transition: all var(--dur) var(--ease);
-  background: rgba(255,255,255,.02);
+  background: #161b26;
   line-height: 1.55;
   user-select: none;
 }
@@ -411,12 +434,12 @@ img, iframe { max-width: 100%; border: 0; }
 .q-choice.correct  {
   border-color: rgba(74,222,128,.55);
   color: #4ade80;
-  background: rgba(74,222,128,.07);
+  background: rgba(74,222,128,.14);
 }
 .q-choice.wrong    {
   border-color: rgba(248,113,113,.5);
   color: #f87171;
-  background: rgba(248,113,113,.07);
+  background: rgba(248,113,113,.14);
 }
 .q-choice.show-correct {
   border-color: rgba(74,222,128,.3);
@@ -426,7 +449,7 @@ img, iframe { max-width: 100%; border: 0; }
 .q-explain {
   display: none;
   margin-top: .65rem;
-  background: rgba(255,255,255,.03);
+  background: #1a1f2e;
   border-radius: var(--r-sm);
   padding: .7rem .9rem;
   font-size: 12.5px;
@@ -440,13 +463,11 @@ img, iframe { max-width: 100%; border: 0; }
    LESSON BLOCKS  — glass morphism
    ══════════════════════════════════════════════════════════════════════════ */
 .gateway {
-  background: rgba(255,255,255,.03);
+  background: #1a1f2e;
   border: 1px solid var(--border2);
   border-radius: var(--r-md);
   padding: 1.1rem 1.25rem;
   margin-bottom: 1.6rem;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
   transition: border-color var(--dur) var(--ease);
 }
 .gateway:hover { border-color: var(--AC); }
@@ -468,9 +489,7 @@ img, iframe { max-width: 100%; border: 0; }
   border-radius: var(--r-md);
   overflow: hidden;
   margin-bottom: 1.6rem;
-  background: rgba(255,255,255,.025);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: #181d2a;
   transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
 }
 .lesson:hover {
@@ -478,7 +497,7 @@ img, iframe { max-width: 100%; border: 0; }
   box-shadow: 0 4px 32px rgba(0,0,0,.3), 0 0 0 1px var(--ACfaint);
 }
 .lesson-head {
-  background: rgba(255,255,255,.04);
+  background: #1e2438;
   padding: .85rem 1.1rem;
   border-bottom: 1px solid var(--border);
   display: flex;
@@ -526,7 +545,7 @@ img, iframe { max-width: 100%; border: 0; }
    TOPIC NOTES
    ══════════════════════════════════════════════════════════════════════════ */
 .topicnote {
-  background: rgba(255,255,255,.03);
+  background: #1a1f2e;
   border: 1px solid var(--border);
   border-radius: var(--r-sm);
   padding: .85rem 1rem;
@@ -584,7 +603,7 @@ img, iframe { max-width: 100%; border: 0; }
   flex-direction: column;
   gap: .22rem;
   padding: .7rem .9rem;
-  background: rgba(255,255,255,.03);
+  background: #1a1f2e;
   border: 1px solid var(--border);
   border-radius: var(--r-sm);
   text-decoration: none;
@@ -623,7 +642,7 @@ img, iframe { max-width: 100%; border: 0; }
    LEGACY TEXTAREA (.iq) — preserved for backward compat
    ══════════════════════════════════════════════════════════════════════════ */
 .iq {
-  background: rgba(255,255,255,.025);
+  background: #181d2a;
   border: 1px solid var(--border);
   border-radius: var(--r-sm);
   padding: .9rem 1rem;
@@ -648,7 +667,7 @@ img, iframe { max-width: 100%; border: 0; }
 .iq textarea {
   width: 100%;
   min-height: 80px;
-  background: rgba(255,255,255,.04);
+  background: #1e2438;
   border: 1px solid var(--border2);
   border-radius: var(--r-sm);
   padding: .55rem .72rem;
@@ -674,14 +693,14 @@ img, iframe { max-width: 100%; border: 0; }
   letter-spacing: .05em;
   padding: .3rem .55rem;
   list-style: none;
-  background: rgba(255,255,255,.03);
+  background: #1a1f2e;
   transition: color var(--dur) var(--ease);
 }
 .answer summary::-webkit-details-marker { display: none; }
 .answer summary::before { content: '▸  '; color: var(--AC); }
 details[open] > .answer summary::before,
 details[open].answer summary::before { content: '▾  '; }
-.model { padding: .65rem .75rem; background: rgba(255,255,255,.02); }
+.model { padding: .65rem .75rem; background: #161b26; }
 .model p  { font-size: 12.5px; color: var(--text2); line-height: 1.7; margin-bottom: .3rem; }
 .model ul { margin-left: 1rem; }
 .model li { font-size: 12.5px; color: var(--text2); margin: .15rem 0; }
@@ -703,14 +722,14 @@ details[open].answer summary::before { content: '▾  '; }
 .actions button[data-status="right"]:hover { border-color: rgba(74,222,128,.6); color: #4ade80; background: rgba(74,222,128,.08); }
 .actions button[data-status="wrong"]:hover  { border-color: rgba(248,113,113,.6); color: #f87171; background: rgba(248,113,113,.08); }
 .iqbank {
-  background: rgba(255,255,255,.025);
+  background: #181d2a;
   border: 1px solid var(--border2);
   border-radius: var(--r-md);
   overflow: hidden;
   margin: 1.75rem 0;
 }
 .iqbank-head {
-  background: rgba(255,255,255,.04);
+  background: #1e2438;
   padding: .85rem 1.1rem;
   display: flex;
   align-items: center;
@@ -735,7 +754,7 @@ details[open].answer summary::before { content: '▾  '; }
   flex-wrap: wrap;
   gap: .35rem;
   border-bottom: 1px solid var(--border);
-  background: rgba(255,255,255,.02);
+  background: #161b26;
 }
 .bank-tools button {
   font-family: 'Fira Code', monospace;
@@ -767,7 +786,7 @@ details[open].answer summary::before { content: '▾  '; }
   margin-right: .3rem;
 }
 .badge.non-ap {
-  background: rgba(245,158,11,.08);
+  background: rgba(245,158,11,.15);
   color: #f59e0b;
   border-color: rgba(245,158,11,.25);
 }
@@ -850,7 +869,7 @@ h5 { font-family: 'Fira Code', monospace; font-size: 10px; font-weight: 600; let
   font-family: 'Fira Code', monospace;
   font-size: 10px;
   color: var(--text3);
-  background: rgba(255,255,255,.03);
+  background: #1a1f2e;
   border: 1px solid var(--border2);
   border-radius: var(--r-sm);
   padding: .22rem .6rem;
@@ -860,7 +879,7 @@ h5 { font-family: 'Fira Code', monospace; font-size: 10px; font-weight: 600; let
 }
 .mini-nav a:hover, .mini-nav button:hover { color: var(--AC); border-color: var(--AC); background: var(--ACfaint); }
 #q {
-  background: rgba(255,255,255,.04);
+  background: #1e2438;
   border: 1px solid var(--border2);
   border-radius: var(--r-sm);
   padding: .32rem .7rem;
@@ -886,7 +905,7 @@ h5 { font-family: 'Fira Code', monospace; font-size: 10px; font-weight: 600; let
    CALLOUT BOXES  — frq-note, formula-strip, exam-tip
    ══════════════════════════════════════════════════════════════════════════ */
 .frq-note {
-  background: rgba(251,146,60,.06);
+  background: rgba(251,146,60,.14);
   border: 1px solid rgba(251,146,60,.18);
   border-left: 3px solid #fb923c;
   border-radius: var(--r-sm);
@@ -902,7 +921,7 @@ h5 { font-family: 'Fira Code', monospace; font-size: 10px; font-weight: 600; let
   font-family: 'Fira Code', monospace;
 }
 .formula-strip {
-  background: rgba(167,139,250,.06);
+  background: rgba(167,139,250,.14);
   border: 1px solid rgba(167,139,250,.18);
   border-left: 3px solid #a78bfa;
   border-radius: var(--r-sm);
@@ -926,7 +945,7 @@ h5 { font-family: 'Fira Code', monospace; font-size: 10px; font-weight: 600; let
 }
 .formula-strip li b { color: var(--AC); }
 .exam-tip {
-  background: rgba(74,222,128,.05);
+  background: rgba(74,222,128,.12);
   border: 1px solid rgba(74,222,128,.18);
   border-left: 3px solid #4ade80;
   border-radius: var(--r-sm);
@@ -947,18 +966,16 @@ h5 { font-family: 'Fira Code', monospace; font-size: 10px; font-weight: 600; let
    UNIT MUST-KNOW BLOCKS
    ══════════════════════════════════════════════════════════════════════════ */
 .unit-must-know {
-  background: rgba(255,255,255,.025);
+  background: #181d2a;
   border: 1px solid var(--border2);
   border-top: 3px solid var(--AC);
   border-radius: var(--r-md);
   margin: 2.25rem 0 1.75rem;
   overflow: hidden;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
   box-shadow: 0 4px 24px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.05);
 }
 .umk-header {
-  background: rgba(255,255,255,.04);
+  background: #1e2438;
   padding: .8rem 1.2rem;
   font-family: 'Fira Code', monospace;
   font-size: 11px;
@@ -1034,7 +1051,7 @@ h5 { font-family: 'Fira Code', monospace; font-size: 10px; font-weight: 600; let
   font-family: 'Fira Code', monospace;
   font-size: 12px;
   color: var(--text);
-  background: rgba(255,255,255,.04);
+  background: #1e2438;
   border: 1px solid var(--border2);
   border-left: 2px solid var(--AC);
   padding: .38rem .7rem;
@@ -1078,7 +1095,7 @@ h5 { font-family: 'Fira Code', monospace; font-size: 10px; font-weight: 600; let
   letter-spacing: .1em;
   text-transform: uppercase;
   font-weight: 600;
-  background: rgba(255,255,255,.025);
+  background: #181d2a;
 }
 .uet-icon { font-size: 14px; }
 .uet-list {

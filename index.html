@@ -6,332 +6,175 @@
 <title>Five &amp; A+ | AP® &amp; College Review — Free Interactive Study Site</title>
 <link rel="stylesheet" href="assets/site.css">
 <style>
-/* ── Hub-only styles (v3) ──────────────────────────────────────────────── */
+/* Five & A+ Hub v4 — Study.com inspired, solid dark cards */
+:root{--bg:#0d1117;--bg2:#13161f;--bg3:#1a1f2e;--bg4:#1e2438;--border:rgba(255,255,255,.08);--border2:rgba(255,255,255,.14);--text:#e8edf8;--text2:#8b9ab5;--text3:#4a5570;--gold:#f59e0b;--blue:#3b82f6;--ease:cubic-bezier(.4,0,.2,1);}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter','Outfit',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;}
+a{text-decoration:none;color:inherit;}
+img{display:block;max-width:100%;}
+
+/* Scrollbar */
+::-webkit-scrollbar{width:8px;}
+::-webkit-scrollbar-track{background:var(--bg2);}
+::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15);border-radius:4px;}
+::-webkit-scrollbar-thumb:hover{background:rgba(245,158,11,.5);}
+
 /* Navbar */
-.navbar{position:sticky;top:0;z-index:200;background:rgba(13,14,20,.82);backdrop-filter:blur(20px) saturate(1.4);-webkit-backdrop-filter:blur(20px) saturate(1.4);border-bottom:1px solid rgba(255,255,255,.07);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:60px;}
-.nav-brand{font-family:'Syne',sans-serif;font-size:1.25rem;font-weight:800;background:linear-gradient(135deg,#f59e0b,#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.navbar{position:sticky;top:0;z-index:200;background:rgba(13,17,23,.9);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:60px;}
+.nav-brand{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;background:linear-gradient(135deg,#f59e0b,#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .nav-links{display:flex;gap:.25rem;}
-.nav-links a{color:var(--text3);text-decoration:none;font-family:'Fira Code',monospace;font-size:11px;padding:.35rem .65rem;border-radius:6px;transition:all .2s;}
+.nav-links a{color:var(--text3);font-family:'Fira Code',monospace;font-size:11px;padding:.35rem .65rem;border-radius:6px;transition:all .2s var(--ease);}
 .nav-links a:hover{color:var(--gold);background:rgba(245,158,11,.08);}
 @media(max-width:680px){.nav-links{display:none;}}
 
-/* Hero */
-.hero{max-width:1100px;margin:0 auto;padding:5.5rem 2rem 4rem;text-align:center;position:relative;z-index:1;}
-.hero-badge{font-family:'Fira Code',monospace;font-size:11px;color:var(--gold);letter-spacing:.16em;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.22);padding:.32rem 1.1rem;border-radius:20px;display:inline-block;margin-bottom:1.6rem;}
-.hero h1{font-family:'Syne',sans-serif;font-size:clamp(2.8rem,7vw,5.5rem);font-weight:800;line-height:.95;letter-spacing:-.04em;margin-bottom:1.25rem;}
-.h1-l1{display:block;color:#fff;}
-.h1-l2{display:block;background:linear-gradient(135deg,#f59e0b 0%,#3b82f6 70%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.hero-sub{font-size:1.05rem;color:var(--text2);max-width:520px;margin:0 auto 2.75rem;line-height:1.8;}
-
-/* Stats */
-.stats-row{display:flex;flex-wrap:wrap;justify-content:center;gap:.75rem;margin-bottom:2.75rem;}
-.stat{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:.9rem 1.5rem;text-align:center;backdrop-filter:blur(12px);transition:border-color .2s,transform .2s;}
-.stat:hover{border-color:rgba(245,158,11,.35);transform:translateY(-2px);}
+/* Hero — solid navy/teal with study image */
+.hero{position:relative;overflow:hidden;background:linear-gradient(135deg,#0d1c2e 0%,#0f2233 40%,#0d2040 100%);padding:5.5rem 2rem 4.5rem;text-align:center;}
+.hero-bg{position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=1400&h=600&fit=crop&q=60&auto=format');background-size:cover;background-position:center;opacity:.07;}
+.hero-inner{position:relative;z-index:1;max-width:800px;margin:0 auto;}
+.hero-badge{font-family:'Fira Code',monospace;font-size:11px;color:#60a5fa;letter-spacing:.14em;background:rgba(96,165,250,.1);border:1px solid rgba(96,165,250,.25);padding:.32rem 1.1rem;border-radius:20px;display:inline-block;margin-bottom:1.6rem;}
+.hero h1{font-family:'Syne',sans-serif;font-size:clamp(2.4rem,6vw,4.5rem);font-weight:800;line-height:1.0;letter-spacing:-.035em;margin-bottom:1.25rem;color:#fff;}
+.hero h1 span{display:block;background:linear-gradient(135deg,#60a5fa,#38bdf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-sub{font-size:1.05rem;color:rgba(255,255,255,.65);max-width:540px;margin:0 auto 2.5rem;line-height:1.8;}
+.stats-row{display:flex;flex-wrap:wrap;justify-content:center;gap:.75rem;margin-bottom:2.5rem;}
+.stat{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:.9rem 1.5rem;text-align:center;backdrop-filter:blur(12px);}
 .stat-n{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:#fff;line-height:1;}
-.stat-l{font-family:'Fira Code',monospace;font-size:10px;color:var(--text3);letter-spacing:.08em;margin-top:.2rem;}
-
-/* CTA Button */
-.cta-btn{display:inline-flex;align-items:center;gap:.55rem;background:linear-gradient(135deg,rgba(245,158,11,.18),rgba(59,130,246,.14));border:1px solid rgba(245,158,11,.35);color:var(--gold);font-family:'Fira Code',monospace;font-size:12px;padding:.85rem 1.85rem;border-radius:8px;text-decoration:none;transition:all .2s;letter-spacing:.07em;box-shadow:0 0 20px rgba(245,158,11,.08);}
-.cta-btn:hover{background:linear-gradient(135deg,rgba(245,158,11,.28),rgba(59,130,246,.22));border-color:var(--gold);box-shadow:0 0 30px rgba(245,158,11,.18);transform:translateY(-1px);}
-
-/* Layout */
-.wrap{max-width:1100px;margin:0 auto;padding:0 2rem;}
-.sec{padding:2.75rem 0 .5rem;position:relative;z-index:1;}
-.sec-h{display:flex;align-items:baseline;gap:1rem;margin-bottom:1.85rem;}
-.sec-tag{font-family:'Fira Code',monospace;font-size:10px;color:var(--text3);letter-spacing:.14em;text-transform:uppercase;}
-.sec-title{font-family:'Syne',sans-serif;font-size:1.35rem;font-weight:800;letter-spacing:-.02em;}
-.sec-line{flex:1;height:1px;background:rgba(255,255,255,.07);}
-.cat{margin-bottom:2.5rem;}
-.cat-lbl{font-family:'Fira Code',monospace;font-size:10px;color:var(--text3);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.85rem;}
-
-/* Course grid */
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:12px;overflow:hidden;}
-@media(max-width:880px){.grid{grid-template-columns:repeat(2,1fr);}}
-@media(max-width:560px){.grid{grid-template-columns:1fr;}}
-.gc{background:rgba(19,22,31,1);padding:1.5rem;text-decoration:none;display:block;transition:background .18s,transform .18s;position:relative;overflow:hidden;}
-.gc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--ac,#4ade80);transform:scaleX(0);transform-origin:left;transition:transform .3s cubic-bezier(.4,0,.2,1);}
-.gc::after{content:'';position:absolute;inset:0;opacity:0;background:radial-gradient(ellipse at 30% 30%,var(--ac,#4ade80) 0%,transparent 70%);transition:opacity .3s;pointer-events:none;}
-.gc:hover{background:rgba(24,28,40,1);}
-.gc:hover::before{transform:scaleX(1);}
-.gc:hover::after{opacity:.04;}
-.gc.w2{grid-column:span 2;}
-@media(max-width:880px){.gc.w2{grid-column:span 1;}}
-
-/* Card internals */
-.g-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.9rem;}
-.g-icon{width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;background:var(--ic,rgba(74,222,128,.1));flex-shrink:0;}
-.g-badge{font-family:'Fira Code',monospace;font-size:9px;padding:.16rem .48rem;border-radius:20px;letter-spacing:.05em;background:var(--tb,rgba(74,222,128,.08));color:var(--ac,#4ade80);border:1px solid var(--tbd,rgba(74,222,128,.2));}
-.g-title{font-size:1rem;font-weight:700;color:#fff;margin-bottom:.22rem;line-height:1.2;}
-.g-sub{font-size:11.5px;color:var(--text2);line-height:1.55;margin-bottom:.9rem;}
-.g-pills{display:flex;flex-wrap:wrap;gap:.22rem;margin-bottom:.9rem;}
-.gp{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:20px;font-size:9.5px;color:var(--text3);padding:.14rem .45rem;font-family:'Fira Code',monospace;}
-.g-foot{display:flex;justify-content:space-between;align-items:center;}
-.g-meta{font-size:10.5px;color:var(--text3);font-family:'Fira Code',monospace;}
-.g-arr{font-size:15px;color:var(--text3);transition:transform .2s,color .2s;}
-.gc:hover .g-arr{transform:translateX(5px);color:var(--ac,#4ade80);}
+.stat-l{font-family:'Fira Code',monospace;font-size:10px;color:rgba(255,255,255,.45);letter-spacing:.08em;margin-top:.2rem;}
+.cta-btn{display:inline-flex;align-items:center;gap:.55rem;background:linear-gradient(135deg,#1d4ed8,#0ea5e9);color:#fff;font-family:'Fira Code',monospace;font-size:12px;padding:.9rem 2rem;border-radius:8px;letter-spacing:.06em;font-weight:500;transition:all .2s var(--ease);box-shadow:0 4px 20px rgba(14,165,233,.3);}
+.cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(14,165,233,.45);}
 
 /* Search */
-.hub-search{max-width:460px;margin:0 auto 1.25rem;position:relative;z-index:1;}
-.hub-search input{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:.7rem 1.1rem;color:var(--text);font-family:'Inter','Outfit',sans-serif;font-size:14px;outline:none;transition:border-color .2s,box-shadow .2s;backdrop-filter:blur(12px);}
-.hub-search input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(245,158,11,.12);}
+.hub-search{max-width:440px;margin:0 auto 1.5rem;position:relative;}
+.hub-search input{width:100%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:.75rem 1.1rem;color:#fff;font-family:'Inter',sans-serif;font-size:14px;outline:none;transition:all .2s;}
+.hub-search input::placeholder{color:rgba(255,255,255,.4);}
+.hub-search input:focus{border-color:rgba(96,165,250,.6);background:rgba(255,255,255,.12);box-shadow:0 0 0 3px rgba(96,165,250,.15);}
+
+/* Content wrapper */
+.wrap{max-width:1200px;margin:0 auto;padding:0 2rem;}
+.main-content{padding:3rem 0 4rem;}
+
+/* Category sections */
+.cat-section{margin-bottom:3.5rem;}
+.cat-heading{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;letter-spacing:-.02em;margin-bottom:1.25rem;color:var(--text);padding-bottom:.75rem;border-bottom:1px solid var(--border);}
+
+/* Course cards — Study.com style */
+.cc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;}
+@media(max-width:1100px){.cc-grid{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:760px){.cc-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:480px){.cc-grid{grid-template-columns:1fr;}}
+
+.cc{background:var(--bg3);border:1px solid var(--border);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;transition:transform .2s var(--ease),box-shadow .2s var(--ease),border-color .2s var(--ease);}
+.cc:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.5);border-color:var(--ac,rgba(255,255,255,.2));}
+.cc-img{height:150px;overflow:hidden;background:var(--bg4);flex-shrink:0;position:relative;}
+.cc-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s var(--ease);}
+.cc:hover .cc-img img{transform:scale(1.04);}
+.cc-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(0,0,0,.55));}
+.cc-body{padding:1rem 1.1rem 1.1rem;display:flex;flex-direction:column;flex:1;gap:.3rem;}
+.cc-tag{font-family:'Fira Code',monospace;font-size:9px;color:var(--ac,#60a5fa);letter-spacing:.12em;text-transform:uppercase;font-weight:600;}
+.cc-title{font-family:'Syne',sans-serif;font-size:.97rem;font-weight:800;color:var(--text);line-height:1.25;letter-spacing:-.01em;}
+.cc-desc{font-size:11.5px;color:var(--text2);line-height:1.55;flex:1;margin-top:.15rem;}
+.cc-foot{display:flex;justify-content:space-between;align-items:center;margin-top:.65rem;padding-top:.65rem;border-top:1px solid var(--border);}
+.cc-meta{font-family:'Fira Code',monospace;font-size:9.5px;color:var(--text3);}
+.cc-cta{font-family:'Fira Code',monospace;font-size:10px;color:var(--ac,#60a5fa);font-weight:600;transition:color .15s;}
+.cc:hover .cc-cta{color:#fff;}
+
+/* College section */
+.college-section{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:1.75rem;margin-bottom:3rem;}
+.college-section h2{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;margin-bottom:1.25rem;color:var(--text);}
+
+/* About builder */
+.about-builder{max-width:720px;margin:4rem auto 2rem;background:var(--bg3);border:1px solid var(--border2);border-radius:14px;padding:2.5rem;}
+.ab-label{font-family:'Fira Code',monospace;font-size:.75rem;letter-spacing:.1em;color:var(--gold);text-transform:uppercase;margin-bottom:.75rem;}
+.ab-heading{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;margin-bottom:1rem;letter-spacing:-.02em;}
+.ab-body{color:var(--text2);line-height:1.75;margin-bottom:1.25rem;font-size:.93rem;}
+.ab-profile{font-family:'Fira Code',monospace;font-size:.8rem;color:var(--text3);border-top:1px solid var(--border);padding-top:1rem;margin-top:1rem;}
 
 /* Footer */
-.footer-hub{background:var(--bg2);border-top:1px solid transparent;border-image:linear-gradient(90deg,transparent,rgba(245,158,11,.4),transparent) 1;padding:2.5rem 2rem;text-align:center;margin-top:4rem;}
-.f-brand-hub{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;background:linear-gradient(135deg,#f59e0b,#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.38rem;display:inline-block;}
+.footer-hub{background:var(--bg2);border-top:2px solid;border-image:linear-gradient(90deg,transparent,rgba(245,158,11,.5),transparent) 1;padding:2.5rem 2rem;text-align:center;margin-top:2rem;}
+.f-brand-hub{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;background:linear-gradient(135deg,#f59e0b,#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.4rem;display:inline-block;}
 .f-trademark{font-family:'Fira Code',monospace;font-size:9.5px;color:var(--text3);max-width:640px;margin:.4rem auto;line-height:1.8;}
 .f-sub-hub{font-family:'Fira Code',monospace;font-size:9px;color:var(--text3);letter-spacing:.06em;margin-top:.28rem;}
 
-/* About builder */
-.about-builder{max-width:780px;margin:4rem auto 2rem;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:2.5rem;backdrop-filter:blur(12px);}
-.ab-label{font-family:'Fira Code',monospace;font-size:.75rem;letter-spacing:.1em;color:var(--gold);text-transform:uppercase;margin-bottom:.75rem;}
-.ab-heading{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;margin-bottom:1rem;letter-spacing:-.02em;}
-.ab-body{color:var(--text2);line-height:1.75;margin-bottom:1.25rem;font-size:.93rem;}
-.ab-profile{font-family:'Fira Code',monospace;font-size:.8rem;color:var(--text3);border-top:1px solid rgba(255,255,255,.07);padding-top:1rem;margin-top:1rem;letter-spacing:.02em;}
+/* Hidden (filtering) */
+.cc.hidden{display:none;}
 </style>
 </head>
 <body>
 <nav class="navbar">
   <div class="nav-brand">Five &amp; A+</div>
   <div class="nav-links">
-    <a href="#ap">AP® Guides</a>
+    <a href="#courses">AP® Guides</a>
     <a href="#college">College</a>
     <a href="#about">About</a>
   </div>
 </nav>
 
 <div class="hero">
-  <div class="hero-badge">★ &nbsp;Built by a student, for students — 100% free</div>
-  <h1><span class="h1-l1">Score 5s.</span><span class="h1-l2">Score A's.</span></h1>
-  <p class="hero-sub">25 AP® &amp; college course review guides — click-to-select MCQs, instant feedback, localStorage progress tracking, embedded video resources. Zero paywalls.</p>
-  <div class="stats-row">
-    <div class="stat"><div class="stat-n">25</div><div class="stat-l">Courses</div></div>
-    <div class="stat"><div class="stat-n">184+</div><div class="stat-l">Unit Pages</div></div>
-    <div class="stat"><div class="stat-n">5 500+</div><div class="stat-l">MCQs</div></div>
-    <div class="stat"><div class="stat-n">100%</div><div class="stat-l">Free</div></div>
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <div class="hero-badge">★ &nbsp;Built by a student, for students — 100% free</div>
+    <h1>Master your AP® exams.<span>Score 5s. Score A's.</span></h1>
+    <p class="hero-sub">25 AP® &amp; college courses — interactive MCQ practice, instant feedback, embedded video lessons, and comprehensive review guides. Zero paywalls, ever.</p>
+    <div class="stats-row">
+      <div class="stat"><div class="stat-n">25</div><div class="stat-l">Courses</div></div>
+      <div class="stat"><div class="stat-n">184+</div><div class="stat-l">Unit Pages</div></div>
+      <div class="stat"><div class="stat-n">5,500+</div><div class="stat-l">MCQs</div></div>
+      <div class="stat"><div class="stat-n">100%</div><div class="stat-l">Free</div></div>
+    </div>
+    <div class="hub-search">
+      <input id="hubq" placeholder="Search courses…" oninput="filterHub()">
+    </div>
+    <a class="cta-btn" href="#courses">Browse All Courses →</a>
   </div>
-  <div class="hub-search">
-    <input id="hubq" placeholder="Search courses…" oninput="filterHub()">
-  </div>
-  <a class="cta-btn" href="#ap">→ &nbsp;Browse All Guides</a>
 </div>
 
-<!-- AP® COURSES -->
-<section class="sec" id="ap"><div class="wrap">
-<div class="sec-h"><span class="sec-tag">AP® Courses</span><span class="sec-title">AP® Exam Review</span><div class="sec-line"></div></div>
+<div class="wrap">
+<div class="main-content" id="courses">
 
-<div class="cat"><div class="cat-lbl">History &amp; Social Science</div>
-<div class="grid">
-<a class="gc" href="courses/ap-u-s-history.html" style="--ac:#c9a96e;--ic:rgba(201,169,110,.1);--tb:rgba(201,169,110,.08);--tbd:rgba(201,169,110,.2);">
-<div class="g-top"><div class="g-icon">📜</div><span class="g-badge">HISTORY</span></div>
-<div class="g-title">AP® U.S. History</div>
-<div class="g-sub">All 9 periods · DBQ, LEQ, SAQ with current rubrics · HIPP sourcing, Heimler thesis formula, Tom Richey contextualization.</div>
-<div class="g-pills"><span class="gp">9 Periods</span><span class="gp">7-pt DBQ</span><span class="gp">HIPP</span><span class="gp">MCQ Practice</span></div>
-<div class="g-foot"><span class="g-meta">9 units · P1–P9</span><span class="g-arr">→</span></div></a>
+<div class="cat-section"><h2 class="cat-heading">History &amp; Social Science</h2><div class="cc-grid"><a class="cc" href="courses/ap-u-s-history.html" style="--ac:#f59e0b"><div class="cc-img"><img src="https://images.unsplash.com/photo-1461360370896-922624d12aa1?w=400&h=220&fit=crop&q=80&auto=format" alt="AP® U.S. History" loading="lazy" width="400" height="220"></div><div class="cc-body"><span class="cc-tag">HISTORY</span><h3 class="cc-title">AP® U.S. History</h3><p class="cc-desc">9 periods · DBQ, LEQ, SAQ · HIPP sourcing · Heimler thesis formula</p><div class="cc-foot"><span class="cc-meta">9 units · P1–P9</span><span class="cc-cta">Explore →</span></div></div></a>
+<a class="cc" href="courses/ap-world-history-modern.html" style="--ac:#f59e0b"><div class="cc-img"><img src="https://images.unsplash.com/photo-1526129882362-aa42f12f15ea?w=400&h=220&fit=crop&q=80&auto=format" alt="AP® World History: Modern" loading="lazy" width="400" height="220"></div><div class="cc-body"><span class="cc-tag">HISTORY</span><h3 class="cc-title">AP® World History: Modern</h3><p class="cc-desc">1200–present · Trade networks, empires, revolutions · SPICE-T themes</p><div class="cc-foot"><span class="cc-meta">9 units · 1200–present</span><span class="cc-cta">Explore →</span></div></div></a>
+<a class="cc" href="courses/ap-european-history.html" style="--ac:#f59e0b"><div class="cc-img"><img src="https://images.unsplash.com/photo-1552580709-09816f09f7b2?w=400&h=220&fit=crop&q=80&auto=format" alt="AP® European History" loading="lazy" width="400" height="220"></div><div class="cc-body"><span class="cc-tag">HISTORY</span><h3 class="cc-title">AP® European History</h3><p class="cc-desc">Renaissance to Cold War · Reformation, scientific revolution, nationalism</p><div class="cc-foot"><span class="cc-meta">9 units · 1450–present</span><span class="cc-cta">Explore →</span></div></div></a>
+<a class="cc" href="courses/ap-human-geography.html" style="--ac:#fb923c"><div class="cc-img"><img src="https://images.unsplash.com/photo-1446776877080-d5ffa62a2669?w=400&h=220&fit=crop&q=80&auto=format" alt="AP® Human Geography" loading="lazy" width="400" height="220"></div><div class="cc-body"><span class="cc-tag">SOCIAL SCIENCE</span><h3 class="cc-title">AP® Human Geography</h3><p class="cc-desc">Population, culture, political geography, agriculture, urban land use</p><div class="cc-foot"><span class="cc-meta">7 units · All topics</span><span class="cc-cta">Explore →</span></div></div></a>
+<a class="cc" href="courses/ap-u-s-government-politics.html" style="--ac:#fb923c"><div class="cc-img"><img src="https://images.unsplash.com/photo-1569025690938-a00729c9e1f9?w=400&h=220&fit=crop&q=80&auto=format" alt="AP® U.S. Government &amp; Politics" loading="lazy" width="400" height="220"></div><div class="cc-body"><span class="cc-tag">SOCIAL SCIENCE</span><h3 class="cc-title">AP® U.S. Government &amp; Politics</h3><p class="cc-desc">15 required SCOTUS cases · 9 foundational documents · All FRQ types</p><div class="cc-foot"><span class="cc-meta">5 units · Branches &amp; Rights</span><span class="cc-cta">Explore →</span></div></div></a>
+<a class="cc" href="courses/ap-comparative-government-and-politics.html" style="--ac:#94a3b8"><div class="cc-img"><img src="https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=400&h=220&fit=crop&q=80&auto=format" alt="AP® Comparative Gov &amp; Politics" loading="lazy" width="400" height="220"></div><div class="cc-body"><span class="cc-tag">SOCIAL SCIENCE</span><h3 class="cc-title">AP® Comparative Gov &amp; Politics</h3><p class="cc-desc">UK, Mexico, Russia, Iran, China, Nigeria · Institutions, democracy, civil liberties</p><div class="cc-foot"><span class="cc-meta">5 units · 6 case countries</span><span class="cc-cta">Explore →</span></div></div></a>
+<a class="cc" href="courses/ap-psychology.html" style="--ac:#c084fc"><div class="cc-img"><img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=220&fit=crop&q=80&auto=format" alt="AP® Psychology" loading="lazy" width="400" height="220"></div><div class="cc-body"><span class="cc-tag">SOCIAL SCIENCE</span><h3 class="cc-title">AP® Psychology</h3><p class="cc-desc">7 perspectives · Conditioning · Memory models · Milgram/Asch · Disorders</p><div class="cc-foot"><span class="cc-meta">5 units · Behavior to health</span><span class="cc-cta">Explore →</span></div></div></a></div></div>
 
-<a class="gc" href="courses/ap-world-history-modern.html" style="--ac:#f59e0b;--ic:rgba(245,158,11,.1);--tb:rgba(245,158,11,.08);--tbd:rgba(245,158,11,.2);">
-<div class="g-top"><div class="g-icon">🌍</div><span class="g-badge">HISTORY</span></div>
-<div class="g-title">AP® World History: Modern</div>
-<div class="g-sub">1200–present · Trade networks, gunpowder empires, Atlantic revolutions, imperialism, decolonization, globalization · SPICE-T themes.</div>
-<div class="g-pills"><span class="gp">9 Units</span><span class="gp">SPICE-T</span><span class="gp">DBQ/LEQ</span><span class="gp">MCQ Practice</span></div>
-<div class="g-foot"><span class="g-meta">9 units · 1200–present</span><span class="g-arr">→</span></div></a>
+<div class="cat-section"><h2 class="cat-heading">English Language Arts</h2><div class="cc-grid"><a class="cc" href="courses/ap-english-language-composition.html" style="--ac:#d4b896"><div class="cc-img"><img src="https://images.unsplash.com/photo-1457369804613-52c61a468e7d?w=400&h=220&fit=crop&q=80&auto=format" alt="AP® Language &amp; Composition" loading="lazy" width="400" height="220"></div><div class="cc-body"><span class="cc-tag">AP® ENGLISH</span><h3 class="cc-title">AP® Language &amp; Composition</h3><p class="cc-desc">2025 rubric (1+4+1) · SPACE-CAT · 30+ rhetorical devices · Model essays</p><div class="cc-foot"><span class="cc-meta">9 units · All 3 FRQ types</span><span class="cc-cta">Explore →</span></div></div></a>
+<a class="cc" href="courses/ap-english-literature-composition.html" style="--ac:#d4b896"><div class="cc-img"><img src="https://images.unsplash.com/photo-1544716278-e513176f20b5?w=400&h=220&fit=crop&q=80&auto=format" alt="AP® Literature &amp; Composition" loading="lazy" width="400" height="220"></div><div class="cc-body"><span class="cc-tag">AP® ENGLISH</span><h3 class="cc-title">AP® Literature &amp; Composition</h3><p class="cc-desc">60+ literary devices · TPCASTT · Short fiction, poetry, drama · Model FRQs</p><div class="cc-foot"><span class="cc-meta">9 units · Poetry to drama</span><span class="cc-cta">Explore →</span></div></div></a></div></div>
 
-<a class="gc" href="courses/ap-european-history.html" style="--ac:#f87171;--ic:rgba(248,113,113,.1);--tb:rgba(248,113,113,.08);--tbd:rgba(248,113,113,.2);">
-<div class="g-top"><div class="g-icon">🏰</div><span class="g-badge">HISTORY</span></div>
-<div class="g-title">AP® European History</div>
-<div class="g-sub">Renaissance through post-WWII · Reformation, scientific revolution, French Revolution, nationalism, totalitarianism, Cold War Europe.</div>
-<div class="g-pills"><span class="gp">9 Units</span><span class="gp">DBQ/LEQ</span><span class="gp">Causation</span><span class="gp">MCQ Practice</span></div>
-<div class="g-foot"><span class="g-meta">9 units · 1450–present</span><span class="g-arr">→</span></div></a>
+<div class="cat-section"><h2 class="cat-heading">STEM</h2><div class="cc-grid"><a class="cc" href="courses/ap-biology.html" style="--ac:#22c55e"><div class="cc-img"><img src="https://images.unsplash.com/photo-1530026405186-ed1f139313f3?w=400&h=220&fit=crop&q=80&auto=format" alt="AP® Biology" loading="lazy" width="400" height="220"></div><div class="cc-body"><span class="cc-tag">AP® STEM</span><h3 class="cc-title">AP® Biology</h3><p class="cc-desc">Cells, genetics, evolution, ecology · Hardy-Weinberg · ATP counts</p><div class="cc-foot"><span class="cc-meta">8 units · All topics</span><span class="cc-cta">Explore →</span></div></div></a>
+<a class="cc" href="courses/ap-chemistry.html" style="--ac:#a78bfa"><div class="cc-img"><img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=400&h=220&fit=crop&q=80&auto=format" alt="AP® Chemistry" loading="lazy" width="400" height="220"></div><div class="cc-body"><span class="cc-tag">AP® STEM</span><h3 class="cc-title">AP® Chemistry</h3><p class="cc-desc">ICE tables, titration, Henderson-Hasselbalch, Nernst · Step-by-step solutions</p><div class="cc-foot"><span class="cc-meta">9 units · Calculations focus</span><span class="cc-cta">Explore →</span></div></div></a>
+<a class="cc" href="courses/ap-environmental-science.html" style="--ac:#86efac"><div class="cc-img"><img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=220&fit=crop&q=80&auto=format" alt="AP® Environmental Science" loading="lazy" width="400" height="220"></div><div class="cc-body"><span class="cc-tag">AP® STEM</span><h3 class="cc-title">AP® Environmental Science</h3><p class="cc-desc">HIPPCO · Rule of 70 · Energy sources · Climate vs. ozone · FRQ calculations</p><div class="cc-foot"><span class="cc-meta">9 units · Earth systems</span><span class="cc-cta">Explore →</span></div></div></a>
+<a class="cc" href="courses/ap-physics-1-2.html" style="--ac:#38bdf8"><div class="cc-img"><img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=400&h=220&fit=crop&q=80&auto=format" alt="AP® Physics 1 &amp; 2" loading="lazy" width="400" height="220"></div><div class="cc-body"><span class="cc-tag">AP® STEM</span><h3 class="cc-title">AP® Physics 1 &amp; 2</h3><p class="cc-desc">Mechanics through modern physics · Every equation · FBDs, rotation, optics</p><div class="cc-foot"><span class="cc-meta">13 units · Physics 1+2</span><span class="cc-cta">Explore →</span></div></div></a>
+<a class="cc" href="courses/ap-physics-c-mechanics.html" style="--ac:#38bdf8"><div class="cc-img"><img src="https://images.unsplash.com/photo-1609942072084-4e581e47a30a?w=400&h=220&fit=crop&q=80&auto=format" alt="AP® Physics C: Mechanics" loading="lazy" width="400" height="220"></div><div class="cc-body"><span class="cc-tag">AP® STEM</span><h3 class="cc-title">AP® Physics C: Mechanics</h3><p class="cc-desc">Calculus-based · Kinematics, Newton's laws, rotation, oscillations</p><div class="cc-foot"><span class="cc-meta">7 units · Calculus-based</span><span class="cc-cta">Explore →</span></div></div></a>
+<a class="cc" href="courses/ap-physics-c-electricity-and-magnetism.html" style="--ac:#38bdf8"><div class="cc-img"><img src="https://images.unsplash.com/photo-1608022800249-0fcf8e0f0a21?w=400&h=220&fit=crop&q=80&auto=format" alt="AP® Physics C: E&amp;M" loading="lazy" width="400" height="220"></div><div class="cc-body"><span class="cc-tag">AP® STEM</span><h3 class="cc-title">AP® Physics C: E&amp;M</h3><p class="cc-desc">Electric fields, Gauss's law, circuits, magnetic fields, Maxwell's equations</p><div class="cc-foot"><span class="cc-meta">6 units · Calculus-based E&amp;M</span><span class="cc-cta">Explore →</span></div></div></a>
+<a class="cc" href="courses/ap-calculus-bc.html" style="--ac:#818cf8"><div class="cc-img"><img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=400&h=220&fit=crop&q=80&auto=format" alt="AP® Calculus BC" loading="lazy" width="400" height="220"></div><div class="cc-body"><span class="cc-tag">AP® STEM</span><h3 class="cc-title">AP® Calculus BC</h3><p class="cc-desc">Limits through series · Taylor/Maclaurin, parametric, polar · All BC topics</p><div class="cc-foot"><span class="cc-meta">10 units · AB + BC topics</span><span class="cc-cta">Explore →</span></div></div></a>
+<a class="cc" href="courses/ap-precalculus.html" style="--ac:#818cf8"><div class="cc-img"><img src="https://images.unsplash.com/photo-1509228627929-c0b3ed6e2b91?w=400&h=220&fit=crop&q=80&auto=format" alt="AP® Precalculus" loading="lazy" width="400" height="220"></div><div class="cc-body"><span class="cc-tag">AP® STEM</span><h3 class="cc-title">AP® Precalculus</h3><p class="cc-desc">Polynomial, rational, sinusoidal · Exponentials, logarithms, polar</p><div class="cc-foot"><span class="cc-meta">4 units · All function types</span><span class="cc-cta">Explore →</span></div></div></a>
+<a class="cc" href="courses/ap-computer-science-a.html" style="--ac:#4ade80"><div class="cc-img"><img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=220&fit=crop&q=80&auto=format" alt="AP® Computer Science A" loading="lazy" width="400" height="220"></div><div class="cc-body"><span class="cc-tag">AP® STEM</span><h3 class="cc-title">AP® Computer Science A</h3><p class="cc-desc">All 4 FRQ types · Java, OOP, arrays, ArrayLists · Complete solutions</p><div class="cc-foot"><span class="cc-meta">4 units · Java &amp; OOP</span><span class="cc-cta">Explore →</span></div></div></a>
+<a class="cc" href="courses/ap-computer-science-principles.html" style="--ac:#f97316"><div class="cc-img"><img src="https://images.unsplash.com/photo-1518770660439-464ac907be0b?w=400&h=220&fit=crop&q=80&auto=format" alt="AP® CS Principles" loading="lazy" width="400" height="220"></div><div class="cc-body"><span class="cc-tag">AP® STEM</span><h3 class="cc-title">AP® CS Principles</h3><p class="cc-desc">5 Big Ideas · Algorithms, data, systems, impact · Create PT breakdown</p><div class="cc-foot"><span class="cc-meta">5 units · 5 Big Ideas</span><span class="cc-cta">Explore →</span></div></div></a></div></div>
 
-<a class="gc" href="courses/ap-human-geography.html" style="--ac:#f97316;--ic:rgba(249,115,22,.1);--tb:rgba(249,115,22,.08);--tbd:rgba(249,115,22,.2);">
-<div class="g-top"><div class="g-icon">🗺️</div><span class="g-badge">SOCIAL SCIENCE</span></div>
-<div class="g-title">AP® Human Geography</div>
-<div class="g-sub">Thinking geographically through cities and development · Population, culture, political geography, agriculture, urban land use.</div>
-<div class="g-pills"><span class="gp">7 Units</span><span class="gp">FRQ</span><span class="gp">Models</span><span class="gp">MCQ Practice</span></div>
-<div class="g-foot"><span class="g-meta">7 units · All topics</span><span class="g-arr">→</span></div></a>
+<div class="cat-section"><h2 class="cat-heading">Economics</h2><div class="cc-grid"><a class="cc" href="courses/ap-macroeconomics.html" style="--ac:#34d399"><div class="cc-img"><img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=400&h=220&fit=crop&q=80&auto=format" alt="AP® Macroeconomics" loading="lazy" width="400" height="220"></div><div class="cc-body"><span class="cc-tag">AP® ECON</span><h3 class="cc-title">AP® Macroeconomics</h3><p class="cc-desc">AD/AS, fiscal &amp; monetary policy, balance of payments, Phillips curve</p><div class="cc-foot"><span class="cc-meta">6 units · GDP to trade</span><span class="cc-cta">Explore →</span></div></div></a>
+<a class="cc" href="courses/ap-microeconomics.html" style="--ac:#34d399"><div class="cc-img"><img src="https://images.unsplash.com/photo-1579621970795-87facc2f976d?w=400&h=220&fit=crop&q=80&auto=format" alt="AP® Microeconomics" loading="lazy" width="400" height="220"></div><div class="cc-body"><span class="cc-tag">AP® ECON</span><h3 class="cc-title">AP® Microeconomics</h3><p class="cc-desc">Supply/demand, elasticity, firm behavior, market structures, game theory</p><div class="cc-foot"><span class="cc-meta">6 units · Market to policy</span><span class="cc-cta">Explore →</span></div></div></a></div></div>
 
-<a class="gc" href="courses/ap-u-s-government-politics.html" style="--ac:#60a5fa;--ic:rgba(96,165,250,.1);--tb:rgba(96,165,250,.08);--tbd:rgba(96,165,250,.2);">
-<div class="g-top"><div class="g-icon">🏛️</div><span class="g-badge">SOCIAL SCIENCE</span></div>
-<div class="g-title">AP® U.S. Government &amp; Politics</div>
-<div class="g-sub">All 15 required SCOTUS cases · 9 foundational documents · Argument essay, SCOTUS comparison, concept application FRQs.</div>
-<div class="g-pills"><span class="gp">5 Units</span><span class="gp">15 SCOTUS</span><span class="gp">FRQ Types</span><span class="gp">MCQ Practice</span></div>
-<div class="g-foot"><span class="g-meta">5 units · Branches &amp; Rights</span><span class="g-arr">→</span></div></a>
+<div class="cat-section"><h2 class="cat-heading">Arts &amp; Music</h2><div class="cc-grid"><a class="cc" href="courses/ap-art-history.html" style="--ac:#f472b6"><div class="cc-img"><img src="https://images.unsplash.com/photo-1544967082-d9d25d867d66?w=400&h=220&fit=crop&q=80&auto=format" alt="AP® Art History" loading="lazy" width="400" height="220"></div><div class="cc-body"><span class="cc-tag">AP® ARTS</span><h3 class="cc-title">AP® Art History</h3><p class="cc-desc">Global prehistory to contemporary · 250 required works · Formal analysis</p><div class="cc-foot"><span class="cc-meta">10 units · Global art</span><span class="cc-cta">Explore →</span></div></div></a>
+<a class="cc" href="courses/ap-music-theory.html" style="--ac:#e879f9"><div class="cc-img"><img src="https://images.unsplash.com/photo-1507838153414-b4b713384a76?w=400&h=220&fit=crop&q=80&auto=format" alt="AP® Music Theory" loading="lazy" width="400" height="220"></div><div class="cc-body"><span class="cc-tag">AP® ARTS</span><h3 class="cc-title">AP® Music Theory</h3><p class="cc-desc">Notation, harmony, voice leading, ear training, sight-singing</p><div class="cc-foot"><span class="cc-meta">8 units · Harmony to form</span><span class="cc-cta">Explore →</span></div></div></a></div></div>
 
-<a class="gc" href="courses/ap-comparative-government-and-politics.html" style="--ac:#94a3b8;--ic:rgba(148,163,184,.1);--tb:rgba(148,163,184,.08);--tbd:rgba(148,163,184,.2);">
-<div class="g-top"><div class="g-icon">⚖️</div><span class="g-badge">SOCIAL SCIENCE</span></div>
-<div class="g-title">AP® Comparative Gov &amp; Politics</div>
-<div class="g-sub">Six core countries · UK, Mexico, Russia, Iran, China, Nigeria · Political institutions, democratization, civil liberties, economic systems.</div>
-<div class="g-pills"><span class="gp">5 Units</span><span class="gp">6 Countries</span><span class="gp">FRQ</span><span class="gp">MCQ Practice</span></div>
-<div class="g-foot"><span class="g-meta">5 units · 6 case countries</span><span class="g-arr">→</span></div></a>
+<div class="cat-section"><h2 class="cat-heading">College Math</h2><div class="cc-grid"><a class="cc" href="courses/college-algebra.html" style="--ac:#60a5fa"><div class="cc-img"><img src="https://images.unsplash.com/photo-1509228627929-c0b3ed6e2b91?w=400&h=220&fit=crop&q=80&auto=format" alt="College Algebra" loading="lazy" width="400" height="220"></div><div class="cc-body"><span class="cc-tag">COLLEGE MATH</span><h3 class="cc-title">College Algebra</h3><p class="cc-desc">Equations, inequalities, functions, polynomials, exponentials, systems</p><div class="cc-foot"><span class="cc-meta">6 units · Foundations</span><span class="cc-cta">Explore →</span></div></div></a>
+<a class="cc" href="courses/college-trigonometry.html" style="--ac:#818cf8"><div class="cc-img"><img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=400&h=220&fit=crop&q=80&auto=format" alt="College Trigonometry" loading="lazy" width="400" height="220"></div><div class="cc-body"><span class="cc-tag">COLLEGE MATH</span><h3 class="cc-title">College Trigonometry</h3><p class="cc-desc">Unit circle, right triangles, trig graphs, identities, polar, vectors</p><div class="cc-foot"><span class="cc-meta">6 units · Trig to polar</span><span class="cc-cta">Explore →</span></div></div></a></div></div>
 
-<a class="gc" href="courses/ap-psychology.html" style="--ac:#a855f7;--ic:rgba(168,85,247,.1);--tb:rgba(168,85,247,.08);--tbd:rgba(168,85,247,.2);">
-<div class="g-top"><div class="g-icon">🧠</div><span class="g-badge">SOCIAL SCIENCE</span></div>
-<div class="g-title">AP® Psychology</div>
-<div class="g-sub">7 perspectives · Classical &amp; operant conditioning · Memory models · Milgram/Asch/Zimbardo · All disorders + treatments.</div>
-<div class="g-pills"><span class="gp">5 Units</span><span class="gp">Key Studies</span><span class="gp">Conditioning</span><span class="gp">MCQ Practice</span></div>
-<div class="g-foot"><span class="g-meta">5 units · Behavior to health</span><span class="g-arr">→</span></div></a>
-</div></div>
-
-<div class="cat"><div class="cat-lbl">English Language Arts</div>
-<div class="grid">
-<a class="gc" href="courses/ap-english-language-composition.html" style="--ac:#fb923c;--ic:rgba(251,146,60,.1);--tb:rgba(251,146,60,.08);--tbd:rgba(251,146,60,.2);">
-<div class="g-top"><div class="g-icon">✍️</div><span class="g-badge">AP® ENGLISH</span></div>
-<div class="g-title">AP® Language &amp; Composition</div>
-<div class="g-sub">Current 2025 analytic rubric (1+4+1) · SPACE-CAT · 30+ rhetorical devices · Scored model essays for all 3 FRQ types.</div>
-<div class="g-pills"><span class="gp">9 Units</span><span class="gp">1+4+1 Rubric</span><span class="gp">SPACE-CAT</span><span class="gp">MCQ Practice</span></div>
-<div class="g-foot"><span class="g-meta">9 units · All 3 FRQ types</span><span class="g-arr">→</span></div></a>
-
-<a class="gc" href="courses/ap-english-literature-composition.html" style="--ac:#f472b6;--ic:rgba(244,114,182,.1);--tb:rgba(244,114,182,.08);--tbd:rgba(244,114,182,.2);">
-<div class="g-top"><div class="g-icon">📖</div><span class="g-badge">AP® ENGLISH</span></div>
-<div class="g-title">AP® Literature &amp; Composition</div>
-<div class="g-sub">60+ literary devices · TPCASTT · Short fiction, poetry, longer fiction/drama · FRQs with scored model responses and rubric annotation.</div>
-<div class="g-pills"><span class="gp">9 Units</span><span class="gp">TPCASTT</span><span class="gp">Prose FRQ</span><span class="gp">MCQ Practice</span></div>
-<div class="g-foot"><span class="g-meta">9 units · Poetry to drama</span><span class="g-arr">→</span></div></a>
-</div></div>
-
-<div class="cat"><div class="cat-lbl">STEM</div>
-<div class="grid">
-<a class="gc" href="courses/ap-biology.html" style="--ac:#4ade80;--ic:rgba(74,222,128,.1);--tb:rgba(74,222,128,.08);--tbd:rgba(74,222,128,.2);">
-<div class="g-top"><div class="g-icon">🧬</div><span class="g-badge">AP® STEM</span></div>
-<div class="g-title">AP® Biology</div>
-<div class="g-sub">Chemistry of life through ecology · Photosynthesis/respiration ATP counts · Genetics, gene expression · Hardy-Weinberg, evolution, ecology.</div>
-<div class="g-pills"><span class="gp">8 Units</span><span class="gp">Cell Biology</span><span class="gp">Genetics</span><span class="gp">MCQ Practice</span></div>
-<div class="g-foot"><span class="g-meta">8 units · All topics</span><span class="g-arr">→</span></div></a>
-
-<a class="gc" href="courses/ap-chemistry.html" style="--ac:#2dd4bf;--ic:rgba(45,212,191,.1);--tb:rgba(45,212,191,.08);--tbd:rgba(45,212,191,.2);">
-<div class="g-top"><div class="g-icon">⚗️</div><span class="g-badge">AP® STEM</span></div>
-<div class="g-title">AP® Chemistry</div>
-<div class="g-sub">Atomic structure through electrochemistry · ICE tables, titration, Henderson-Hasselbalch, Nernst · Step-by-step problem solving.</div>
-<div class="g-pills"><span class="gp">9 Units</span><span class="gp">Kinetics</span><span class="gp">Equilibrium</span><span class="gp">MCQ Practice</span></div>
-<div class="g-foot"><span class="g-meta">9 units · Calculations focus</span><span class="g-arr">→</span></div></a>
-
-<a class="gc" href="courses/ap-environmental-science.html" style="--ac:#22c55e;--ic:rgba(34,197,94,.1);--tb:rgba(34,197,94,.08);--tbd:rgba(34,197,94,.2);">
-<div class="g-top"><div class="g-icon">🌿</div><span class="g-badge">AP® STEM</span></div>
-<div class="g-title">AP® Environmental Science</div>
-<div class="g-sub">HIPPCO · Rule of 70 · Demographic transition · Energy source comparison · Climate vs. ozone · FRQ calculations shown step-by-step.</div>
-<div class="g-pills"><span class="gp">9 Units</span><span class="gp">HIPPCO</span><span class="gp">Rule of 70</span><span class="gp">MCQ Practice</span></div>
-<div class="g-foot"><span class="g-meta">9 units · Earth systems</span><span class="g-arr">→</span></div></a>
-
-<a class="gc" href="courses/ap-physics-1-2.html" style="--ac:#34d399;--ic:rgba(52,211,153,.1);--tb:rgba(52,211,153,.08);--tbd:rgba(52,211,153,.2);">
-<div class="g-top"><div class="g-icon">⚡</div><span class="g-badge">AP® STEM</span></div>
-<div class="g-title">AP® Physics 1 &amp; 2</div>
-<div class="g-sub">Mechanics through modern physics · Every equation with worked examples · FBDs, rotational motion, E&amp;M, optics, thermodynamics, nuclear.</div>
-<div class="g-pills"><span class="gp">13 Units</span><span class="gp">Equations</span><span class="gp">FBDs</span><span class="gp">MCQ Practice</span></div>
-<div class="g-foot"><span class="g-meta">13 units · Physics 1+2</span><span class="g-arr">→</span></div></a>
-
-<a class="gc" href="courses/ap-physics-c-mechanics.html" style="--ac:#10b981;--ic:rgba(16,185,129,.1);--tb:rgba(16,185,129,.08);--tbd:rgba(16,185,129,.2);">
-<div class="g-top"><div class="g-icon">🔬</div><span class="g-badge">AP® STEM</span></div>
-<div class="g-title">AP® Physics C: Mechanics</div>
-<div class="g-sub">Calculus-based mechanics · Kinematics, Newton's laws, work-energy, momentum, rotation, oscillations, gravitation · FRQ problem solving.</div>
-<div class="g-pills"><span class="gp">7 Units</span><span class="gp">Calculus-based</span><span class="gp">FRQ</span><span class="gp">MCQ Practice</span></div>
-<div class="g-foot"><span class="g-meta">7 units · Calculus-based</span><span class="g-arr">→</span></div></a>
-
-<a class="gc" href="courses/ap-physics-c-electricity-and-magnetism.html" style="--ac:#38bdf8;--ic:rgba(56,189,248,.1);--tb:rgba(56,189,248,.08);--tbd:rgba(56,189,248,.2);">
-<div class="g-top"><div class="g-icon">🔋</div><span class="g-badge">AP® STEM</span></div>
-<div class="g-title">AP® Physics C: Electricity &amp; Magnetism</div>
-<div class="g-sub">Calculus-based E&amp;M · Electric fields, Gauss's law, circuits, capacitors, magnetic fields, Faraday's law, Maxwell's equations.</div>
-<div class="g-pills"><span class="gp">6 Units</span><span class="gp">Calculus-based</span><span class="gp">Gauss's Law</span><span class="gp">MCQ Practice</span></div>
-<div class="g-foot"><span class="g-meta">6 units · Calculus-based E&amp;M</span><span class="g-arr">→</span></div></a>
-
-<a class="gc" href="courses/ap-calculus-bc.html" style="--ac:#a78bfa;--ic:rgba(167,139,250,.1);--tb:rgba(167,139,250,.08);--tbd:rgba(167,139,250,.2);">
-<div class="g-top"><div class="g-icon">∫</div><span class="g-badge">AP® STEM</span></div>
-<div class="g-title">AP® Calculus BC</div>
-<div class="g-sub">Limits through series · Every BC-only topic: Taylor/Maclaurin, parametric, polar, convergence tests · Worked examples for every problem type.</div>
-<div class="g-pills"><span class="gp">10 Units</span><span class="gp">Series Tests</span><span class="gp">Polar</span><span class="gp">MCQ Practice</span></div>
-<div class="g-foot"><span class="g-meta">10 units · AB + BC topics</span><span class="g-arr">→</span></div></a>
-
-<a class="gc" href="courses/ap-precalculus.html" style="--ac:#818cf8;--ic:rgba(129,140,248,.1);--tb:rgba(129,140,248,.08);--tbd:rgba(129,140,248,.2);">
-<div class="g-top"><div class="g-icon">📈</div><span class="g-badge">AP® STEM</span></div>
-<div class="g-title">AP® Precalculus</div>
-<div class="g-sub">Polynomial, rational, and sinusoidal functions · Exponentials and logarithms · Polar and parametric · Data modeling and statistical reasoning.</div>
-<div class="g-pills"><span class="gp">4 Units</span><span class="gp">Functions</span><span class="gp">Modeling</span><span class="gp">MCQ Practice</span></div>
-<div class="g-foot"><span class="g-meta">4 units · All function types</span><span class="g-arr">→</span></div></a>
-
-<a class="gc" href="courses/ap-computer-science-a.html" style="--ac:#5b9cf6;--ic:rgba(91,156,246,.1);--tb:rgba(91,156,246,.08);--tbd:rgba(91,156,246,.2);">
-<div class="g-top"><div class="g-icon">⌨️</div><span class="g-badge">AP® STEM</span></div>
-<div class="g-title">AP® Computer Science A</div>
-<div class="g-sub">All 4 FRQ types with complete step-by-step solutions · Java syntax reference · OOP, arrays, ArrayLists, 2D arrays · Common traps.</div>
-<div class="g-pills"><span class="gp">4 Units</span><span class="gp">4 FRQ Types</span><span class="gp">Java</span><span class="gp">MCQ Practice</span></div>
-<div class="g-foot"><span class="g-meta">4 units · Java &amp; OOP</span><span class="g-arr">→</span></div></a>
-
-<a class="gc" href="courses/ap-computer-science-principles.html" style="--ac:#f97316;--ic:rgba(249,115,22,.1);--tb:rgba(249,115,22,.08);--tbd:rgba(249,115,22,.2);">
-<div class="g-top"><div class="g-icon">💻</div><span class="g-badge">AP® STEM</span></div>
-<div class="g-title">AP® Computer Science Principles</div>
-<div class="g-sub">5 Big Ideas · Creative development, data, algorithms, systems/networks, societal impact · Full Create PT breakdown with example responses.</div>
-<div class="g-pills"><span class="gp">5 Units</span><span class="gp">Pseudocode</span><span class="gp">Create PT</span><span class="gp">MCQ Practice</span></div>
-<div class="g-foot"><span class="g-meta">5 units · 5 Big Ideas</span><span class="g-arr">→</span></div></a>
-</div></div>
-
-<div class="cat"><div class="cat-lbl">Economics</div>
-<div class="grid">
-<a class="gc" href="courses/ap-macroeconomics.html" style="--ac:#34d399;--ic:rgba(52,211,153,.1);--tb:rgba(52,211,153,.08);--tbd:rgba(52,211,153,.2);">
-<div class="g-top"><div class="g-icon">📊</div><span class="g-badge">AP® ECON</span></div>
-<div class="g-title">AP® Macroeconomics</div>
-<div class="g-sub">PPC, AD/AS, fiscal &amp; monetary policy, money multiplier, Phillips Curve, balance of payments, exchange rates · Graph-by-graph analysis.</div>
-<div class="g-pills"><span class="gp">6 Units</span><span class="gp">AD/AS</span><span class="gp">Monetary Policy</span><span class="gp">MCQ Practice</span></div>
-<div class="g-foot"><span class="g-meta">6 units · Macro &amp; policy</span><span class="g-arr">→</span></div></a>
-
-<a class="gc" href="courses/ap-microeconomics.html" style="--ac:#06b6d4;--ic:rgba(6,182,212,.1);--tb:rgba(6,182,212,.08);--tbd:rgba(6,182,212,.2);">
-<div class="g-top"><div class="g-icon">📉</div><span class="g-badge">AP® ECON</span></div>
-<div class="g-title">AP® Microeconomics</div>
-<div class="g-sub">Supply &amp; demand, elasticity, consumer theory, production costs, perfect &amp; imperfect competition, factor markets, market failure, externalities.</div>
-<div class="g-pills"><span class="gp">6 Units</span><span class="gp">Market Structures</span><span class="gp">Elasticity</span><span class="gp">MCQ Practice</span></div>
-<div class="g-foot"><span class="g-meta">6 units · Micro &amp; markets</span><span class="g-arr">→</span></div></a>
-</div></div>
-
-<div class="cat"><div class="cat-lbl">Arts</div>
-<div class="grid">
-<a class="gc" href="courses/ap-art-history.html" style="--ac:#c9a84c;--ic:rgba(201,168,76,.1);--tb:rgba(201,168,76,.08);--tbd:rgba(201,168,76,.2);">
-<div class="g-top"><div class="g-icon">🖼️</div><span class="g-badge">AP® ARTS</span></div>
-<div class="g-title">AP® Art History</div>
-<div class="g-sub">All 10 content areas · OPTIC formal analysis · 40+ key works with full context · Movements prehistoric through contemporary · Essay types.</div>
-<div class="g-pills"><span class="gp">10 Units</span><span class="gp">OPTIC</span><span class="gp">40+ Works</span><span class="gp">MCQ Practice</span></div>
-<div class="g-foot"><span class="g-meta">10 units · All content areas</span><span class="g-arr">→</span></div></a>
-
-<a class="gc" href="courses/ap-music-theory.html" style="--ac:#e879f9;--ic:rgba(232,121,249,.1);--tb:rgba(232,121,249,.08);--tbd:rgba(232,121,249,.2);">
-<div class="g-top"><div class="g-icon">🎵</div><span class="g-badge">AP® ARTS</span></div>
-<div class="g-title">AP® Music Theory</div>
-<div class="g-sub">Scales, intervals, chords, SATB voice leading rules · Cadences, circle of fifths, musical form · Aural skills strategy · FRQ types.</div>
-<div class="g-pills"><span class="gp">8 Units</span><span class="gp">Circle of 5ths</span><span class="gp">SATB</span><span class="gp">MCQ Practice</span></div>
-<div class="g-foot"><span class="g-meta">8 units · Written + Aural</span><span class="g-arr">→</span></div></a>
-</div></div>
-</div></section>
-
-<!-- COLLEGE COURSES -->
-<section class="sec" id="college"><div class="wrap">
-<div class="sec-h"><span class="sec-tag">College</span><span class="sec-title">College Course Review</span><div class="sec-line"></div></div>
-<div class="cat"><div class="cat-lbl">Mathematics — Non-AP® / Non-standardized courses</div>
-<div class="grid">
-<a class="gc" href="courses/college-algebra.html" style="--ac:#38bdf8;--ic:rgba(56,189,248,.1);--tb:rgba(56,189,248,.08);--tbd:rgba(56,189,248,.2);">
-<div class="g-top"><div class="g-icon">📐</div><span class="g-badge">COLLEGE MATH</span></div>
-<div class="g-title">College Algebra</div>
-<div class="g-sub">Number systems through functions, polynomials, rational functions, exponentials, logarithms, systems of equations, matrices, sequences, conics.</div>
-<div class="g-pills"><span class="gp">6 Units</span><span class="gp">Non-AP®</span><span class="gp">Step-by-step</span><span class="gp">MCQ Practice</span></div>
-<div class="g-foot"><span class="g-meta">6 units · All algebra topics</span><span class="g-arr">→</span></div></a>
-
-<a class="gc" href="courses/college-trigonometry.html" style="--ac:#818cf8;--ic:rgba(129,140,248,.1);--tb:rgba(129,140,248,.08);--tbd:rgba(129,140,248,.2);">
-<div class="g-top"><div class="g-icon">📊</div><span class="g-badge">COLLEGE MATH</span></div>
-<div class="g-title">College Trigonometry</div>
-<div class="g-sub">Unit circle mastery · All 6 trig functions and graphs · Sum-difference, double-angle identities · Inverse trig · Law of Sines &amp; Cosines · Polar.</div>
-<div class="g-pills"><span class="gp">6 Units</span><span class="gp">Non-AP®</span><span class="gp">All Identities</span><span class="gp">MCQ Practice</span></div>
-<div class="g-foot"><span class="g-meta">6 units · All trig topics</span><span class="g-arr">→</span></div></a>
-</div></div>
-</div></section>
-
-<!-- ABOUT -->
-<section class="sec" id="about"><div class="wrap">
-<div class="about-builder">
-  <p class="ab-label">Built by Students, for Students</p>
-  <p class="ab-heading">Five &amp; A+</p>
-  <p class="ab-body">Five &amp; A+ was founded by Arnav Sinha and co-founded by Yashwin Kandra, a Don Bosco Prep student from New York in the Class of 2027. After taking on 11 AP® courses and coding for years, Yashwin wanted to help build a study system that worked for students who do not fit perfectly into conventional study habits.</p>
-  <p class="ab-body">This is not just flashcards, and it is not a blank Notion page that leaves all the organizing to you. The goal is to put lessons, videos, practice, explanations, and review paths in one place, so students can spend less time building a study system and more time actually learning.</p>
-  <p class="ab-profile">Arnav Sinha &middot; Founder</p>
-  <p class="ab-profile">Yashwin Kandra &middot; Co-Founder &middot; Don Bosco Prep &middot; Class of 2027 &middot; New York &middot; 11 AP® courses &middot; Student Developer</p>
 </div>
-</div></section>
+
+<div class="about-builder" id="about">
+  <div class="ab-label">About Five &amp; A+</div>
+  <h2 class="ab-heading">Built for students, by a student</h2>
+  <p class="ab-body">Five &amp; A+ is a free, independent AP® and college review platform. Every unit page includes structured content, click-to-select MCQs with instant feedback, embedded video resources, vocabulary review, key equations, and exam-specific strategy tips — all in one place, no account required.</p>
+  <p class="ab-profile">Built by Arnav Sinha &amp; Yashwin Kandra · 2025–2026 · Not affiliated with the College Board</p>
+</div>
+</div>
 
 <footer class="footer-hub">
   <div class="f-brand-hub">Five &amp; A+</div>
-  <p class="f-trademark">AP® and Advanced Placement® are trademarks registered by the College Board, which is not affiliated with, and does not endorse, this site.</p>
+  <p class="f-trademark">AP® and Advanced Placement® are trademarks registered by the College Board, which is not affiliated with, and does not endorse, this site. Five &amp; A+ is an independent educational resource and is not affiliated with, endorsed by, or sponsored by the College Board.</p>
   <p class="f-trademark">Five &amp; A+ is an independent educational resource and is not affiliated with, endorsed by, or sponsored by the College Board.</p>
   <p class="f-sub-hub">Free AP® &amp; College Review &middot; Built by Arnav Sinha &amp; Yashwin Kandra &middot; 2025–2026</p>
 </footer>
@@ -339,8 +182,13 @@
 <script>
 function filterHub() {
   var q = document.getElementById('hubq').value.toLowerCase().trim();
-  document.querySelectorAll('.gc').forEach(function(card) {
-    card.style.display = (!q || card.innerText.toLowerCase().includes(q)) ? '' : 'none';
+  document.querySelectorAll('.cc').forEach(function(c) {
+    var text = c.textContent.toLowerCase();
+    c.classList.toggle('hidden', q.length > 0 && text.indexOf(q) === -1);
+  });
+  document.querySelectorAll('.cat-section').forEach(function(s) {
+    var visible = s.querySelectorAll('.cc:not(.hidden)').length > 0;
+    s.style.display = (q.length > 0 && !visible) ? 'none' : '';
   });
 }
 </script>

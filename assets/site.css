@@ -24,9 +24,9 @@
   --shadow:     rgba(26,18,8,0.12);
 
   /* Course accent — overridden per-course via body style */
-  --AC:      #1a4a2a;
-  --ACfaint: rgba(26,74,42,0.08);
-  --ACglow:  rgba(26,74,42,0.20);
+  --AC:      #8b6914;
+  --ACfaint: rgba(139,105,20,0.08);
+  --ACglow:  rgba(139,105,20,0.20);
 
   /* Motion */
   --ease: cubic-bezier(.4,0,.2,1);

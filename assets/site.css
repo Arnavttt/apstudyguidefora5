@@ -497,3 +497,285 @@ h5 { font-family:'Fira Code',monospace; font-size:10px; font-weight:600; letter-
 /* ── MathJax — prevent horizontal overflow on mobile ─────────────────────── */
 mjx-container { overflow-x: auto; max-width: 100%; display: block; }
 .MJX-TEX { overflow-x: auto; }
+
+
+/* Exam tips: use course accent everywhere (override injected hardcoded green) */
+.unit-exam-tips {
+  background: var(--ACfaint) !important;
+  border: 1px solid color-mix(in srgb, var(--AC) 25%, transparent) !important;
+  border-left: 3px solid var(--AC) !important;
+}
+.uet-header { border-bottom: 1px solid color-mix(in srgb, var(--AC) 20%, transparent) !important; }
+.uet-icon { color: var(--AC) !important; }
+.uet-list li::before { color: var(--AC) !important; }
+
+[data-course="biology"] {
+  --bg2:#08120e;--bg3:#0d1a12;
+  --glow1:20% 20%; --glow2:75% 85%;
+}
+
+[data-course="physics-1-2"] {
+  --bg2:#08100f;--bg3:#0d1619;
+  --glow1:15% 30%; --glow2:80% 70%;
+}
+
+[data-course="calculus"] {
+  --bg2:#0b0a17;--bg3:#10101e;
+  --glow1:25% 15%; --glow2:70% 80%;
+}
+
+[data-course="chemistry"] {
+  --bg2:#071210;--bg3:#0b1918;
+  --glow1:30% 25%; --glow2:65% 75%;
+}
+
+[data-course="cs-a"] {
+  --bg2:#080d16;--bg3:#0c121e;
+  --glow1:10% 20%; --glow2:85% 75%;
+}
+
+[data-course="cs-p"] {
+  --bg2:#0f0c09;--bg3:#150f09;
+  --glow1:25% 20%; --glow2:70% 80%;
+}
+
+[data-course="english-lang"] {
+  --bg2:#120c08;--bg3:#19110a;
+  --glow1:30% 20%; --glow2:65% 75%;
+}
+
+[data-course="english-lit"] {
+  --bg2:#130810;--bg3:#1a0c16;
+  --glow1:20% 30%; --glow2:75% 65%;
+}
+
+[data-course="us-history"] {
+  --bg2:#100f07;--bg3:#17140a;
+  --glow1:25% 25%; --glow2:70% 70%;
+}
+
+[data-course="art-history"] {
+  --bg2:#100e07;--bg3:#17130a;
+  --glow1:20% 20%; --glow2:75% 75%;
+}
+
+[data-course="euro-history"] {
+  --bg2:#140808;--bg3:#1b0d0d;
+  --glow1:15% 20%; --glow2:80% 75%;
+}
+
+[data-course="world-history"] {
+  --bg2:#120f07;--bg3:#18130a;
+  --glow1:25% 25%; --glow2:70% 70%;
+}
+
+[data-course="us-gov"] {
+  --bg2:#08100f;--bg3:#0d1419;
+  --glow1:20% 20%; --glow2:75% 75%;
+}
+
+[data-course="comp-gov"] {
+  --bg2:#0c0c10;--bg3:#101019;
+  --glow1:25% 25%; --glow2:70% 70%;
+}
+
+[data-course="psychology"] {
+  --bg2:#100912;--bg3:#160e19;
+  --glow1:20% 30%; --glow2:75% 65%;
+}
+
+[data-course="music"] {
+  --bg2:#130813;--bg3:#1a0d1a;
+  --glow1:20% 20%; --glow2:75% 75%;
+}
+
+[data-course="env-sci"] {
+  --bg2:#08120d;--bg3:#0d1912;
+  --glow1:15% 25%; --glow2:80% 70%;
+}
+
+[data-course="macro"] {
+  --bg2:#08100e;--bg3:#0d1814;
+  --glow1:25% 20%; --glow2:70% 75%;
+}
+
+[data-course="micro"] {
+  --bg2:#070e14;--bg3:#0b1219;
+  --glow1:20% 25%; --glow2:75% 70%;
+}
+
+[data-course="human-geo"] {
+  --bg2:#120d08;--bg3:#190f09;
+  --glow1:25% 20%; --glow2:70% 75%;
+}
+
+[data-course="precalc"] {
+  --bg2:#0b0a16;--bg3:#100f1d;
+  --glow1:25% 15%; --glow2:70% 80%;
+}
+
+[data-course="physics-c-mech"] {
+  --bg2:#08120e;--bg3:#0c1812;
+  --glow1:20% 20%; --glow2:75% 80%;
+}
+
+[data-course="physics-c-em"] {
+  --bg2:#071018;--bg3:#0b141f;
+  --glow1:15% 25%; --glow2:80% 70%;
+}
+
+[data-course="college-algebra"] {
+  --bg2:#07100e;--bg3:#0b1418;
+  --glow1:20% 20%; --glow2:75% 75%;
+}
+
+[data-course="college-trig"] {
+  --bg2:#0b0a16;--bg3:#100f1d;
+  --glow1:25% 15%; --glow2:70% 80%;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   Per-course visual themes — polished, not garish
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* Replace hardcoded body::before gradient with course-tinted version */
+body[data-course]::before {
+  background:
+    radial-gradient(ellipse at var(--glow1,20% 20%), var(--ACfaint) 0%, transparent 55%),
+    radial-gradient(ellipse at var(--glow2,78% 80%), var(--ACfaint) 0%, transparent 45%);
+}
+
+/* Exam tips: use course accent everywhere */
+.unit-exam-tips {
+  background: var(--ACfaint) !important;
+  border: 1px solid color-mix(in srgb, var(--AC) 25%, transparent) !important;
+  border-left: 3px solid var(--AC) !important;
+}
+.uet-header { border-bottom: 1px solid color-mix(in srgb, var(--AC) 20%, transparent) !important; }
+.uet-icon { color: var(--AC) !important; }
+.uet-list li::before { color: var(--AC) !important; }
+
+[data-course="ap-biology"] {
+  --bg2:#08120e;--bg3:#0d1a12;
+  --glow1:20% 20%; --glow2:75% 85%;
+}
+
+[data-course="ap-physics-1-2"] {
+  --bg2:#08100f;--bg3:#0d1619;
+  --glow1:15% 30%; --glow2:80% 70%;
+}
+
+[data-course="ap-calculus-bc"] {
+  --bg2:#0b0a17;--bg3:#10101e;
+  --glow1:25% 15%; --glow2:70% 80%;
+}
+
+[data-course="ap-chemistry"] {
+  --bg2:#071210;--bg3:#0b1918;
+  --glow1:30% 25%; --glow2:65% 75%;
+}
+
+[data-course="ap-computer-science-a"] {
+  --bg2:#080d16;--bg3:#0c121e;
+  --glow1:10% 20%; --glow2:85% 75%;
+}
+
+[data-course="ap-computer-science-principles"] {
+  --bg2:#0f0c09;--bg3:#150f09;
+  --glow1:25% 20%; --glow2:70% 80%;
+}
+
+[data-course="ap-english-language-composition"] {
+  --bg2:#120c08;--bg3:#19110a;
+  --glow1:30% 20%; --glow2:65% 75%;
+}
+
+[data-course="ap-english-literature-composition"] {
+  --bg2:#130810;--bg3:#1a0c16;
+  --glow1:20% 30%; --glow2:75% 65%;
+}
+
+[data-course="ap-u-s-history"] {
+  --bg2:#100f07;--bg3:#17140a;
+  --glow1:25% 25%; --glow2:70% 70%;
+}
+
+[data-course="ap-art-history"] {
+  --bg2:#100e07;--bg3:#17130a;
+  --glow1:20% 20%; --glow2:75% 75%;
+}
+
+[data-course="ap-european-history"] {
+  --bg2:#140808;--bg3:#1b0d0d;
+  --glow1:15% 20%; --glow2:80% 75%;
+}
+
+[data-course="ap-world-history-modern"] {
+  --bg2:#120f07;--bg3:#18130a;
+  --glow1:25% 25%; --glow2:70% 70%;
+}
+
+[data-course="ap-u-s-government-politics"] {
+  --bg2:#08100f;--bg3:#0d1419;
+  --glow1:20% 20%; --glow2:75% 75%;
+}
+
+[data-course="ap-comparative-government-and-politics"] {
+  --bg2:#0c0c10;--bg3:#101019;
+  --glow1:25% 25%; --glow2:70% 70%;
+}
+
+[data-course="ap-psychology"] {
+  --bg2:#100912;--bg3:#160e19;
+  --glow1:20% 30%; --glow2:75% 65%;
+}
+
+[data-course="ap-music-theory"] {
+  --bg2:#130813;--bg3:#1a0d1a;
+  --glow1:20% 20%; --glow2:75% 75%;
+}
+
+[data-course="ap-environmental-science"] {
+  --bg2:#08120d;--bg3:#0d1912;
+  --glow1:15% 25%; --glow2:80% 70%;
+}
+
+[data-course="ap-macroeconomics"] {
+  --bg2:#08100e;--bg3:#0d1814;
+  --glow1:25% 20%; --glow2:70% 75%;
+}
+
+[data-course="ap-microeconomics"] {
+  --bg2:#070e14;--bg3:#0b1219;
+  --glow1:20% 25%; --glow2:75% 70%;
+}
+
+[data-course="ap-human-geography"] {
+  --bg2:#120d08;--bg3:#190f09;
+  --glow1:25% 20%; --glow2:70% 75%;
+}
+
+[data-course="ap-precalculus"] {
+  --bg2:#0b0a16;--bg3:#100f1d;
+  --glow1:25% 15%; --glow2:70% 80%;
+}
+
+[data-course="ap-physics-c-mechanics"] {
+  --bg2:#08120e;--bg3:#0c1812;
+  --glow1:20% 20%; --glow2:75% 80%;
+}
+
+[data-course="ap-physics-c-electricity-and-magnetism"] {
+  --bg2:#071018;--bg3:#0b141f;
+  --glow1:15% 25%; --glow2:80% 70%;
+}
+
+[data-course="college-algebra"] {
+  --bg2:#07100e;--bg3:#0b1418;
+  --glow1:20% 20%; --glow2:75% 75%;
+}
+
+[data-course="college-trigonometry"] {
+  --bg2:#0b0a16;--bg3:#100f1d;
+  --glow1:25% 15%; --glow2:70% 80%;
+}

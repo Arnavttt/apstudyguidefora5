@@ -1,22 +1,24 @@
 /* Five & A+ — site.css v3 (premium dark design system) */
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&family=Syne:wght@700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap');
 
 /* ══════════════════════════════════════════════════════════════════════════
    DESIGN TOKENS
    ══════════════════════════════════════════════════════════════════════════ */
 :root {
-  /* Base — deep slate, not pure black */
-  --bg:      #0f1117;
-  --bg2:     #13161f;
-  --bg3:     #1a1f2e;
+    /* Base — deep slate, not pure black */
+  --bg:      #12151c;
+  --bg2:     #1a1e28;
+  --bg3:     #1f2535;
   --bg4:     #1e2438;
 
   /* Borders — translucent white for glass feel */
-  --border:  rgba(255,255,255,.07);
+  --border:  rgba(255,255,255,.08);
   --border2: rgba(255,255,255,.12);
   --border3: rgba(255,255,255,.20);
 
   /* Typography */
+
   --text:    #e8edf8;
   --text2:   #8b9ab5;
   --text3:   #4a5570;
@@ -65,13 +67,17 @@
 *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
-  font-family: 'Inter', 'Outfit', sans-serif;
+  font-family: 'Comfortaa', sans-serif;
   background: var(--bg);
   color: var(--text);
   overflow-x: hidden;
-  line-height: 1.65;
+  font-size: 16px;
+  line-height: 1.8;
   -webkit-font-smoothing: antialiased;
 }
+h1 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; }
+h2 { font-size: 1.6rem; font-weight: 600; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; margin: 2rem 0 1rem; }
+p { margin-bottom: 1rem; max-width: none; }
 
 /* Ambient glow (course-tinted radial gradients) */
 body::before {
@@ -293,7 +299,7 @@ img, iframe { max-width: 100%; border: 0; }
 /* ══════════════════════════════════════════════════════════════════════════
    PAGE LAYOUT
    ══════════════════════════════════════════════════════════════════════════ */
-.page-wrap { max-width: 1000px; margin: 0 auto; padding: 1.75rem 1.5rem 4rem; position: relative; z-index: 2; }
+.page-wrap { max-width: 1100px; margin: 0 auto; padding: 1.75rem 1.5rem 4rem; position: relative; z-index: 2; }
 
 /* ══════════════════════════════════════════════════════════════════════════
    DASHBOARD BAR
@@ -850,7 +856,7 @@ body.global-unmarked .iq.right,.iq.wrong             { display: none; }
   margin-bottom: .3rem;
   display: block;
 }
-h3 { font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 800; letter-spacing: -.02em; margin-bottom: .3rem; }
+h3 { font-family: 'Comfortaa', sans-serif; font-size: 1.2rem; font-weight: 600; color: var(--AC); margin: 1.5rem 0 0.5rem; }
 h4 { font-family: 'Syne', sans-serif; font-size: .95rem; font-weight: 800; letter-spacing: -.01em; }
 h5 { font-family: 'Fira Code', monospace; font-size: 10px; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: var(--text3); }
 
@@ -893,7 +899,7 @@ h5 { font-family: 'Fira Code', monospace; font-size: 10px; font-weight: 600; let
   transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
 }
 #q:focus { border-color: var(--AC); box-shadow: 0 0 0 3px var(--ACfaint); }
-.simple-layout { max-width: 1000px; margin: 0 auto; padding: 1.4rem 1.25rem 3.5rem; position: relative; z-index: 2; }
+.simple-layout { max-width: 1100px; margin: 0 auto; padding: 1.4rem 1.25rem 3.5rem; position: relative; z-index: 2; }
 .breadcrumb { font-family: 'Fira Code', monospace; font-size: 10px; color: var(--text3); margin-bottom: .65rem; }
 .breadcrumb a { color: var(--text3); }
 .breadcrumb a:hover { color: var(--AC); }
@@ -1308,3 +1314,13 @@ body[data-course]::before {
 /* SVG course banners */
 .course-banner-svg svg, .course-card svg { width: 100%; height: 200px; display: block; border-radius: 8px 8px 0 0; }
 .course-banner-svg { line-height: 0; }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   COURSE OVERVIEW SECTION
+   ══════════════════════════════════════════════════════════════════════════ */
+.course-overview { margin: 2rem 0 3rem; padding: 1.5rem 0; border-bottom: 1px solid var(--border); }
+.overview-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem; margin-top: 1rem; }
+.overview-card { background: var(--bg2); border-radius: 8px; padding: 1.25rem; border-left: 3px solid var(--AC, #6c8ebf); }
+.overview-card h3 { margin-top: 0; font-size: 1rem; color: var(--AC); }
+.quick-start { border-left-color: #f0a500; }
+.quick-start h3 { color: #f0a500; }

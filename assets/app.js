@@ -330,3 +330,8 @@ document.addEventListener('click', function(e) {
   updateScores();
   refreshAllBankScores();
 })();
+
+function toggleSidebar() {
+  var sb = document.getElementById('sidebar');
+  if (sb) sb.classList.toggle('open');
+}

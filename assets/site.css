@@ -1291,3 +1291,75 @@ mjx-container { overflow-x: auto; max-width: 100%; display: block; }
 .practice-section { margin: 2rem 0; }
 .practice-section h2 { font-size:1.4rem; margin-bottom:1rem; }
 .practice-section h3 { font-size:1.1rem; margin:1.5rem 0 .75rem; color:var(--text1); }
+
+/* ── Sidebar ─────────────────────────────────────────────────────────────── */
+.sidebar {
+  position: fixed;
+  top: 0; left: 0;
+  width: 260px;
+  height: 100vh;
+  background: var(--parchment, #fdf8f0);
+  border-right: 1px solid var(--border, #e5ddd0);
+  overflow-y: auto;
+  z-index: 400;
+  transform: translateX(-100%);
+  transition: transform 0.25s ease;
+  padding-top: 1rem;
+}
+.sidebar.open { transform: translateX(0); }
+.sidebar-header {
+  padding: 1rem 1.25rem 0.75rem;
+  border-bottom: 1px solid var(--border, #e5ddd0);
+  margin-bottom: 0.5rem;
+}
+.sidebar-course-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--AC, #8b6914);
+  text-decoration: none;
+}
+.sidebar-course-title:hover { text-decoration: underline; }
+.sidebar-nav { padding: 0.25rem 0; }
+.sidebar-link {
+  display: block;
+  padding: 0.55rem 1.25rem;
+  font-size: 0.82rem;
+  color: var(--text2, #5c4a2a);
+  text-decoration: none;
+  border-left: 3px solid transparent;
+  line-height: 1.4;
+  transition: all 0.15s ease;
+}
+.sidebar-link:hover { background: var(--ACfaint, rgba(139,105,20,0.07)); color: var(--AC, #8b6914); }
+.sidebar-link.active {
+  border-left-color: var(--AC, #8b6914);
+  background: var(--ACfaint, rgba(139,105,20,0.07));
+  color: var(--AC, #8b6914);
+  font-weight: 600;
+}
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  z-index: 399;
+}
+.sidebar.open ~ .sidebar-overlay { display: block; }
+.sidebar-toggle {
+  position: absolute;
+  top: 1rem; left: 1rem;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 6px;
+  color: white;
+  font-size: 1.1rem;
+  padding: 0.3rem 0.6rem;
+  cursor: pointer;
+  z-index: 10;
+  line-height: 1;
+}
+.sidebar-toggle:hover { background: rgba(255,255,255,0.25); }
+/* make masthead relative so toggle can be positioned */
+.masthead { position: relative; }

@@ -385,18 +385,24 @@ function rateSite(val) {
   localStorage.setItem('fa2-site-rating', val);
   var btns = document.querySelectorAll('#siteReviewStars .sr-star');
   btns.forEach(function(b) { b.classList.toggle('lit', parseInt(b.dataset.val) <= val); });
-  var labels = ['','Not for me 😕','Could be better 🤔','It's okay 😊','Really helpful 💪','Love it! 🌟'];
+  var labels = ['','Not for me 😕','Could be better 🤔','Pretty helpful 😊','Really solid 💪','Love it! 🌟'];
   var lbl = document.getElementById('siteReviewLabel');
   if (lbl) lbl.textContent = labels[val] || '';
   var form = document.getElementById('siteReviewForm');
-  if (form) form.style.display = 'block';
+  if (form) form.style.display = 'flex';
 }
 function submitSiteReview() {
+  var name = document.getElementById('siteReviewName');
   var txt = document.getElementById('siteReviewText');
   var thanks = document.getElementById('siteReviewThanks');
   var form = document.getElementById('siteReviewForm');
   var reviews = JSON.parse(localStorage.getItem('fa2-site-reviews') || '[]');
-  reviews.push({ rating: localStorage.getItem('fa2-site-rating'), text: txt ? txt.value.trim() : '', ts: Date.now() });
+  reviews.push({
+    rating: localStorage.getItem('fa2-site-rating'),
+    name: name ? name.value.trim() : '',
+    text: txt ? txt.value.trim() : '',
+    ts: Date.now()
+  });
   localStorage.setItem('fa2-site-reviews', JSON.stringify(reviews));
   if (form) form.style.display = 'none';
   if (thanks) thanks.style.display = 'block';
@@ -404,36 +410,11 @@ function submitSiteReview() {
 (function initSiteReview() {
   var saved = parseInt(localStorage.getItem('fa2-site-rating')) || 0;
   if (saved) {
-    var btns = document.querySelectorAll('#siteReviewStars .sr-star');
-    btns.forEach(function(b) { b.classList.toggle('lit', parseInt(b.dataset.val) <= saved); });
-    var labels = ['','Not for me 😕','Could be better 🤔','It's okay 😊','Really helpful 💪','Love it! 🌟'];
+    document.querySelectorAll('#siteReviewStars .sr-star').forEach(function(b) {
+      b.classList.toggle('lit', parseInt(b.dataset.val) <= saved);
+    });
+    var labels = ['','Not for me 😕','Could be better 🤔','Pretty helpful 😊','Really solid 💪','Love it! 🌟'];
     var lbl = document.getElementById('siteReviewLabel');
     if (lbl) lbl.textContent = labels[saved] || '';
   }
-})();
-
-/* ── Sidebar helpers ──────────────────────────────────────────────────── */
-function closeSidebar() {
-  var sb = document.getElementById('sidebar');
-  if (sb) sb.classList.remove('open');
-}
-
-/* Scrollspy: highlight sidebar link for visible lesson */
-(function initScrollspy() {
-  if (!document.querySelector('.sidebar-lesson-link')) return;
-  var links = Array.from(document.querySelectorAll('.sidebar-lesson-link'));
-  var sections = links.map(function(a) {
-    var href = a.getAttribute('href');
-    return href ? document.querySelector(href) : null;
-  });
-  function onScroll() {
-    var scrollY = window.scrollY + 120;
-    var active = null;
-    sections.forEach(function(sec, i) {
-      if (sec && sec.offsetTop <= scrollY) active = i;
-    });
-    links.forEach(function(a, i) { a.classList.toggle('active', i === active); });
-  }
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
 })();

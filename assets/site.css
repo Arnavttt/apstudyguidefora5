@@ -1468,48 +1468,48 @@ mjx-container { overflow-x: auto; max-width: 100%; display: block; }
 
 /* ── Site Review Section ─────────────────────────────────────────────────── */
 .site-review-section {
-  background: var(--parchment2, #f5ede0);
-  border-top: 1px solid var(--border, #e5ddd0);
-  padding: 3rem 1.5rem;
+  padding: 4rem 1.5rem 3rem;
   text-align: center;
+  background: var(--bg3, #f0e8d8);
+  border-top: 1px solid var(--border2, #d4c4a8);
+  border-bottom: 1px solid var(--border2, #d4c4a8);
 }
-.sr-inner { max-width: 500px; margin: 0 auto; }
-.sr-heading { font-size: 1.4rem; font-weight: 700; color: var(--ink, #2a1f0e); margin: 0 0 .4rem; }
-.sr-sub { font-size: .9rem; color: var(--ink3, #9c8060); margin: 0 0 1.5rem; }
-.sr-stars { display: flex; justify-content: center; gap: .35rem; margin-bottom: .75rem; }
+.sr-inner { max-width: 540px; margin: 0 auto; }
+.sr-eyebrow {
+  font-family: 'Comfortaa', monospace;
+  font-size: .72rem; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--gold, #c89b3c); margin: 0 0 .5rem; font-weight: 700;
+}
+.sr-heading { font-size: 1.75rem; font-weight: 800; color: var(--text1, #2a1f0e); margin: 0 0 .5rem; }
+.sr-sub { font-size: .92rem; color: var(--text3, #9c8060); margin: 0 0 1.75rem; }
+.sr-stars { display: flex; justify-content: center; gap: .4rem; margin-bottom: .75rem; }
 .sr-star {
-  background: none; border: none; font-size: 2.4rem;
-  color: var(--border, #e5ddd0); cursor: pointer;
+  background: none; border: none; font-size: 2.6rem;
+  color: var(--border2, #d4c4a8); cursor: pointer;
   transition: color .15s, transform .1s; line-height: 1; padding: 0;
 }
 .sr-star:hover, .sr-star.lit { color: #f59e0b; }
-.sr-star:hover { transform: scale(1.15); }
-.sr-label { font-size: .85rem; color: var(--ink3, #9c8060); margin: 0 0 1.25rem; min-height: 1.2em; }
-.sr-form { margin-top: .5rem; }
-.sr-textarea {
+.sr-star:hover { transform: scale(1.2); }
+.sr-label { font-size: .88rem; color: var(--text3, #9c8060); margin: 0 0 1.5rem; min-height: 1.4em; }
+.sr-form { display: flex; flex-direction: column; gap: .75rem; text-align: left; }
+.sr-name, .sr-textarea {
   width: 100%; box-sizing: border-box;
-  border: 1px solid var(--border, #e5ddd0); border-radius: 8px;
-  padding: .7rem; font-size: .88rem; font-family: inherit;
-  background: #fff; resize: vertical; margin-bottom: .75rem;
-  color: var(--ink, #2a1f0e);
+  border: 1px solid var(--border2, #d4c4a8); border-radius: 8px;
+  padding: .7rem .9rem; font-size: .9rem; font-family: inherit;
+  background: #fff; color: var(--text1, #2a1f0e);
 }
-.sr-textarea:focus { outline: none; border-color: var(--AC, #8b6914); }
+.sr-name { resize: none; }
+.sr-textarea { resize: vertical; }
+.sr-name:focus, .sr-textarea:focus { outline: none; border-color: var(--gold, #c89b3c); box-shadow: 0 0 0 3px rgba(200,155,60,.12); }
 .sr-submit {
-  background: var(--AC, #8b6914); color: #fff;
+  align-self: center;
+  background: var(--gold, #c89b3c); color: #fff;
   border: none; border-radius: 8px;
-  padding: .55rem 2rem; font-size: .9rem; font-weight: 600;
-  cursor: pointer; transition: background .15s;
+  padding: .65rem 2.5rem; font-size: .95rem; font-weight: 700;
+  cursor: pointer; transition: background .15s; letter-spacing: .02em;
 }
-.sr-submit:hover { background: color-mix(in srgb, var(--AC, #8b6914) 82%, black); }
-.sr-thanks { font-size: .95rem; color: var(--AC, #8b6914); font-weight: 600; margin: .75rem 0 0; }
-
-/* ── Sidebar lesson nav ───────────────────────────────────────────────────── */
-.sidebar-lesson-link {
-  display: flex;
-  flex-direction: column;
-  gap: 0.1rem;
-  padding: 0.6rem 1.25rem;
-}
+.sr-submit:hover { background: color-mix(in srgb, var(--gold, #c89b3c) 82%, black); }
+.sr-thanks { font-size: 1rem; color: var(--gold, #c89b3c); font-weight: 700; margin: 1rem 0 0; }
 .sidebar-lesson-num {
   font-size: 0.7rem;
   font-weight: 700;

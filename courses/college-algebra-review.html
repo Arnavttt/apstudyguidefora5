@@ -33,4 +33,15 @@ b) Half-life 10 years: after 10 years, half remains. A(10) = A₀/2. Using A(t) 
 
 c) Find t when A(t) = 0.10·A₀ (10% remains): 0.10·A₀ = A₀·(1/2)^(t/10). Divide by A₀: 0.10 = (1/2)^(t/10). Take log of both sides: log(0.10) = (t/10)·log(0.5). t/10 = log(0.10)/log(0.5) = (-1)/(-0.301) = 3.322. t = 33.2 years. It takes approximately 33.2 years (about 3.32 half-lives) for 90% to decay.</div></details></div></div>
 <footer class="site-footer"><div class="f-brand">Five &amp; A+</div><p class="trademark">AP® and Advanced Placement® are trademarks registered by the College Board, which is not affiliated with, and does not endorse, this site. Five &amp; A+ is an independent educational resource and is not affiliated with, endorsed by, or sponsored by the College Board.</p><p class="f-sub">Free AP® &amp; College Review · Built by Arnav Sinha &amp; Yashwin Kandra</p></footer><script src="../assets/app.js"></script>
-</body></html>
+<div class="feedback-widget" id="feedbackWidget">
+<button aria-label="Send feedback" class="feedback-trigger" onclick="toggleFeedback()">💬</button>
+<div class="feedback-panel" id="feedbackPanel">
+<div class="feedback-header">
+<span>Send Feedback</span>
+<button class="feedback-close" onclick="toggleFeedback()">✕</button>
+</div>
+<textarea class="feedback-text" id="feedbackText" placeholder="Found an error? Have a suggestion?" rows="4"></textarea>
+<button class="feedback-submit" onclick="submitFeedback()">Send</button>
+<p class="feedback-thanks" id="feedbackThanks" style="display:none">Thanks for your feedback! 🙏</p>
+</div>
+</div></body></html>

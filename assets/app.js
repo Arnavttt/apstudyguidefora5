@@ -335,3 +335,46 @@ function toggleSidebar() {
   var sb = document.getElementById('sidebar');
   if (sb) sb.classList.toggle('open');
 }
+
+/* ── Unit confidence rating ───────────────────────────────────────────── */
+function rateUnit(uid, val) {
+  localStorage.setItem('unit-rate-' + uid, val);
+  renderStars(uid, val);
+  var labels = ['','Just started 😅','Getting there 🙂','Feeling okay 😊','Pretty solid 💪','Got this! 🌟'];
+  var lbl = document.getElementById('reviewLabel-' + uid);
+  if (lbl) lbl.textContent = labels[val] || '';
+}
+function renderStars(uid, val) {
+  var btns = document.querySelectorAll('#reviewStars-' + uid + ' .star-btn');
+  btns.forEach(function(b) {
+    b.classList.toggle('lit', parseInt(b.dataset.val) <= val);
+  });
+}
+function initRatings() {
+  document.querySelectorAll('.review-stars').forEach(function(el) {
+    var uid = el.id.replace('reviewStars-','');
+    var saved = parseInt(localStorage.getItem('unit-rate-' + uid)) || 0;
+    if (saved) { renderStars(uid, saved); rateUnit(uid, saved); }
+  });
+}
+
+/* ── Feedback widget ──────────────────────────────────────────────────── */
+function toggleFeedback() {
+  var panel = document.getElementById('feedbackPanel');
+  if (panel) panel.classList.toggle('open');
+}
+function submitFeedback() {
+  var txt = document.getElementById('feedbackText');
+  var thanks = document.getElementById('feedbackThanks');
+  var btn = document.querySelector('.feedback-submit');
+  if (!txt || !txt.value.trim()) return;
+  // Store locally (no backend)
+  var fb = JSON.parse(localStorage.getItem('fa2-feedback') || '[]');
+  fb.push({ page: location.pathname, text: txt.value.trim(), ts: Date.now() });
+  localStorage.setItem('fa2-feedback', JSON.stringify(fb));
+  txt.value = '';
+  if (thanks) thanks.style.display = 'block';
+  if (btn) btn.style.display = 'none';
+  setTimeout(function() { toggleFeedback(); if (thanks) thanks.style.display = 'none'; if (btn) btn.style.display = ''; }, 2000);
+}
+document.addEventListener('DOMContentLoaded', initRatings);

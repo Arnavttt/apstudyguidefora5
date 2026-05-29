@@ -29,4 +29,15 @@ So: 1/(tan x + cot x) = sin x cos x = (1/2)sin(2x).</div></details></div><div st
 
 c) Fourth roots of 16: We need w such that w⁴ = 16. Write 16 in polar form: 16 = 16 cis(0) = 16 cis(2πk). Fourth roots: w_k = 16^(1/4) cis((0 + 2πk)/4) = 2 cis(πk/2) for k = 0, 1, 2, 3. w₀ = 2 cis(0) = 2(1 + 0i) = 2. w₁ = 2 cis(π/2) = 2(0 + i) = 2i. w₂ = 2 cis(π) = 2(-1 + 0i) = -2. w₃ = 2 cis(3π/2) = 2(0 - i) = -2i. The four fourth roots of 16 are: 2, 2i, -2, -2i. Verify: 2⁴ = 16 ✓; (2i)⁴ = 16i⁴ = 16(1) = 16 ✓.</div></details></div></div>
 <footer class="site-footer"><div class="f-brand">Five &amp; A+</div><p class="trademark">AP® and Advanced Placement® are trademarks registered by the College Board, which is not affiliated with, and does not endorse, this site. Five &amp; A+ is an independent educational resource and is not affiliated with, endorsed by, or sponsored by the College Board.</p><p class="f-sub">Free AP® &amp; College Review · Built by Arnav Sinha &amp; Yashwin Kandra</p></footer><script src="../assets/app.js"></script>
-</body></html>
+<div class="feedback-widget" id="feedbackWidget">
+<button aria-label="Send feedback" class="feedback-trigger" onclick="toggleFeedback()">💬</button>
+<div class="feedback-panel" id="feedbackPanel">
+<div class="feedback-header">
+<span>Send Feedback</span>
+<button class="feedback-close" onclick="toggleFeedback()">✕</button>
+</div>
+<textarea class="feedback-text" id="feedbackText" placeholder="Found an error? Have a suggestion?" rows="4"></textarea>
+<button class="feedback-submit" onclick="submitFeedback()">Send</button>
+<p class="feedback-thanks" id="feedbackThanks" style="display:none">Thanks for your feedback! 🙏</p>
+</div>
+</div></body></html>

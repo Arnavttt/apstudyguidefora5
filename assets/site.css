@@ -1282,3 +1282,12 @@ mjx-container { overflow-x: auto; max-width: 100%; display: block; }
 .pill-overview { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.4); font-weight: 600; }
 .pill-review   { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.4); font-weight: 600; }
 .pill.active   { background: white; color: var(--ACdark, #1a1208); font-weight: 700; }
+
+/* Practice section styles */
+
+.mcq-item { background:#fff; border:1px solid var(--border); border-radius:6px; padding:1.25rem; margin-bottom:1.5rem; }
+.mcq-reveal summary, .frq-answer summary { cursor:pointer; color:var(--AC); font-weight:600; margin-top:.5rem; display:block; }
+.frq-prompt { background:#fff; border:1px solid var(--border); border-radius:6px; padding:1.25rem; margin:.75rem 0; white-space:pre-wrap; }
+.practice-section { margin: 2rem 0; }
+.practice-section h2 { font-size:1.4rem; margin-bottom:1rem; }
+.practice-section h3 { font-size:1.1rem; margin:1.5rem 0 .75rem; color:var(--text1); }

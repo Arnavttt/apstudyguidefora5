@@ -1256,3 +1256,29 @@ mjx-container { overflow-x: auto; max-width: 100%; display: block; }
 [data-course="college-algebra"]                       { --AC:#3b82f6; --ACfaint:rgba(59,130,246,.10); --ACglow:rgba(59,130,246,.20); --ACdark:#2563eb; }
 /* College Trigonometry — indigo */
 [data-course="college-trigonometry"]                  { --AC:#6366f1; --ACfaint:rgba(99,102,241,.10); --ACglow:rgba(99,102,241,.20); --ACdark:#4f46e5; }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   PERIOD-PILLS NAV BAR (Overview / Unit pills / Review)
+   ══════════════════════════════════════════════════════════════════════════ */
+.period-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+  margin-top: 1rem;
+}
+.pill {
+  background: rgba(255,255,255,.04);
+  border: 1px solid var(--border2);
+  color: var(--text3);
+  font-family: 'Fira Code', monospace;
+  font-size: 10px;
+  padding: .28rem .7rem;
+  border-radius: 20px;
+  text-decoration: none;
+  transition: all var(--dur) var(--ease);
+  cursor: pointer;
+}
+.pill:hover { border-color: var(--AC); color: var(--AC); background: var(--ACfaint); }
+.pill-overview { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.4); font-weight: 600; }
+.pill-review   { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.4); font-weight: 600; }
+.pill.active   { background: white; color: var(--ACdark, #1a1208); font-weight: 700; }

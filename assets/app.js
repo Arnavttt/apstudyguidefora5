@@ -411,3 +411,29 @@ function submitSiteReview() {
     if (lbl) lbl.textContent = labels[saved] || '';
   }
 })();
+
+/* ── Sidebar helpers ──────────────────────────────────────────────────── */
+function closeSidebar() {
+  var sb = document.getElementById('sidebar');
+  if (sb) sb.classList.remove('open');
+}
+
+/* Scrollspy: highlight sidebar link for visible lesson */
+(function initScrollspy() {
+  if (!document.querySelector('.sidebar-lesson-link')) return;
+  var links = Array.from(document.querySelectorAll('.sidebar-lesson-link'));
+  var sections = links.map(function(a) {
+    var href = a.getAttribute('href');
+    return href ? document.querySelector(href) : null;
+  });
+  function onScroll() {
+    var scrollY = window.scrollY + 120;
+    var active = null;
+    sections.forEach(function(sec, i) {
+      if (sec && sec.offsetTop <= scrollY) active = i;
+    });
+    links.forEach(function(a, i) { a.classList.toggle('active', i === active); });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();

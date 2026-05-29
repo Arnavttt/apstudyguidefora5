@@ -1502,3 +1502,28 @@ mjx-container { overflow-x: auto; max-width: 100%; display: block; }
 }
 .sr-submit:hover { background: color-mix(in srgb, var(--AC, #8b6914) 82%, black); }
 .sr-thanks { font-size: .95rem; color: var(--AC, #8b6914); font-weight: 600; margin: .75rem 0 0; }
+
+/* ── Sidebar lesson nav ───────────────────────────────────────────────────── */
+.sidebar-lesson-link {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding: 0.6rem 1.25rem;
+}
+.sidebar-lesson-num {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--AC, #8b6914);
+  opacity: 0.7;
+}
+.sidebar-lesson-title {
+  font-size: 0.83rem;
+  line-height: 1.35;
+  color: var(--text2, #5c4a2a);
+}
+.sidebar-link.sidebar-lesson-link:hover .sidebar-lesson-title,
+.sidebar-link.sidebar-lesson-link.active .sidebar-lesson-title {
+  color: var(--AC, #8b6914);
+}

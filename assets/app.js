@@ -378,3 +378,36 @@ function submitFeedback() {
   setTimeout(function() { toggleFeedback(); if (thanks) thanks.style.display = 'none'; if (btn) btn.style.display = ''; }, 2000);
 }
 document.addEventListener('DOMContentLoaded', initRatings);
+
+
+/* ── Site review rating ───────────────────────────────────────────────── */
+function rateSite(val) {
+  localStorage.setItem('fa2-site-rating', val);
+  var btns = document.querySelectorAll('#siteReviewStars .sr-star');
+  btns.forEach(function(b) { b.classList.toggle('lit', parseInt(b.dataset.val) <= val); });
+  var labels = ['','Not for me 😕','Could be better 🤔','It's okay 😊','Really helpful 💪','Love it! 🌟'];
+  var lbl = document.getElementById('siteReviewLabel');
+  if (lbl) lbl.textContent = labels[val] || '';
+  var form = document.getElementById('siteReviewForm');
+  if (form) form.style.display = 'block';
+}
+function submitSiteReview() {
+  var txt = document.getElementById('siteReviewText');
+  var thanks = document.getElementById('siteReviewThanks');
+  var form = document.getElementById('siteReviewForm');
+  var reviews = JSON.parse(localStorage.getItem('fa2-site-reviews') || '[]');
+  reviews.push({ rating: localStorage.getItem('fa2-site-rating'), text: txt ? txt.value.trim() : '', ts: Date.now() });
+  localStorage.setItem('fa2-site-reviews', JSON.stringify(reviews));
+  if (form) form.style.display = 'none';
+  if (thanks) thanks.style.display = 'block';
+}
+(function initSiteReview() {
+  var saved = parseInt(localStorage.getItem('fa2-site-rating')) || 0;
+  if (saved) {
+    var btns = document.querySelectorAll('#siteReviewStars .sr-star');
+    btns.forEach(function(b) { b.classList.toggle('lit', parseInt(b.dataset.val) <= saved); });
+    var labels = ['','Not for me 😕','Could be better 🤔','It's okay 😊','Really helpful 💪','Love it! 🌟'];
+    var lbl = document.getElementById('siteReviewLabel');
+    if (lbl) lbl.textContent = labels[saved] || '';
+  }
+})();

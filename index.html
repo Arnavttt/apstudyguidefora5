@@ -182,6 +182,27 @@ function filterHub() {
   });
 }
 </script>
+
+<section class="site-review-section">
+  <div class="sr-inner">
+    <h2 class="sr-heading">What do you think?</h2>
+    <p class="sr-sub">Rate your experience and leave a note — it helps us improve.</p>
+    <div class="sr-stars" id="siteReviewStars">
+      <button class="sr-star" onclick="rateSite(1)" data-val="1" aria-label="1 star">★</button>
+      <button class="sr-star" onclick="rateSite(2)" data-val="2" aria-label="2 stars">★</button>
+      <button class="sr-star" onclick="rateSite(3)" data-val="3" aria-label="3 stars">★</button>
+      <button class="sr-star" onclick="rateSite(4)" data-val="4" aria-label="4 stars">★</button>
+      <button class="sr-star" onclick="rateSite(5)" data-val="5" aria-label="5 stars">★</button>
+    </div>
+    <p class="sr-label" id="siteReviewLabel">Tap to rate</p>
+    <div class="sr-form" id="siteReviewForm" style="display:none">
+      <textarea class="sr-textarea" id="siteReviewText" placeholder="Tell us what you think…" rows="3"></textarea>
+      <button class="sr-submit" onclick="submitSiteReview()">Submit Review</button>
+    </div>
+    <p class="sr-thanks" id="siteReviewThanks" style="display:none">Thanks for your review! 🎉</p>
+  </div>
+</section>
+
 <div class="feedback-widget" id="feedbackWidget">
 <button aria-label="Send feedback" class="feedback-trigger" onclick="toggleFeedback()">💬</button>
 <div class="feedback-panel" id="feedbackPanel">

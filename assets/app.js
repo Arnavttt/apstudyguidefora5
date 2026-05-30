@@ -388,8 +388,7 @@ function rateSite(val) {
   var labels = ['','Not for me 😕','Could be better 🤔','Pretty helpful 😊','Really solid 💪','Love it! 🌟'];
   var lbl = document.getElementById('siteReviewLabel');
   if (lbl) lbl.textContent = labels[val] || '';
-  var form = document.getElementById('siteReviewForm');
-  if (form) form.style.display = 'flex';
+  // form is always visible
 }
 function submitSiteReview() {
   var name = document.getElementById('siteReviewName');

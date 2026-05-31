@@ -527,8 +527,8 @@ img, iframe { max-width: 100%; border: 0; }
 }
 .lesson-head label input[type=checkbox] { accent-color: var(--AC); width: 14px; height: 14px; cursor: pointer; }
 .lesson-head h4 { font-family: 'Comfortaa', sans-serif; font-size: .95rem; font-weight: 700; color: var(--ink); }
-.lesson-body { padding: 1.1rem 1.25rem; }
-.lesson-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1.5rem; margin-bottom: 1.1rem; }
+.lesson-body { padding: 1.5rem 1.75rem; }
+.lesson-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 2rem; margin-bottom: 1.5rem; }
 @media(max-width:640px) { .lesson-grid { grid-template-columns: 1fr; } }
 .lesson-grid h5 {
   font-family: 'Comfortaa', sans-serif;
@@ -559,20 +559,20 @@ img, iframe { max-width: 100%; border: 0; }
   background: #fff;
   border: 1px solid var(--border);
   border-radius: var(--r-sm);
-  padding: .85rem 1rem;
-  margin-bottom: .7rem;
+  padding: 1.1rem 1.25rem;
+  margin-bottom: 1rem;
   box-shadow: 0 1px 4px var(--shadow);
 }
 .topicnote:last-child { margin-bottom: 0; }
 .topicnote h5 {
   font-family: 'Comfortaa', sans-serif;
-  font-size: .82rem;
+  font-size: .85rem;
   font-weight: 700;
   color: var(--AC);
-  margin-bottom: .4rem;
+  margin-bottom: .6rem;
   letter-spacing: 0.02em;
 }
-.topicnote p { font-family: 'Comfortaa', sans-serif; font-size: 14px; color: var(--ink2); line-height: 1.65; margin-bottom: .3rem; }
+.topicnote p { font-family: 'Comfortaa', sans-serif; font-size: 14.5px; color: var(--ink2); line-height: 1.85; margin-bottom: .5rem; }
 .topicnote p:last-child { margin-bottom: 0; }
 .topicnote b { color: var(--ink); font-weight: 700; }
 
@@ -590,13 +590,13 @@ img, iframe { max-width: 100%; border: 0; }
   margin-bottom: .65rem;
 }
 .resources { display: flex; flex-direction: column; gap: 1rem; }
-.vid-wrap { display: flex; flex-direction: column; gap: .4rem; }
+.vid-wrap { display: flex; flex-direction: column; gap: .4rem; max-width: 480px; }
 .vid-wrap iframe {
   border-radius: var(--r-sm);
   width: 100%;
   aspect-ratio: 16/9;
   height: auto;
-  box-shadow: 0 4px 16px var(--shadow);
+  box-shadow: 0 4px 12px var(--shadow);
 }
 .vid-fallback {
   font-family: 'Comfortaa', sans-serif;

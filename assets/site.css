@@ -221,7 +221,7 @@ img, iframe { max-width: 100%; border: 0; }
 /* ══════════════════════════════════════════════════════════════════════════
    PAGE LAYOUT
    ══════════════════════════════════════════════════════════════════════════ */
-.page-wrap { max-width: 100%; margin: 0; padding: 2rem 2.5rem 4rem; }
+.page-wrap { max-width: 100%; margin: 0; padding: 2rem 0.75rem 4rem; }
 .simple-layout { max-width: 100%; margin: 0; padding: 2rem 2.5rem 4rem; }
 
 /* ══════════════════════════════════════════════════════════════════════════
@@ -495,7 +495,7 @@ img, iframe { max-width: 100%; border: 0; }
 
 .lesson {
   border: 1px solid var(--border);
-  border-radius: var(--r-sm);
+  border-radius: 0;
   overflow: hidden;
   margin-bottom: 1.5rem;
   background: #fff;
@@ -1178,7 +1178,7 @@ mjx-container { overflow-x: auto; max-width: 100%; display: block; }
 @media(max-width:700px) {
   .topnav { padding: 0 .85rem; }
   .masthead { padding: 2rem 1rem 1.75rem; }
-  .page-wrap, .simple-layout { padding: 1.25rem 1rem 2.5rem; }
+  .page-wrap, .simple-layout { padding: 1rem 0.5rem 2.5rem; }
   .dash-card b { font-size: 1.1rem; }
   .quiz-body { padding: .9rem 1rem; }
   .lesson-body { padding: .85rem 1rem; }

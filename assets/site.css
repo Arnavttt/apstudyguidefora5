@@ -1633,3 +1633,16 @@ mjx-container { overflow-x: auto; max-width: 100%; display: block; }
 .cp-step p { font-size: .83rem; color: var(--text2); margin: 0; line-height: 1.5; }
 .cp-cta { display: inline-block; background: var(--AC); color: #fff; padding: .65rem 1.75rem; border-radius: 8px; font-weight: 700; font-size: .95rem; text-decoration: none; transition: background .15s; }
 .cp-cta:hover { background: color-mix(in srgb, var(--AC) 82%, black); }
+
+
+/* ── Unit Cheat Sheet ─────────────────────────────────────────────────────── */
+.cheat-sheet { border: 1px solid var(--AC); border-radius: 8px; margin: 2rem 0; overflow: hidden; }
+.cs-toggle { width: 100%; background: var(--ACfaint); border: none; padding: .85rem 1.25rem; text-align: left; font-size: .92rem; font-weight: 700; color: var(--AC); cursor: pointer; }
+.cs-toggle:hover { background: color-mix(in srgb, var(--AC) 12%, transparent); }
+.cs-body { display: none; padding: 1.25rem; border-top: 1px solid var(--AC); }
+.cheat-sheet.cs-open .cs-body { display: block; }
+.cs-heading { font-size: .95rem; font-weight: 700; color: var(--text1); margin: 0 0 .85rem; }
+.cs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: .65rem; }
+.cs-item { background: var(--bg2); border-radius: 6px; padding: .6rem .8rem; font-size: .82rem; }
+.cs-term { font-weight: 700; color: var(--AC); display: block; margin-bottom: .2rem; }
+.cs-def { color: var(--text2); line-height: 1.5; }

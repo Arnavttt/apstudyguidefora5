@@ -60,7 +60,18 @@
 .uet-list li::before { content: '✓'; position: absolute; left: 0; color: #4ade80; font-size: 11px; top: .25em; }
 .uet-list li b { color: var(--text); }
 </style><link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;600;700&amp;display=swap" rel="stylesheet"/>
-</head><body style="--AC:#9333ea;--ACfaint:rgba(147,51,234,0.07);--ACglow:rgba(147,51,234,0.18);"><nav class="topnav"><a class="nav-brand-link" href="../index.html">Five &amp; A+</a><a href="../index.html">← Hub</a><a href="../courses/ap-psychology-overview.html">← AP® Psychology</a><div class="topnav-right"><input id="q" oninput="filterSite()" placeholder="Search this page…"/></div></nav><div class="masthead"><div class="mh-inner"><button aria-label="Toggle unit navigation" class="sidebar-toggle" onclick="toggleSidebar()">☰</button><p class="mh-breadcrumb"><a href="../index.html">Hub</a> / <a href="../courses/ap-psychology-overview.html">AP® Psychology</a> / Unit 2</p><p class="mh-tag">Unit 2 of AP® Psychology</p><h1 class="mh-title">Cognition</h1><p class="mh-sub">Explores sensation, perception, learning, memory, thinking, language, and intelligence.</p><div class="mh-pills"><span class="mh-pill">4 lessons</span><span class="mh-pill">30 questions</span></div><div class="period-pills"><a class="pill pill-overview" href="../courses/ap-psychology-overview.html">Overview</a><a class="pill" href="../units/ap-psychology-1-unit-1-biological-bases-of-behavior.html">Unit 1: Biological Bases of Behavior</a><a class="pill active" href="../units/ap-psychology-2-unit-2-cognition.html">Unit 2: Cognition</a><a class="pill" href="../units/ap-psychology-3-unit-3-development-and-learning.html">Unit 3: Development and Learning</a><a class="pill" href="../units/ap-psychology-4-unit-4-social-psychology-and-personality.html">Unit 4: Social Psychology and Personality</a><a class="pill" href="../units/ap-psychology-5-unit-5-mental-and-physical-health.html">Unit 5: Mental and Physical Health</a><a class="pill pill-review" href="../courses/ap-psychology-review.html">AP® Exam Review</a></div></div></div><div class="sidebar" id="sidebar"><div class="sidebar-header"><a class="sidebar-course-title" href="../courses/ap-psychology-overview.html">AP® Psychology</a></div><nav class="sidebar-nav">
+</head><body style="--AC:#9333ea;--ACfaint:rgba(147,51,234,0.07);--ACglow:rgba(147,51,234,0.18);"><nav class="topnav"><a class="nav-brand-link" href="../index.html">Five &amp; A+</a><a href="../index.html">← Hub</a><a href="../courses/ap-psychology-overview.html">← AP® Psychology</a><div class="topnav-right"><input id="q" oninput="filterSite()" placeholder="Search this page…"/></div><div class="feedback-widget" id="feedbackWidget">
+<button aria-label="Send feedback" class="feedback-trigger" onclick="toggleFeedback()">💬</button>
+<div class="feedback-panel" id="feedbackPanel">
+<div class="feedback-header">
+<span>Send Feedback</span>
+<button class="feedback-close" onclick="toggleFeedback()">✕</button>
+</div>
+<textarea class="feedback-text" id="feedbackText" placeholder="Found an error? Have a suggestion?" rows="4"></textarea>
+<button class="feedback-submit" onclick="submitFeedback()">Send</button>
+<p class="feedback-thanks" id="feedbackThanks" style="display:none">Thanks for your feedback! 🙏</p>
+</div>
+</div></nav><div class="masthead"><div class="mh-inner"><button aria-label="Toggle unit navigation" class="sidebar-toggle" onclick="toggleSidebar()">☰</button><p class="mh-breadcrumb"><a href="../index.html">Hub</a> / <a href="../courses/ap-psychology-overview.html">AP® Psychology</a> / Unit 2</p><p class="mh-tag">Unit 2 of AP® Psychology</p><h1 class="mh-title">Cognition</h1><p class="mh-sub">Explores sensation, perception, learning, memory, thinking, language, and intelligence.</p><div class="mh-pills"><span class="mh-pill">4 lessons</span><span class="mh-pill">30 questions</span></div><div class="period-pills"><a class="pill pill-overview" href="../courses/ap-psychology-overview.html">Overview</a><a class="pill" href="../units/ap-psychology-1-unit-1-biological-bases-of-behavior.html">Unit 1: Biological Bases of Behavior</a><a class="pill active" href="../units/ap-psychology-2-unit-2-cognition.html">Unit 2: Cognition</a><a class="pill" href="../units/ap-psychology-3-unit-3-development-and-learning.html">Unit 3: Development and Learning</a><a class="pill" href="../units/ap-psychology-4-unit-4-social-psychology-and-personality.html">Unit 4: Social Psychology and Personality</a><a class="pill" href="../units/ap-psychology-5-unit-5-mental-and-physical-health.html">Unit 5: Mental and Physical Health</a><a class="pill pill-review" href="../courses/ap-psychology-review.html">AP® Exam Review</a></div></div></div><div class="sidebar" id="sidebar"><div class="sidebar-header"><a class="sidebar-course-title" href="../courses/ap-psychology-overview.html">AP® Psychology</a></div><nav class="sidebar-nav">
 <a class="sidebar-link sidebar-lesson-link" href="#psych-u2-l1" onclick="closeSidebar()">
 <span class="sidebar-lesson-num">Lesson 1</span>
 <span class="sidebar-lesson-title">Sensation and Perception</span>
@@ -121,15 +132,4 @@
 <button class="star-btn" data-val="5" onclick="rateUnit('ap-psychology-2',5)">★</button>
 </div>
 <p class="review-label" id="reviewLabel-ap-psychology-2">Click a star to rate your confidence</p>
-</div><div class="feedback-widget" id="feedbackWidget">
-<button aria-label="Send feedback" class="feedback-trigger" onclick="toggleFeedback()">💬</button>
-<div class="feedback-panel" id="feedbackPanel">
-<div class="feedback-header">
-<span>Send Feedback</span>
-<button class="feedback-close" onclick="toggleFeedback()">✕</button>
-</div>
-<textarea class="feedback-text" id="feedbackText" placeholder="Found an error? Have a suggestion?" rows="4"></textarea>
-<button class="feedback-submit" onclick="submitFeedback()">Send</button>
-<p class="feedback-thanks" id="feedbackThanks" style="display:none">Thanks for your feedback! 🙏</p>
-</div>
 </div><footer class="site-footer"><div class="f-brand">Five &amp; A+</div><p class="trademark">AP® and Advanced Placement® are trademarks registered by the College Board, which is not affiliated with, and does not endorse, this site. Five &amp; A+ is an independent educational resource and is not affiliated with, endorsed by, or sponsored by the College Board.</p><p class="f-sub">Free AP® &amp; College Review · Built by Arnav Sinha &amp; Yashwin Kandra</p></footer><div class="lesson-nav-bar"><a class="lnb-btn lnb-prev" href="ap-psychology-1-unit-1-biological-bases-of-behavior.html" id="lnbPrev">← Previous Lesson</a><span class="lnb-course" id="lnbCourse">AP® Psychology</span><a class="lnb-btn lnb-next" href="ap-psychology-3-unit-3-development-and-learning.html" id="lnbNext">Next Lesson →</a></div></body></html>

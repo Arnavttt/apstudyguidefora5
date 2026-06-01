@@ -1397,34 +1397,28 @@ mjx-container { overflow-x: auto; max-width: 100%; display: block; }
 
 /* ── Feedback Widget ─────────────────────────────────────────────────────── */
 .feedback-widget {
-  position: fixed;
-  top: 50%;
-  right: 0;
-  transform: translateY(-50%);
-  z-index: 500;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
 }
 .feedback-trigger {
   width: auto; height: auto;
-  border-radius: 6px 0 0 6px;
-  background: var(--AC, #8b6914);
-  color: white;
-  border: none;
-  font-size: .78rem;
-  font-weight: 700;
-  letter-spacing: .04em;
+  border-radius: 4px;
+  background: transparent;
+  color: rgba(250,246,238,0.7);
+  border: 1px solid rgba(250,246,238,0.25);
+  font-size: .75rem;
+  font-weight: 600;
   cursor: pointer;
-  box-shadow: -2px 0 8px rgba(0,0,0,0.15);
   display: flex; align-items: center; justify-content: center;
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
-  padding: .85rem .45rem;
-  transition: background 0.2s;
+  padding: .25rem .65rem;
+  transition: background 0.2s, color 0.2s;
 }
-.feedback-trigger:hover { background: color-mix(in srgb, var(--AC, #8b6914) 85%, black); }
+.feedback-trigger:hover { background: rgba(255,255,255,0.1); color: #fff; }
 .feedback-panel {
   display: none;
   position: absolute;
-  top: 0; right: 100%;
+  top: calc(100% + 8px); right: 0;
   width: 280px;
   background: var(--parchment, #fdf8f0);
   border: 1px solid var(--border, #e5ddd0);

@@ -435,3 +435,30 @@ function initLessonProgress() {
   });
 }
 document.addEventListener('DOMContentLoaded', initLessonProgress);
+
+
+/* ── Continue where you left off ─────────────────────────────────────────── */
+function initContinueBanner() {
+  var banner = document.getElementById('continueBanner');
+  var link = document.getElementById('continueLink');
+  if (!banner || !link) return;
+  var sidebarLinks = Array.from(document.querySelectorAll('.sidebar-lesson-link'));
+  if (!sidebarLinks.length) return;
+  var allKeys = [];
+  for (var i = 0; i < localStorage.length; i++) {
+    var k = localStorage.key(i);
+    if (k && k.startsWith('fa2-done-') && localStorage.getItem(k) === '1') allKeys.push(k);
+  }
+  if (!allKeys.length) return;
+  var firstIncomplete = sidebarLinks.find(function(a) {
+    var href = a.getAttribute('href') || '';
+    var id = href.replace('#','');
+    return !localStorage.getItem('fa2-done-' + id);
+  });
+  if (firstIncomplete) {
+    link.href = firstIncomplete.getAttribute('href') || '#';
+    link.textContent = firstIncomplete.querySelector('.sidebar-lesson-title')?.textContent || 'Next lesson';
+    banner.style.display = 'flex';
+  }
+}
+document.addEventListener('DOMContentLoaded', initContinueBanner);

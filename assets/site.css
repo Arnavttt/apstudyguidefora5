@@ -1549,3 +1549,41 @@ mjx-container { overflow-x: auto; max-width: 100%; display: block; }
   font-style: italic;
   background: var(--bg2, #f5ede0);
 }
+
+/* ── How to Get a 5 ──────────────────────────────────────────────────────── */
+.h5-section { margin: 0 0 2.5rem; }
+.h5-heading { font-size: 1.4rem; font-weight: 800; color: var(--AC); margin: 0 0 1.25rem; padding-bottom: .5rem; border-bottom: 2px solid var(--AC); }
+.h5-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: 1.25rem; }
+.h5-card { background: var(--bg2, #f5ede0); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.1rem; }
+.h5-card-title { font-size: .88rem; font-weight: 700; color: var(--text1); margin: 0 0 .5rem; }
+.h5-card p { font-size: .85rem; color: var(--text2); line-height: 1.7; margin: 0; }
+.h5-skills { background: var(--ACfaint); border: 1px solid var(--AC); border-radius: 8px; padding: 1.1rem 1.25rem; }
+.h5-skills-title { font-size: .95rem; font-weight: 700; color: var(--AC); margin: 0 0 .75rem; }
+.h5-skills ul { margin: 0; padding-left: 1.25rem; }
+.h5-skills li { font-size: .85rem; color: var(--text2); line-height: 1.7; margin-bottom: .3rem; }
+
+/* ── Common Mistakes Box ─────────────────────────────────────────────────── */
+.lesson-mistakes { background: #fff8e7; border-left: 3px solid #f59e0b; border-radius: 0 6px 6px 0; padding: .85rem 1rem; margin-top: 1rem; }
+.lm-title { font-size: .82rem; font-weight: 700; color: #92400e; margin: 0 0 .5rem; letter-spacing: .02em; }
+.lm-list { margin: 0; padding-left: 1.1rem; }
+.lm-list li { font-size: .83rem; color: #78350f; line-height: 1.65; margin-bottom: .25rem; }
+.lm-list li:last-child { margin-bottom: 0; }
+
+/* ── Formula Card ────────────────────────────────────────────────────────── */
+.formula-card { border: 1px solid var(--AC); border-radius: 8px; margin-bottom: 1.5rem; overflow: hidden; background: var(--ACfaint); }
+.fc-header { display: flex; align-items: center; gap: .75rem; padding: .85rem 1.1rem; cursor: pointer; }
+.fc-icon { font-size: 1.3rem; color: var(--AC); font-weight: 700; }
+.fc-title { font-size: .95rem; font-weight: 700; color: var(--AC); margin: 0; flex: 1; }
+.fc-toggle { background: var(--AC); color: #fff; border: none; border-radius: 4px; padding: .25rem .7rem; font-size: .78rem; cursor: pointer; }
+.fc-body { display: none; padding: 1rem 1.1rem; border-top: 1px solid var(--AC); }
+.formula-card.fc-open .fc-body { display: block; }
+.fc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: .75rem; }
+.fc-item { background: #fff; border: 1px solid var(--border); border-radius: 6px; padding: .7rem .85rem; }
+.fc-name { display: block; font-size: .78rem; font-weight: 700; color: var(--text1); margin-bottom: .25rem; }
+.fc-eq { display: block; font-family: 'Courier New', monospace; font-size: 1rem; color: var(--AC); margin-bottom: .25rem; font-weight: 700; }
+.fc-note { display: block; font-size: .75rem; color: var(--text3); line-height: 1.5; }
+
+/* ── FRQ Scoring Guide ───────────────────────────────────────────────────── */
+.scoring-guide { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; margin: 1.5rem 0; }
+.sg-body { font-size: .88rem; color: var(--text2); line-height: 1.75; }
+.sg-body strong { color: var(--text1); }

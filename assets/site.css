@@ -1646,3 +1646,8 @@ mjx-container { overflow-x: auto; max-width: 100%; display: block; }
 .cs-item { background: var(--bg2); border-radius: 6px; padding: .6rem .8rem; font-size: .82rem; }
 .cs-term { font-weight: 700; color: var(--AC); display: block; margin-bottom: .2rem; }
 .cs-def { color: var(--text2); line-height: 1.5; }
+
+
+/* Video labels and descriptions */
+.vid-label { font-size: .75rem; font-weight: 700; color: var(--AC); text-transform: uppercase; letter-spacing: .06em; margin: 0 0 .35rem; }
+.vid-desc { font-size: .78rem; color: var(--text3); font-style: italic; margin: .3rem 0 0; line-height: 1.5; }

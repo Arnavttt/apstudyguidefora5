@@ -1399,7 +1399,7 @@ mjx-container { overflow-x: auto; max-width: 100%; display: block; }
 .feedback-widget {
   position: fixed;
   bottom: 1.5rem;
-  right: 1.5rem;
+  left: 1.5rem;
   z-index: 500;
 }
 .feedback-trigger {
@@ -1418,7 +1418,7 @@ mjx-container { overflow-x: auto; max-width: 100%; display: block; }
 .feedback-panel {
   display: none;
   position: absolute;
-  bottom: 60px; right: 0;
+  bottom: 60px; left: 0;
   width: 280px;
   background: var(--parchment, #fdf8f0);
   border: 1px solid var(--border, #e5ddd0);

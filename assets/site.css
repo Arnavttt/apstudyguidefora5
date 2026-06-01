@@ -1605,3 +1605,8 @@ mjx-container { overflow-x: auto; max-width: 100%; display: block; }
 }
 .lnb-btn:hover { background: color-mix(in srgb, var(--AC) 82%, black); }
 .lnb-course { font-size: .8rem; color: var(--text3); text-align: center; }
+
+
+/* ── Lesson completion state ──────────────────────────────────────────────── */
+.lesson-done .lesson-head { background: color-mix(in srgb, var(--AC) 8%, var(--parchment2)); }
+.lesson-done .lesson-head h4::after { content: ' ✓'; color: var(--AC); font-size: .85em; }

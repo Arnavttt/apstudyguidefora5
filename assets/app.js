@@ -417,3 +417,21 @@ function submitSiteReview() {
     if (lbl) lbl.textContent = labels[saved] || '';
   }
 })();
+
+/* ── Lesson completion ────────────────────────────────────────────────────── */
+function initLessonProgress() {
+  document.querySelectorAll('input[data-progress]').forEach(function(cb) {
+    var id = cb.dataset.progress;
+    if (localStorage.getItem('fa2-done-' + id) === '1') {
+      cb.checked = true;
+      var lesson = cb.closest('.lesson');
+      if (lesson) lesson.classList.add('lesson-done');
+    }
+    cb.addEventListener('change', function() {
+      localStorage.setItem('fa2-done-' + id, cb.checked ? '1' : '0');
+      var lesson = cb.closest('.lesson');
+      if (lesson) lesson.classList.toggle('lesson-done', cb.checked);
+    });
+  });
+}
+document.addEventListener('DOMContentLoaded', initLessonProgress);

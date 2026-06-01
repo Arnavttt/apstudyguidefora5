@@ -1587,3 +1587,21 @@ mjx-container { overflow-x: auto; max-width: 100%; display: block; }
 .scoring-guide { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; margin: 1.5rem 0; }
 .sg-body { font-size: .88rem; color: var(--text2); line-height: 1.75; }
 .sg-body strong { color: var(--text1); }
+
+
+/* ── Lesson Nav Bar ──────────────────────────────────────────────────────── */
+.lesson-nav-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem 1.5rem; background: var(--parchment2, #f5ede0);
+  border-top: 1px solid var(--border); margin-top: 2rem;
+  position: sticky; bottom: 0; z-index: 100;
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.06);
+}
+.lnb-btn {
+  display: inline-flex; align-items: center; gap: .4rem;
+  padding: .55rem 1.1rem; background: var(--AC); color: #fff;
+  border-radius: 6px; text-decoration: none; font-size: .88rem;
+  font-weight: 600; transition: background .15s;
+}
+.lnb-btn:hover { background: color-mix(in srgb, var(--AC) 82%, black); }
+.lnb-course { font-size: .8rem; color: var(--text3); text-align: center; }

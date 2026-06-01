@@ -1621,3 +1621,15 @@ mjx-container { overflow-x: auto; max-width: 100%; display: block; }
 .cb-text { font-size: .88rem; color: var(--text1); font-weight: 600; }
 .cb-link { font-size: .88rem; color: var(--AC); font-weight: 700; text-decoration: underline; }
 .cb-dismiss { margin-left: auto; background: none; border: none; color: var(--text3); cursor: pointer; font-size: 1rem; }
+
+
+/* ── Course Path ──────────────────────────────────────────────────────────── */
+.course-path { background: var(--ACfaint); border: 1px solid var(--AC); border-radius: 10px; padding: 1.5rem; margin: 1.5rem 0 2rem; }
+.cp-title { font-size: 1.05rem; font-weight: 800; color: var(--AC); margin: 0 0 1.1rem; }
+.cp-steps { display: flex; flex-direction: column; gap: .85rem; margin-bottom: 1.25rem; }
+.cp-step { display: flex; align-items: flex-start; gap: .85rem; }
+.cp-num { flex-shrink: 0; width: 28px; height: 28px; background: var(--AC); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: .82rem; font-weight: 800; }
+.cp-step strong { font-size: .9rem; color: var(--text1); display: block; margin-bottom: .15rem; }
+.cp-step p { font-size: .83rem; color: var(--text2); margin: 0; line-height: 1.5; }
+.cp-cta { display: inline-block; background: var(--AC); color: #fff; padding: .65rem 1.75rem; border-radius: 8px; font-weight: 700; font-size: .95rem; text-decoration: none; transition: background .15s; }
+.cp-cta:hover { background: color-mix(in srgb, var(--AC) 82%, black); }

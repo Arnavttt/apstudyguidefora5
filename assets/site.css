@@ -1651,3 +1651,66 @@ mjx-container { overflow-x: auto; max-width: 100%; display: block; }
 /* Video labels and descriptions */
 .vid-label { font-size: .75rem; font-weight: 700; color: var(--AC); text-transform: uppercase; letter-spacing: .06em; margin: 0 0 .35rem; }
 .vid-desc { font-size: .78rem; color: var(--text3); font-style: italic; margin: .3rem 0 0; line-height: 1.5; }
+
+/* ── Mobile improvements (added by audit) ─────────────────────────────── */
+@media (max-width: 480px) {
+  /* Masthead / unit header */
+  .mh-title { font-size: 1.4rem !important; }
+  .mh-sub { font-size: .85rem; }
+  .mh-pills { flex-wrap: wrap; gap: .35rem; }
+  .period-pills { display: flex; flex-direction: column; gap: .3rem; }
+  .period-pills .pill { font-size: .72rem; padding: .3rem .6rem; }
+
+  /* Lesson grid — force single column */
+  .lesson-grid,
+  .unit-grid,
+  .course-grid { grid-template-columns: 1fr !important; }
+
+  /* Tables — allow horizontal scroll */
+  table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+  /* Quiz choices — prevent text overflow */
+  .q-choice { font-size: .82rem; padding: .55rem .7rem; word-break: break-word; }
+  .q-text { font-size: .9rem; }
+
+  /* Sidebar — full width overlay */
+  .sidebar { width: 100% !important; max-width: 100% !important; }
+
+  /* Video wrapper — force 16:9 on small screens */
+  .vid-wrap iframe { height: 200px; }
+
+  /* Formula/code blocks */
+  .formula-block, pre, code { font-size: .78rem; overflow-x: auto; display: block; }
+
+  /* Cheat sheet / key facts */
+  .cheat-sheet, .key-facts { padding: .7rem .8rem; }
+
+  /* Navigation pills — scroll horizontally */
+  .nav-pills, .tab-pills { overflow-x: auto; white-space: nowrap; flex-wrap: nowrap; }
+
+  /* Reduce hero padding */
+  .hero { padding: 2.5rem 1rem 2rem; }
+  .hero h1 { font-size: 1.8rem; }
+}
+
+@media (max-width: 768px) {
+  /* Topnav adjustments */
+  .topnav { flex-wrap: wrap; height: auto; padding: .5rem .85rem; gap: .35rem; }
+  .topnav-right { width: 100%; margin-top: .3rem; }
+  #q { width: 100%; }
+
+  /* Masthead breadcrumb font */
+  .mh-breadcrumb { font-size: .72rem; }
+
+  /* Reduce sidebar toggle area */
+  .sidebar-toggle { padding: .35rem .5rem; }
+
+  /* Unit content padding */
+  .unit-content, .lesson-content { padding: 1rem; }
+
+  /* Quiz score bar */
+  .score-bar { flex-direction: column; gap: .4rem; }
+
+  /* Practice section */
+  .practice-section { padding: .8rem; }
+}

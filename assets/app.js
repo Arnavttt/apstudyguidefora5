@@ -1,6 +1,17 @@
 /* Five & A+ — app.js v2 (MCQ + legacy dual-mode, localStorage) */
 'use strict';
 
+/* ── Safe storage (private browsing fallback) ──────────────────────────────── */
+const _store = (function() {
+  try { _store.setItem('__test__','1'); _store.removeItem('__test__'); return window.localStorage; }
+  catch(e) {
+    var m = {};
+    return { getItem: function(k){return m[k]||null;}, setItem: function(k,v){m[k]=String(v);},
+             removeItem: function(k){delete m[k];}, get length(){return Object.keys(m).length;},
+             key: function(i){return Object.keys(m)[i]||null;} };
+  }
+})();
+
 /* ── storage keys ─────────────────────────────────────────────────────────── */
 const P = 'fa2-';
 function key(type, qid) { return P + type + '-' + qid; }
@@ -38,8 +49,8 @@ function mcqPick(el, qid) {
 
   var result = isCorrect ? 'right' : 'wrong';
   var chosenIdx = Array.from(item.querySelectorAll('.q-choice')).indexOf(el);
-  localStorage.setItem(key('mcq-state', qid), result);
-  localStorage.setItem(key('mcq-chosen', qid), chosenIdx);
+  _store.setItem(key('mcq-state', qid), result);
+  _store.setItem(key('mcq-chosen', qid), chosenIdx);
 
   updateScores();
   updateBankScore(item.dataset.bank);
@@ -48,8 +59,8 @@ function mcqPick(el, qid) {
 function loadMcqState() {
   allMcqItems().forEach(function(item) {
     var qid = item.dataset.qid;
-    var result = localStorage.getItem(key('mcq-state', qid));
-    var chosenIdx = localStorage.getItem(key('mcq-chosen', qid));
+    var result = _store.getItem(key('mcq-state', qid));
+    var chosenIdx = _store.getItem(key('mcq-chosen', qid));
     if (result === null || chosenIdx === null) return;
 
     item.classList.add('answered');
@@ -84,9 +95,9 @@ function setLegacyState(card, status) {
   var st = card.querySelector('[data-state]');
   if (st) st.textContent = status === 'right' ? 'Correct' : status === 'wrong' ? 'Wrong' : 'Unmarked';
   if (status === 'right' || status === 'wrong') {
-    localStorage.setItem(key('state', qid), status);
+    _store.setItem(key('state', qid), status);
   } else {
-    localStorage.removeItem(key('state', qid));
+    _store.removeItem(key('state', qid));
   }
   updateScores();
   updateBankScore(card.dataset.bank);
@@ -94,7 +105,7 @@ function setLegacyState(card, status) {
 
 function saveLegacyAnswer(textarea) {
   var card = textarea.closest('.iq');
-  if (card) localStorage.setItem(key('answer', card.dataset.qid), textarea.value);
+  if (card) _store.setItem(key('answer', card.dataset.qid), textarea.value);
 }
 
 function loadLegacyState() {
@@ -102,10 +113,10 @@ function loadLegacyState() {
     var qid = card.dataset.qid;
     var ta = card.querySelector('textarea[data-answer]');
     if (ta) {
-      var saved = localStorage.getItem(key('answer', qid));
+      var saved = _store.getItem(key('answer', qid));
       if (saved !== null) ta.value = saved;
     }
-    setLegacyState(card, localStorage.getItem(key('state', qid)) || '');
+    setLegacyState(card, _store.getItem(key('state', qid)) || '');
   });
 }
 
@@ -116,7 +127,7 @@ function updateScores() {
   var mcqItems = allMcqItems();
   var mcqRight = 0, mcqWrong = 0;
   mcqItems.forEach(function(item) {
-    var s = localStorage.getItem(key('mcq-state', item.dataset.qid));
+    var s = _store.getItem(key('mcq-state', item.dataset.qid));
     if (s === 'right') mcqRight++;
     else if (s === 'wrong') mcqWrong++;
   });
@@ -156,7 +167,7 @@ function updateBankScore(bankId) {
   var mcqInBank = allMcqItems().filter(function(i) { return i.dataset.bank === bankId; });
   var mr = 0, mw = 0;
   mcqInBank.forEach(function(i) {
-    var s = localStorage.getItem(key('mcq-state', i.dataset.qid));
+    var s = _store.getItem(key('mcq-state', i.dataset.qid));
     if (s === 'right') mr++; else if (s === 'wrong') mw++;
   });
 
@@ -192,8 +203,8 @@ function resetBank(bankId) {
     });
     var exp = document.getElementById('exp-' + qid);
     if (exp) exp.style.display = 'none';
-    localStorage.removeItem(key('mcq-state', qid));
-    localStorage.removeItem(key('mcq-chosen', qid));
+    _store.removeItem(key('mcq-state', qid));
+    _store.removeItem(key('mcq-chosen', qid));
   });
 
   /* Legacy reset */
@@ -201,7 +212,7 @@ function resetBank(bankId) {
     var ta = card.querySelector('textarea');
     if (ta) ta.value = '';
     card.querySelectorAll('details').forEach(function(d) { d.open = false; });
-    localStorage.removeItem(key('answer', card.dataset.qid));
+    _store.removeItem(key('answer', card.dataset.qid));
     setLegacyState(card, '');
   });
 
@@ -221,8 +232,8 @@ function resetAll() {
     });
     var exp = document.getElementById('exp-' + qid);
     if (exp) exp.style.display = 'none';
-    localStorage.removeItem(key('mcq-state', qid));
-    localStorage.removeItem(key('mcq-chosen', qid));
+    _store.removeItem(key('mcq-state', qid));
+    _store.removeItem(key('mcq-chosen', qid));
   });
 
   /* clear legacy */
@@ -230,14 +241,14 @@ function resetAll() {
     var ta = q.querySelector('textarea');
     if (ta) ta.value = '';
     q.querySelectorAll('details').forEach(function(d) { d.open = false; });
-    localStorage.removeItem(key('answer', q.dataset.qid));
+    _store.removeItem(key('answer', q.dataset.qid));
     setLegacyState(q, '');
   });
 
   /* clear progress checkboxes */
   document.querySelectorAll('input[data-progress]').forEach(function(cb) {
     cb.checked = false;
-    localStorage.removeItem('fa-progress-' + cb.dataset.progress);
+    _store.removeItem('fa-progress-' + cb.dataset.progress);
   });
 
   updateScores();
@@ -283,7 +294,7 @@ document.addEventListener('input', function(e) {
 
 document.addEventListener('change', function(e) {
   if (e.target.matches('input[data-progress]')) {
-    localStorage.setItem('fa-progress-' + e.target.dataset.progress, e.target.checked ? '1' : '0');
+    _store.setItem('fa-progress-' + e.target.dataset.progress, e.target.checked ? '1' : '0');
   }
 });
 
@@ -300,7 +311,7 @@ document.addEventListener('click', function(e) {
     if (!card) return;
     var ta = card.querySelector('textarea');
     if (ta) ta.value = '';
-    localStorage.removeItem(key('answer', card.dataset.qid));
+    _store.removeItem(key('answer', card.dataset.qid));
     setLegacyState(card, '');
   }
 
@@ -322,7 +333,7 @@ document.addEventListener('click', function(e) {
 (function init() {
   /* restore progress checkboxes */
   document.querySelectorAll('input[data-progress]').forEach(function(cb) {
-    cb.checked = localStorage.getItem('fa-progress-' + cb.dataset.progress) === '1';
+    cb.checked = _store.getItem('fa-progress-' + cb.dataset.progress) === '1';
   });
 
   loadMcqState();
@@ -338,7 +349,7 @@ function toggleSidebar() {
 
 /* ── Unit confidence rating ───────────────────────────────────────────── */
 function rateUnit(uid, val) {
-  localStorage.setItem('unit-rate-' + uid, val);
+  _store.setItem('unit-rate-' + uid, val);
   renderStars(uid, val);
   var labels = ['','Just started 😅','Getting there 🙂','Feeling okay 😊','Pretty solid 💪','Got this! 🌟'];
   var lbl = document.getElementById('reviewLabel-' + uid);
@@ -353,7 +364,7 @@ function renderStars(uid, val) {
 function initRatings() {
   document.querySelectorAll('.review-stars').forEach(function(el) {
     var uid = el.id.replace('reviewStars-','');
-    var saved = parseInt(localStorage.getItem('unit-rate-' + uid)) || 0;
+    var saved = parseInt(_store.getItem('unit-rate-' + uid)) || 0;
     if (saved) { renderStars(uid, saved); rateUnit(uid, saved); }
   });
 }
@@ -369,9 +380,9 @@ function submitFeedback() {
   var btn = document.querySelector('.feedback-submit');
   if (!txt || !txt.value.trim()) return;
   // Store locally (no backend)
-  var fb = JSON.parse(localStorage.getItem('fa2-feedback') || '[]');
+  var fb = JSON.parse(_store.getItem('fa2-feedback') || '[]');
   fb.push({ page: location.pathname, text: txt.value.trim(), ts: Date.now() });
-  localStorage.setItem('fa2-feedback', JSON.stringify(fb));
+  _store.setItem('fa2-feedback', JSON.stringify(fb));
   txt.value = '';
   if (thanks) thanks.style.display = 'block';
   if (btn) btn.style.display = 'none';
@@ -382,7 +393,7 @@ document.addEventListener('DOMContentLoaded', initRatings);
 
 /* ── Site review rating ───────────────────────────────────────────────── */
 function rateSite(val) {
-  localStorage.setItem('fa2-site-rating', val);
+  _store.setItem('fa2-site-rating', val);
   var btns = document.querySelectorAll('#siteReviewStars .sr-star');
   btns.forEach(function(b) { b.classList.toggle('lit', parseInt(b.dataset.val) <= val); });
   var labels = ['','Not for me 😕','Could be better 🤔','Pretty helpful 😊','Really solid 💪','Love it! 🌟'];
@@ -395,19 +406,19 @@ function submitSiteReview() {
   var txt = document.getElementById('siteReviewText');
   var thanks = document.getElementById('siteReviewThanks');
   var form = document.getElementById('siteReviewForm');
-  var reviews = JSON.parse(localStorage.getItem('fa2-site-reviews') || '[]');
+  var reviews = JSON.parse(_store.getItem('fa2-site-reviews') || '[]');
   reviews.push({
-    rating: localStorage.getItem('fa2-site-rating'),
+    rating: _store.getItem('fa2-site-rating'),
     name: name ? name.value.trim() : '',
     text: txt ? txt.value.trim() : '',
     ts: Date.now()
   });
-  localStorage.setItem('fa2-site-reviews', JSON.stringify(reviews));
+  _store.setItem('fa2-site-reviews', JSON.stringify(reviews));
   if (form) form.style.display = 'none';
   if (thanks) thanks.style.display = 'block';
 }
 (function initSiteReview() {
-  var saved = parseInt(localStorage.getItem('fa2-site-rating')) || 0;
+  var saved = parseInt(_store.getItem('fa2-site-rating')) || 0;
   if (saved) {
     document.querySelectorAll('#siteReviewStars .sr-star').forEach(function(b) {
       b.classList.toggle('lit', parseInt(b.dataset.val) <= saved);
@@ -422,13 +433,13 @@ function submitSiteReview() {
 function initLessonProgress() {
   document.querySelectorAll('input[data-progress]').forEach(function(cb) {
     var id = cb.dataset.progress;
-    if (localStorage.getItem('fa2-done-' + id) === '1') {
+    if (_store.getItem('fa2-done-' + id) === '1') {
       cb.checked = true;
       var lesson = cb.closest('.lesson');
       if (lesson) lesson.classList.add('lesson-done');
     }
     cb.addEventListener('change', function() {
-      localStorage.setItem('fa2-done-' + id, cb.checked ? '1' : '0');
+      _store.setItem('fa2-done-' + id, cb.checked ? '1' : '0');
       var lesson = cb.closest('.lesson');
       if (lesson) lesson.classList.toggle('lesson-done', cb.checked);
     });
@@ -445,15 +456,15 @@ function initContinueBanner() {
   var sidebarLinks = Array.from(document.querySelectorAll('.sidebar-lesson-link'));
   if (!sidebarLinks.length) return;
   var allKeys = [];
-  for (var i = 0; i < localStorage.length; i++) {
-    var k = localStorage.key(i);
-    if (k && k.startsWith('fa2-done-') && localStorage.getItem(k) === '1') allKeys.push(k);
+  for (var i = 0; i < _store.length; i++) {
+    var k = _store.key(i);
+    if (k && k.startsWith('fa2-done-') && _store.getItem(k) === '1') allKeys.push(k);
   }
   if (!allKeys.length) return;
   var firstIncomplete = sidebarLinks.find(function(a) {
     var href = a.getAttribute('href') || '';
     var id = href.replace('#','');
-    return !localStorage.getItem('fa2-done-' + id);
+    return !_store.getItem('fa2-done-' + id);
   });
   if (firstIncomplete) {
     link.href = firstIncomplete.getAttribute('href') || '#';

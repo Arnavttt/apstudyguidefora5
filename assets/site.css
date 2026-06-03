@@ -1714,3 +1714,18 @@ mjx-container { overflow-x: auto; max-width: 100%; display: block; }
   /* Practice section */
   .practice-section { padding: .8rem; }
 }
+
+/* ── Research in Action ──────────────────────────────────────────────────── */
+.research-spotlight {
+  background: linear-gradient(135deg, var(--ACfaint, rgba(139,105,20,.07)) 0%, #fff 100%);
+  border: 1px solid var(--AC, #8b6914);
+  border-left: 4px solid var(--AC, #8b6914);
+  border-radius: 8px;
+  padding: 1.1rem 1.25rem;
+  margin: 1rem 0;
+}
+.rs-tag { font-size: .7rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--AC, #8b6914); margin: 0 0 .4rem; }
+.rs-finding { font-size: .88rem; color: var(--text1, #2a1f0e); font-weight: 600; margin: 0 0 .35rem; line-height: 1.5; }
+.rs-detail { font-size: .82rem; color: var(--text2, #5c4a2a); line-height: 1.65; margin: 0 0 .4rem; }
+.rs-cite { font-size: .75rem; color: var(--text3, #9c8060); font-style: italic; }
+.rs-cite a { color: var(--AC, #8b6914); }

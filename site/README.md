@@ -21,6 +21,12 @@ assets/app.js           ← MCQ logic + localStorage progress tracking
 - **Click-to-select MCQs** — instant feedback, score tracked per bank
 - **localStorage persistence** — answers survive page reloads
 - **Per-unit dashboards** — see right / wrong / unanswered at a glance
+- **AP® skill checkpoints** — course-specific study loops that pair guide practice with official AP Classroom work
+- **Unit transfer prompts** — AP® unit pages turn local lessons into rubric-style written, worked, or performance-task practice
+- **Command-verb toolkits** — AP® response habits for identify, describe, explain, justify, calculate, compare, and related task verbs
+- **Mistake-repair workflows** — Wrong-only review prompts that turn missed questions into a retake plan
+- **Spaced-review plans** — same-day, 48-hour, and one-week prompts for keeping AP® units active
+- **Official-practice bridges** — AP® course pages connect local practice to AP Daily, AP Central course pages, and AP Classroom work
 - **Dark premium UI** — Outfit / Syne / Fira Code font stack, per-course accent colors
 - **Embedded video** — YouTube (privacy-enhanced mode) with fallback links
 - **GitHub Pages–ready** — all paths relative, `.nojekyll` present
@@ -70,13 +76,31 @@ All answers are stored in `localStorage` under the key prefix `fa2-`. To reset a
 
 ## Development
 
-Content is generated from Python modules in `ap_content/`. To regenerate:
+Content is generated from Python modules in `html_generator/ap_content/`.
+From the repository root, regenerate the checked-in static site with:
 
 ```bash
-python generate_ap_content.py [slug1 slug2 ...]
+python html_generator/generate_ap_content.py
 ```
 
-Omit arguments to regenerate all courses.
+Useful variants:
+
+```bash
+python html_generator/generate_ap_content.py --dry-run
+python html_generator/generate_ap_content.py ap-biology
+python html_generator/generate_ap_content.py bio college-algebra
+python html_generator/generate_ap_content.py --output-dir path/to/site-root ap-biology
+```
+
+Omit course selectors to regenerate all courses into `site/`. AP® course pages
+also receive generated exam-skill study loops, command-verb toolkits, and unit
+checkpoints from `generate_ap_content.py`, plus AP-only unit transfer prompts,
+mistake-repair prompts, spaced-review plans, and official-practice bridges that use the existing
+dashboard filters; the two college math courses keep their Non-AP® labeling and
+skip AP-only guidance. Selectors may be
+module names (`bio`), course slugs (`ap-biology`), abbreviations, or course HTML
+files (`ap-biology.html`). Split content modules are grouped automatically, so a
+single selector regenerates the whole course.
 
 ## About the Creators
 

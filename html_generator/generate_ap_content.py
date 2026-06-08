@@ -340,6 +340,13 @@ FINAL_REVIEW_STEPS = [
     ('Lock the routine', 'The night before, review your miss tags, required materials, calculator/device rules, and the first-pass plan.'),
 ]
 
+SCORE_BUILDER_STEPS = [
+    ('1. Learn', 'Start with gateway ideas and lesson questions until the vocabulary, model, source, formula, or process is usable without notes.'),
+    ('2. Prove', 'Use unit review questions and one transfer prompt to show you can explain, justify, calculate, compare, or analyze under pressure.'),
+    ('3. Mix', 'Use the course bank to switch units without warning; this exposes fragile recall better than rereading a favorite topic.'),
+    ('4. Transfer', 'Finish with AP Daily, assigned AP Classroom practice, released questions, or scoring evidence for the same skill.'),
+]
+
 # ── helpers ─────────────────────────────────────────────────────────────────
 
 def qid(seed):
@@ -688,6 +695,32 @@ def ap_course_focus_html(course_name, course_slug, units, is_non_ap=False):
     )
 
 
+def ap_score_builder_ladder_html(course_slug, is_non_ap=False):
+    if is_non_ap:
+        return ''
+
+    focus_profile = ap_focus_profile(course_slug)
+    response_profile = ap_response_profile(course_slug)
+    cards = ''.join(
+        f'<article><b>{label}</b><p>{desc}</p></article>'
+        for label, desc in SCORE_BUILDER_STEPS
+    )
+    commands = ', '.join(name for name, _ in response_profile['commands'][:4])
+
+    return (
+        f'<section class="score-ladder">'
+        f'<div class="score-ladder-head">'
+        f'<span class="eyebrow">AP&reg; Score Builder</span>'
+        f'<h3>Move from knowing it to proving it</h3>'
+        f'<p>Use this path when a course feels too big: build the idea, prove it in one unit, '
+        f'then mix it with older content and official practice. Keep checking {focus_profile["skill"].lower()} '
+        f'and command verbs like {commands}.</p>'
+        f'</div>'
+        f'<div class="score-ladder-grid">{cards}</div>'
+        f'</section>'
+    )
+
+
 def ap_unit_checkpoint_html(course_slug, unit_title, lessons, is_non_ap=False):
     if is_non_ap:
         return ''
@@ -983,6 +1016,7 @@ def render_course(course_name, course_slug, abbrev, units, course_qs,
 
     course_quiz = quiz_section_html(cbank_id, f'{course_name} — 20 course-level questions', cqs_html, 20)
     ap_course_focus = ap_course_focus_html(course_name, course_slug, units, is_non_ap)
+    ap_score_builder_ladder = ap_score_builder_ladder_html(course_slug, is_non_ap)
     ap_response_toolkit = ap_response_toolkit_html(course_slug, is_non_ap)
     ap_mistake_log = ap_mistake_log_html(course_slug, is_non_ap)
     ap_spaced_review = ap_spaced_review_html(course_slug, is_non_ap)
@@ -1016,6 +1050,7 @@ def render_course(course_name, course_slug, abbrev, units, course_qs,
         f'<div class="page-wrap">'
         f'{dashboard_html()}'
         f'{ap_course_focus}'
+        f'{ap_score_builder_ladder}'
         f'{ap_response_toolkit}'
         f'{ap_mistake_log}'
         f'{ap_spaced_review}'

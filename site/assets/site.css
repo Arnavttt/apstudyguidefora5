@@ -237,6 +237,25 @@ img,iframe { max-width:100%; border:0; }
 .study-flow-card small a { color:var(--text3); }
 .study-flow-card small a:hover { color:var(--AC); }
 
+.score-ladder {
+  background:var(--bg2); border:1px solid var(--border); border-radius:8px;
+  padding:1rem 1.15rem; margin:0 0 1.55rem;
+}
+.score-ladder-head { margin-bottom:.85rem; }
+.score-ladder-head p {
+  color:var(--text2); font-size:13px; line-height:1.7; max-width:800px;
+}
+.score-ladder-grid {
+  display:grid; grid-template-columns:repeat(4,1fr); gap:1px;
+  background:var(--border); border:1px solid var(--border); border-radius:6px; overflow:hidden;
+}
+.score-ladder-grid article { background:var(--bg3); padding:.8rem .9rem; }
+.score-ladder-grid b {
+  display:block; color:var(--AC); font-family:'Fira Code',monospace;
+  font-size:10px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:.28rem;
+}
+.score-ladder-grid p { color:var(--text2); font-size:12.5px; line-height:1.6; }
+
 .response-toolkit {
   background:var(--bg2); border:1px solid var(--border); border-radius:8px;
   padding:1rem 1.15rem; margin:0 0 1.55rem;
@@ -429,6 +448,7 @@ img,iframe { max-width:100%; border:0; }
 .spaced-strip p b { color:var(--text); }
 @media(max-width:760px) {
   .study-flow-grid,
+  .score-ladder-grid,
   .response-command-grid,
   .mistake-log-grid,
   .spaced-review-grid,
@@ -441,6 +461,7 @@ img,iframe { max-width:100%; border:0; }
 }
 @media(min-width:761px) and (max-width:980px) {
   .response-command-grid,
+  .score-ladder-grid,
   .mistake-log-grid,
   .spaced-review-grid,
   .official-bridge-grid,

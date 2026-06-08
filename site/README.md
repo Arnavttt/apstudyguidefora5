@@ -24,6 +24,7 @@ assets/app.js           ← MCQ logic + localStorage progress tracking
 - **AP® skill checkpoints** — course-specific study loops that pair guide practice with official AP Classroom work
 - **Score-builder ladders** — AP® course pages show how to move from lesson recall to mixed and official practice
 - **Unit transfer prompts** — AP® unit pages turn local lessons into rubric-style written, worked, or performance-task practice
+- **AP® prompt builders** — unit pages help students turn recall into claim, evidence, and reasoning before the review quiz
 - **Command-verb toolkits** — AP® response habits for identify, describe, explain, justify, calculate, compare, and related task verbs
 - **Mistake-repair workflows** — Wrong-only review prompts that turn missed questions into a retake plan
 - **Spaced-review plans** — same-day, 48-hour, and one-week prompts for keeping AP® units active
@@ -99,6 +100,7 @@ Omit course selectors to regenerate all courses into `site/`. AP® course pages
 also receive generated exam-skill study loops, score-builder ladders,
 command-verb toolkits, and unit
 checkpoints from `generate_ap_content.py`, plus AP-only unit transfer prompts,
+prompt builders,
 mistake-repair prompts, spaced-review plans, official-practice bridges, and
 final-review priorities plus exam-day strategy cards that use the existing
 dashboard filters; the two college math courses keep their Non-AP® labeling and

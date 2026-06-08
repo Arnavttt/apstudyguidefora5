@@ -783,6 +783,42 @@ def ap_unit_transfer_practice_html(course_slug, unit_title, lessons, is_non_ap=F
     )
 
 
+def ap_unit_prompt_builder_html(course_slug, unit_title, lessons, is_non_ap=False):
+    if is_non_ap:
+        return ''
+
+    focus_profile = ap_focus_profile(course_slug)
+    response_profile = ap_response_profile(course_slug)
+    commands = response_profile['commands']
+    command_names = ', '.join(name for name, _ in commands[:3]) if commands else 'Explain, justify, and describe'
+    first_lesson = lessons[0]['title'] if lessons else short_unit_title(unit_title)
+    later_lesson = lessons[-1]['title'] if len(lessons) > 1 else first_lesson
+    clean_title = short_unit_title(unit_title)
+
+    cards = (
+        f'<article><b>1. Command</b><p>Choose one verb from {command_names}. '
+        f'Rewrite the task in your own words before answering.</p></article>'
+        f'<article><b>2. Evidence</b><p>Pull one specific term, model, source detail, data point, '
+        f'image feature, calculation, or code trace from {first_lesson} or {later_lesson}.</p></article>'
+        f'<article><b>3. Reasoning</b><p>Add the because/therefore sentence that connects the evidence to '
+        f'{focus_profile["skill"].lower()}.</p></article>'
+        f'<article><b>4. Score scan</b><p>Underline the claim, evidence, and reasoning. '
+        f'If the answer only names content from {clean_title}, revise it into an AP-style explanation.</p></article>'
+    )
+
+    return (
+        f'<section class="prompt-builder">'
+        f'<div class="prompt-builder-head">'
+        f'<span class="eyebrow">AP&reg; Prompt Builder</span>'
+        f'<h3>Draft the answer before the unit quiz</h3>'
+        f'<p>Use this four-step routine after the lesson banks and before the unit review. '
+        f'It turns recall from {clean_title} into the kind of concise, scored language AP prompts reward.</p>'
+        f'</div>'
+        f'<div class="prompt-builder-grid">{cards}</div>'
+        f'</section>'
+    )
+
+
 def render_unit(course_name, course_slug, abbrev, unit_num, unit_title,
                 unit_desc, gateway, lessons, unit_qs, course_html_file,
                 accent_color='#4ade80', is_non_ap=False):
@@ -929,6 +965,7 @@ def render_unit(course_name, course_slug, abbrev, unit_num, unit_title,
     unit_quiz = quiz_section_html(ubank_id, f'Unit {unit_num} Review — 10 questions', uqs_html, 10)
     ap_unit_checkpoint = ap_unit_checkpoint_html(course_slug, unit_title, lessons, is_non_ap)
     ap_unit_transfer_practice = ap_unit_transfer_practice_html(course_slug, unit_title, lessons, is_non_ap)
+    ap_unit_prompt_builder = ap_unit_prompt_builder_html(course_slug, unit_title, lessons, is_non_ap)
     ap_unit_mistake_strip = ap_unit_mistake_strip_html(course_slug, is_non_ap)
     ap_unit_spaced_strip = ap_unit_spaced_strip_html(course_slug, is_non_ap)
 
@@ -962,6 +999,7 @@ def render_unit(course_name, course_slug, abbrev, unit_num, unit_title,
         f'{ap_unit_checkpoint}'
         f'{ap_unit_transfer_practice}'
         f'{lessons_html}'
+        f'{ap_unit_prompt_builder}'
         f'{unit_quiz}'
         f'{ap_unit_mistake_strip}'
         f'{ap_unit_spaced_strip}'

@@ -432,6 +432,26 @@ img,iframe { max-width:100%; border:0; }
   font-size:10px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:.28rem;
 }
 .transfer-practice-grid p { color:var(--text2); font-size:12.5px; line-height:1.6; }
+.prompt-builder {
+  background:var(--bg2); border:1px solid var(--border); border-left:3px solid var(--AC);
+  border-radius:8px; padding:1rem 1.15rem; margin:1.5rem 0;
+}
+.prompt-builder-head { margin-bottom:.85rem; }
+.prompt-builder-head p {
+  color:var(--text2); font-size:13px; line-height:1.7; max-width:820px;
+}
+.prompt-builder-grid {
+  display:grid; grid-template-columns:repeat(4,1fr); gap:.65rem;
+}
+.prompt-builder-grid article {
+  background:var(--bg3); border:1px solid var(--border); border-radius:6px;
+  padding:.82rem .9rem;
+}
+.prompt-builder-grid b {
+  display:block; color:var(--AC); font-family:'Fira Code',monospace;
+  font-size:10px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:.28rem;
+}
+.prompt-builder-grid p { color:var(--text2); font-size:12.5px; line-height:1.6; }
 .mistake-strip {
   background:var(--bg2); border:1px solid var(--border); border-left:3px solid var(--AC);
   border-radius:8px; padding:1rem 1.15rem; margin:1.5rem 0 0;
@@ -456,6 +476,7 @@ img,iframe { max-width:100%; border:0; }
   .exam-day-grid,
   .final-review-grid,
   .transfer-practice-grid,
+  .prompt-builder-grid,
   .ap-checkpoint-grid { grid-template-columns:1fr; }
   .ap-checkpoint-grid div + div { border-left:0; border-top:1px solid var(--border); }
 }
@@ -468,6 +489,7 @@ img,iframe { max-width:100%; border:0; }
   .exam-day-grid,
   .final-review-grid,
   .transfer-practice-grid,
+  .prompt-builder-grid,
   .ap-checkpoint-grid { grid-template-columns:repeat(2,1fr); }
   .ap-checkpoint-grid div + div { border-left:0; }
   .ap-checkpoint-grid div:nth-child(odd) { border-left:0; }

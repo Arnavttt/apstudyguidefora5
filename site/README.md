@@ -27,6 +27,7 @@ assets/app.js           ← MCQ logic + localStorage progress tracking
 - **Unit transfer prompts** — AP® unit pages turn local lessons into rubric-style written, worked, or performance-task practice
 - **AP® prompt builders** — unit pages help students turn recall into claim, evidence, and reasoning before the review quiz
 - **Command-verb toolkits** — AP® response habits for identify, describe, explain, justify, calculate, compare, and related task verbs
+- **Stimulus strategy cards** — course pages show how to read passages, graphs, sources, code, images, and data before answering
 - **Mistake-repair workflows** — Wrong-only review prompts that turn missed questions into a retake plan
 - **Spaced-review plans** — same-day, 48-hour, and one-week prompts for keeping AP® units active
 - **Official-practice bridges** — AP® course pages connect local practice to AP Daily, AP Central course pages, and AP Classroom work
@@ -102,6 +103,7 @@ also receive generated exam-skill study loops, score-builder ladders,
 command-verb toolkits, and unit
 checkpoints from `generate_ap_content.py`, plus AP-only unit transfer prompts,
 unit connection cards, prompt builders,
+stimulus strategy cards,
 mistake-repair prompts, spaced-review plans, official-practice bridges, and
 final-review priorities plus exam-day strategy cards that use the existing
 dashboard filters; the two college math courses keep their Non-AP® labeling and

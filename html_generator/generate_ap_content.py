@@ -306,6 +306,63 @@ COURSE_RESPONSE_PROFILE = {
     'ap-world-history-modern': 'history',
 }
 
+STIMULUS_PROFILES = {
+    'default': [
+        ('Name the input', 'Identify what the prompt gives you: source, graph, image, data, passage, model, scenario, or code.'),
+        ('Mark the task', 'Circle the command verb and decide whether the answer needs a fact, comparison, explanation, or justification.'),
+        ('Use evidence', 'Point to one detail from the stimulus before adding outside course knowledge.'),
+        ('Check transfer', 'Ask how the same idea could appear in a different unit or official practice format.'),
+    ],
+    'history': [
+        ('Source it first', 'Name the author, audience, purpose, point of view, period, and region before choosing evidence.'),
+        ('Context before claim', 'Place the stimulus in a broader process such as causation, continuity/change, comparison, or exchange.'),
+        ('Evidence over summary', 'Use one concrete document detail and one course fact instead of retelling the whole source.'),
+        ('Rubric scan', 'Check whether the answer actually supports the historical reasoning skill the prompt asks for.'),
+    ],
+    'government': [
+        ('Classify the stimulus', 'Decide whether it is data, a required document, a case, an institution, a policy, or a political behavior.'),
+        ('Attach the rule', 'Connect the stimulus to the constitutional principle, institution, actor, or comparative country evidence.'),
+        ('Explain the effect', 'Move from definition to outcome: power, participation, policy, rights, legitimacy, or accountability.'),
+        ('Compare carefully', 'When two systems or branches appear, state both sides before explaining the similarity or difference.'),
+    ],
+    'english': [
+        ('Read for purpose', 'Identify speaker, audience, situation, conflict, or line of reasoning before naming devices.'),
+        ('Choose live evidence', 'Pick a phrase, image, syntax choice, or source detail that proves the claim instead of decorating it.'),
+        ('Commentary does work', 'Explain how the evidence shapes meaning, tone, argument, theme, or complexity.'),
+        ('Synthesize, do not stack', 'When sources appear, put them in conversation around one defensible claim.'),
+    ],
+    'science': [
+        ('Read the setup', 'Mark variables, controls, units, axes, treatment groups, model parts, or particle/biological scale.'),
+        ('Find the pattern', 'State the data trend, anomaly, mechanism, or causal relationship before jumping to the answer.'),
+        ('Link to model', 'Use the course model or mechanism to explain why the observed result makes sense.'),
+        ('Justify with evidence', 'Cite a number, comparison, condition, control, graph feature, or scientific principle.'),
+    ],
+    'math': [
+        ('Identify representation', 'Name the graph, table, equation, series, vector, parameter, or context before calculating.'),
+        ('Check conditions', 'Look for intervals, units, differentiability, convergence, calculator context, and theorem requirements.'),
+        ('Show the setup', 'Write the expression, equation, derivative, integral, or reasoning path before simplifying.'),
+        ('Interpret the result', 'Translate numbers back into the problem context with units, sign, direction, or meaning.'),
+    ],
+    'economics': [
+        ('Draw mentally', 'Identify the market, axes, curves, equilibrium, policy, shock, or macro model before answering.'),
+        ('Name the shift', 'State which curve or variable changes and why incentives, scarcity, or policy caused it.'),
+        ('Track direction', 'Follow price, quantity, output, unemployment, inflation, interest rate, or trade effects in order.'),
+        ('Label the evidence', 'Keep graph labels, calculation work, and economic interpretation tied together.'),
+    ],
+    'computer-science': [
+        ('Trace the input', 'Follow parameters, data structures, indexes, object state, and return values before trusting intuition.'),
+        ('Watch control flow', 'Track loops, conditionals, method calls, abstractions, and side effects in execution order.'),
+        ('State the purpose', 'Explain what the program, procedure, data representation, network, or computing impact is doing.'),
+        ('Check constraints', 'Confirm the code or explanation satisfies every condition in the prompt.'),
+    ],
+    'arts': [
+        ('Observe first', 'Name visible or audible features: form, material, line, space, texture, harmony, rhythm, or structure.'),
+        ('Tie to context', 'Connect the feature to function, patronage, culture, period, performance practice, or audience.'),
+        ('Compare evidence', 'Use specific similarities and differences rather than broad impressions.'),
+        ('Support attribution', 'When naming style or identity, point to the visual or musical evidence that proves it.'),
+    ],
+}
+
 MISTAKE_LOG_STEPS = [
     ('Tag the miss', 'Use Wrong only, then label the miss as content, command verb, evidence, graph/calculation, or careful reading.'),
     ('Repair the rule', 'Write the one rule, mechanism, source detail, model, or formula that would have prevented the miss.'),
@@ -470,8 +527,12 @@ def ap_focus_profile(course_slug):
     return AP_FOCUS_PROFILES.get(course_slug, DEFAULT_AP_FOCUS)
 
 
+def ap_response_profile_key(course_slug):
+    return COURSE_RESPONSE_PROFILE.get(course_slug, 'default')
+
+
 def ap_response_profile(course_slug):
-    key = COURSE_RESPONSE_PROFILE.get(course_slug, 'default')
+    key = ap_response_profile_key(course_slug)
     return RESPONSE_PROFILES.get(key, RESPONSE_PROFILES['default'])
 
 
@@ -502,6 +563,31 @@ def ap_response_toolkit_html(course_slug, is_non_ap=False):
         f'</div>'
         f'<div class="response-command-grid">{command_cards}</div>'
         f'<p class="response-watch"><b>Watch for:</b> {profile["watch"]}</p>'
+        f'</section>'
+    )
+
+
+def ap_stimulus_strategy_html(course_slug, is_non_ap=False):
+    if is_non_ap:
+        return ''
+
+    focus_profile = ap_focus_profile(course_slug)
+    profile_key = ap_response_profile_key(course_slug)
+    stimulus_cards = STIMULUS_PROFILES.get(profile_key, STIMULUS_PROFILES['default'])
+    cards = ''.join(
+        f'<article><b>{label}</b><p>{desc}</p></article>'
+        for label, desc in stimulus_cards
+    )
+
+    return (
+        f'<section class="stimulus-strategy">'
+        f'<div class="stimulus-strategy-head">'
+        f'<span class="eyebrow">AP&reg; Stimulus Strategy</span>'
+        f'<h3>Read the source before chasing the answer</h3>'
+        f'<p>Use this routine whenever a prompt starts with a passage, graph, image, map, data table, '
+        f'scenario, score excerpt, or code segment. It keeps {focus_profile["skill"].lower()} tied to the evidence in front of you.</p>'
+        f'</div>'
+        f'<div class="stimulus-strategy-grid">{cards}</div>'
         f'</section>'
     )
 
@@ -1111,6 +1197,7 @@ def render_course(course_name, course_slug, abbrev, units, course_qs,
     ap_course_focus = ap_course_focus_html(course_name, course_slug, units, is_non_ap)
     ap_score_builder_ladder = ap_score_builder_ladder_html(course_slug, is_non_ap)
     ap_response_toolkit = ap_response_toolkit_html(course_slug, is_non_ap)
+    ap_stimulus_strategy = ap_stimulus_strategy_html(course_slug, is_non_ap)
     ap_mistake_log = ap_mistake_log_html(course_slug, is_non_ap)
     ap_spaced_review = ap_spaced_review_html(course_slug, is_non_ap)
     ap_official_bridge = ap_official_bridge_html(course_slug, is_non_ap)
@@ -1145,6 +1232,7 @@ def render_course(course_name, course_slug, abbrev, units, course_qs,
         f'{ap_course_focus}'
         f'{ap_score_builder_ladder}'
         f'{ap_response_toolkit}'
+        f'{ap_stimulus_strategy}'
         f'{ap_mistake_log}'
         f'{ap_spaced_review}'
         f'{ap_official_bridge}'

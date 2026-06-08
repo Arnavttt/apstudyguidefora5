@@ -412,6 +412,31 @@ img,iframe { max-width:100%; border:0; }
   font-size:10px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:.3rem;
 }
 .ap-checkpoint-grid p { color:var(--text2); font-size:12.5px; line-height:1.65; }
+.unit-connections {
+  background:var(--bg2); border:1px solid var(--border); border-radius:8px;
+  padding:1rem 1.15rem; margin:0 0 1.5rem;
+}
+.unit-connections-head { margin-bottom:.85rem; }
+.unit-connections-head p {
+  color:var(--text2); font-size:13px; line-height:1.7; max-width:820px;
+}
+.unit-connections-grid {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:.65rem;
+}
+.unit-connections-grid article {
+  background:var(--bg3); border:1px solid var(--border); border-radius:6px;
+  padding:.82rem .9rem;
+}
+.unit-connections-grid b {
+  display:block; color:var(--AC); font-family:'Fira Code',monospace;
+  font-size:10px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:.28rem;
+}
+.unit-connections-grid p { color:var(--text2); font-size:12.5px; line-height:1.6; margin-bottom:.48rem; }
+.unit-connections-grid a {
+  color:var(--text); font-family:'Fira Code',monospace; font-size:10.5px;
+  text-decoration:none;
+}
+.unit-connections-grid a:hover { color:var(--AC); }
 .transfer-practice {
   background:var(--bg2); border:1px solid var(--border); border-radius:8px;
   padding:1rem 1.15rem; margin:0 0 1.5rem;
@@ -477,6 +502,7 @@ img,iframe { max-width:100%; border:0; }
   .final-review-grid,
   .transfer-practice-grid,
   .prompt-builder-grid,
+  .unit-connections-grid,
   .ap-checkpoint-grid { grid-template-columns:1fr; }
   .ap-checkpoint-grid div + div { border-left:0; border-top:1px solid var(--border); }
 }
@@ -490,6 +516,7 @@ img,iframe { max-width:100%; border:0; }
   .final-review-grid,
   .transfer-practice-grid,
   .prompt-builder-grid,
+  .unit-connections-grid,
   .ap-checkpoint-grid { grid-template-columns:repeat(2,1fr); }
   .ap-checkpoint-grid div + div { border-left:0; }
   .ap-checkpoint-grid div:nth-child(odd) { border-left:0; }

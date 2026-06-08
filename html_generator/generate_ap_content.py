@@ -819,9 +819,59 @@ def ap_unit_prompt_builder_html(course_slug, unit_title, lessons, is_non_ap=Fals
     )
 
 
+def ap_unit_connections_html(course_name, course_slug, unit_title, course_html_file,
+                             prev_unit=None, next_unit=None, is_non_ap=False):
+    if is_non_ap:
+        return ''
+
+    profile = ap_focus_profile(course_slug)
+    clean_title = short_unit_title(unit_title)
+
+    if prev_unit:
+        prev_title = short_unit_title(prev_unit['title'])
+        prev_action = (
+            f'<a href="{prev_unit["file"]}">Review Unit {prev_unit["num"]}: {prev_title}</a>'
+        )
+        prev_text = (
+            f'Redo one missed or unanswered item from Unit {prev_unit["num"]}, then explain how it sets up {clean_title}.'
+        )
+    else:
+        prev_action = f'<a href="../courses/{course_html_file}">Open the {course_name} map</a>'
+        prev_text = f'Start by checking where {clean_title} fits in the full course sequence before drilling details.'
+
+    if next_unit:
+        next_title = short_unit_title(next_unit['title'])
+        next_action = (
+            f'<a href="{next_unit["file"]}">Preview Unit {next_unit["num"]}: {next_title}</a>'
+        )
+        next_text = (
+            f'Name one idea from {clean_title} that should carry forward into Unit {next_unit["num"]}.'
+        )
+    else:
+        next_action = f'<a href="../courses/{course_html_file}">Use the course bank</a>'
+        next_text = f'You are at the end of this course map; mix {clean_title} with two older units before final review.'
+
+    return (
+        f'<section class="unit-connections">'
+        f'<div class="unit-connections-head">'
+        f'<span class="eyebrow">AP&reg; Unit Connections</span>'
+        f'<h3>Keep this unit tied to the course map</h3>'
+        f'<p>AP questions rarely stay inside one clean topic. Use these links to connect {clean_title} '
+        f'to adjacent units and to keep practicing {profile["skill"].lower()} across the course.</p>'
+        f'</div>'
+        f'<div class="unit-connections-grid">'
+        f'<article><b>Bridge back</b><p>{prev_text}</p>{prev_action}</article>'
+        f'<article><b>Bridge forward</b><p>{next_text}</p>{next_action}</article>'
+        f'<article><b>Mix now</b><p>Answer two questions from this unit, then one course-bank question without previewing the topic.</p>'
+        f'<a href="../courses/{course_html_file}">Open mixed course practice</a></article>'
+        f'</div>'
+        f'</section>'
+    )
+
+
 def render_unit(course_name, course_slug, abbrev, unit_num, unit_title,
                 unit_desc, gateway, lessons, unit_qs, course_html_file,
-                accent_color='#4ade80', is_non_ap=False):
+                accent_color='#4ade80', is_non_ap=False, prev_unit=None, next_unit=None):
 
     acfaint = accent_color  # will generate rgba below
     # parse hex to rgb for --ACfaint
@@ -964,6 +1014,9 @@ def render_unit(course_name, course_slug, abbrev, unit_num, unit_title,
 
     unit_quiz = quiz_section_html(ubank_id, f'Unit {unit_num} Review — 10 questions', uqs_html, 10)
     ap_unit_checkpoint = ap_unit_checkpoint_html(course_slug, unit_title, lessons, is_non_ap)
+    ap_unit_connections = ap_unit_connections_html(
+        course_name, course_slug, unit_title, course_html_file, prev_unit, next_unit, is_non_ap
+    )
     ap_unit_transfer_practice = ap_unit_transfer_practice_html(course_slug, unit_title, lessons, is_non_ap)
     ap_unit_prompt_builder = ap_unit_prompt_builder_html(course_slug, unit_title, lessons, is_non_ap)
     ap_unit_mistake_strip = ap_unit_mistake_strip_html(course_slug, is_non_ap)
@@ -997,6 +1050,7 @@ def render_unit(course_name, course_slug, abbrev, unit_num, unit_title,
         f'{dashboard_html()}'
         f'<div class="gateway"><h4>Unit learning gateway</h4><ul>{gw_html}</ul></div>'
         f'{ap_unit_checkpoint}'
+        f'{ap_unit_connections}'
         f'{ap_unit_transfer_practice}'
         f'{lessons_html}'
         f'{ap_unit_prompt_builder}'
@@ -1238,7 +1292,9 @@ def generate(filter_selectors=None, output_dir=None, dry_run=False):
             all_units.extend(m.UNITS)
         all_units.sort(key=lambda u: u['num'])
 
-        for unit in all_units:
+        for idx, unit in enumerate(all_units):
+            prev_unit = all_units[idx - 1] if idx > 0 else None
+            next_unit = all_units[idx + 1] if idx + 1 < len(all_units) else None
             html = render_unit(
                 course_name=course_name,
                 course_slug=course_slug,
@@ -1252,6 +1308,8 @@ def generate(filter_selectors=None, output_dir=None, dry_run=False):
                 course_html_file=course_html_file,
                 accent_color=accent_color,
                 is_non_ap=is_non_ap,
+                prev_unit=prev_unit,
+                next_unit=next_unit,
             )
             write_file(units_dir / unit['file'], html, dry_run=dry_run)
             print(f'  [unit]   {unit["file"]}')

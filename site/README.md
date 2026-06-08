@@ -20,7 +20,7 @@ assets/app.js           ← MCQ logic + localStorage progress tracking
 
 - **Click-to-select MCQs** — instant feedback, score tracked per bank
 - **localStorage persistence** — answers survive page reloads
-- **Per-unit dashboards** — see right / wrong / unanswered at a glance
+- **Per-unit dashboards** — see right / wrong / unanswered questions and lesson completion at a glance
 - **AP® skill checkpoints** — course-specific study loops that pair guide practice with official AP Classroom work
 - **Score-builder ladders** — AP® course pages show how to move from lesson recall to mixed and official practice
 - **Unit transfer prompts** — AP® unit pages turn local lessons into rubric-style written, worked, or performance-task practice

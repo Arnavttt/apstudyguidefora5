@@ -137,6 +137,9 @@ function updateScores() {
   var answered = (mcqRight + mcqWrong) + legAnswered;
   var unmarked = total - right - wrong;
   var pct      = total ? Math.round(right / total * 100) : 0;
+  var progressBoxes = Array.from(document.querySelectorAll('input[data-progress]'));
+  var lessonsTotal = progressBoxes.length;
+  var lessonsDone = progressBoxes.filter(function(cb) { return cb.checked; }).length;
 
   function set(id, val) { var el = document.getElementById(id); if (el) el.textContent = val; }
   set('dash-total',    total);
@@ -144,7 +147,11 @@ function updateScores() {
   set('dash-right',    right);
   set('dash-wrong',    wrong);
   set('dash-unmarked', unmarked);
+  set('dash-lessons',  lessonsDone + ' / ' + lessonsTotal);
   set('dash-pct',      pct + '%');
+
+  var lessonCard = document.getElementById('dash-lessons-card');
+  if (lessonCard) lessonCard.classList.toggle('hidden', lessonsTotal === 0);
 }
 
 function updateBankScore(bankId) {
@@ -284,6 +291,7 @@ document.addEventListener('input', function(e) {
 document.addEventListener('change', function(e) {
   if (e.target.matches('input[data-progress]')) {
     localStorage.setItem('fa-progress-' + e.target.dataset.progress, e.target.checked ? '1' : '0');
+    updateScores();
   }
 });
 

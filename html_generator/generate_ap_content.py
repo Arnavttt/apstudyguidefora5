@@ -440,6 +440,7 @@ def dashboard_html():
         f'<div class="dash-card"><b id="dash-right">0</b><span>correct</span></div>'
         f'<div class="dash-card"><b id="dash-wrong">0</b><span>wrong</span></div>'
         f'<div class="dash-card"><b id="dash-unmarked">0</b><span>unanswered</span></div>'
+        f'<div class="dash-card hidden" id="dash-lessons-card"><b id="dash-lessons">0 / 0</b><span>lessons done</span></div>'
         f'<div class="dash-card"><b id="dash-pct">0%</b><span>score</span></div>'
         f'</div>'
         f'<div class="dash-actions">'

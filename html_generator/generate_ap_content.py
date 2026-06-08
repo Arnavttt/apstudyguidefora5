@@ -333,6 +333,13 @@ EXAM_DAY_STEPS = [
     ('Final check', 'Use remaining time to catch missing units, labels, thesis/claim language, command verbs, and unsupported explanations.'),
 ]
 
+FINAL_REVIEW_STEPS = [
+    ('Find the leak', 'Use Wrong only and Unanswered only to choose the two weakest units instead of rereading the whole course.'),
+    ('Mix the bank', 'Alternate one weak unit, one older unit, and the course quiz so recall has to survive topic switching.'),
+    ('Score the response', 'Compare one written, worked, or performance response with released scoring evidence or teacher feedback.'),
+    ('Lock the routine', 'The night before, review your miss tags, required materials, calculator/device rules, and the first-pass plan.'),
+]
+
 # ── helpers ─────────────────────────────────────────────────────────────────
 
 def qid(seed):
@@ -606,6 +613,30 @@ def ap_exam_day_strategy_html(course_slug, is_non_ap=False):
         f'<div class="exam-day-grid">{cards}</div>'
         f'<p class="exam-day-note"><b>Before test day:</b> confirm the current College Board exam-day rules, '
         f'calculator/device requirements, and what to bring with your AP teacher or coordinator.</p>'
+        f'</section>'
+    )
+
+
+def ap_final_review_priorities_html(course_slug, is_non_ap=False):
+    if is_non_ap:
+        return ''
+
+    focus_profile = ap_focus_profile(course_slug)
+    response_profile = ap_response_profile(course_slug)
+    cards = ''.join(
+        f'<article><b>{label}</b><p>{desc}</p></article>'
+        for label, desc in FINAL_REVIEW_STEPS
+    )
+
+    return (
+        f'<section class="final-review">'
+        f'<div class="final-review-head">'
+        f'<span class="eyebrow">AP&reg; Final Review Priorities</span>'
+        f'<h3>Spend the last week on evidence, not panic</h3>'
+        f'<p>Use the dashboard to decide what deserves time. For this course, the priority is still '
+        f'{focus_profile["skill"].lower()}; pair that with the {response_profile["title"].lower()} and official scoring evidence.</p>'
+        f'</div>'
+        f'<div class="final-review-grid">{cards}</div>'
         f'</section>'
     )
 
@@ -956,6 +987,7 @@ def render_course(course_name, course_slug, abbrev, units, course_qs,
     ap_mistake_log = ap_mistake_log_html(course_slug, is_non_ap)
     ap_spaced_review = ap_spaced_review_html(course_slug, is_non_ap)
     ap_official_bridge = ap_official_bridge_html(course_slug, is_non_ap)
+    ap_final_review_priorities = ap_final_review_priorities_html(course_slug, is_non_ap)
     ap_exam_day_strategy = ap_exam_day_strategy_html(course_slug, is_non_ap)
 
     non_ap_badge = '<span class="badge non-ap">Non-AP® / Non-standardized</span>' if is_non_ap else '<span class="badge">AP® Exam Review</span>'
@@ -988,6 +1020,7 @@ def render_course(course_name, course_slug, abbrev, units, course_qs,
         f'{ap_mistake_log}'
         f'{ap_spaced_review}'
         f'{ap_official_bridge}'
+        f'{ap_final_review_priorities}'
         f'{ap_exam_day_strategy}'
         f'{course_quiz}'
         f'</div>'

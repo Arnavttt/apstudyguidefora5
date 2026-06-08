@@ -27,6 +27,7 @@ assets/app.js           ← MCQ logic + localStorage progress tracking
 - **Mistake-repair workflows** — Wrong-only review prompts that turn missed questions into a retake plan
 - **Spaced-review plans** — same-day, 48-hour, and one-week prompts for keeping AP® units active
 - **Official-practice bridges** — AP® course pages connect local practice to AP Daily, AP Central course pages, and AP Classroom work
+- **Final-review priorities** — AP® course pages triage weak units, mixed retrieval, and scoring evidence for the last week
 - **Exam-day strategy cards** — AP® course pages rehearse pacing, evidence checks, and final review habits
 - **Dark premium UI** — Outfit / Syne / Fira Code font stack, per-course accent colors
 - **Embedded video** — YouTube (privacy-enhanced mode) with fallback links
@@ -97,7 +98,7 @@ Omit course selectors to regenerate all courses into `site/`. AP® course pages
 also receive generated exam-skill study loops, command-verb toolkits, and unit
 checkpoints from `generate_ap_content.py`, plus AP-only unit transfer prompts,
 mistake-repair prompts, spaced-review plans, official-practice bridges, and
-exam-day strategy cards that use the existing
+final-review priorities plus exam-day strategy cards that use the existing
 dashboard filters; the two college math courses keep their Non-AP® labeling and
 skip AP-only guidance. Selectors may be
 module names (`bio`), course slugs (`ap-biology`), abbreviations, or course HTML

@@ -355,6 +355,27 @@ img,iframe { max-width:100%; border:0; }
 }
 .exam-day-note b { color:var(--text); }
 
+.final-review {
+  background:var(--bg2); border:1px solid var(--border); border-radius:8px;
+  padding:1rem 1.15rem; margin:0 0 1.55rem;
+}
+.final-review-head { margin-bottom:.85rem; }
+.final-review-head p {
+  color:var(--text2); font-size:13px; line-height:1.7; max-width:800px;
+}
+.final-review-grid {
+  display:grid; grid-template-columns:repeat(4,1fr); gap:.65rem;
+}
+.final-review-grid article {
+  background:var(--bg3); border:1px solid var(--border); border-radius:6px;
+  padding:.8rem .9rem;
+}
+.final-review-grid b {
+  display:block; color:var(--AC); font-family:'Fira Code',monospace;
+  font-size:10px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:.28rem;
+}
+.final-review-grid p { color:var(--text2); font-size:12.5px; line-height:1.6; }
+
 .ap-checkpoint {
   border:1px solid var(--border); border-radius:8px;
   background:linear-gradient(180deg,var(--bg2),rgba(18,22,32,.72));
@@ -413,6 +434,7 @@ img,iframe { max-width:100%; border:0; }
   .spaced-review-grid,
   .official-bridge-grid,
   .exam-day-grid,
+  .final-review-grid,
   .transfer-practice-grid,
   .ap-checkpoint-grid { grid-template-columns:1fr; }
   .ap-checkpoint-grid div + div { border-left:0; border-top:1px solid var(--border); }
@@ -423,6 +445,7 @@ img,iframe { max-width:100%; border:0; }
   .spaced-review-grid,
   .official-bridge-grid,
   .exam-day-grid,
+  .final-review-grid,
   .transfer-practice-grid,
   .ap-checkpoint-grid { grid-template-columns:repeat(2,1fr); }
   .ap-checkpoint-grid div + div { border-left:0; }

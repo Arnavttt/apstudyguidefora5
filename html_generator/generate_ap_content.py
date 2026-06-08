@@ -327,6 +327,12 @@ OFFICIAL_BRIDGE_STEPS = [
     ('Read scoring evidence', 'For written or worked responses, compare your answer to scoring guidelines, samples, or the explanation logic here.'),
 ]
 
+EXAM_DAY_STEPS = [
+    ('First pass', 'Answer the clear questions first, mark uncertainty, and keep moving so one hard prompt does not steal the section.'),
+    ('Evidence pass', 'Return to marked items and check that every response points to evidence, a setup, a graph, a source, code behavior, or a mechanism.'),
+    ('Final check', 'Use remaining time to catch missing units, labels, thesis/claim language, command verbs, and unsupported explanations.'),
+]
+
 # ── helpers ─────────────────────────────────────────────────────────────────
 
 def qid(seed):
@@ -573,6 +579,33 @@ def ap_official_bridge_html(course_slug, is_non_ap=False):
         f'<span>&middot;</span>'
         f'<a href="https://apcentral.collegeboard.org/instructional-resources/ap-classroom/overview" target="_blank" rel="noopener">AP Classroom overview</a>'
         f'</p>'
+        f'</section>'
+    )
+
+
+def ap_exam_day_strategy_html(course_slug, is_non_ap=False):
+    if is_non_ap:
+        return ''
+
+    focus_profile = ap_focus_profile(course_slug)
+    response_profile = ap_response_profile(course_slug)
+    cards = ''.join(
+        f'<article><b>{label}</b><p>{desc}</p></article>'
+        for label, desc in EXAM_DAY_STEPS
+    )
+    command_names = ', '.join(name for name, _ in response_profile['commands'][:3])
+
+    return (
+        f'<section class="exam-day-strategy">'
+        f'<div class="exam-day-head">'
+        f'<span class="eyebrow">AP&reg; Exam-Day Strategy</span>'
+        f'<h3>Have a plan before the timer starts</h3>'
+        f'<p>Use this course bank to rehearse pacing, then carry a simple pass system into the official exam. '
+        f'For this course, keep watching for {focus_profile["skill"].lower()} and command verbs like {command_names}.</p>'
+        f'</div>'
+        f'<div class="exam-day-grid">{cards}</div>'
+        f'<p class="exam-day-note"><b>Before test day:</b> confirm the current College Board exam-day rules, '
+        f'calculator/device requirements, and what to bring with your AP teacher or coordinator.</p>'
         f'</section>'
     )
 
@@ -923,6 +956,7 @@ def render_course(course_name, course_slug, abbrev, units, course_qs,
     ap_mistake_log = ap_mistake_log_html(course_slug, is_non_ap)
     ap_spaced_review = ap_spaced_review_html(course_slug, is_non_ap)
     ap_official_bridge = ap_official_bridge_html(course_slug, is_non_ap)
+    ap_exam_day_strategy = ap_exam_day_strategy_html(course_slug, is_non_ap)
 
     non_ap_badge = '<span class="badge non-ap">Non-AP® / Non-standardized</span>' if is_non_ap else '<span class="badge">AP® Exam Review</span>'
 
@@ -954,6 +988,7 @@ def render_course(course_name, course_slug, abbrev, units, course_qs,
         f'{ap_mistake_log}'
         f'{ap_spaced_review}'
         f'{ap_official_bridge}'
+        f'{ap_exam_day_strategy}'
         f'{course_quiz}'
         f'</div>'
         f'{footer_html()}'

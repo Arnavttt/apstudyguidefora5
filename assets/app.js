@@ -36,7 +36,7 @@ function mcqPick(el, qid) {
   item.classList.add('answered');
 
   var isCorrect = el.dataset.correct === 'true';
-  el.classList.add(isCorrect ? 'correct' : 'wrong');
+  el.classList.add(isCorrect ? 'correct' : 'wrong', 'fresh');
   if (!isCorrect) {
     item.querySelectorAll('.q-choice[data-correct="true"]').forEach(function(c) {
       c.classList.add('show-correct');
@@ -495,7 +495,9 @@ document.addEventListener('DOMContentLoaded', initContinueBanner);
   var nodeHalo = null, nodeCore = null;
 
   function buildLightPath() {
-    if (reduced) return;
+    /* Built even under prefers-reduced-motion: the comet is a scroll-linked
+       progress indicator (it only moves when the user scrolls). Reduced
+       motion disables the easing glide and reveal animations instead. */
     if (svg) svg.remove();
     var w = window.innerWidth, h = window.innerHeight;
     var mob = w < 700;
@@ -542,18 +544,11 @@ document.addEventListener('DOMContentLoaded', initContinueBanner);
       return p;
     }
     mkPath('fa-lp-base', 1);
-    glowEl  = mkPath('fa-lp-glow', mob ? 7 : 10);
+    glowEl  = mkPath('fa-lp-glow', mob ? 6 : 10);
     cometEl = mkPath('fa-lp-comet', mob ? 2 : 2.5);
     glowEl.setAttribute('stroke', 'url(#fa-lp-grad)');
-    glowEl.setAttribute('filter', 'url(#fa-lp-blur)');
+    if (!mob) glowEl.setAttribute('filter', 'url(#fa-lp-blur)');
     cometEl.setAttribute('stroke', 'url(#fa-lp-grad)');
-
-    pathLen = cometEl.getTotalLength();
-    cometLen = Math.min(320, pathLen * 0.22);
-    [glowEl, cometEl].forEach(function(p) {
-      p.setAttribute('stroke-dasharray', cometLen + ' ' + pathLen);
-      p.setAttribute('stroke-dashoffset', 0);
-    });
 
     /* glowing node at the head of the comet */
     function mkNode(r, cls) {
@@ -563,10 +558,24 @@ document.addEventListener('DOMContentLoaded', initContinueBanner);
       svg.appendChild(c);
       return c;
     }
-    nodeHalo = mkNode(mob ? 8 : 11, 'fa-lp-halo');
+    nodeHalo = mkNode(mob ? 7 : 10, 'fa-lp-halo');
     nodeCore = mkNode(mob ? 3 : 4, 'fa-lp-node');
-    placeNode(0);
+
+    /* Attach BEFORE measuring: getTotalLength()/getPointAtLength() throw on
+       detached geometry in Firefox, which previously killed the whole path. */
     document.body.prepend(svg);
+    try {
+      pathLen = cometEl.getTotalLength();
+    } catch (e) {
+      svg.remove(); svg = cometEl = glowEl = null; pathLen = 0;
+      return;
+    }
+    cometLen = Math.min(320, pathLen * 0.22);
+    [glowEl, cometEl].forEach(function(p) {
+      p.setAttribute('stroke-dasharray', cometLen + ' ' + pathLen);
+      p.setAttribute('stroke-dashoffset', 0);
+    });
+    placeNode(0);
   }
 
   function placeNode(offset) {
@@ -591,8 +600,12 @@ document.addEventListener('DOMContentLoaded', initContinueBanner);
     bar.style.transform = 'scaleX(' + p + ')';
     if (cometEl && pathLen) {
       target = -p * (pathLen - cometLen);
-      current += (target - current) * 0.14;
-      if (Math.abs(target - current) < 0.5) current = target;
+      if (reduced) {
+        current = target;   /* no glide under reduced motion — direct set */
+      } else {
+        current += (target - current) * 0.14;
+        if (Math.abs(target - current) < 0.5) current = target;
+      }
       glowEl.setAttribute('stroke-dashoffset', current);
       cometEl.setAttribute('stroke-dashoffset', current);
       placeNode(current);
@@ -605,7 +618,18 @@ document.addEventListener('DOMContentLoaded', initContinueBanner);
   var rsT = null;
   window.addEventListener('resize', function() {
     clearTimeout(rsT);
-    rsT = setTimeout(function() { buildLightPath(); onScroll(); }, 150);
+    rsT = setTimeout(function() {
+      buildLightPath();
+      /* snap easing state to the new geometry so the comet doesn't glide
+         across the screen after a resize/rotation */
+      if (pathLen) {
+        current = target = -progress() * (pathLen - cometLen);
+        glowEl.setAttribute('stroke-dashoffset', current);
+        cometEl.setAttribute('stroke-dashoffset', current);
+        placeNode(current);
+      }
+      onScroll();
+    }, 150);
   }, { passive: true });
 
   buildLightPath();

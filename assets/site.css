@@ -1057,7 +1057,7 @@ h5 { font-family: 'Space Grotesk', sans-serif; font-size: 10px; font-weight: 700
   white-space: nowrap;
   transition: all var(--dur) var(--ease);
 }
-.rv-term:hover { background: var(--AC); color: #fff; border-color: var(--AC); }
+.rv-term:hover { background: var(--ACfaint); color: var(--AC); border-color: var(--AC); }
 .review-list { list-style: none; display: flex; flex-direction: column; gap: .3rem; }
 .review-list li {
   display: flex;
@@ -1273,9 +1273,9 @@ mjx-container { overflow-x: auto; max-width: 100%; display: block; }
   margin-top: 1rem;
 }
 .pill {
-  background: rgba(255,255,255,.04);
-  border: 1px solid var(--border2);
-  color: var(--text3);
+  background: rgba(10,10,24,.30);
+  border: 1px solid rgba(255,255,255,.30);
+  color: rgba(255,255,255,.92);
   font-family: 'Fira Code', monospace;
   font-size: 10px;
   padding: .28rem .7rem;
@@ -1284,9 +1284,9 @@ mjx-container { overflow-x: auto; max-width: 100%; display: block; }
   transition: all var(--dur) var(--ease);
   cursor: pointer;
 }
-.pill:hover { border-color: var(--AC); color: var(--AC); background: var(--ACfaint); }
-.pill-overview { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.4); font-weight: 600; }
-.pill-review   { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.4); font-weight: 600; }
+.pill:hover { border-color: #fff; color: var(--ACdark, #1a1208); background: rgba(255,255,255,.92); }
+.pill-overview { background: rgba(255,255,255,0.16); border-color: rgba(255,255,255,0.45); color: #fff; font-weight: 600; }
+.pill-review   { background: rgba(255,255,255,0.16); border-color: rgba(255,255,255,0.45); color: #fff; font-weight: 600; }
 .pill.active   { background: white; color: var(--ACdark, #1a1208); font-weight: 700; }
 
 /* Practice section styles */
@@ -1509,7 +1509,7 @@ mjx-container { overflow-x: auto; max-width: 100%; display: block; }
 .sr-name:focus, .sr-textarea:focus { outline: none; border-color: var(--gold, #c89b3c); box-shadow: 0 0 0 3px rgba(200,155,60,.12); }
 .sr-submit {
   align-self: center;
-  background: var(--gold, #c89b3c); color: #fff;
+  background: linear-gradient(90deg, #22d3ee, #67e8f9); color: #06121f;
   border: none; border-radius: 8px;
   padding: .65rem 2.5rem; font-size: .95rem; font-weight: 700;
   cursor: pointer; transition: background .15s; letter-spacing: .02em;
@@ -1580,7 +1580,7 @@ mjx-container { overflow-x: auto; max-width: 100%; display: block; }
 .fc-header { display: flex; align-items: center; gap: .75rem; padding: .85rem 1.1rem; cursor: pointer; }
 .fc-icon { font-size: 1.3rem; color: var(--AC); font-weight: 700; }
 .fc-title { font-size: .95rem; font-weight: 700; color: var(--AC); margin: 0; flex: 1; }
-.fc-toggle { background: var(--AC); color: #fff; border: none; border-radius: 4px; padding: .25rem .7rem; font-size: .78rem; cursor: pointer; }
+.fc-toggle { background: color-mix(in srgb, var(--AC) 55%, #0a0a18); color: #fff; border: 1px solid var(--AC); border: none; border-radius: 4px; padding: .25rem .7rem; font-size: .78rem; cursor: pointer; }
 .fc-body { display: none; padding: 1rem 1.1rem; border-top: 1px solid var(--AC); }
 .formula-card.fc-open .fc-body { display: block; }
 .fc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: .75rem; }
@@ -1605,7 +1605,7 @@ mjx-container { overflow-x: auto; max-width: 100%; display: block; }
 }
 .lnb-btn {
   display: inline-flex; align-items: center; gap: .4rem;
-  padding: .55rem 1.1rem; background: var(--AC); color: #fff;
+  padding: .55rem 1.1rem; background: color-mix(in srgb, var(--AC) 55%, #0a0a18); border: 1px solid var(--AC); color: #fff;
   border-radius: 6px; text-decoration: none; font-size: .88rem;
   font-weight: 600; transition: background .15s;
 }
@@ -1634,10 +1634,10 @@ mjx-container { overflow-x: auto; max-width: 100%; display: block; }
 .cp-title { font-size: 1.05rem; font-weight: 800; color: var(--AC); margin: 0 0 1.1rem; }
 .cp-steps { display: flex; flex-direction: column; gap: .85rem; margin-bottom: 1.25rem; }
 .cp-step { display: flex; align-items: flex-start; gap: .85rem; }
-.cp-num { flex-shrink: 0; width: 28px; height: 28px; background: var(--AC); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: .82rem; font-weight: 800; }
+.cp-num { flex-shrink: 0; width: 28px; height: 28px; background: color-mix(in srgb, var(--AC) 55%, #0a0a18); border: 1px solid var(--AC); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: .82rem; font-weight: 800; }
 .cp-step strong { font-size: .9rem; color: var(--text1); display: block; margin-bottom: .15rem; }
 .cp-step p { font-size: .83rem; color: var(--text2); margin: 0; line-height: 1.5; }
-.cp-cta { display: inline-block; background: var(--AC); color: #fff; padding: .65rem 1.75rem; border-radius: 8px; font-weight: 700; font-size: .95rem; text-decoration: none; transition: background .15s; }
+.cp-cta { display: inline-block; background: color-mix(in srgb, var(--AC) 55%, #0a0a18); border: 1px solid var(--AC); color: #fff; padding: .65rem 1.75rem; border-radius: 8px; font-weight: 700; font-size: .95rem; text-decoration: none; transition: background .15s; }
 .cp-cta:hover { background: color-mix(in srgb, var(--AC) 82%, black); }
 
 
@@ -1755,8 +1755,8 @@ mjx-container { overflow-x: auto; max-width: 100%; display: block; }
   pointer-events: none;
 }
 #fa-lightpath .fa-lp-base { stroke: rgba(255,255,255,.06); }
-#fa-lightpath .fa-lp-glow { opacity: .32; }
-#fa-lightpath .fa-lp-halo { fill: rgba(34,211,238,.16); }
+#fa-lightpath .fa-lp-glow { opacity: .26; }
+#fa-lightpath .fa-lp-halo { fill: rgba(34,211,238,.12); }
 #fa-lightpath .fa-lp-node { fill: #a5f3fc; }
 
 /* Scroll reveal — class applied by JS just before observing, so content
@@ -1785,4 +1785,58 @@ mjx-container { overflow-x: auto; max-width: 100%; display: block; }
 body {
   background-image: radial-gradient(circle, rgba(255,255,255,.03) 1px, transparent 1px);
   background-size: 26px 26px;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   POLISH LAYER (v7) — unified buttons, card hovers, quiz feedback motion
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* Anchor targets never hide under the sticky nav */
+[id] { scroll-margin-top: 72px; }
+
+/* Unified pill buttons across quiz tools, dashboards, and legacy banks */
+.dash-actions button, .quiz-reset, .bank-tools button,
+.actions button, .mini-nav a, .mini-nav button {
+  border-radius: 999px;
+}
+.dash-actions button:hover, .quiz-reset:hover, .bank-tools button:hover {
+  box-shadow: 0 0 0 3px var(--ACfaint);
+}
+
+/* Card resting + hover states: one consistent treatment */
+.lesson, .quiz-section, .gateway, .dashboard, .iqbank, .research-spotlight {
+  transition: border-color .25s var(--ease), box-shadow .25s var(--ease);
+}
+.lesson:hover, .quiz-section:hover, .gateway:hover, .iqbank:hover {
+  border-color: color-mix(in srgb, var(--AC) 45%, var(--border));
+  box-shadow: 0 6px 24px -10px rgba(0,0,0,.6);
+}
+
+/* Quiz pick feedback — plays only on a fresh click (JS adds .fresh) */
+@keyframes faPop   { 0% { transform: scale(1); } 45% { transform: scale(1.018); } 100% { transform: scale(1); } }
+@keyframes faNudge { 0%, 100% { transform: translateX(0); } 30% { transform: translateX(-3px); } 60% { transform: translateX(3px); } }
+.q-choice.fresh.correct { animation: faPop .3s var(--ease); }
+.q-choice.fresh.wrong   { animation: faNudge .3s var(--ease); }
+.q-explain { animation: faFade .35s var(--ease); }
+@keyframes faFade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+/* Video embeds: rounded with an accent ring on hover */
+.vid-wrap iframe { border: 1px solid var(--border); transition: border-color .25s var(--ease), box-shadow .25s var(--ease); }
+.vid-wrap:hover iframe { border-color: color-mix(in srgb, var(--AC) 55%, var(--border)); box-shadow: 0 0 0 3px var(--ACfaint); }
+
+/* Topnav links: smooth underline grow */
+.topnav a:not(.nav-brand-link) { transition: color .2s var(--ease), border-color .2s var(--ease); }
+
+/* Masthead pills get a gentle lift */
+.masthead .pill { transition: all .2s var(--ease); }
+.masthead .pill:hover { transform: translateY(-1px); }
+
+/* Accent CTAs share a hover treatment */
+.cp-cta:hover, .fc-toggle:hover { filter: brightness(1.25); }
+.sr-submit:hover { filter: brightness(1.1); transform: translateY(-1px); }
+.sr-submit { transition: filter .2s var(--ease), transform .2s var(--ease); }
+
+@media (prefers-reduced-motion: reduce) {
+  .q-choice.fresh.correct, .q-choice.fresh.wrong, .q-explain { animation: none; }
+  .masthead .pill:hover, .sr-submit:hover { transform: none; }
 }

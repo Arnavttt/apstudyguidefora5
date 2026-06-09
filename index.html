@@ -35,16 +35,17 @@ img{display:block;max-width:100%;}
 
 /* Hero: solid navy/teal with study image */
 .hero{position:relative;overflow:hidden;background:transparent;padding:5.5rem 2rem 4rem;text-align:center;}
-.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 45% 55% at 30% 30%,rgba(34,211,238,.13),transparent 65%),radial-gradient(ellipse 45% 55% at 70% 55%,rgba(129,140,248,.15),transparent 65%);}
+.hero-bg{position:absolute;inset:-10%;background:radial-gradient(ellipse 45% 55% at 30% 30%,rgba(34,211,238,.13),transparent 65%),radial-gradient(ellipse 45% 55% at 70% 55%,rgba(129,140,248,.15),transparent 65%);}
+@media(prefers-reduced-motion:no-preference){.hero-bg{animation:orbDrift 26s ease-in-out infinite alternate;}@keyframes orbDrift{from{transform:translate(-1.5%,-1%) scale(1);}to{transform:translate(1.5%,1.5%) scale(1.06);}}}
 .hero-inner{position:relative;z-index:1;max-width:800px;margin:0 auto;}
 .hero-badge{font-family:'Space Grotesk',monospace;font-size:11px;color:#67e8f9;letter-spacing:.14em;background:rgba(34,211,238,.08);border:1px solid rgba(34,211,238,.3);padding:.32rem 1.1rem;border-radius:20px;display:inline-block;margin-bottom:1.6rem;}
-.hero h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(2.2rem,6vw,4rem);font-weight:700;line-height:1.05;letter-spacing:-0.02em;margin-bottom:1.1rem;color:#faf6ee;}
+.hero h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(2.2rem,6vw,4rem);font-weight:700;line-height:1.05;letter-spacing:-0.02em;margin-bottom:1.1rem;color:var(--ink);}
 .hero h1 span{display:block;background:linear-gradient(90deg,#22d3ee,#818cf8);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
 .hero-sub{font-size:1rem;color:var(--ink2);max-width:520px;margin:0 auto 2rem;line-height:1.8;font-family:'Space Grotesk',sans-serif;}
 .stats-row{display:flex;flex-wrap:wrap;justify-content:center;gap:.75rem;margin-bottom:2.5rem;}
 .stat{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:.85rem 1.4rem;text-align:center;transition:transform .25s var(--ease),border-color .25s;}
 .stat:hover{transform:translateY(-3px);border-color:rgba(34,211,238,.5);}
-.stat-n{font-family:'Space Grotesk',sans-serif;font-size:1.5rem;font-weight:700;color:#faf6ee;line-height:1;}
+.stat-n{font-family:'Space Grotesk',sans-serif;font-size:1.5rem;font-weight:700;color:var(--ink);line-height:1;}
 .stat-l{font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:600;color:var(--ink3);letter-spacing:.08em;margin-top:.2rem;}
 .cta-btn{display:inline-flex;align-items:center;gap:.55rem;background:linear-gradient(90deg,#22d3ee,#67e8f9);color:#06121f;font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:700;padding:.85rem 1.85rem;border-radius:999px;letter-spacing:.06em;transition:all .25s var(--ease);}
 .cta-btn:hover{transform:translateY(-2px);box-shadow:0 12px 32px -10px rgba(34,211,238,.5);filter:brightness(1.1);}
@@ -71,7 +72,21 @@ img{display:block;max-width:100%;}
 
 /* Category sections */
 .cat-section{margin-bottom:3.5rem;}
-.cat-heading{font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:700;color:var(--ink);margin-bottom:1.25rem;padding-bottom:.65rem;border-bottom:2px solid var(--border);}
+.cat-heading{font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:700;color:var(--ink);margin-bottom:1.25rem;padding-bottom:.65rem;border-bottom:1px solid var(--border);position:relative;}
+.cat-heading::after{content:'';position:absolute;left:0;bottom:-1px;width:56px;height:2px;background:linear-gradient(90deg,#22d3ee,#818cf8);border-radius:2px;}
+.intro-heading{border-bottom:1px solid var(--border);position:relative;}
+.intro-heading::after{content:'';position:absolute;left:0;bottom:-1px;width:56px;height:2px;background:linear-gradient(90deg,#22d3ee,#818cf8);border-radius:2px;}
+
+/* staggered grid reveals */
+.feat-grid .feat:nth-child(2),.how-grid .how-step:nth-child(2){transition-delay:.08s;}
+.feat-grid .feat:nth-child(3),.how-grid .how-step:nth-child(3){transition-delay:.16s;}
+.feat-grid .feat:nth-child(4){transition-delay:.24s;}
+
+/* closing CTA band */
+.cta-band{margin:1rem 0 3rem;border:1px solid var(--border);border-radius:18px;padding:2.5rem 2rem;text-align:center;position:relative;overflow:hidden;background:linear-gradient(180deg,var(--card),var(--bg2));}
+.cta-band::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#22d3ee 30%,#818cf8 70%,transparent);}
+.cta-band h2{font-family:'Space Grotesk',sans-serif;font-size:1.5rem;font-weight:700;color:var(--ink);margin-bottom:.5rem;}
+.cta-band p{font-size:.92rem;color:var(--ink2);max-width:480px;margin:0 auto 1.5rem;line-height:1.7;}
 
 /* Course cards: Study.com style */
 .cc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;}
@@ -207,6 +222,11 @@ img{display:block;max-width:100%;}
 <a class="cc" href="courses/ap-music-theory-overview.html" style="--ac:#e879f9"><div class="cc-img"><svg aria-hidden="true" height="200" viewbox="0 0 400 200" width="100%" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1208" height="200" width="400"></rect><line stroke="#fbbf24" stroke-width="2" x1="40" x2="320" y1="70" y2="70"></line><line stroke="#fbbf24" stroke-width="2" x1="40" x2="320" y1="88" y2="88"></line><line stroke="#fbbf24" stroke-width="2" x1="40" x2="320" y1="106" y2="106"></line><line stroke="#fbbf24" stroke-width="2" x1="40" x2="320" y1="124" y2="124"></line><line stroke="#fbbf24" stroke-width="2" x1="40" x2="320" y1="142" y2="142"></line><ellipse cx="200" cy="138" fill="#fbbf24" opacity="0.9" rx="14" ry="10" transform="rotate(-20,200,138)"></ellipse><line stroke="#fbbf24" stroke-width="3" x1="213" x2="213" y1="132" y2="70"></line><ellipse cx="250" cy="120" fill="#fbbf24" opacity="0.9" rx="14" ry="10" transform="rotate(-20,250,120)"></ellipse><line stroke="#fbbf24" stroke-width="3" x1="263" x2="263" y1="114" y2="52"></line><text fill="#fbbf24" font-family="monospace" font-size="16" opacity="0.7" text-anchor="middle" x="195" y="183">AP Music Theory</text></svg></div><div class="cc-body"><span class="cc-tag">AP® ARTS</span><h3 class="cc-title">AP® Music Theory</h3><p class="cc-desc">Notation, harmony, voice leading, ear training, sight-singing</p><div class="cc-foot"><span class="cc-meta">8 units, Harmony to form</span><span class="cc-cta">Explore →</span></div></div></a></div></div>
 <div class="cat-section"><h2 class="cat-heading">College Math</h2><div class="cc-grid"><a class="cc" href="courses/college-algebra-overview.html" style="--ac:#3b82f6"><div class="cc-img"><svg aria-hidden="true" height="200" viewbox="0 0 400 200" width="100%" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1208" height="200" width="400"></rect><line stroke="#818cf8" stroke-width="2" x1="30" x2="280" y1="160" y2="160"></line><line stroke="#818cf8" stroke-width="2" x1="155" x2="155" y1="20" y2="165"></line><path d="M60,155 Q120,20 190,80 Q220,110 250,60" fill="none" stroke="#818cf8" stroke-width="3"></path><text fill="#818cf8" font-family="monospace" font-size="20" text-anchor="middle" x="335" y="100">ax²+b</text><text fill="#818cf8" font-family="monospace" font-size="17" opacity="0.7" text-anchor="middle" x="155" y="185">College Algebra</text></svg></div><div class="cc-body"><span class="cc-tag">COLLEGE MATH</span><h3 class="cc-title">College Algebra</h3><p class="cc-desc">Equations, inequalities, functions, polynomials, exponentials, systems</p><div class="cc-foot"><span class="cc-meta">6 units, Foundations</span><span class="cc-cta">Explore →</span></div></div></a>
 <a class="cc" href="courses/college-trigonometry-overview.html" style="--ac:#6366f1"><div class="cc-img"><svg aria-hidden="true" height="200" viewbox="0 0 400 200" width="100%" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1208" height="200" width="400"></rect><line stroke="#818cf8" stroke-width="2" x1="30" x2="280" y1="100" y2="100"></line><polyline fill="none" points="30,100 60,50 90,100 120,150 150,100 180,50 210,100 240,150 270,100" stroke="#818cf8" stroke-width="3"></polyline><text fill="#818cf8" font-family="monospace" font-size="20" text-anchor="middle" x="335" y="90">sin(x)</text><text fill="#818cf8" font-family="monospace" font-size="16" opacity="0.7" text-anchor="middle" x="155" y="185">College Trigonometry</text></svg></div><div class="cc-body"><span class="cc-tag">COLLEGE MATH</span><h3 class="cc-title">College Trigonometry</h3><p class="cc-desc">Unit circle, right triangles, trig graphs, identities, polar, vectors</p><div class="cc-foot"><span class="cc-meta">6 units, Trig to polar</span><span class="cc-cta">Explore →</span></div></div></a></div></div>
+</div>
+<div class="cta-band">
+<h2>Ready to start scoring higher?</h2>
+<p>Pick a course, work through the lessons at your own pace, and watch your practice scores climb. Everything is free, forever.</p>
+<a class="cta-btn" href="#courses">Browse All Courses →</a>
 </div>
 <section class="site-review-section">
 <div class="sr-inner">

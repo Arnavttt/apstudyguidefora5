@@ -206,6 +206,29 @@ img,iframe { max-width:100%; border:0; }
 .gateway li { font-size:13px; color:var(--text2); padding-left:1rem; position:relative; }
 .gateway li::before { content:'→'; position:absolute; left:0; color:var(--AC); font-size:11px; top:.1em; }
 
+.unit-targets {
+  background:var(--bg2); border:1px solid var(--border); border-radius:8px;
+  padding:1rem 1.15rem; margin:0 0 1.5rem;
+}
+.unit-targets-head { margin-bottom:.85rem; }
+.unit-targets-head p {
+  color:var(--text2); font-size:13px; line-height:1.7; max-width:820px;
+}
+.unit-targets-grid {
+  display:grid; grid-template-columns:repeat(4,1fr); gap:.65rem;
+}
+.unit-targets-grid article {
+  background:var(--bg3); border:1px solid var(--border); border-radius:6px;
+  padding:.82rem .9rem;
+}
+.unit-targets-grid b {
+  display:block; color:var(--AC); font-family:'Fira Code',monospace;
+  font-size:10px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:.32rem;
+}
+.unit-targets-grid p { color:var(--text2); font-size:12.5px; line-height:1.6; margin-bottom:.38rem; }
+.unit-targets-grid p:last-child { margin-bottom:0; }
+.unit-targets-grid span { color:var(--text); font-weight:700; }
+
 .study-flow { margin:0 0 1.55rem; }
 .study-flow-head { margin-bottom:.8rem; }
 .study-flow-head p,
@@ -565,6 +588,7 @@ img,iframe { max-width:100%; border:0; }
   .exam-day-grid,
   .final-review-grid,
   .transfer-practice-grid,
+  .unit-targets-grid,
   .response-starters-grid,
   .prompt-builder-grid,
   .unit-connections-grid,
@@ -582,6 +606,7 @@ img,iframe { max-width:100%; border:0; }
   .exam-day-grid,
   .final-review-grid,
   .transfer-practice-grid,
+  .unit-targets-grid,
   .response-starters-grid,
   .prompt-builder-grid,
   .unit-connections-grid,

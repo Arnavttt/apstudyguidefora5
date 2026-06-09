@@ -925,6 +925,82 @@ def ap_unit_checkpoint_html(course_slug, unit_title, lessons, is_non_ap=False):
 
 # ── Unit renderer ─────────────────────────────────────────────────────────────
 
+def lesson_field(items, fallback):
+    return items[0] if items else fallback
+
+
+def lesson_topic_field(lesson, key, fallback):
+    for topic in lesson.get('topics', []):
+        value = topic.get(key, '')
+        if value:
+            return value
+    return fallback
+
+
+def unit_target_lessons(lessons):
+    if len(lessons) <= 4:
+        return lessons
+
+    picks = [lessons[0], lessons[1], lessons[len(lessons) // 2], lessons[-1]]
+    selected = []
+    seen = set()
+    for lesson in picks:
+        marker = id(lesson)
+        if marker not in seen:
+            selected.append(lesson)
+            seen.add(marker)
+    return selected
+
+
+def ap_unit_quick_targets_html(course_slug, unit_title, lessons, is_non_ap=False):
+    if is_non_ap:
+        return ''
+
+    focus_profile = ap_focus_profile(course_slug)
+    clean_title = short_unit_title(unit_title)
+    cards = ''
+
+    for lesson in unit_target_lessons(lessons):
+        title = lesson.get('title', clean_title)
+        objective = lesson_field(
+            lesson.get('objectives', []),
+            f'Explain one high-value idea from {title}.'
+        )
+        misconception = lesson_topic_field(
+            lesson,
+            'misconception',
+            'Do not stop at recognition; prove the idea with evidence, setup, or reasoning.'
+        )
+        tested = lesson_field(
+            lesson.get('how_tested', []),
+            lesson_topic_field(
+                lesson,
+                'how_tested',
+                'Expect a prompt that asks you to apply the idea in a new context.'
+            )
+        )
+
+        cards += (
+            f'<article><b>{title}</b>'
+            f'<p><span>Prove:</span> {objective}</p>'
+            f'<p><span>Avoid:</span> {misconception}</p>'
+            f'<p><span>Test:</span> {tested}</p></article>'
+        )
+
+    return (
+        f'<section class="unit-targets">'
+        f'<div class="unit-targets-head">'
+        f'<span class="eyebrow">AP&reg; Unit Quick Targets</span>'
+        f'<h3>What to prove before you move on</h3>'
+        f'<p>Use these lesson targets as a fast checklist for {clean_title}. They pull from the '
+        f'unit objectives, common misconceptions, and AP-style testing notes while keeping the focus on '
+        f'{focus_profile["skill"].lower()}.</p>'
+        f'</div>'
+        f'<div class="unit-targets-grid">{cards}</div>'
+        f'</section>'
+    )
+
+
 def ap_unit_transfer_practice_html(course_slug, unit_title, lessons, is_non_ap=False):
     if is_non_ap:
         return ''
@@ -1218,6 +1294,7 @@ def render_unit(course_name, course_slug, abbrev, unit_num, unit_title,
         uqs_html += make_mcq(qi, stem, correct, dists, ubank_id, course_slug, 'unit', seed)
 
     unit_quiz = quiz_section_html(ubank_id, f'Unit {unit_num} Review — 10 questions', uqs_html, 10)
+    ap_unit_quick_targets = ap_unit_quick_targets_html(course_slug, unit_title, lessons, is_non_ap)
     ap_unit_checkpoint = ap_unit_checkpoint_html(course_slug, unit_title, lessons, is_non_ap)
     ap_unit_connections = ap_unit_connections_html(
         course_name, course_slug, unit_title, course_html_file, prev_unit, next_unit, is_non_ap
@@ -1255,6 +1332,7 @@ def render_unit(course_name, course_slug, abbrev, unit_num, unit_title,
         f'<div class="page-wrap">'
         f'{dashboard_html()}'
         f'<div class="gateway"><h4>Unit learning gateway</h4><ul>{gw_html}</ul></div>'
+        f'{ap_unit_quick_targets}'
         f'{ap_unit_checkpoint}'
         f'{ap_unit_connections}'
         f'{ap_unit_transfer_practice}'

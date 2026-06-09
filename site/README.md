@@ -23,6 +23,7 @@ assets/app.js           ← MCQ logic + localStorage progress tracking
 - **Per-unit dashboards** — see right / wrong / unanswered questions and lesson completion at a glance
 - **AP® skill checkpoints** — course-specific study loops that pair guide practice with official AP Classroom work
 - **Score-builder ladders** — AP® course pages show how to move from lesson recall to mixed and official practice
+- **Unit quick targets** — AP® unit pages summarize lesson objectives, common misconceptions, and AP-style testing notes
 - **Unit connection cards** — AP® unit pages link previous, next, and mixed course practice without leaving the current structure
 - **Unit transfer prompts** — AP® unit pages turn local lessons into rubric-style written, worked, or performance-task practice
 - **Response starter banks** — AP® unit pages give course-specific sentence stems for claims, evidence, reasoning, calculations, tracing, and analysis
@@ -103,7 +104,8 @@ python html_generator/generate_ap_content.py --output-dir path/to/site-root ap-b
 Omit course selectors to regenerate all courses into `site/`. AP® course pages
 also receive generated exam-skill study loops, score-builder ladders,
 command-verb toolkits, and unit
-checkpoints from `generate_ap_content.py`, plus AP-only unit transfer prompts,
+checkpoints from `generate_ap_content.py`, plus AP-only unit quick targets,
+unit transfer prompts,
 unit connection cards, response starter banks, prompt builders,
 stimulus strategy cards,
 mistake-repair prompts, spaced-review plans, official-practice bridges, and

@@ -871,6 +871,38 @@ def ap_course_focus_html(course_name, course_slug, units, is_non_ap=False):
     )
 
 
+def ap_course_unit_map_html(course_slug, units, is_non_ap=False):
+    if is_non_ap:
+        return ''
+
+    profile = ap_focus_profile(course_slug)
+    cards = ''
+
+    for unit in units:
+        title = short_unit_title(unit['title'])
+        label = f'Period {unit["num"]}' if unit['title'].lower().startswith('period ') else f'Unit {unit["num"]}'
+        cards += (
+            f'<a class="course-unit-card" href="../units/{unit["file"]}">'
+            f'<b>{label}</b>'
+            f'<h4>{title}</h4>'
+            f'<p>{unit["desc"]}</p>'
+            f'<small>Practice cue: use this unit to sharpen {profile["skill"].lower()}.</small>'
+            f'</a>'
+        )
+
+    return (
+        f'<section class="course-unit-map">'
+        f'<div class="course-unit-map-head">'
+        f'<span class="eyebrow">AP&reg; Unit Strategy Map</span>'
+        f'<h3>See the whole course before you drill details</h3>'
+        f'<p>Use this map to choose the next unit, then return to the mixed course bank when you need '
+        f'to practice switching topics without warning.</p>'
+        f'</div>'
+        f'<div class="course-unit-map-grid">{cards}</div>'
+        f'</section>'
+    )
+
+
 def ap_score_builder_ladder_html(course_slug, is_non_ap=False):
     if is_non_ap:
         return ''
@@ -1394,6 +1426,7 @@ def render_course(course_name, course_slug, abbrev, units, course_qs,
 
     course_quiz = quiz_section_html(cbank_id, f'{course_name} — 20 course-level questions', cqs_html, 20)
     ap_course_focus = ap_course_focus_html(course_name, course_slug, units, is_non_ap)
+    ap_course_unit_map = ap_course_unit_map_html(course_slug, units, is_non_ap)
     ap_score_builder_ladder = ap_score_builder_ladder_html(course_slug, is_non_ap)
     ap_response_toolkit = ap_response_toolkit_html(course_slug, is_non_ap)
     ap_stimulus_strategy = ap_stimulus_strategy_html(course_slug, is_non_ap)
@@ -1430,6 +1463,7 @@ def render_course(course_name, course_slug, abbrev, units, course_qs,
         f'<div class="page-wrap">'
         f'{dashboard_html()}'
         f'{ap_course_focus}'
+        f'{ap_course_unit_map}'
         f'{ap_score_builder_ladder}'
         f'{ap_response_toolkit}'
         f'{ap_stimulus_strategy}'

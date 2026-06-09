@@ -369,6 +369,27 @@ img,iframe { max-width:100%; border:0; }
 .official-bridge-links a { color:var(--text3); }
 .official-bridge-links a:hover { color:var(--AC); }
 
+.review-sprint {
+  background:var(--bg2); border:1px solid var(--border); border-radius:8px;
+  padding:1rem 1.15rem; margin:0 0 1.55rem;
+}
+.review-sprint-head { margin-bottom:.85rem; }
+.review-sprint-head p {
+  color:var(--text2); font-size:13px; line-height:1.7; max-width:820px;
+}
+.review-sprint-grid {
+  display:grid; grid-template-columns:repeat(4,1fr); gap:.65rem;
+}
+.review-sprint-grid article {
+  background:var(--bg3); border:1px solid var(--border); border-radius:6px;
+  padding:.8rem .9rem;
+}
+.review-sprint-grid b {
+  display:block; color:var(--AC); font-family:'Fira Code',monospace;
+  font-size:10px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:.28rem;
+}
+.review-sprint-grid p { color:var(--text2); font-size:12.5px; line-height:1.6; }
+
 .exam-day-strategy {
   background:var(--bg2); border:1px solid var(--border); border-radius:8px;
   padding:1rem 1.15rem; margin:0 0 1.55rem;
@@ -520,6 +541,7 @@ img,iframe { max-width:100%; border:0; }
   .mistake-log-grid,
   .spaced-review-grid,
   .official-bridge-grid,
+  .review-sprint-grid,
   .exam-day-grid,
   .final-review-grid,
   .transfer-practice-grid,
@@ -535,6 +557,7 @@ img,iframe { max-width:100%; border:0; }
   .mistake-log-grid,
   .spaced-review-grid,
   .official-bridge-grid,
+  .review-sprint-grid,
   .exam-day-grid,
   .final-review-grid,
   .transfer-practice-grid,

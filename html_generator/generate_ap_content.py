@@ -397,6 +397,13 @@ FINAL_REVIEW_STEPS = [
     ('Lock the routine', 'The night before, review your miss tags, required materials, calculator/device rules, and the first-pass plan.'),
 ]
 
+REVIEW_SPRINT_STEPS = [
+    ('Days 1-2', 'Find two weak units with Wrong only and Unanswered only, then repair one miss from each as a rule, model, source move, setup, or code trace.'),
+    ('Days 3-4', 'Write or work one AP-style response using the command toolkit, then compare the answer to explanations, teacher feedback, or scoring evidence.'),
+    ('Days 5-6', 'Mix a weak unit, an older unit, and the course quiz so recall has to survive topic switching and stimulus changes.'),
+    ('Day 7', 'Review miss tags, stimulus routine, pacing plan, required materials, and the first-pass strategy you will use when the timer starts.'),
+]
+
 SCORE_BUILDER_STEPS = [
     ('1. Learn', 'Start with gateway ideas and lesson questions until the vocabulary, model, source, formula, or process is usable without notes.'),
     ('2. Prove', 'Use unit review questions and one transfer prompt to show you can explain, justify, calculate, compare, or analyze under pressure.'),
@@ -731,6 +738,31 @@ def ap_final_review_priorities_html(course_slug, is_non_ap=False):
         f'{focus_profile["skill"].lower()}; pair that with the {response_profile["title"].lower()} and official scoring evidence.</p>'
         f'</div>'
         f'<div class="final-review-grid">{cards}</div>'
+        f'</section>'
+    )
+
+
+def ap_review_sprint_html(course_slug, units, is_non_ap=False):
+    if is_non_ap:
+        return ''
+
+    focus_profile = ap_focus_profile(course_slug)
+    response_profile = ap_response_profile(course_slug)
+    cards = ''.join(
+        f'<article><b>{label}</b><p>{desc}</p></article>'
+        for label, desc in REVIEW_SPRINT_STEPS
+    )
+
+    return (
+        f'<section class="review-sprint">'
+        f'<div class="review-sprint-head">'
+        f'<span class="eyebrow">AP&reg; Review Sprint</span>'
+        f'<h3>Use the last week as a controlled reset</h3>'
+        f'<p>When the exam is close, use the {len(units)}-unit map, dashboard filters, and course quiz '
+        f'to make a short plan instead of rereading everything. Keep each session tied to '
+        f'{focus_profile["skill"].lower()} and the {response_profile["title"].lower()}.</p>'
+        f'</div>'
+        f'<div class="review-sprint-grid">{cards}</div>'
         f'</section>'
     )
 
@@ -1201,6 +1233,7 @@ def render_course(course_name, course_slug, abbrev, units, course_qs,
     ap_mistake_log = ap_mistake_log_html(course_slug, is_non_ap)
     ap_spaced_review = ap_spaced_review_html(course_slug, is_non_ap)
     ap_official_bridge = ap_official_bridge_html(course_slug, is_non_ap)
+    ap_review_sprint = ap_review_sprint_html(course_slug, units, is_non_ap)
     ap_final_review_priorities = ap_final_review_priorities_html(course_slug, is_non_ap)
     ap_exam_day_strategy = ap_exam_day_strategy_html(course_slug, is_non_ap)
 
@@ -1236,6 +1269,7 @@ def render_course(course_name, course_slug, abbrev, units, course_qs,
         f'{ap_mistake_log}'
         f'{ap_spaced_review}'
         f'{ap_official_bridge}'
+        f'{ap_review_sprint}'
         f'{ap_final_review_priorities}'
         f'{ap_exam_day_strategy}'
         f'{course_quiz}'

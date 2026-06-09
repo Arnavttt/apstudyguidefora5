@@ -4,11 +4,13 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta name="description" content="Free AP® and college course review: 25 courses, 184+ unit guides, 5,500+ practice MCQs with instant feedback, embedded video lessons, and exam strategy. No accounts, no paywalls."/>
+<meta name="theme-color" content="#3d3120"/>
 <title>Five &amp; A+ | AP® &amp; College Review: Free Interactive Study Site</title>
 <link href="assets/site.css" rel="stylesheet"/>
 <style>
 /* Five & A+ Hub v4: Study.com inspired, solid dark cards */
-:root{--ink:#1a1208;--ink2:#3d3120;--ink3:#6b5f4e;--parchment:#faf6ee;--parchment2:#f3ead6;--parchment3:#e8dfc5;--red:#8b1a1a;--gold:#3f3f46;--gold2:#52525b;--blue:#1a3a5c;--green:#1a4a2a;--border:#c8b89a;--shadow:rgba(26,18,8,0.12);--ease:cubic-bezier(.4,0,.2,1);--bg:#faf6ee;--bg2:#f3ead6;--bg3:#e8dfc5;--text:#1a1208;--text2:#3d3120;--text3:#6b5f4e;}
+:root{--ink:#1a1208;--ink2:#3d3120;--ink3:#6b5f4e;--parchment:#faf6ee;--parchment2:#f3ead6;--parchment3:#e8dfc5;--red:#8b1a1a;--gold:#b8860b;--gold2:#d4a017;--blue:#1a3a5c;--green:#1a4a2a;--border:#c8b89a;--shadow:rgba(26,18,8,0.12);--ease:cubic-bezier(.4,0,.2,1);--bg:#faf6ee;--bg2:#f3ead6;--bg3:#e8dfc5;--text:#1a1208;--text2:#3d3120;--text3:#6b5f4e;}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
 body{font-family:'Comfortaa',sans-serif;background:#faf6ee;color:#1a1208;-webkit-font-smoothing:antialiased;}
@@ -18,16 +20,18 @@ img{display:block;max-width:100%;}
 /* Scrollbar */
 ::-webkit-scrollbar{width:8px;}
 ::-webkit-scrollbar-track{background:var(--bg2);}
-::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15);border-radius:4px;}
-::-webkit-scrollbar-thumb:hover{background:rgba(245,158,11,.5);}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px;}
+::-webkit-scrollbar-thumb:hover{background:var(--gold);}
 
 /* Navbar */
-.navbar{position:sticky;top:0;z-index:200;background:#3d3120;border-bottom:3px solid #52525b;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:52px;}
-.nav-brand{font-family:'Comfortaa',sans-serif;font-size:13px;font-weight:700;color:#52525b;letter-spacing:0.05em;}
-.nav-links{display:flex;gap:.25rem;}
+.navbar{position:sticky;top:0;z-index:200;background:#3d3120;border-bottom:3px solid var(--gold);padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;height:52px;}
+.nav-brand{font-family:'Comfortaa',sans-serif;font-size:13px;font-weight:700;color:var(--gold2);letter-spacing:0.05em;}
+.nav-links{display:flex;align-items:center;gap:.25rem;}
 .nav-links a{color:#e8dfc5;font-family:'Comfortaa',sans-serif;font-size:11px;font-weight:600;padding:.3rem .6rem;border-radius:4px;transition:all .2s;}
-.nav-links a:hover{color:#52525b;}
-@media(max-width:680px){.nav-links{display:none;}}
+.nav-links a:hover{color:var(--gold2);}
+.nav-cta{color:var(--gold2)!important;border:1px solid rgba(212,160,23,.45);border-radius:999px!important;padding:.32rem .9rem!important;}
+.nav-cta:hover{background:rgba(212,160,23,.12);}
+@media(max-width:680px){.nav-links a:not(.nav-cta){display:none;}}
 
 /* Hero: solid navy/teal with study image */
 .hero{position:relative;overflow:hidden;background:#1a1208;padding:5rem 2rem 4rem;text-align:center;}
@@ -35,20 +39,31 @@ img{display:block;max-width:100%;}
 .hero-inner{position:relative;z-index:1;max-width:800px;margin:0 auto;}
 .hero-badge{font-family:'Comfortaa',monospace;font-size:11px;color:#60a5fa;letter-spacing:.14em;background:rgba(96,165,250,.1);border:1px solid rgba(96,165,250,.25);padding:.32rem 1.1rem;border-radius:20px;display:inline-block;margin-bottom:1.6rem;}
 .hero h1{font-family:'Comfortaa',sans-serif;font-size:clamp(2.2rem,6vw,4rem);font-weight:700;line-height:1.05;letter-spacing:-0.02em;margin-bottom:1.1rem;color:#faf6ee;}
-.hero h1 span{color:#52525b;}
+.hero h1 span{display:block;color:var(--gold2);}
 .hero-sub{font-size:1rem;color:rgba(250,246,238,0.65);max-width:520px;margin:0 auto 2rem;line-height:1.8;font-family:'Comfortaa',sans-serif;}
 .stats-row{display:flex;flex-wrap:wrap;justify-content:center;gap:.75rem;margin-bottom:2.5rem;}
-.stat{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.14);border-radius:4px;padding:.85rem 1.4rem;text-align:center;}
+.stat{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.14);border-radius:8px;padding:.85rem 1.4rem;text-align:center;transition:transform .25s var(--ease),border-color .25s;}
+.stat:hover{transform:translateY(-3px);border-color:rgba(212,160,23,.5);}
 .stat-n{font-family:'Comfortaa',sans-serif;font-size:1.5rem;font-weight:700;color:#faf6ee;line-height:1;}
 .stat-l{font-family:'Comfortaa',sans-serif;font-size:10px;font-weight:600;color:rgba(250,246,238,0.45);letter-spacing:.08em;margin-top:.2rem;}
-.cta-btn{display:inline-flex;align-items:center;gap:.55rem;background:#52525b;color:#fff;font-family:'Comfortaa',sans-serif;font-size:12px;font-weight:700;padding:.85rem 1.85rem;border-radius:4px;letter-spacing:.06em;transition:all .2s;}
-.cta-btn:hover{background:#71717a;transform:translateY(-1px);}
+.cta-btn{display:inline-flex;align-items:center;gap:.55rem;background:var(--gold);color:#fff;font-family:'Comfortaa',sans-serif;font-size:12px;font-weight:700;padding:.85rem 1.85rem;border-radius:999px;letter-spacing:.06em;transition:all .25s var(--ease);}
+.cta-btn:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 10px 28px -10px rgba(184,134,11,.55);}
+/* staggered hero entrance */
+@media(prefers-reduced-motion:no-preference){
+  .hero-inner>*{opacity:0;animation:heroUp .65s var(--ease) forwards;}
+  .hero-inner>:nth-child(2){animation-delay:.08s;}
+  .hero-inner>:nth-child(3){animation-delay:.16s;}
+  .hero-inner>:nth-child(4){animation-delay:.24s;}
+  .hero-inner>:nth-child(5){animation-delay:.32s;}
+  .hero-inner>:nth-child(6){animation-delay:.4s;}
+  @keyframes heroUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
+}
 
 /* Search */
 .hub-search{max-width:440px;margin:0 auto 1.5rem;position:relative;}
-.hub-search input{width:100%;background:#fff;border:1px solid #c8b89a;border-radius:4px;padding:.7rem 1rem;color:#1a1208;font-family:'Comfortaa',sans-serif;font-size:14px;outline:none;transition:border-color .2s;}
-.hub-search input::placeholder{color:rgba(255,255,255,.4);}
-.hub-search input:focus{border-color:#52525b;}
+.hub-search input{width:100%;background:#fff;border:1px solid #c8b89a;border-radius:999px;padding:.7rem 1.25rem;color:#1a1208;font-family:'Comfortaa',sans-serif;font-size:14px;outline:none;transition:border-color .2s,box-shadow .2s;}
+.hub-search input::placeholder{color:rgba(26,18,8,.4);}
+.hub-search input:focus{border-color:var(--gold);box-shadow:0 0 0 4px rgba(184,134,11,.12);}
 
 /* Content wrapper */
 .wrap{max-width:1200px;margin:0 auto;padding:0 2rem;}
@@ -76,8 +91,27 @@ img{display:block;max-width:100%;}
 .cc-desc{font-size:11.5px;color:var(--text2);line-height:1.55;flex:1;margin-top:.15rem;}
 .cc-foot{display:flex;justify-content:space-between;align-items:center;margin-top:.65rem;padding-top:.65rem;border-top:1px solid var(--border);}
 .cc-meta{font-family:'Comfortaa',monospace;font-size:9.5px;color:var(--text3);}
-.cc-cta{font-family:'Comfortaa',monospace;font-size:10px;color:var(--ac,#60a5fa);font-weight:600;transition:color .15s;}
-.cc:hover .cc-cta{color:#fff;}
+.cc-cta{font-family:'Comfortaa',monospace;font-size:10px;color:var(--ac,#60a5fa);font-weight:600;transition:color .15s,transform .2s var(--ease);display:inline-block;}
+.cc:hover .cc-cta{color:var(--ink);transform:translateX(3px);}
+
+/* Why + How sections */
+.intro-sec{padding:2.75rem 0 0;}
+.intro-heading{font-family:'Comfortaa',sans-serif;font-size:1.1rem;font-weight:700;color:var(--ink);margin-bottom:1.25rem;padding-bottom:.65rem;border-bottom:2px solid var(--border);}
+.feat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;}
+@media(max-width:880px){.feat-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:480px){.feat-grid{grid-template-columns:1fr;}}
+.feat{background:#fff;border:1px solid var(--border);border-radius:12px;padding:1.15rem 1.2rem;border-top:3px solid var(--gold);transition:transform .25s var(--ease),box-shadow .25s var(--ease);}
+.feat:hover{transform:translateY(-3px);box-shadow:0 10px 26px var(--shadow);}
+.feat-ico{font-size:20px;margin-bottom:.5rem;}
+.feat b{display:block;font-size:.92rem;color:var(--ink);font-weight:700;margin-bottom:.3rem;}
+.feat p{font-size:11.5px;color:var(--ink3);line-height:1.65;margin:0;}
+.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;}
+@media(max-width:760px){.how-grid{grid-template-columns:1fr;}}
+.how-step{background:#fff;border:1px solid var(--border);border-radius:12px;padding:1.3rem 1.3rem 1.2rem;transition:transform .25s var(--ease),box-shadow .25s var(--ease);}
+.how-step:hover{transform:translateY(-3px);box-shadow:0 10px 26px var(--shadow);}
+.how-n{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:999px;font-family:'Comfortaa',sans-serif;font-weight:700;font-size:.85rem;color:#fff;background:var(--gold);margin-bottom:.7rem;}
+.how-step b{display:block;font-size:.95rem;color:var(--ink);font-weight:700;margin-bottom:.35rem;}
+.how-step p{font-size:12px;color:var(--ink3);line-height:1.7;margin:0;}
 
 /* College section */
 .college-section{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:1.75rem;margin-bottom:3rem;}
@@ -105,9 +139,10 @@ img{display:block;max-width:100%;}
 <nav class="navbar">
 <div class="nav-brand">Five &amp; A+</div>
 <div class="nav-links">
+<a href="#why">Why Us</a>
 <a href="#courses">AP® Guides</a>
-<a href="#college">College</a>
 <a href="#about">About</a>
+<a class="nav-cta" href="#courses">Start studying →</a>
 </div>
 </nav>
 <div class="hero">
@@ -129,6 +164,23 @@ img{display:block;max-width:100%;}
 </div>
 </div>
 <div class="wrap">
+<div class="intro-sec" id="why">
+<h2 class="intro-heading">Why students use Five &amp; A+</h2>
+<div class="feat-grid">
+<div class="feat"><div class="feat-ico">⚡</div><b>Instant MCQ feedback</b><p>5,500+ click-to-answer questions. See the right answer and a full explanation the moment you pick.</p></div>
+<div class="feat"><div class="feat-ico">🎬</div><b>Video lessons built in</b><p>Lessons embed videos from trusted channels like Heimler, Bozeman, and Professor Leonard, right where you need them.</p></div>
+<div class="feat"><div class="feat-ico">🧮</div><b>Formulas &amp; exam strategy</b><p>Key equations in real math notation, plus FRQ tips and common mistakes flagged inside each lesson.</p></div>
+<div class="feat"><div class="feat-ico">💾</div><b>Progress that sticks</b><p>Scores, stars, and checkmarks save to your device automatically. Close the tab, come back, keep going.</p></div>
+</div>
+</div>
+<div class="intro-sec" id="how">
+<h2 class="intro-heading">How it works</h2>
+<div class="how-grid">
+<div class="how-step"><span class="how-n">1</span><b>Pick your course</b><p>Choose from 25 AP® and college guides below. Each one follows the official unit structure of the course.</p></div>
+<div class="how-step"><span class="how-n">2</span><b>Work each lesson</b><p>Read the notes and misconceptions, scan the vocab, watch the embedded video, then check the exit ticket.</p></div>
+<div class="how-step"><span class="how-n">3</span><b>Drill and track</b><p>Answer the lesson MCQs, take the unit quiz, and watch your dashboard score climb. Wrong answers explain themselves.</p></div>
+</div>
+</div>
 <div class="main-content" id="courses">
 <div class="cat-section"><h2 class="cat-heading">History &amp; Social Science</h2><div class="cc-grid"><a class="cc" href="courses/ap-u-s-history-overview.html" style="--ac:#ef4444"><div class="cc-img"><svg aria-hidden="true" height="200" viewbox="0 0 400 200" width="100%" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1208" height="200" width="400"></rect><rect fill="none" height="110" rx="5" stroke="#f59e0b" stroke-width="3" width="200" x="60" y="50"></rect><ellipse cx="60" cy="105" fill="none" rx="15" ry="55" stroke="#f59e0b" stroke-width="2"></ellipse><ellipse cx="260" cy="105" fill="none" rx="15" ry="55" stroke="#f59e0b" stroke-width="2"></ellipse><line opacity="0.5" stroke="#f59e0b" stroke-width="2" x1="80" x2="240" y1="80" y2="80"></line><line opacity="0.5" stroke="#f59e0b" stroke-width="2" x1="80" x2="240" y1="100" y2="100"></line><line opacity="0.5" stroke="#f59e0b" stroke-width="2" x1="80" x2="240" y1="120" y2="120"></line><text fill="#f59e0b" font-family="sans-serif" font-size="54" text-anchor="middle" x="322" y="118">★</text><text fill="#f59e0b" font-family="monospace" font-size="16" opacity="0.7" text-anchor="middle" x="155" y="185">AP U.S. History</text></svg></div><div class="cc-body"><span class="cc-tag">HISTORY</span><h3 class="cc-title">AP® U.S. History</h3><p class="cc-desc">9 periods, DBQ, LEQ, SAQ, HIPP sourcing, Heimler thesis formula</p><div class="cc-foot"><span class="cc-meta">9 units, P1 to P9</span><span class="cc-cta">Explore →</span></div></div></a>
 <a class="cc" href="courses/ap-world-history-modern-overview.html" style="--ac:#dc2626"><div class="cc-img"><svg aria-hidden="true" height="200" viewbox="0 0 400 200" width="100%" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1208" height="200" width="400"></rect><circle cx="120" cy="90" fill="none" r="55" stroke="#f59e0b" stroke-width="3"></circle><line stroke="#f59e0b" stroke-width="2" x1="65" x2="175" y1="90" y2="90"></line><line opacity="0.6" stroke="#f59e0b" stroke-width="1" x1="65" x2="175" y1="65" y2="65"></line><line opacity="0.6" stroke="#f59e0b" stroke-width="1" x1="65" x2="175" y1="115" y2="115"></line><ellipse cx="120" cy="90" fill="none" rx="25" ry="55" stroke="#f59e0b" stroke-width="1.5"></ellipse><rect fill="none" height="75" rx="3" stroke="#f59e0b" stroke-width="2" width="60" x="230" y="70"></rect><rect fill="none" height="75" rx="3" stroke="#f59e0b" stroke-width="2" width="60" x="290" y="70"></rect><line stroke="#f59e0b" stroke-width="3" x1="290" x2="290" y1="70" y2="145"></line><text fill="#f59e0b" font-family="monospace" font-size="15" opacity="0.7" text-anchor="middle" x="195" y="182">AP World History</text></svg></div><div class="cc-body"><span class="cc-tag">HISTORY</span><h3 class="cc-title">AP® World History: Modern</h3><p class="cc-desc">1200 to present, Trade networks, empires, revolutions, SPICE-T themes</p><div class="cc-foot"><span class="cc-meta">9 units, 1200 to present</span><span class="cc-cta">Explore →</span></div></div></a>
@@ -179,7 +231,6 @@ img{display:block;max-width:100%;}
 <footer class="footer-hub">
 <div class="f-brand-hub">Five &amp; A+</div>
 <p class="f-trademark">AP® and Advanced Placement® are trademarks registered by the College Board, which is not affiliated with, and does not endorse, this site. Five &amp; A+ is an independent educational resource and is not affiliated with, endorsed by, or sponsored by the College Board.</p>
-<p class="f-trademark">Five &amp; A+ is an independent educational resource and is not affiliated with, endorsed by, or sponsored by the College Board.</p>
 <p class="f-sub-hub">Free AP® &amp; College Review, Built by Arnav Sinha &amp; Yashwin Kandra, 2025 to 2026</p>
 </footer>
 <script>
@@ -195,5 +246,6 @@ function filterHub() {
  });
 }
 </script>
+<script src="assets/app.js"></script>
 </body>
 </html>

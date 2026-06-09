@@ -1729,3 +1729,46 @@ mjx-container { overflow-x: auto; max-width: 100%; display: block; }
 .rs-detail { font-size: .82rem; color: var(--text2, #5c4a2a); line-height: 1.65; margin: 0 0 .4rem; }
 .rs-cite { font-size: .75rem; color: var(--text3, #9c8060); font-style: italic; }
 .rs-cite a { color: var(--AC, #8b6914); }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   MOTION LAYER (v6)  — progress bar, scroll light path, reveals
+   All elements are injected by app.js; pages without JS are unaffected.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* Reading progress bar */
+#fa-progress {
+  position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 500;
+  background: linear-gradient(90deg, var(--gold), var(--gold2) 55%, var(--blue));
+  transform: scaleX(0); transform-origin: left;
+  pointer-events: none; will-change: transform;
+}
+
+/* Scroll light path — sits behind all content, visible in page gutters */
+#fa-lightpath {
+  position: fixed; inset: 0; z-index: -1;
+  pointer-events: none;
+}
+#fa-lightpath .fa-lp-base { stroke: rgba(26,18,8,.07); }
+#fa-lightpath .fa-lp-glow { opacity: .22; }
+
+/* Scroll reveal — class applied by JS just before observing, so content
+   is never hidden when JS is unavailable */
+.fa-rv { opacity: 0; transform: translateY(14px); transition: opacity .55s var(--ease), transform .55s var(--ease); }
+.fa-rv.fa-in { opacity: 1; transform: none; }
+
+/* Interaction polish */
+::selection { background: rgba(184,134,11,.25); }
+:focus-visible { outline: 2px solid var(--AC); outline-offset: 2px; }
+.q-choice:hover:not(.picked) { transform: translateX(3px); transition: transform .18s var(--ease), border-color .18s, background .18s, color .18s; }
+.mh-pill, .dash-actions button, .quiz-reset, .bank-tools button { transition: all .18s var(--ease); }
+.mh-pill:hover, .dash-actions button:hover { transform: translateY(-1px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .fa-rv { opacity: 1; transform: none; transition: none; }
+  .q-choice:hover:not(.picked) { transform: none; }
+  html { scroll-behavior: auto; }
+}
+
+@media print {
+  #fa-progress, #fa-lightpath { display: none; }
+}

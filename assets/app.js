@@ -473,3 +473,134 @@ function initContinueBanner() {
   }
 }
 document.addEventListener('DOMContentLoaded', initContinueBanner);
+
+/* ── Motion layer (v6): progress bar + SVG light path + scroll reveals ─────
+   Purely cosmetic. Everything is injected here, so no page HTML changes are
+   needed and pages without JS render normally. Respects
+   prefers-reduced-motion. Scroll work is rAF-gated with passive listeners;
+   the only per-frame mutations are a transform and two dashoffset writes.
+──────────────────────────────────────────────────────────────────────────── */
+(function motionLayer() {
+  var reduced = window.matchMedia &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* reading progress bar */
+  var bar = document.createElement('div');
+  bar.id = 'fa-progress';
+  document.body.appendChild(bar);
+
+  /* SVG light path */
+  var NS = 'http://www.w3.org/2000/svg';
+  var svg = null, glowEl = null, cometEl = null, pathLen = 0, cometLen = 0;
+
+  function buildLightPath() {
+    if (reduced) return;
+    if (svg) svg.remove();
+    var w = window.innerWidth, h = window.innerHeight;
+    var mob = w < 700;
+    var L = Math.max(w * 0.05, 16), R = w - L, cx = w / 2;
+
+    var d = 'M ' + R + ' -24' +
+      ' C ' + R + ' ' + h * 0.22 + ', ' + L + ' ' + h * 0.16 + ', ' + L + ' ' + h * 0.40 +
+      ' C ' + L + ' ' + h * 0.62 + ', ' + R + ' ' + h * 0.56 + ', ' + R + ' ' + h * 0.78 +
+      ' C ' + R + ' ' + (h * 0.96) + ', ' + cx + ' ' + (h * 0.92) + ', ' + cx + ' ' + (h + 24);
+
+    svg = document.createElementNS(NS, 'svg');
+    svg.setAttribute('id', 'fa-lightpath');
+    svg.setAttribute('width', w);
+    svg.setAttribute('height', h);
+    svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+    svg.setAttribute('aria-hidden', 'true');
+
+    var defs = document.createElementNS(NS, 'defs');
+    var grad = document.createElementNS(NS, 'linearGradient');
+    grad.setAttribute('id', 'fa-lp-grad');
+    grad.setAttribute('x1', '0'); grad.setAttribute('y1', '0');
+    grad.setAttribute('x2', '0'); grad.setAttribute('y2', '1');
+    [['0%', '#b8860b'], ['100%', '#1a3a5c']].forEach(function(s) {
+      var stop = document.createElementNS(NS, 'stop');
+      stop.setAttribute('offset', s[0]);
+      stop.setAttribute('stop-color', s[1]);
+      grad.appendChild(stop);
+    });
+    defs.appendChild(grad);
+    svg.appendChild(defs);
+
+    function mkPath(cls, width) {
+      var p = document.createElementNS(NS, 'path');
+      p.setAttribute('d', d);
+      p.setAttribute('class', cls);
+      p.setAttribute('fill', 'none');
+      p.setAttribute('stroke-width', width);
+      p.setAttribute('stroke-linecap', 'round');
+      svg.appendChild(p);
+      return p;
+    }
+    mkPath('fa-lp-base', 1);
+    glowEl  = mkPath('fa-lp-glow', mob ? 4 : 6);
+    cometEl = mkPath('fa-lp-comet', mob ? 1.5 : 2);
+    glowEl.setAttribute('stroke', 'url(#fa-lp-grad)');
+    cometEl.setAttribute('stroke', 'url(#fa-lp-grad)');
+
+    pathLen = cometEl.getTotalLength();
+    cometLen = Math.min(200, pathLen * 0.16);
+    [glowEl, cometEl].forEach(function(p) {
+      p.setAttribute('stroke-dasharray', cometLen + ' ' + pathLen);
+      p.setAttribute('stroke-dashoffset', 0);
+    });
+    document.body.prepend(svg);
+  }
+
+  /* rAF-driven updates; comet position is eased toward the scroll target */
+  var target = 0, current = 0, raf = null;
+
+  function progress() {
+    var docH = document.documentElement.scrollHeight - window.innerHeight;
+    return docH > 0 ? Math.min(1, Math.max(0, window.scrollY / docH)) : 0;
+  }
+
+  function tick() {
+    raf = null;
+    var p = progress();
+    bar.style.transform = 'scaleX(' + p + ')';
+    if (cometEl && pathLen) {
+      target = -p * (pathLen - cometLen);
+      current += (target - current) * 0.14;
+      if (Math.abs(target - current) < 0.5) current = target;
+      glowEl.setAttribute('stroke-dashoffset', current);
+      cometEl.setAttribute('stroke-dashoffset', current);
+      if (current !== target) raf = requestAnimationFrame(tick);
+    }
+  }
+  function onScroll() { if (!raf) raf = requestAnimationFrame(tick); }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  var rsT = null;
+  window.addEventListener('resize', function() {
+    clearTimeout(rsT);
+    rsT = setTimeout(function() { buildLightPath(); onScroll(); }, 150);
+  }, { passive: true });
+
+  buildLightPath();
+  onScroll();
+
+  /* scroll reveals */
+  if (!reduced && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('fa-in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -7% 0px', threshold: 0 });
+
+    document.querySelectorAll(
+      '.lesson,.quiz-section,.gateway,.dashboard,.cat-section,.about-builder,' +
+      '.unit-review-wrap,.site-review-section,.feat,.how-step,.iqbank,.research-spotlight'
+    ).forEach(function(el) {
+      el.classList.add('fa-rv');
+      io.observe(el);
+    });
+  }
+})();

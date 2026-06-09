@@ -25,6 +25,7 @@ assets/app.js           ← MCQ logic + localStorage progress tracking
 - **Score-builder ladders** — AP® course pages show how to move from lesson recall to mixed and official practice
 - **Unit connection cards** — AP® unit pages link previous, next, and mixed course practice without leaving the current structure
 - **Unit transfer prompts** — AP® unit pages turn local lessons into rubric-style written, worked, or performance-task practice
+- **Response starter banks** — AP® unit pages give course-specific sentence stems for claims, evidence, reasoning, calculations, tracing, and analysis
 - **AP® prompt builders** — unit pages help students turn recall into claim, evidence, and reasoning before the review quiz
 - **Command-verb toolkits** — AP® response habits for identify, describe, explain, justify, calculate, compare, and related task verbs
 - **Stimulus strategy cards** — course pages show how to read passages, graphs, sources, code, images, and data before answering
@@ -103,7 +104,7 @@ Omit course selectors to regenerate all courses into `site/`. AP® course pages
 also receive generated exam-skill study loops, score-builder ladders,
 command-verb toolkits, and unit
 checkpoints from `generate_ap_content.py`, plus AP-only unit transfer prompts,
-unit connection cards, prompt builders,
+unit connection cards, response starter banks, prompt builders,
 stimulus strategy cards,
 mistake-repair prompts, spaced-review plans, official-practice bridges, and
 review sprint plans,

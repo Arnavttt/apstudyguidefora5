@@ -411,6 +411,63 @@ SCORE_BUILDER_STEPS = [
     ('4. Transfer', 'Finish with AP Daily, assigned AP Classroom practice, released questions, or scoring evidence for the same skill.'),
 ]
 
+UNIT_RESPONSE_STARTER_PROFILES = {
+    'default': [
+        ('Claim', 'The prompt is asking for ..., so the answer should show ... .'),
+        ('Evidence', 'A specific detail that supports this is ... .'),
+        ('Reasoning', 'This matters because it connects ... to ... .'),
+        ('Check', 'My answer uses the command verb because it ... .'),
+    ],
+    'history': [
+        ('Context', 'In this period or region, the broader process was ... .'),
+        ('Evidence', 'One specific example that supports the claim is ... .'),
+        ('Reasoning', 'This shows causation, comparison, or continuity/change because ... .'),
+        ('Sourcing', 'The source point of view, purpose, audience, or situation matters because ... .'),
+    ],
+    'government': [
+        ('Principle', 'The constitutional, institutional, or comparative principle is ... .'),
+        ('Evidence', 'The case, document, data point, country example, or institution shows ... .'),
+        ('Effect', 'This affects power, policy, rights, participation, or legitimacy because ... .'),
+        ('Comparison', 'The similarity or difference is ... because both sides ... .'),
+    ],
+    'english': [
+        ('Claim', 'The passage or source develops the idea that ... .'),
+        ('Evidence', 'The most useful detail is ... because it reveals ... .'),
+        ('Commentary', 'This choice affects the audience, tone, argument, or meaning by ... .'),
+        ('Line of reasoning', 'This paragraph connects to the thesis because ... .'),
+    ],
+    'science': [
+        ('Claim', 'The result supports the claim that ... .'),
+        ('Data', 'The evidence is the change, trend, value, control, or comparison showing ... .'),
+        ('Mechanism', 'This happens because the model, structure, reaction, or system ... .'),
+        ('Limitation', 'A variable, assumption, or source of uncertainty to check is ... .'),
+    ],
+    'math': [
+        ('Setup', 'The correct representation or theorem is ... because the problem gives ... .'),
+        ('Work', 'The calculation starts with ... and changes to ... .'),
+        ('Justification', 'This method applies because the needed condition is ... .'),
+        ('Interpretation', 'In context, the value, sign, units, or direction means ... .'),
+    ],
+    'economics': [
+        ('Graph setup', 'The relevant model is ... with ... on the axes or variables.'),
+        ('Shift or decision', 'The change occurs because ... affects incentives, scarcity, or policy.'),
+        ('Outcome', 'As a result, ... moves from ... to ... .'),
+        ('Explanation', 'The graph or calculation supports the answer because ... .'),
+    ],
+    'computer-science': [
+        ('Trace', 'After this input or loop pass, the variable, index, object, or list becomes ... .'),
+        ('Purpose', 'This abstraction, procedure, or data structure is useful because ... .'),
+        ('Condition', 'The code follows this branch because ... .'),
+        ('Result', 'The output, return value, or impact is ... because the program ... .'),
+    ],
+    'arts': [
+        ('Observation', 'A visible or audible feature is ... .'),
+        ('Context', 'This connects to the period, culture, patron, function, or performance practice because ... .'),
+        ('Meaning', 'The feature supports the work purpose, style, or expression by ... .'),
+        ('Comparison', 'A useful similarity or difference is ... because the evidence shows ... .'),
+    ],
+}
+
 # ── helpers ─────────────────────────────────────────────────────────────────
 
 def qid(seed):
@@ -901,6 +958,36 @@ def ap_unit_transfer_practice_html(course_slug, unit_title, lessons, is_non_ap=F
     )
 
 
+def ap_unit_response_starters_html(course_slug, unit_title, lessons, is_non_ap=False):
+    if is_non_ap:
+        return ''
+
+    profile_key = ap_response_profile_key(course_slug)
+    response_profile = ap_response_profile(course_slug)
+    starters = UNIT_RESPONSE_STARTER_PROFILES.get(
+        profile_key, UNIT_RESPONSE_STARTER_PROFILES['default']
+    )
+    clean_title = short_unit_title(unit_title)
+    first_lesson = lessons[0]['title'] if lessons else clean_title
+    cards = ''.join(
+        f'<article><b>{label}</b><p>{stem}</p></article>'
+        for label, stem in starters
+    )
+
+    return (
+        f'<section class="response-starters">'
+        f'<div class="response-starters-head">'
+        f'<span class="eyebrow">AP&reg; Response Starters</span>'
+        f'<h3>Start with language that can earn points</h3>'
+        f'<p>After the lesson bank for {clean_title}, use these stems to turn recall from '
+        f'{first_lesson} into the {response_profile["title"].lower()}. Replace the blanks with '
+        f'a term, source detail, data point, graph feature, calculation, image feature, or code trace from this unit.</p>'
+        f'</div>'
+        f'<div class="response-starters-grid">{cards}</div>'
+        f'</section>'
+    )
+
+
 def ap_unit_prompt_builder_html(course_slug, unit_title, lessons, is_non_ap=False):
     if is_non_ap:
         return ''
@@ -1136,6 +1223,7 @@ def render_unit(course_name, course_slug, abbrev, unit_num, unit_title,
         course_name, course_slug, unit_title, course_html_file, prev_unit, next_unit, is_non_ap
     )
     ap_unit_transfer_practice = ap_unit_transfer_practice_html(course_slug, unit_title, lessons, is_non_ap)
+    ap_unit_response_starters = ap_unit_response_starters_html(course_slug, unit_title, lessons, is_non_ap)
     ap_unit_prompt_builder = ap_unit_prompt_builder_html(course_slug, unit_title, lessons, is_non_ap)
     ap_unit_mistake_strip = ap_unit_mistake_strip_html(course_slug, is_non_ap)
     ap_unit_spaced_strip = ap_unit_spaced_strip_html(course_slug, is_non_ap)
@@ -1171,6 +1259,7 @@ def render_unit(course_name, course_slug, abbrev, unit_num, unit_title,
         f'{ap_unit_connections}'
         f'{ap_unit_transfer_practice}'
         f'{lessons_html}'
+        f'{ap_unit_response_starters}'
         f'{ap_unit_prompt_builder}'
         f'{unit_quiz}'
         f'{ap_unit_mistake_strip}'

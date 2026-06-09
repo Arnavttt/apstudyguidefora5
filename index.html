@@ -13,7 +13,7 @@
 :root{--ink:#edf1ff;--ink2:#a8b1d8;--ink3:#6e79a8;--parchment:#0a0a18;--parchment2:#10101f;--parchment3:#181830;--red:#fb7185;--gold:#22d3ee;--gold2:#67e8f9;--blue:#818cf8;--green:#34d399;--border:#232347;--border2:#2c2c54;--card:#14142a;--shadow:rgba(0,0,0,0.5);--ease:cubic-bezier(.4,0,.2,1);--bg:#0a0a18;--bg2:#10101f;--bg3:#181830;--text:#edf1ff;--text2:#a8b1d8;--text3:#6e79a8;}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{font-family:'Space Grotesk',sans-serif;background:#0a0a18;color:#edf1ff;background-image:radial-gradient(circle,rgba(255,255,255,.03) 1px,transparent 1px);background-size:26px 26px;-webkit-font-smoothing:antialiased;}
+body{font-family:'Inter',sans-serif;background:#0a0a18;color:#edf1ff;background-image:radial-gradient(circle,rgba(255,255,255,.03) 1px,transparent 1px);background-size:26px 26px;-webkit-font-smoothing:antialiased;}
 a{text-decoration:none;color:inherit;}
 img{display:block;max-width:100%;}
 
@@ -95,7 +95,7 @@ img{display:block;max-width:100%;}
 @media(max-width:480px){.cc-grid{grid-template-columns:1fr;}}
 
 .cc{background:var(--bg3);border:1px solid var(--border);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;transition:transform .2s var(--ease),box-shadow .2s var(--ease),border-color .2s var(--ease);border-top:4px solid var(--ac,#8b6914);}
-.cc:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.5);border-color:var(--ac,rgba(255,255,255,.2));}
+.cc:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.5),0 16px 44px -14px color-mix(in srgb,var(--ac,#22d3ee) 40%,transparent);border-color:var(--ac,rgba(255,255,255,.2));}
 .cc-img{height:150px;overflow:hidden;background:#0d0d1f;flex-shrink:0;position:relative;}
 .cc-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s var(--ease);}
 .cc:hover .cc-img img{transform:scale(1.04);}
@@ -148,7 +148,7 @@ img{display:block;max-width:100%;}
 /* Hidden (filtering) */
 .cc.hidden{display:none;}
 </style>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&amp;family=Space+Grotesk:wght@300..700&amp;display=swap" rel="stylesheet"/>
 </head>
 <body>
 <nav class="navbar">

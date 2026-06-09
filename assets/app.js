@@ -529,7 +529,7 @@ document.addEventListener('DOMContentLoaded', initContinueBanner);
     defs.appendChild(grad);
     var blur = document.createElementNS(NS, 'filter');
     blur.setAttribute('id', 'fa-lp-blur');
-    blur.innerHTML = '<feGaussianBlur stdDeviation="4"/>';
+    blur.innerHTML = '<feGaussianBlur stdDeviation="5"/>';
     defs.appendChild(blur);
     svg.appendChild(defs);
 
@@ -544,8 +544,8 @@ document.addEventListener('DOMContentLoaded', initContinueBanner);
       return p;
     }
     mkPath('fa-lp-base', 1);
-    glowEl  = mkPath('fa-lp-glow', mob ? 6 : 10);
-    cometEl = mkPath('fa-lp-comet', mob ? 2 : 2.5);
+    glowEl  = mkPath('fa-lp-glow', mob ? 8 : 13);
+    cometEl = mkPath('fa-lp-comet', mob ? 2.5 : 3);
     glowEl.setAttribute('stroke', 'url(#fa-lp-grad)');
     if (!mob) glowEl.setAttribute('filter', 'url(#fa-lp-blur)');
     cometEl.setAttribute('stroke', 'url(#fa-lp-grad)');
@@ -558,8 +558,8 @@ document.addEventListener('DOMContentLoaded', initContinueBanner);
       svg.appendChild(c);
       return c;
     }
-    nodeHalo = mkNode(mob ? 7 : 10, 'fa-lp-halo');
-    nodeCore = mkNode(mob ? 3 : 4, 'fa-lp-node');
+    nodeHalo = mkNode(mob ? 9 : 14, 'fa-lp-halo');
+    nodeCore = mkNode(mob ? 3.5 : 5, 'fa-lp-node');
 
     /* Attach BEFORE measuring: getTotalLength()/getPointAtLength() throw on
        detached geometry in Firefox, which previously killed the whole path. */
@@ -570,7 +570,7 @@ document.addEventListener('DOMContentLoaded', initContinueBanner);
       svg.remove(); svg = cometEl = glowEl = null; pathLen = 0;
       return;
     }
-    cometLen = Math.min(320, pathLen * 0.22);
+    cometLen = Math.min(460, pathLen * 0.3);
     [glowEl, cometEl].forEach(function(p) {
       p.setAttribute('stroke-dasharray', cometLen + ' ' + pathLen);
       p.setAttribute('stroke-dashoffset', 0);

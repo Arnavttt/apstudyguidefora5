@@ -903,6 +903,64 @@ def ap_course_unit_map_html(course_slug, units, is_non_ap=False):
     )
 
 
+def course_drill_pairs(units):
+    if len(units) < 2:
+        return []
+
+    candidate_indexes = [0, len(units) // 3, (2 * len(units)) // 3, len(units) - 2]
+    pairs = []
+    seen = set()
+
+    for idx in candidate_indexes:
+        idx = max(0, min(idx, len(units) - 2))
+        if idx in seen:
+            continue
+        seen.add(idx)
+        pairs.append((units[idx], units[idx + 1]))
+
+    return pairs
+
+
+def unit_label(unit):
+    return f'Period {unit["num"]}' if unit['title'].lower().startswith('period ') else f'Unit {unit["num"]}'
+
+
+def ap_cross_unit_drills_html(course_slug, units, is_non_ap=False):
+    if is_non_ap:
+        return ''
+
+    pairs = course_drill_pairs(units)
+    if not pairs:
+        return ''
+
+    profile = ap_focus_profile(course_slug)
+    cards = ''
+
+    for left, right in pairs:
+        left_title = short_unit_title(left['title'])
+        right_title = short_unit_title(right['title'])
+        cards += (
+            f'<article>'
+            f'<b>{unit_label(left)} &rarr; {unit_label(right)}</b>'
+            f'<h4>{left_title} + {right_title}</h4>'
+            f'<p>Answer one question from each unit, then write a two-sentence bridge between the ideas.</p>'
+            f'<small>Use {profile["skill"].lower()} to explain what changes, carries forward, or creates a contrast.</small>'
+            f'</article>'
+        )
+
+    return (
+        f'<section class="cross-unit-drills">'
+        f'<div class="cross-unit-drills-head">'
+        f'<span class="eyebrow">AP&reg; Cross-Unit Transfer Drills</span>'
+        f'<h3>Practice the switches AP questions like to make</h3>'
+        f'<p>After reviewing the map, use these paired drills to connect nearby and late-course units. '
+        f'The goal is to move between topics while keeping {profile["skill"].lower()} active.</p>'
+        f'</div>'
+        f'<div class="cross-unit-drills-grid">{cards}</div>'
+        f'</section>'
+    )
+
+
 def ap_score_builder_ladder_html(course_slug, is_non_ap=False):
     if is_non_ap:
         return ''
@@ -1427,6 +1485,7 @@ def render_course(course_name, course_slug, abbrev, units, course_qs,
     course_quiz = quiz_section_html(cbank_id, f'{course_name} — 20 course-level questions', cqs_html, 20)
     ap_course_focus = ap_course_focus_html(course_name, course_slug, units, is_non_ap)
     ap_course_unit_map = ap_course_unit_map_html(course_slug, units, is_non_ap)
+    ap_cross_unit_drills = ap_cross_unit_drills_html(course_slug, units, is_non_ap)
     ap_score_builder_ladder = ap_score_builder_ladder_html(course_slug, is_non_ap)
     ap_response_toolkit = ap_response_toolkit_html(course_slug, is_non_ap)
     ap_stimulus_strategy = ap_stimulus_strategy_html(course_slug, is_non_ap)
@@ -1464,6 +1523,7 @@ def render_course(course_name, course_slug, abbrev, units, course_qs,
         f'{dashboard_html()}'
         f'{ap_course_focus}'
         f'{ap_course_unit_map}'
+        f'{ap_cross_unit_drills}'
         f'{ap_score_builder_ladder}'
         f'{ap_response_toolkit}'
         f'{ap_stimulus_strategy}'

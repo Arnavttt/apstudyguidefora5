@@ -961,6 +961,61 @@ def ap_cross_unit_drills_html(course_slug, units, is_non_ap=False):
     )
 
 
+def mixed_practice_targets(units):
+    if len(units) < 3:
+        return []
+
+    indexes = [len(units) - 1, 0, len(units) // 2]
+    targets = []
+    seen = set()
+
+    for idx in indexes:
+        if idx in seen:
+            continue
+        seen.add(idx)
+        targets.append(units[idx])
+
+    return targets
+
+
+def ap_mixed_practice_planner_html(course_slug, units, is_non_ap=False):
+    if is_non_ap:
+        return ''
+
+    targets = mixed_practice_targets(units)
+    if len(targets) < 3:
+        return ''
+
+    profile = ap_focus_profile(course_slug)
+    response_profile = ap_response_profile(course_slug)
+    recent, anchor, bridge = targets
+
+    cards = (
+        f'<article><b>1. Recent unit</b><h4>{unit_label(recent)}: {short_unit_title(recent["title"])}</h4>'
+        f'<p>Answer five questions from the newest or weakest unit, then write one rule, model, source move, '
+        f'or setup you had to retrieve.</p></article>'
+        f'<article><b>2. Older unit</b><h4>{unit_label(anchor)}: {short_unit_title(anchor["title"])}</h4>'
+        f'<p>Switch to an early unit without previewing notes. If recall breaks, tag the miss before reading the explanation.</p></article>'
+        f'<article><b>3. Bridge unit</b><h4>{unit_label(bridge)}: {short_unit_title(bridge["title"])}</h4>'
+        f'<p>Add a middle unit and explain how the prompt changes the skill demand, evidence type, or representation.</p></article>'
+        f'<article><b>4. Course bank</b><h4>Mixed AP&reg; practice</h4>'
+        f'<p>Finish with ten course-level questions, then filter <b>Wrong only</b> and repair the first miss using '
+        f'{profile["skill"].lower()} plus the {response_profile["title"].lower()}.</p></article>'
+    )
+
+    return (
+        f'<section class="mixed-practice-planner">'
+        f'<div class="mixed-practice-head">'
+        f'<span class="eyebrow">AP&reg; Mixed Practice Planner</span>'
+        f'<h3>Build a short set that feels like the real exam</h3>'
+        f'<p>Use this sequence when rereading feels easy but mixed questions still feel jumpy. '
+        f'It forces fresh recall, older retrieval, a bridge unit, and the course bank into one sitting.</p>'
+        f'</div>'
+        f'<div class="mixed-practice-grid">{cards}</div>'
+        f'</section>'
+    )
+
+
 def ap_score_builder_ladder_html(course_slug, is_non_ap=False):
     if is_non_ap:
         return ''
@@ -1486,6 +1541,7 @@ def render_course(course_name, course_slug, abbrev, units, course_qs,
     ap_course_focus = ap_course_focus_html(course_name, course_slug, units, is_non_ap)
     ap_course_unit_map = ap_course_unit_map_html(course_slug, units, is_non_ap)
     ap_cross_unit_drills = ap_cross_unit_drills_html(course_slug, units, is_non_ap)
+    ap_mixed_practice_planner = ap_mixed_practice_planner_html(course_slug, units, is_non_ap)
     ap_score_builder_ladder = ap_score_builder_ladder_html(course_slug, is_non_ap)
     ap_response_toolkit = ap_response_toolkit_html(course_slug, is_non_ap)
     ap_stimulus_strategy = ap_stimulus_strategy_html(course_slug, is_non_ap)
@@ -1524,6 +1580,7 @@ def render_course(course_name, course_slug, abbrev, units, course_qs,
         f'{ap_course_focus}'
         f'{ap_course_unit_map}'
         f'{ap_cross_unit_drills}'
+        f'{ap_mixed_practice_planner}'
         f'{ap_score_builder_ladder}'
         f'{ap_response_toolkit}'
         f'{ap_stimulus_strategy}'

@@ -25,6 +25,7 @@ assets/app.js           ← MCQ logic + localStorage progress tracking
 - **Score-builder ladders** — AP® course pages show how to move from lesson recall to mixed and official practice
 - **Course unit strategy maps** — AP® course pages link every unit with descriptions and AP-skill practice cues
 - **Cross-unit transfer drills** — AP® course pages pair units so students practice topic switching before mixed review
+- **Mixed practice planners** — AP® course pages turn recent, older, bridge, and course-bank practice into one sitting
 - **Unit quick targets** — AP® unit pages summarize lesson objectives, common misconceptions, and AP-style testing notes
 - **Unit connection cards** — AP® unit pages link previous, next, and mixed course practice without leaving the current structure
 - **Unit transfer prompts** — AP® unit pages turn local lessons into rubric-style written, worked, or performance-task practice
@@ -107,6 +108,7 @@ Omit course selectors to regenerate all courses into `site/`. AP® course pages
 also receive generated exam-skill study loops, score-builder ladders,
 course unit strategy maps,
 cross-unit transfer drills,
+mixed practice planners,
 command-verb toolkits, and unit
 checkpoints from `generate_ap_content.py`, plus AP-only unit quick targets,
 unit transfer prompts,

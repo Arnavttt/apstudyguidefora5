@@ -492,6 +492,7 @@ document.addEventListener('DOMContentLoaded', initContinueBanner);
   /* SVG light path */
   var NS = 'http://www.w3.org/2000/svg';
   var svg = null, glowEl = null, cometEl = null, pathLen = 0, cometLen = 0;
+  var nodeHalo = null, nodeCore = null;
 
   function buildLightPath() {
     if (reduced) return;
@@ -517,13 +518,17 @@ document.addEventListener('DOMContentLoaded', initContinueBanner);
     grad.setAttribute('id', 'fa-lp-grad');
     grad.setAttribute('x1', '0'); grad.setAttribute('y1', '0');
     grad.setAttribute('x2', '0'); grad.setAttribute('y2', '1');
-    [['0%', '#b8860b'], ['100%', '#1a3a5c']].forEach(function(s) {
+    [['0%', '#22d3ee'], ['100%', '#818cf8']].forEach(function(s) {
       var stop = document.createElementNS(NS, 'stop');
       stop.setAttribute('offset', s[0]);
       stop.setAttribute('stop-color', s[1]);
       grad.appendChild(stop);
     });
     defs.appendChild(grad);
+    var blur = document.createElementNS(NS, 'filter');
+    blur.setAttribute('id', 'fa-lp-blur');
+    blur.innerHTML = '<feGaussianBlur stdDeviation="4"/>';
+    defs.appendChild(blur);
     svg.appendChild(defs);
 
     function mkPath(cls, width) {
@@ -537,18 +542,39 @@ document.addEventListener('DOMContentLoaded', initContinueBanner);
       return p;
     }
     mkPath('fa-lp-base', 1);
-    glowEl  = mkPath('fa-lp-glow', mob ? 4 : 6);
-    cometEl = mkPath('fa-lp-comet', mob ? 1.5 : 2);
+    glowEl  = mkPath('fa-lp-glow', mob ? 7 : 10);
+    cometEl = mkPath('fa-lp-comet', mob ? 2 : 2.5);
     glowEl.setAttribute('stroke', 'url(#fa-lp-grad)');
+    glowEl.setAttribute('filter', 'url(#fa-lp-blur)');
     cometEl.setAttribute('stroke', 'url(#fa-lp-grad)');
 
     pathLen = cometEl.getTotalLength();
-    cometLen = Math.min(200, pathLen * 0.16);
+    cometLen = Math.min(320, pathLen * 0.22);
     [glowEl, cometEl].forEach(function(p) {
       p.setAttribute('stroke-dasharray', cometLen + ' ' + pathLen);
       p.setAttribute('stroke-dashoffset', 0);
     });
+
+    /* glowing node at the head of the comet */
+    function mkNode(r, cls) {
+      var c = document.createElementNS(NS, 'circle');
+      c.setAttribute('r', r);
+      c.setAttribute('class', cls);
+      svg.appendChild(c);
+      return c;
+    }
+    nodeHalo = mkNode(mob ? 8 : 11, 'fa-lp-halo');
+    nodeCore = mkNode(mob ? 3 : 4, 'fa-lp-node');
+    placeNode(0);
     document.body.prepend(svg);
+  }
+
+  function placeNode(offset) {
+    if (!cometEl || !pathLen) return;
+    var head = Math.min(pathLen, -offset + cometLen);
+    var pt = cometEl.getPointAtLength(head);
+    nodeHalo.setAttribute('cx', pt.x); nodeHalo.setAttribute('cy', pt.y);
+    nodeCore.setAttribute('cx', pt.x); nodeCore.setAttribute('cy', pt.y);
   }
 
   /* rAF-driven updates; comet position is eased toward the scroll target */
@@ -569,6 +595,7 @@ document.addEventListener('DOMContentLoaded', initContinueBanner);
       if (Math.abs(target - current) < 0.5) current = target;
       glowEl.setAttribute('stroke-dashoffset', current);
       cometEl.setAttribute('stroke-dashoffset', current);
+      placeNode(current);
       if (current !== target) raf = requestAnimationFrame(tick);
     }
   }

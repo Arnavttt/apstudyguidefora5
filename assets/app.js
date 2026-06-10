@@ -548,10 +548,29 @@ document.addEventListener('DOMContentLoaded', initContinueBanner);
     return any ? { left: left, right: right } : { left: 0, right: 0 };
   }
 
+  /* Vertical band between the page header (masthead/hero) and the footer —
+     the only stretch of the document the light path may occupy. Measured in
+     document coordinates. */
+  function headerFooterBand() {
+    var sy = window.scrollY || 0;
+    var header = document.querySelector('.masthead, .hero, .top');
+    var footer = document.querySelector('.site-footer, .footer-hub');
+    var top = 0;
+    if (header) {
+      top = header.getBoundingClientRect().bottom + sy;
+    } else {
+      var tn = document.querySelector('.topnav, .navbar');
+      if (tn) top = Math.min(tn.getBoundingClientRect().bottom + sy, 300); /* sticky-safe cap */
+    }
+    var docH = document.documentElement.scrollHeight;
+    var bottom = footer ? footer.getBoundingClientRect().top + sy : docH;
+    return { top: top + 28, bottom: Math.max(top, bottom - 28) };
+  }
+
   /* Content-aware mode:
-       'full' — flowing comet confined to a side gutter (clipped, never
-                crosses content). Needs a wide viewport, a real gutter, and
-                enough scroll length for the comet to travel.
+       'full' — flowing comet confined to a side gutter between the header
+                and the footer (never crosses content). Needs a wide
+                viewport, a real gutter, and enough travel distance.
        'glow' — ambient corner glow only (the safe default).
      Decided from measured layout, not viewport width alone. */
   function decideMode() {
@@ -560,6 +579,8 @@ document.addEventListener('DOMContentLoaded', initContinueBanner);
     var g = gutters(w);
     if (Math.max(g.left, g.right) < 130) return 'glow';           // content too wide → no lane
     if (document.documentElement.scrollHeight - h < h * 0.6) return 'glow'; // too short to travel
+    var band = headerFooterBand();
+    if (band.bottom - band.top < h * 1.1) return 'glow';          // header→footer stretch too short
     return 'full';
   }
 
@@ -588,6 +609,8 @@ document.addEventListener('DOMContentLoaded', initContinueBanner);
     if (decideMode() !== 'full') return;   /* glow-only mode: no line at all */
 
     var w = window.innerWidth, h = window.innerHeight;
+    var band = headerFooterBand();
+    var bandH = Math.round(band.bottom - band.top);
     var g = gutters(w);
     var pad = 14, edge = 12;
     var side = g.right >= g.left ? 'right' : 'left';
@@ -605,19 +628,23 @@ document.addEventListener('DOMContentLoaded', initContinueBanner);
     var cw     = parseFloat(bs.getPropertyValue('--lp-width')) || 3;
     var dash   = (bs.getPropertyValue('--lp-dash') || '').trim();
 
-    /* Vertical meander confined entirely to the gutter band. The inner extent
-       scales with the family amplitude (capped so it can never leave the
-       gutter); fluid families (amp ≥ 1.2) get an extra sweep instead. */
+    /* Vertical meander spanning ONLY the header→footer band, in document
+       coordinates: one sweep per ~viewport of travel, fluid families
+       (amp ≥ 1.2) get extra sweeps. The inner extent scales with the family
+       amplitude (capped so it can never leave the gutter). */
     var xOut = side === 'right' ? xMax : xMin;
     var xIn  = side === 'right' ? xMin : xMax;
     xIn = xOut + (xIn - xOut) * Math.min(amp, 1);
-    var waves = amp >= 1.2 ? 4 : 3;
-    var seg = (h + 40) / waves;
-    var d = 'M ' + xOut + ' -20';
+    var y0 = 14, y1 = bandH - 14;
+    var span = y1 - y0;
+    var waves = Math.max(2, Math.round(span / (h * 1.15)));
+    if (amp >= 1.2) waves = Math.max(3, Math.round(waves * 1.3));
+    var seg = span / waves;
+    var d = 'M ' + xOut + ' ' + y0;
     for (var wv = 1; wv <= waves; wv++) {
       var xa = (wv - 1) % 2 === 0 ? xOut : xIn;
       var xb = wv % 2 === 0 ? xOut : xIn;
-      var ya = -20 + (wv - 1) * seg, yb = -20 + wv * seg;
+      var ya = y0 + (wv - 1) * seg, yb = y0 + wv * seg;
       d += ' C ' + xa + ' ' + (ya + seg * 0.55).toFixed(1) +
            ', '  + xb + ' ' + (yb - seg * 0.55).toFixed(1) +
            ', '  + xb + ' ' + yb.toFixed(1);
@@ -626,9 +653,12 @@ document.addEventListener('DOMContentLoaded', initContinueBanner);
     svg = document.createElementNS(NS, 'svg');
     svg.setAttribute('id', 'fa-lightpath');
     svg.setAttribute('width', w);
-    svg.setAttribute('height', h);
-    svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+    svg.setAttribute('height', bandH);
+    svg.setAttribute('viewBox', '0 0 ' + w + ' ' + bandH);
     svg.setAttribute('aria-hidden', 'true');
+    /* document-anchored: starts under the header, ends above the footer */
+    svg.style.top = band.top + 'px';
+    svg.style.height = bandH + 'px';
 
     var defs = document.createElementNS(NS, 'defs');
     var grad = document.createElementNS(NS, 'linearGradient');
@@ -642,25 +672,9 @@ document.addEventListener('DOMContentLoaded', initContinueBanner);
       grad.appendChild(stop);
     });
     defs.appendChild(grad);
-    var blur = document.createElementNS(NS, 'filter');
-    blur.setAttribute('id', 'fa-lp-blur');
-    blur.innerHTML = '<feGaussianBlur stdDeviation="5"/>';
-    defs.appendChild(blur);
-    /* Hard clip on the content-facing edge: even with blur, the glow can
-       never bleed past the gutter onto text. The cut lands in empty
-       whitespace so it is invisible. */
-    var clip = document.createElementNS(NS, 'clipPath');
-    clip.setAttribute('id', 'fa-lp-clip');
-    var cr = document.createElementNS(NS, 'rect');
-    var clipX = side === 'right' ? (contentEdge + 4) : 0;
-    var clipW = side === 'right' ? (w - clipX + 24) : Math.max(0, contentEdge - 4);
-    cr.setAttribute('x', clipX); cr.setAttribute('y', -40);
-    cr.setAttribute('width', clipW); cr.setAttribute('height', h + 80);
-    clip.appendChild(cr); defs.appendChild(clip);
     svg.appendChild(defs);
 
     var host = document.createElementNS(NS, 'g');
-    host.setAttribute('clip-path', 'url(#fa-lp-clip)');
     svg.appendChild(host);
 
     function mkPath(cls, width) {
@@ -675,10 +689,13 @@ document.addEventListener('DOMContentLoaded', initContinueBanner);
     }
     var baseEl = mkPath('fa-lp-base', 1);
     if (dash && dash !== '0') baseEl.setAttribute('stroke-dasharray', dash);
-    glowEl  = mkPath('fa-lp-glow', Math.max(9, cw * 4));
+    /* Soft glow = wide low-opacity stroke. No SVG blur filter here: a filter
+       surface as tall as the whole document would be far too expensive, and
+       the meander keeps a ≥14px pad from content so the wide stroke (≤9px
+       half-width) still never touches text. */
+    glowEl  = mkPath('fa-lp-glow', Math.max(12, cw * 5));
     cometEl = mkPath('fa-lp-comet', cw);
     glowEl.setAttribute('stroke', 'url(#fa-lp-grad)');
-    glowEl.setAttribute('filter', 'url(#fa-lp-blur)');
     cometEl.setAttribute('stroke', 'url(#fa-lp-grad)');
 
     /* glowing node at the head of the comet */
@@ -749,12 +766,12 @@ document.addEventListener('DOMContentLoaded', initContinueBanner);
 
   window.addEventListener('scroll', onScroll, { passive: true });
   var rsT = null;
-  window.addEventListener('resize', function() {
+  function rebuildSnap() {
     clearTimeout(rsT);
     rsT = setTimeout(function() {
       buildLightPath();
       /* snap easing state to the new geometry so the comet doesn't glide
-         across the screen after a resize/rotation */
+         across the screen after a resize/relayout */
       if (pathLen) {
         current = target = -progress() * (pathLen - cometLen);
         glowEl.setAttribute('stroke-dashoffset', current);
@@ -763,7 +780,17 @@ document.addEventListener('DOMContentLoaded', initContinueBanner);
       }
       onScroll();
     }, 150);
-  }, { passive: true });
+  }
+  window.addEventListener('resize', rebuildSnap, { passive: true });
+  /* Content height changes (lesson toggles, quiz explanations) move the
+     footer — rebuild so the document-anchored path still ends above it. */
+  if ('ResizeObserver' in window) {
+    var lastDocH = document.documentElement.scrollHeight;
+    new ResizeObserver(function() {
+      var hNow = document.documentElement.scrollHeight;
+      if (Math.abs(hNow - lastDocH) > 24) { lastDocH = hNow; rebuildSnap(); }
+    }).observe(document.body);
+  }
 
   buildLightPath();
   onScroll();

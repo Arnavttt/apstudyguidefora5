@@ -474,6 +474,33 @@ function initContinueBanner() {
 }
 document.addEventListener('DOMContentLoaded', initContinueBanner);
 
+/* ── Course theme attribution ──────────────────────────────────────────────
+   Tags <body data-course="…"> from the URL so the per-course token blocks in
+   site.css (accent colors + light-path character) apply on every page type
+   without editing any page markup. */
+(function courseTheme() {
+  var COURSES = [
+    'ap-art-history', 'ap-biology', 'ap-calculus-bc', 'ap-chemistry',
+    'ap-comparative-government-and-politics', 'ap-computer-science-a',
+    'ap-computer-science-principles', 'ap-english-language-composition',
+    'ap-english-literature-composition', 'ap-environmental-science',
+    'ap-european-history', 'ap-human-geography', 'ap-macroeconomics',
+    'ap-microeconomics', 'ap-music-theory', 'ap-physics-1-2',
+    'ap-physics-c-electricity-and-magnetism', 'ap-physics-c-mechanics',
+    'ap-precalculus', 'ap-psychology', 'ap-u-s-government-politics',
+    'ap-u-s-history', 'ap-world-history-modern',
+    'college-algebra', 'college-trigonometry'
+  ];
+  var m = location.pathname.match(/\/(?:units|courses)\/([a-z0-9-]+)\.html$/);
+  if (!m) return;
+  var base = m[1], match = '';
+  for (var i = 0; i < COURSES.length; i++) {
+    var c = COURSES[i];
+    if ((base === c || base.indexOf(c + '-') === 0) && c.length > match.length) match = c;
+  }
+  if (match) document.body.dataset.course = match;
+})();
+
 /* ── Motion layer (v6): progress bar + SVG light path + scroll reveals ─────
    Purely cosmetic. Everything is injected here, so no page HTML changes are
    needed and pages without JS render normally. Respects
@@ -536,19 +563,21 @@ document.addEventListener('DOMContentLoaded', initContinueBanner);
     return 'full';
   }
 
-  /* lighten a #rrggbb / #rgb toward white by amt (0..1); pass-through otherwise */
-  function lightenHex(hex, amt) {
+  /* deepen a #rrggbb / #rgb toward ink by amt (0..1); pass-through otherwise.
+     On the light parchment theme the trail darkens (instead of whitening) so
+     it stays visible against the bright background. */
+  function shadeHex(hex, amt) {
     hex = (hex || '').trim();
-    if (hex.charAt(0) !== '#') return hex || '#22d3ee';
+    if (hex.charAt(0) !== '#') return hex || '#8b6914';
     hex = hex.slice(1);
     if (hex.length === 3) hex = hex.split('').map(function (c) { return c + c; }).join('');
     if (hex.length !== 6) return '#' + hex;
     var r = parseInt(hex.slice(0, 2), 16),
         g = parseInt(hex.slice(2, 4), 16),
         b = parseInt(hex.slice(4, 6), 16);
-    r = Math.round(r + (255 - r) * amt);
-    g = Math.round(g + (255 - g) * amt);
-    b = Math.round(b + (255 - b) * amt);
+    r = Math.round(r + (26 - r) * amt);
+    g = Math.round(g + (18 - g) * amt);
+    b = Math.round(b + (8  - b) * amt);
     return 'rgb(' + r + ',' + g + ',' + b + ')';
   }
 
@@ -567,15 +596,32 @@ document.addEventListener('DOMContentLoaded', initContinueBanner);
     var xInner = side === 'right' ? (contentEdge + pad) : (contentEdge - pad);
     var xMin = Math.min(xInner, xOuter), xMax = Math.max(xInner, xOuter);
 
-    /* Derive the path color from the active course accent (--AC). */
-    var ac = (getComputedStyle(document.body).getPropertyValue('--AC') || '#22d3ee').trim();
-    var acLight = lightenHex(ac, 0.55);
+    /* Derive the path styling from the active course accent (--AC) plus the
+       course-family character tokens (--lp-*, set in site.css per family). */
+    var bs     = getComputedStyle(document.body);
+    var ac     = (bs.getPropertyValue('--AC') || '#8b6914').trim();
+    var acDeep = shadeHex(ac, 0.30);
+    var amp    = parseFloat(bs.getPropertyValue('--lp-amp'))   || 1;
+    var cw     = parseFloat(bs.getPropertyValue('--lp-width')) || 3;
+    var dash   = (bs.getPropertyValue('--lp-dash') || '').trim();
 
-    /* Vertical meander confined entirely to the gutter band [xMin, xMax]. */
-    var d = 'M ' + xMax + ' -20' +
-      ' C ' + xMax + ' ' + h * 0.18 + ', ' + xMin + ' ' + h * 0.16 + ', ' + xMin + ' ' + h * 0.34 +
-      ' C ' + xMin + ' ' + h * 0.52 + ', ' + xMax + ' ' + h * 0.50 + ', ' + xMax + ' ' + h * 0.68 +
-      ' C ' + xMax + ' ' + h * 0.86 + ', ' + xMin + ' ' + h * 0.84 + ', ' + xMin + ' ' + (h + 20);
+    /* Vertical meander confined entirely to the gutter band. The inner extent
+       scales with the family amplitude (capped so it can never leave the
+       gutter); fluid families (amp ≥ 1.2) get an extra sweep instead. */
+    var xOut = side === 'right' ? xMax : xMin;
+    var xIn  = side === 'right' ? xMin : xMax;
+    xIn = xOut + (xIn - xOut) * Math.min(amp, 1);
+    var waves = amp >= 1.2 ? 4 : 3;
+    var seg = (h + 40) / waves;
+    var d = 'M ' + xOut + ' -20';
+    for (var wv = 1; wv <= waves; wv++) {
+      var xa = (wv - 1) % 2 === 0 ? xOut : xIn;
+      var xb = wv % 2 === 0 ? xOut : xIn;
+      var ya = -20 + (wv - 1) * seg, yb = -20 + wv * seg;
+      d += ' C ' + xa + ' ' + (ya + seg * 0.55).toFixed(1) +
+           ', '  + xb + ' ' + (yb - seg * 0.55).toFixed(1) +
+           ', '  + xb + ' ' + yb.toFixed(1);
+    }
 
     svg = document.createElementNS(NS, 'svg');
     svg.setAttribute('id', 'fa-lightpath');
@@ -589,7 +635,7 @@ document.addEventListener('DOMContentLoaded', initContinueBanner);
     grad.setAttribute('id', 'fa-lp-grad');
     grad.setAttribute('x1', '0'); grad.setAttribute('y1', '0');
     grad.setAttribute('x2', '0'); grad.setAttribute('y2', '1');
-    [['0%', acLight], ['100%', ac]].forEach(function(s) {
+    [['0%', ac], ['100%', acDeep]].forEach(function(s) {
       var stop = document.createElementNS(NS, 'stop');
       stop.setAttribute('offset', s[0]);
       stop.setAttribute('stop-color', s[1]);
@@ -627,9 +673,10 @@ document.addEventListener('DOMContentLoaded', initContinueBanner);
       host.appendChild(p);
       return p;
     }
-    mkPath('fa-lp-base', 1);
-    glowEl  = mkPath('fa-lp-glow', 12);
-    cometEl = mkPath('fa-lp-comet', 3);
+    var baseEl = mkPath('fa-lp-base', 1);
+    if (dash && dash !== '0') baseEl.setAttribute('stroke-dasharray', dash);
+    glowEl  = mkPath('fa-lp-glow', Math.max(9, cw * 4));
+    cometEl = mkPath('fa-lp-comet', cw);
     glowEl.setAttribute('stroke', 'url(#fa-lp-grad)');
     glowEl.setAttribute('filter', 'url(#fa-lp-blur)');
     cometEl.setAttribute('stroke', 'url(#fa-lp-grad)');
@@ -645,7 +692,7 @@ document.addEventListener('DOMContentLoaded', initContinueBanner);
     nodeHalo = mkNode(13, 'fa-lp-halo');
     nodeCore = mkNode(5, 'fa-lp-node');
     nodeHalo.style.fill = ac;          /* inline beats the stylesheet rule */
-    nodeCore.style.fill = acLight;
+    nodeCore.style.fill = '#fff';
 
     /* Attach BEFORE measuring: getTotalLength() throws on detached geometry
        in Firefox, which previously killed the whole path. */

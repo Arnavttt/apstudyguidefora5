@@ -687,7 +687,7 @@ document.addEventListener('DOMContentLoaded', initContinueBanner);
       host.appendChild(p);
       return p;
     }
-    var baseEl = mkPath('fa-lp-base', 1);
+    var baseEl = mkPath('fa-lp-base', Math.max(2.5, cw * 0.9));
     if (dash && dash !== '0') baseEl.setAttribute('stroke-dasharray', dash);
     /* Soft glow = wide low-opacity stroke. No SVG blur filter here: a filter
        surface as tall as the whole document would be far too expensive, and

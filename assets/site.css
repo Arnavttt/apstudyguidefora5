@@ -166,8 +166,11 @@ img, iframe { max-width: 100%; border: 0; }
 .masthead::before { content: none; }
 .masthead::after { content: none; }
 
-/* thin centered reading column */
-.mh-inner { max-width: 720px; margin: 0 auto; position: relative; z-index: 1; }
+/* thin centered reading column. NOTE: intentionally NOT positioned, so the
+   absolutely-positioned .sidebar-toggle anchors to the full-width .masthead
+   (left gutter) instead of this centered column — which is what made the menu
+   button land on top of the breadcrumb. */
+.mh-inner { max-width: 720px; margin: 0 auto; }
 
 .mh-breadcrumb {
   display: inline-block;
@@ -1877,7 +1880,11 @@ mjx-container { overflow-x: auto; max-width: 100%; display: block; }
   position: absolute; left: 0; top: 0; z-index: -1;
   pointer-events: none;
 }
-#fa-lightpath .fa-lp-base { stroke: rgba(26,18,8,.12); }
+/* Continuous soft accent rail — makes the whole route (incl. its start, just
+   below the header) visible; the comet rides on top as the bright highlight.
+   Flat accent (not the gradient) so a full-document-height stroke stays cheap
+   to paint. */
+#fa-lightpath .fa-lp-base { stroke: var(--AC); opacity: .3; }
 #fa-lightpath .fa-lp-glow { opacity: var(--lp-glow, .40); }
 #fa-lightpath .fa-lp-halo { fill: var(--AC); }
 #fa-lightpath .fa-lp-node { fill: var(--AC); }

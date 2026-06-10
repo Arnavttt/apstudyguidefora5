@@ -1944,3 +1944,30 @@ h1, h2, h3, h4,
 @media (prefers-reduced-motion: reduce) {
   .sr-submit:hover { transform: none; }
 }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   AMBIENT GLOW LAYER (v10) — always-safe brand atmosphere, never a line
+   ══════════════════════════════════════════════════════════════════════════ */
+#fa-glow {
+  position: fixed; inset: 0; z-index: -2; pointer-events: none;
+  background:
+    radial-gradient(42vmax 42vmax at 100% -6%, var(--ACglow), transparent 62%),
+    radial-gradient(38vmax 38vmax at -6% 106%, var(--ACglow), transparent 62%);
+  opacity: .5;
+  transition: opacity .4s var(--ease);
+}
+/* When the page is glow-only (no comet), let the atmosphere carry the brand
+   a touch more strongly. */
+#fa-glow.fa-glow-strong {
+  opacity: .72;
+  background:
+    radial-gradient(46vmax 46vmax at 104% -8%, var(--ACglow), transparent 60%),
+    radial-gradient(40vmax 40vmax at -8% 108%, var(--ACglow), transparent 60%);
+}
+@keyframes faGlowDrift {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50%      { transform: translate3d(-2%, 2.5%, 0); }
+}
+#fa-glow { animation: faGlowDrift 26s ease-in-out infinite; will-change: transform; }
+@media (prefers-reduced-motion: reduce) { #fa-glow { animation: none; } }
+@media print { #fa-glow { display: none; } }

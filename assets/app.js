@@ -489,10 +489,52 @@ document.addEventListener('DOMContentLoaded', initContinueBanner);
   bar.id = 'fa-progress';
   document.body.appendChild(bar);
 
+  /* Ambient glow layer — always present, sits deepest, never a hard line.
+     This is the universal, always-safe brand atmosphere: soft course-colored
+     corner glows that can never obstruct text. */
+  var glowLayer = document.createElement('div');
+  glowLayer.id = 'fa-glow';
+  glowLayer.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(glowLayer);
+
   /* SVG light path */
   var NS = 'http://www.w3.org/2000/svg';
   var svg = null, glowEl = null, cometEl = null, pathLen = 0, cometLen = 0;
   var nodeHalo = null, nodeCore = null;
+
+  /* Text-bearing blocks the comet lane must never cross. We measure these
+     (not full-width band wrappers) to find true whitespace gutters. */
+  var LANE_SELS = '.mh-inner,.gateway,.lesson,.quiz-section,.dashboard,' +
+    '.research-spotlight,.h5-section,.unit-review-wrap,.hero-inner,.cc-grid,' +
+    '.feat-grid,.how-grid,.cta-band,.about-builder,.sr-inner,.iqbank';
+
+  /* Smallest left/right whitespace gutter beside actual content. */
+  function gutters(w) {
+    var left = w, right = w, any = false;
+    document.querySelectorAll(LANE_SELS).forEach(function (el) {
+      var r = el.getBoundingClientRect();
+      if (r.width < 60 || r.height < 16) return;
+      any = true;
+      left = Math.min(left, Math.max(0, r.left));
+      right = Math.min(right, Math.max(0, w - r.right));
+    });
+    return any ? { left: left, right: right } : { left: 0, right: 0 };
+  }
+
+  /* Content-aware mode:
+       'full' — flowing comet confined to a side gutter (clipped, never
+                crosses content). Needs a wide viewport, a real gutter, and
+                enough scroll length for the comet to travel.
+       'glow' — ambient corner glow only (the safe default).
+     Decided from measured layout, not viewport width alone. */
+  function decideMode() {
+    var w = window.innerWidth, h = window.innerHeight;
+    if (w < 1100) return 'glow';                                   // no room beside content
+    var g = gutters(w);
+    if (Math.max(g.left, g.right) < 150) return 'glow';           // content too wide → no lane
+    if (document.documentElement.scrollHeight - h < h * 0.6) return 'glow'; // too short to travel
+    return 'full';
+  }
 
   /* lighten a #rrggbb / #rgb toward white by amt (0..1); pass-through otherwise */
   function lightenHex(hex, amt) {
@@ -511,23 +553,29 @@ document.addEventListener('DOMContentLoaded', initContinueBanner);
   }
 
   function buildLightPath() {
-    /* Built even under prefers-reduced-motion: the comet is a scroll-linked
-       progress indicator (it only moves when the user scrolls). Reduced
-       motion disables the easing glide and reveal animations instead. */
-    if (svg) svg.remove();
-    var w = window.innerWidth, h = window.innerHeight;
-    var mob = w < 700;
-    var L = Math.max(w * 0.05, 16), R = w - L, cx = w / 2;
+    /* Tear down any existing comet first. */
+    if (svg) { svg.remove(); svg = cometEl = glowEl = nodeHalo = nodeCore = null; pathLen = 0; }
+    glowLayer.classList.toggle('fa-glow-strong', decideMode() !== 'full');
+    if (decideMode() !== 'full') return;   /* glow-only mode: no line at all */
 
-    /* Derive the path color from the active course accent (--AC, set per
-       course via body style). Falls back to cyan on the hub. */
+    var w = window.innerWidth, h = window.innerHeight;
+    var g = gutters(w);
+    var pad = 14, edge = 12;
+    var side = g.right >= g.left ? 'right' : 'left';
+    var contentEdge = side === 'right' ? (w - g.right) : g.left;
+    var xOuter = side === 'right' ? (w - edge) : edge;
+    var xInner = side === 'right' ? (contentEdge + pad) : (contentEdge - pad);
+    var xMin = Math.min(xInner, xOuter), xMax = Math.max(xInner, xOuter);
+
+    /* Derive the path color from the active course accent (--AC). */
     var ac = (getComputedStyle(document.body).getPropertyValue('--AC') || '#22d3ee').trim();
     var acLight = lightenHex(ac, 0.55);
 
-    var d = 'M ' + R + ' -24' +
-      ' C ' + R + ' ' + h * 0.22 + ', ' + L + ' ' + h * 0.16 + ', ' + L + ' ' + h * 0.40 +
-      ' C ' + L + ' ' + h * 0.62 + ', ' + R + ' ' + h * 0.56 + ', ' + R + ' ' + h * 0.78 +
-      ' C ' + R + ' ' + (h * 0.96) + ', ' + cx + ' ' + (h * 0.92) + ', ' + cx + ' ' + (h + 24);
+    /* Vertical meander confined entirely to the gutter band [xMin, xMax]. */
+    var d = 'M ' + xMax + ' -20' +
+      ' C ' + xMax + ' ' + h * 0.18 + ', ' + xMin + ' ' + h * 0.16 + ', ' + xMin + ' ' + h * 0.34 +
+      ' C ' + xMin + ' ' + h * 0.52 + ', ' + xMax + ' ' + h * 0.50 + ', ' + xMax + ' ' + h * 0.68 +
+      ' C ' + xMax + ' ' + h * 0.86 + ', ' + xMin + ' ' + h * 0.84 + ', ' + xMin + ' ' + (h + 20);
 
     svg = document.createElementNS(NS, 'svg');
     svg.setAttribute('id', 'fa-lightpath');
@@ -552,7 +600,22 @@ document.addEventListener('DOMContentLoaded', initContinueBanner);
     blur.setAttribute('id', 'fa-lp-blur');
     blur.innerHTML = '<feGaussianBlur stdDeviation="5"/>';
     defs.appendChild(blur);
+    /* Hard clip on the content-facing edge: even with blur, the glow can
+       never bleed past the gutter onto text. The cut lands in empty
+       whitespace so it is invisible. */
+    var clip = document.createElementNS(NS, 'clipPath');
+    clip.setAttribute('id', 'fa-lp-clip');
+    var cr = document.createElementNS(NS, 'rect');
+    var clipX = side === 'right' ? (contentEdge + 4) : 0;
+    var clipW = side === 'right' ? (w - clipX + 24) : Math.max(0, contentEdge - 4);
+    cr.setAttribute('x', clipX); cr.setAttribute('y', -40);
+    cr.setAttribute('width', clipW); cr.setAttribute('height', h + 80);
+    clip.appendChild(cr); defs.appendChild(clip);
     svg.appendChild(defs);
+
+    var host = document.createElementNS(NS, 'g');
+    host.setAttribute('clip-path', 'url(#fa-lp-clip)');
+    svg.appendChild(host);
 
     function mkPath(cls, width) {
       var p = document.createElementNS(NS, 'path');
@@ -561,14 +624,14 @@ document.addEventListener('DOMContentLoaded', initContinueBanner);
       p.setAttribute('fill', 'none');
       p.setAttribute('stroke-width', width);
       p.setAttribute('stroke-linecap', 'round');
-      svg.appendChild(p);
+      host.appendChild(p);
       return p;
     }
     mkPath('fa-lp-base', 1);
-    glowEl  = mkPath('fa-lp-glow', mob ? 8 : 13);
-    cometEl = mkPath('fa-lp-comet', mob ? 2.5 : 3);
+    glowEl  = mkPath('fa-lp-glow', 12);
+    cometEl = mkPath('fa-lp-comet', 3);
     glowEl.setAttribute('stroke', 'url(#fa-lp-grad)');
-    if (!mob) glowEl.setAttribute('filter', 'url(#fa-lp-blur)');
+    glowEl.setAttribute('filter', 'url(#fa-lp-blur)');
     cometEl.setAttribute('stroke', 'url(#fa-lp-grad)');
 
     /* glowing node at the head of the comet */
@@ -576,16 +639,16 @@ document.addEventListener('DOMContentLoaded', initContinueBanner);
       var c = document.createElementNS(NS, 'circle');
       c.setAttribute('r', r);
       c.setAttribute('class', cls);
-      svg.appendChild(c);
+      host.appendChild(c);
       return c;
     }
-    nodeHalo = mkNode(mob ? 9 : 14, 'fa-lp-halo');
-    nodeCore = mkNode(mob ? 3.5 : 5, 'fa-lp-node');
+    nodeHalo = mkNode(13, 'fa-lp-halo');
+    nodeCore = mkNode(5, 'fa-lp-node');
     nodeHalo.style.fill = ac;          /* inline beats the stylesheet rule */
     nodeCore.style.fill = acLight;
 
-    /* Attach BEFORE measuring: getTotalLength()/getPointAtLength() throw on
-       detached geometry in Firefox, which previously killed the whole path. */
+    /* Attach BEFORE measuring: getTotalLength() throws on detached geometry
+       in Firefox, which previously killed the whole path. */
     document.body.prepend(svg);
     try {
       pathLen = cometEl.getTotalLength();

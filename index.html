@@ -7,7 +7,7 @@
 <meta name="description" content="Free AP® and college course review: 25 courses, 184+ unit guides, 5,500+ practice MCQs with instant feedback, embedded video lessons, and exam strategy. No accounts, no paywalls."/>
 <meta name="theme-color" content="#faf7f0"/>
 <title>Five &amp; A+ | AP® &amp; College Review: Free Interactive Study Site</title>
-<link href="assets/site.css?v=20260610" rel="stylesheet"/>
+<link href="assets/site.css?v=20260611" rel="stylesheet"/>
 <style>
 /* Five & A+ Hub v4: Study.com inspired, solid dark cards */
 :root{--ink:#1a1208;--ink2:#3d3120;--ink3:#6b5f4e;--parchment:#faf7f0;--parchment2:#f3eddd;--parchment3:#e9e1cc;--red:#c0392b;--gold:#b8860b;--gold2:#d4a017;--blue:#2c5f8a;--green:#2d7a46;--border:#ddd3bd;--border2:#c9bb9c;--card:#fffdf8;--shadow:rgba(26,18,8,0.10);--ease:cubic-bezier(.4,0,.2,1);--bg:#faf7f0;--bg2:#f3eddd;--bg3:#fffdf8;--text:#1a1208;--text2:#3d3120;--text3:#6b5f4e;}
@@ -115,6 +115,9 @@ img{display:block;max-width:100%;}
 .feat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;}
 @media(max-width:880px){.feat-grid{grid-template-columns:repeat(2,1fr);}}
 @media(max-width:480px){.feat-grid{grid-template-columns:1fr;}}
+.why-block{max-width:780px;}
+.why-block p{font-size:.95rem;color:var(--ink2);line-height:1.85;margin:0 0 1rem;}
+.why-block p:last-child{margin-bottom:0;}
 .feat{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.15rem 1.2rem;border-top:3px solid var(--gold);transition:transform .25s var(--ease),box-shadow .25s var(--ease);}
 .feat:hover{transform:translateY(-3px);box-shadow:0 12px 30px var(--shadow);}
 .feat-ico{font-size:20px;margin-bottom:.5rem;}
@@ -138,6 +141,13 @@ img{display:block;max-width:100%;}
 .ab-heading{font-family:'Space Grotesk',sans-serif;font-size:1.5rem;font-weight:800;margin-bottom:1rem;letter-spacing:-.02em;}
 .ab-body{color:var(--text2);line-height:1.75;margin-bottom:1.25rem;font-size:.93rem;}
 .ab-profile{font-family:'Space Grotesk',monospace;font-size:.8rem;color:var(--text3);border-top:1px solid var(--border);padding-top:1rem;margin-top:1rem;}
+.ab-builders{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:.5rem;}
+@media(max-width:640px){.ab-builders{grid-template-columns:1fr;}}
+.ab-builder{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.1rem 1.2rem;border-top:3px solid var(--gold);}
+.ab-builder b{display:block;font-family:'Space Grotesk',sans-serif;font-size:1rem;color:var(--ink);margin-bottom:.3rem;}
+.ab-school{display:block;font-size:.8rem;color:var(--ink2);font-weight:600;margin-bottom:.15rem;}
+.ab-stats{display:block;font-family:'Space Grotesk',monospace;font-size:.72rem;color:var(--gold);letter-spacing:.05em;margin-bottom:.55rem;}
+.ab-builder p{font-size:.85rem;color:var(--ink3);line-height:1.7;margin:0;}
 
 /* Footer */
 .footer-hub{background:var(--bg2);border-top:2px solid;border-image:linear-gradient(90deg,transparent,rgba(245,158,11,.5),transparent) 1;padding:2.5rem 2rem;text-align:center;margin-top:2rem;}
@@ -181,11 +191,9 @@ img{display:block;max-width:100%;}
 <div class="wrap">
 <div class="intro-sec" id="why">
 <h2 class="intro-heading">Why students use Five &amp; A+</h2>
-<div class="feat-grid">
-<div class="feat"><div class="feat-ico">⚡</div><b>Instant MCQ feedback</b><p>5,500+ click-to-answer questions. See the right answer and a full explanation the moment you pick.</p></div>
-<div class="feat"><div class="feat-ico">🎬</div><b>Video lessons built in</b><p>Lessons embed videos from trusted channels like Heimler, Bozeman, and Professor Leonard, right where you need them.</p></div>
-<div class="feat"><div class="feat-ico">🧮</div><b>Formulas &amp; exam strategy</b><p>Key equations in real math notation, plus FRQ tips and common mistakes flagged inside each lesson.</p></div>
-<div class="feat"><div class="feat-ico">💾</div><b>Progress that sticks</b><p>Scores, stars, and checkmarks save to your device automatically. Close the tab, come back, keep going.</p></div>
+<div class="why-block">
+<p>Five &amp; A+ puts everything you need to study in one place. Every lesson pairs structured notes with embedded videos from trusted channels like Heimler's History, Bozeman Science, and Professor Leonard, so you can read, watch, and check your understanding without ever leaving the page. More than 5,500 click-to-answer questions give instant feedback: pick a choice and the correct answer appears on the spot with a full explanation of why.</p>
+<p>Key formulas are rendered in real math notation, FRQ strategy and common mistakes are flagged inside each lesson, and your scores, stars, and checkmarks save to your device automatically. Close the tab, come back tomorrow, and pick up exactly where you left off — no account, no paywall, no catch.</p>
 </div>
 </div>
 <div class="intro-sec" id="how">
@@ -243,8 +251,22 @@ img{display:block;max-width:100%;}
 </section>
 <div class="about-builder" id="about">
 <div class="ab-label">About Five &amp; A+</div>
-<h2 class="ab-heading">Built for students, by a student</h2>
+<h2 class="ab-heading">Built for students, by students</h2>
 <p class="ab-body">Five &amp; A+ is a free, independent AP® and college review platform. Every unit page includes structured content, click-to-select MCQs with instant feedback, embedded video resources, vocabulary review, key equations, and exam-specific strategy tips: all in one place, no account required.</p>
+<div class="ab-builders">
+<div class="ab-builder">
+<b>Arnav Sinha</b>
+<span class="ab-school">Warwick Valley High School, Class of 2027 · New York</span>
+<span class="ab-stats">11 AP courses · 5 college classes</span>
+<p>Arnav wanted to help create a space where students can truly learn — a place to build understanding and do better in the most rigorous classes they take.</p>
+</div>
+<div class="ab-builder">
+<b>Yashwin Kandra</b>
+<span class="ab-school">Don Bosco Prep, Class of 2027</span>
+<span class="ab-stats">11 AP courses</span>
+<p>Yashwin wanted to help create course pages full of relevant, well-organized information so students have everything they need to be successful in their classes.</p>
+</div>
+</div>
 <p class="ab-profile">Built by Arnav Sinha &amp; Yashwin Kandra, 2025 to 2026, Not affiliated with the College Board</p>
 </div>
 </div>
@@ -266,6 +288,6 @@ function filterHub() {
  });
 }
 </script>
-<script src="assets/app.js?v=20260610"></script>
+<script src="assets/app.js?v=20260611"></script>
 </body>
 </html>

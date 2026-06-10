@@ -531,7 +531,7 @@ document.addEventListener('DOMContentLoaded', initContinueBanner);
     var w = window.innerWidth, h = window.innerHeight;
     if (w < 1100) return 'glow';                                   // no room beside content
     var g = gutters(w);
-    if (Math.max(g.left, g.right) < 150) return 'glow';           // content too wide → no lane
+    if (Math.max(g.left, g.right) < 130) return 'glow';           // content too wide → no lane
     if (document.documentElement.scrollHeight - h < h * 0.6) return 'glow'; // too short to travel
     return 'full';
   }

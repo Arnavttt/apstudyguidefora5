@@ -494,6 +494,22 @@ document.addEventListener('DOMContentLoaded', initContinueBanner);
   var svg = null, glowEl = null, cometEl = null, pathLen = 0, cometLen = 0;
   var nodeHalo = null, nodeCore = null;
 
+  /* lighten a #rrggbb / #rgb toward white by amt (0..1); pass-through otherwise */
+  function lightenHex(hex, amt) {
+    hex = (hex || '').trim();
+    if (hex.charAt(0) !== '#') return hex || '#22d3ee';
+    hex = hex.slice(1);
+    if (hex.length === 3) hex = hex.split('').map(function (c) { return c + c; }).join('');
+    if (hex.length !== 6) return '#' + hex;
+    var r = parseInt(hex.slice(0, 2), 16),
+        g = parseInt(hex.slice(2, 4), 16),
+        b = parseInt(hex.slice(4, 6), 16);
+    r = Math.round(r + (255 - r) * amt);
+    g = Math.round(g + (255 - g) * amt);
+    b = Math.round(b + (255 - b) * amt);
+    return 'rgb(' + r + ',' + g + ',' + b + ')';
+  }
+
   function buildLightPath() {
     /* Built even under prefers-reduced-motion: the comet is a scroll-linked
        progress indicator (it only moves when the user scrolls). Reduced
@@ -502,6 +518,11 @@ document.addEventListener('DOMContentLoaded', initContinueBanner);
     var w = window.innerWidth, h = window.innerHeight;
     var mob = w < 700;
     var L = Math.max(w * 0.05, 16), R = w - L, cx = w / 2;
+
+    /* Derive the path color from the active course accent (--AC, set per
+       course via body style). Falls back to cyan on the hub. */
+    var ac = (getComputedStyle(document.body).getPropertyValue('--AC') || '#22d3ee').trim();
+    var acLight = lightenHex(ac, 0.55);
 
     var d = 'M ' + R + ' -24' +
       ' C ' + R + ' ' + h * 0.22 + ', ' + L + ' ' + h * 0.16 + ', ' + L + ' ' + h * 0.40 +
@@ -520,7 +541,7 @@ document.addEventListener('DOMContentLoaded', initContinueBanner);
     grad.setAttribute('id', 'fa-lp-grad');
     grad.setAttribute('x1', '0'); grad.setAttribute('y1', '0');
     grad.setAttribute('x2', '0'); grad.setAttribute('y2', '1');
-    [['0%', '#22d3ee'], ['100%', '#818cf8']].forEach(function(s) {
+    [['0%', acLight], ['100%', ac]].forEach(function(s) {
       var stop = document.createElementNS(NS, 'stop');
       stop.setAttribute('offset', s[0]);
       stop.setAttribute('stop-color', s[1]);
@@ -560,6 +581,8 @@ document.addEventListener('DOMContentLoaded', initContinueBanner);
     }
     nodeHalo = mkNode(mob ? 9 : 14, 'fa-lp-halo');
     nodeCore = mkNode(mob ? 3.5 : 5, 'fa-lp-node');
+    nodeHalo.style.fill = ac;          /* inline beats the stylesheet rule */
+    nodeCore.style.fill = acLight;
 
     /* Attach BEFORE measuring: getTotalLength()/getPointAtLength() throw on
        detached geometry in Firefox, which previously killed the whole path. */

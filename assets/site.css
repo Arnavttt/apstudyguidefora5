@@ -1508,7 +1508,7 @@ mjx-container { overflow-x: auto; max-width: 100%; display: block; }
 }
 .sr-name { resize: none; }
 .sr-textarea { resize: vertical; }
-.sr-name:focus, .sr-textarea:focus { outline: none; border-color: var(--gold, #c89b3c); box-shadow: 0 0 0 3px rgba(200,155,60,.12); }
+.sr-name:focus, .sr-textarea:focus { outline: none; border-color: var(--AC); box-shadow: 0 0 0 3px var(--ACfaint); }
 .sr-submit {
   align-self: center;
   background: linear-gradient(90deg, #22d3ee, #67e8f9); color: #06121f;
@@ -1516,7 +1516,7 @@ mjx-container { overflow-x: auto; max-width: 100%; display: block; }
   padding: .65rem 2.5rem; font-size: .95rem; font-weight: 700;
   cursor: pointer; transition: background .15s; letter-spacing: .02em;
 }
-.sr-submit:hover { background: color-mix(in srgb, var(--gold, #c89b3c) 82%, black); }
+.sr-submit:hover { filter: brightness(1.08); transform: translateY(-1px); box-shadow: 0 8px 24px -8px var(--ACglow); }
 .sr-thanks { font-size: 1rem; color: var(--gold, #c89b3c); font-weight: 700; margin: 1rem 0 0; }
 .sidebar-lesson-num {
   font-size: 0.7rem;
@@ -1746,7 +1746,7 @@ mjx-container { overflow-x: auto; max-width: 100%; display: block; }
 /* Reading progress bar */
 #fa-progress {
   position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 500;
-  background: linear-gradient(90deg, var(--gold), var(--gold2) 55%, var(--blue));
+  background: linear-gradient(90deg, var(--AC), color-mix(in srgb, var(--AC) 45%, #ffffff));
   transform: scaleX(0); transform-origin: left;
   pointer-events: none; will-change: transform;
 }
@@ -1758,8 +1758,8 @@ mjx-container { overflow-x: auto; max-width: 100%; display: block; }
 }
 #fa-lightpath .fa-lp-base { stroke: rgba(255,255,255,.10); }
 #fa-lightpath .fa-lp-glow { opacity: .40; }
-#fa-lightpath .fa-lp-halo { fill: rgba(34,211,238,.18); }
-#fa-lightpath .fa-lp-node { fill: #a5f3fc; }
+#fa-lightpath .fa-lp-halo { fill: var(--AC); }
+#fa-lightpath .fa-lp-node { fill: var(--AC); }
 
 /* Scroll reveal — class applied by JS just before observing, so content
    is never hidden when JS is unavailable */
@@ -1857,7 +1857,7 @@ h1, h2, h3, h4,
 }
 
 /* Light path: halo breathes gently */
-@keyframes faHaloPulse { 0%, 100% { opacity: .65; } 50% { opacity: 1; } }
+@keyframes faHaloPulse { 0%, 100% { opacity: .14; } 50% { opacity: .26; } }
 #fa-lightpath .fa-lp-halo { animation: faHaloPulse 3s ease-in-out infinite; }
 
 /* Masthead breadcrumb as a translucent chip */
@@ -1901,4 +1901,46 @@ h1, h2, h3, h4,
 @media (prefers-reduced-motion: reduce) {
   #fa-lightpath .fa-lp-halo { animation: none; }
   .dash-card:hover { transform: none; }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   REVIEW SECTION REFRESH (v9) — contained card, accent theming, motion
+   ══════════════════════════════════════════════════════════════════════════ */
+.site-review-section {
+  background: transparent;
+  border: none;
+  padding: 3rem 1.5rem;
+}
+.site-review-section .sr-inner {
+  max-width: 600px; margin: 0 auto;
+  background: linear-gradient(180deg, var(--card), var(--bg2));
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 2.5rem 2rem;
+  position: relative; overflow: hidden;
+  box-shadow: 0 18px 48px -24px rgba(0,0,0,.7);
+}
+.site-review-section .sr-inner::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--AC) 30%, #818cf8 70%, transparent);
+}
+.sr-eyebrow { color: var(--AC); }
+.sr-heading { color: var(--ink); }
+.sr-sub { color: var(--ink2); }
+.sr-name, .sr-textarea {
+  background: var(--bg2);
+  border: 1px solid var(--border2);
+  border-radius: 10px;
+  color: var(--ink);
+  transition: border-color .18s var(--ease), box-shadow .18s var(--ease);
+}
+.sr-name::placeholder, .sr-textarea::placeholder { color: var(--ink3); }
+.sr-submit {
+  border-radius: 999px;
+  padding: .7rem 2.75rem;
+  transition: filter .18s var(--ease), transform .18s var(--ease), box-shadow .18s var(--ease);
+}
+.sr-thanks { color: var(--AC); }
+@media (prefers-reduced-motion: reduce) {
+  .sr-submit:hover { transform: none; }
 }

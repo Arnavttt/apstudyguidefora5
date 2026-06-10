@@ -1,4 +1,4 @@
-/* Five & A+ — site.css v5 (APUSH editorial style · Comfortaa) */
+/* Five & A+ - site.css v5 (APUSH editorial style · Comfortaa) */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=Space+Grotesk:wght@300..700&display=swap');
 
 /* ══════════════════════════════════════════════════════════════════════════
@@ -32,12 +32,12 @@
   --bg2:        #f3eddd;
   --bg3:        #e9e1cc;
 
-  /* Course accent — overridden per-course via body style */
+  /* Course accent - overridden per-course via body style */
   --AC:      #8b6914;
   --ACfaint: rgba(139,105,20,0.08);
   --ACglow:  rgba(139,105,20,0.20);
 
-  /* Light-path character — overridden per course family via [data-course] */
+  /* Light-path character - overridden per course family via [data-course] */
   --lp-amp:   1;      /* meander amplitude multiplier (0..1.5)            */
   --lp-width: 3;      /* comet stroke width                               */
   --lp-glow:  .40;    /* glow trail opacity                               */
@@ -81,7 +81,7 @@ a:hover { color: var(--ink); }
 img, iframe { max-width: 100%; border: 0; }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   TOPNAV  — toc-bar style: ink2 bg, gold bottom border
+   TOPNAV  - toc-bar style: ink2 bg, gold bottom border
    ══════════════════════════════════════════════════════════════════════════ */
 .topnav {
   position: sticky;
@@ -142,7 +142,7 @@ img, iframe { max-width: 100%; border: 0; }
 .topnav-right input:focus { border-color: var(--AC); }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   PAGE HERO (v12) — unified light hero, shared by course + unit mastheads
+   PAGE HERO (v12) - unified light hero, shared by course + unit mastheads
    Light parchment base with course-accent washes; a thin centered column;
    the brand light path echoed as faint side rails in the gutters.
    ══════════════════════════════════════════════════════════════════════════ */
@@ -270,7 +270,7 @@ img, iframe { max-width: 100%; border: 0; }
 /* ══════════════════════════════════════════════════════════════════════════
    PAGE LAYOUT
    ══════════════════════════════════════════════════════════════════════════ */
-/* Contained reading width — centers content and opens side gutters so the
+/* Contained reading width - centers content and opens side gutters so the
    light path has whitespace to live in (masthead stays full-bleed above). */
 .page-wrap { max-width: 1080px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
 .simple-layout { max-width: 1080px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
@@ -519,7 +519,7 @@ img, iframe { max-width: 100%; border: 0; }
 .q-explain strong { color: var(--ink); }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   LESSON / GATEWAY BLOCKS — card style
+   LESSON / GATEWAY BLOCKS - card style
    ══════════════════════════════════════════════════════════════════════════ */
 .gateway {
   background: var(--card);
@@ -979,7 +979,7 @@ h5 { font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 700; letter
 .unitpath-head { padding: 1rem 0 .85rem; border-bottom: 1px solid var(--border); margin-bottom: 1rem; }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   CALLOUT BOXES  — editorial style from reference
+   CALLOUT BOXES  - editorial style from reference
    ══════════════════════════════════════════════════════════════════════════ */
 /* frq-note → callout (gold) */
 .frq-note {
@@ -1048,7 +1048,7 @@ h5 { font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 700; letter
 .exam-tip p { font-size: 14px; font-family: 'Inter', sans-serif; color: var(--ink2); line-height: 1.65; margin: 0; }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   UNIT MUST-KNOW BLOCKS — must-know box style
+   UNIT MUST-KNOW BLOCKS - must-know box style
    ══════════════════════════════════════════════════════════════════════════ */
 .unit-must-know {
   background: var(--card);
@@ -1256,98 +1256,98 @@ mjx-container { overflow-x: auto; max-width: 100%; display: block; }
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   PER-COURSE ACCENT THEMES  — v6 Viewstats system
+   PER-COURSE ACCENT THEMES  - v6 Viewstats system
    Each course: --AC (vibrant accent), --ACfaint (10% tint), --ACglow (20% tint), --ACdark (gradient dark end)
-   Parchment base bg is uniform — only accents change per course.
+   Parchment base bg is uniform - only accents change per course.
    ══════════════════════════════════════════════════════════════════════════ */
 
-/* Biology — emerald green */
+/* Biology - emerald green */
 [data-course="ap-biology"]                            { --AC:#10b981; --ACfaint:rgba(16,185,129,.10); --ACglow:rgba(16,185,129,.20); --ACdark:#059669; }
-/* Chemistry — violet */
+/* Chemistry - violet */
 [data-course="ap-chemistry"]                          { --AC:#8b5cf6; --ACfaint:rgba(139,92,246,.10); --ACglow:rgba(139,92,246,.20); --ACdark:#7c3aed; }
-/* Physics 1 & 2 — sky blue */
+/* Physics 1 & 2 - sky blue */
 [data-course="ap-physics-1-2"]                        { --AC:#0ea5e9; --ACfaint:rgba(14,165,233,.10); --ACglow:rgba(14,165,233,.20); --ACdark:#0284c7; }
-/* Physics C Mechanics — sky blue */
+/* Physics C Mechanics - sky blue */
 [data-course="ap-physics-c-mechanics"]                { --AC:#0ea5e9; --ACfaint:rgba(14,165,233,.10); --ACglow:rgba(14,165,233,.20); --ACdark:#0284c7; }
-/* Physics C E&M — cyan */
+/* Physics C E&M - cyan */
 [data-course="ap-physics-c-electricity-and-magnetism"]{ --AC:#06b6d4; --ACfaint:rgba(6,182,212,.10); --ACglow:rgba(6,182,212,.20); --ACdark:#0891b2; }
-/* Calculus BC — deep indigo */
+/* Calculus BC - deep indigo */
 [data-course="ap-calculus-bc"]                        { --AC:#4f46e5; --ACfaint:rgba(79,70,229,.10); --ACglow:rgba(79,70,229,.20); --ACdark:#4338ca; }
-/* Precalculus — violet */
+/* Precalculus - violet */
 [data-course="ap-precalculus"]                        { --AC:#7c3aed; --ACfaint:rgba(124,58,237,.10); --ACglow:rgba(124,58,237,.20); --ACdark:#6d28d9; }
-/* Computer Science A — terminal green */
+/* Computer Science A - terminal green */
 [data-course="ap-computer-science-a"]                 { --AC:#22c55e; --ACfaint:rgba(34,197,94,.10); --ACglow:rgba(34,197,94,.20); --ACdark:#16a34a; }
-/* Computer Science Principles — teal */
+/* Computer Science Principles - teal */
 [data-course="ap-computer-science-principles"]        { --AC:#14b8a6; --ACfaint:rgba(20,184,166,.10); --ACglow:rgba(20,184,166,.20); --ACdark:#0d9488; }
-/* Environmental Science — lime green */
+/* Environmental Science - lime green */
 [data-course="ap-environmental-science"]              { --AC:#84cc16; --ACfaint:rgba(132,204,22,.10); --ACglow:rgba(132,204,22,.20); --ACdark:#65a30d; }
-/* Psychology — purple */
+/* Psychology - purple */
 [data-course="ap-psychology"]                         { --AC:#a855f7; --ACfaint:rgba(168,85,247,.10); --ACglow:rgba(168,85,247,.20); --ACdark:#9333ea; }
-/* Macroeconomics — amber */
+/* Macroeconomics - amber */
 [data-course="ap-macroeconomics"]                     { --AC:#f59e0b; --ACfaint:rgba(245,158,11,.10); --ACglow:rgba(245,158,11,.20); --ACdark:#d97706; }
-/* Microeconomics — orange */
+/* Microeconomics - orange */
 [data-course="ap-microeconomics"]                     { --AC:#f97316; --ACfaint:rgba(249,115,22,.10); --ACglow:rgba(249,115,22,.20); --ACdark:#ea580c; }
-/* U.S. History — red */
+/* U.S. History - red */
 [data-course="ap-u-s-history"]                        { --AC:#ef4444; --ACfaint:rgba(239,68,68,.10); --ACglow:rgba(239,68,68,.20); --ACdark:#dc2626; }
-/* World History — deep red */
+/* World History - deep red */
 [data-course="ap-world-history-modern"]               { --AC:#dc2626; --ACfaint:rgba(220,38,38,.10); --ACglow:rgba(220,38,38,.20); --ACdark:#b91c1c; }
-/* European History — brown/gold */
+/* European History - brown/gold */
 [data-course="ap-european-history"]                   { --AC:#b45309; --ACfaint:rgba(180,83,9,.10); --ACglow:rgba(180,83,9,.20); --ACdark:#92400e; }
-/* U.S. Government — royal blue */
+/* U.S. Government - royal blue */
 [data-course="ap-u-s-government-politics"]            { --AC:#1d4ed8; --ACfaint:rgba(29,78,216,.10); --ACglow:rgba(29,78,216,.20); --ACdark:#1e40af; }
-/* Comparative Government — royal blue */
+/* Comparative Government - royal blue */
 [data-course="ap-comparative-government-and-politics"]{ --AC:#1d4ed8; --ACfaint:rgba(29,78,216,.10); --ACglow:rgba(29,78,216,.20); --ACdark:#1e40af; }
-/* Art History — pink/rose */
+/* Art History - pink/rose */
 [data-course="ap-art-history"]                        { --AC:#ec4899; --ACfaint:rgba(236,72,153,.10); --ACglow:rgba(236,72,153,.20); --ACdark:#db2777; }
-/* English Language & Composition — dark teal */
+/* English Language & Composition - dark teal */
 [data-course="ap-english-language-composition"]       { --AC:#0f766e; --ACfaint:rgba(15,118,110,.10); --ACglow:rgba(15,118,110,.20); --ACdark:#0f5a54; }
-/* English Literature & Composition — deep violet */
+/* English Literature & Composition - deep violet */
 [data-course="ap-english-literature-composition"]     { --AC:#7c3aed; --ACfaint:rgba(124,58,237,.10); --ACglow:rgba(124,58,237,.20); --ACdark:#6d28d9; }
-/* Human Geography — forest green */
+/* Human Geography - forest green */
 [data-course="ap-human-geography"]                    { --AC:#16a34a; --ACfaint:rgba(22,163,74,.10); --ACglow:rgba(22,163,74,.20); --ACdark:#15803d; }
-/* Music Theory — fuchsia */
+/* Music Theory - fuchsia */
 [data-course="ap-music-theory"]                       { --AC:#e879f9; --ACfaint:rgba(232,121,249,.10); --ACglow:rgba(232,121,249,.20); --ACdark:#d946ef; }
-/* College Algebra — blue */
+/* College Algebra - blue */
 [data-course="college-algebra"]                       { --AC:#3b82f6; --ACfaint:rgba(59,130,246,.10); --ACglow:rgba(59,130,246,.20); --ACdark:#2563eb; }
-/* College Trigonometry — indigo */
+/* College Trigonometry - indigo */
 [data-course="college-trigonometry"]                  { --AC:#6366f1; --ACfaint:rgba(99,102,241,.10); --ACglow:rgba(99,102,241,.20); --ACdark:#4f46e5; }
 
 /* ══════════════════════════════════════════════════════════════════════════
    COURSE-FAMILY LIGHT-PATH CHARACTER
    One shared system; each family tunes the path's personality through the
    --lp-* tokens (consumed by app.js + the glow layer). data-course is set on
-   <body> by app.js from the URL. Values stay subtle — same brand, different
+   <body> by app.js from the URL. Values stay subtle - same brand, different
    inflection.
    ══════════════════════════════════════════════════════════════════════════ */
-/* Math — structured and precise: tighter meander, crisp thin stroke */
+/* Math - structured and precise: tighter meander, crisp thin stroke */
 [data-course="ap-calculus-bc"], [data-course="ap-precalculus"],
 [data-course="college-algebra"], [data-course="college-trigonometry"] {
   --lp-amp: .55; --lp-width: 2.5; --lp-glow: .34;
 }
-/* Computer Science — digital rhythm: dashed base line, sharper glow */
+/* Computer Science - digital rhythm: dashed base line, sharper glow */
 [data-course="ap-computer-science-a"], [data-course="ap-computer-science-principles"] {
   --lp-amp: .7; --lp-width: 2.5; --lp-glow: .5; --lp-dash: 6 10;
 }
-/* Science — luminous and analytical: brighter trail, measured sweep */
+/* Science - luminous and analytical: brighter trail, measured sweep */
 [data-course="ap-biology"], [data-course="ap-chemistry"],
 [data-course="ap-physics-1-2"], [data-course="ap-physics-c-mechanics"],
 [data-course="ap-physics-c-electricity-and-magnetism"],
 [data-course="ap-environmental-science"], [data-course="ap-psychology"] {
   --lp-amp: .85; --lp-glow: .52;
 }
-/* History / Government — refined and classic: subtler, slimmer, calmer */
+/* History / Government - refined and classic: subtler, slimmer, calmer */
 [data-course="ap-u-s-history"], [data-course="ap-world-history-modern"],
 [data-course="ap-european-history"], [data-course="ap-u-s-government-politics"],
 [data-course="ap-comparative-government-and-politics"],
 [data-course="ap-human-geography"], [data-course="ap-art-history"] {
   --lp-amp: .75; --lp-width: 2; --lp-glow: .26;
 }
-/* English / Arts — fluid and graceful: wider sweep, soft luminosity */
+/* English / Arts - fluid and graceful: wider sweep, soft luminosity */
 [data-course="ap-english-language-composition"],
 [data-course="ap-english-literature-composition"], [data-course="ap-music-theory"] {
   --lp-amp: 1.35; --lp-width: 3.5; --lp-glow: .32;
 }
-/* Economics — directional, data-inspired: dashed cadence, steady line */
+/* Economics - directional, data-inspired: dashed cadence, steady line */
 [data-course="ap-macroeconomics"], [data-course="ap-microeconomics"] {
   --lp-amp: .7; --lp-width: 2.5; --lp-glow: .36; --lp-dash: 14 7;
 }
@@ -1362,7 +1362,7 @@ mjx-container { overflow-x: auto; max-width: 100%; display: block; }
   gap: .5rem;
   margin-top: 1.1rem;
 }
-/* Unified with .mh-pill — one pill language across course + unit heroes */
+/* Unified with .mh-pill - one pill language across course + unit heroes */
 .pill {
   background: rgba(255,255,255,.66);
   border: 1px solid color-mix(in srgb, var(--AC) 30%, var(--border));
@@ -1462,7 +1462,7 @@ mjx-container { overflow-x: auto; max-width: 100%; display: block; }
   z-index: 399;
 }
 .sidebar.open ~ .sidebar-overlay { display: block; }
-/* Menu toggle — light glass chip in its own safe zone; the hero's symmetric
+/* Menu toggle - light glass chip in its own safe zone; the hero's symmetric
    inline padding (≥3.5rem) keeps the centered column clear of it, and on
    mobile the hero content drops below it (see responsive rules). */
 .sidebar-toggle {
@@ -1788,22 +1788,22 @@ mjx-container { overflow-x: auto; max-width: 100%; display: block; }
   .period-pills { display: flex; flex-direction: column; gap: .3rem; }
   .period-pills .pill { font-size: .72rem; padding: .3rem .6rem; }
 
-  /* Lesson grid — force single column */
+  /* Lesson grid - force single column */
   .lesson-grid,
   .unit-grid,
   .course-grid { grid-template-columns: 1fr !important; }
 
-  /* Tables — allow horizontal scroll */
+  /* Tables - allow horizontal scroll */
   table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
 
-  /* Quiz choices — prevent text overflow */
+  /* Quiz choices - prevent text overflow */
   .q-choice { font-size: .82rem; padding: .55rem .7rem; word-break: break-word; }
   .q-text { font-size: .9rem; }
 
-  /* Sidebar — full width overlay */
+  /* Sidebar - full width overlay */
   .sidebar { width: 100% !important; max-width: 100% !important; }
 
-  /* Video wrapper — force 16:9 on small screens */
+  /* Video wrapper - force 16:9 on small screens */
   .vid-wrap iframe { height: 200px; }
 
   /* Formula/code blocks */
@@ -1812,7 +1812,7 @@ mjx-container { overflow-x: auto; max-width: 100%; display: block; }
   /* Cheat sheet / key facts */
   .cheat-sheet, .key-facts { padding: .7rem .8rem; }
 
-  /* Navigation pills — scroll horizontally */
+  /* Navigation pills - scroll horizontally */
   .nav-pills, .tab-pills { overflow-x: auto; white-space: nowrap; flex-wrap: nowrap; }
 
   /* Reduce hero padding */
@@ -1858,7 +1858,7 @@ mjx-container { overflow-x: auto; max-width: 100%; display: block; }
 .rs-cite a { color: var(--AC, #8b6914); }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   MOTION LAYER (v6)  — progress bar, scroll light path, reveals
+   MOTION LAYER (v6)  - progress bar, scroll light path, reveals
    All elements are injected by app.js; pages without JS are unaffected.
    ══════════════════════════════════════════════════════════════════════════ */
 
@@ -1870,7 +1870,7 @@ mjx-container { overflow-x: auto; max-width: 100%; display: block; }
   pointer-events: none; will-change: transform;
 }
 
-/* Scroll light path — document-anchored in the side gutter; spans only the
+/* Scroll light path - document-anchored in the side gutter; spans only the
    stretch between the page header and the footer (top/height set inline by
    app.js). Sits behind all content. */
 #fa-lightpath {
@@ -1882,7 +1882,7 @@ mjx-container { overflow-x: auto; max-width: 100%; display: block; }
 #fa-lightpath .fa-lp-halo { fill: var(--AC); }
 #fa-lightpath .fa-lp-node { fill: var(--AC); }
 
-/* Scroll reveal — class applied by JS just before observing, so content
+/* Scroll reveal - class applied by JS just before observing, so content
    is never hidden when JS is unavailable */
 .fa-rv { opacity: 0; transform: translateY(14px); transition: opacity .55s var(--ease), transform .55s var(--ease); }
 .fa-rv.fa-in { opacity: 1; transform: none; }
@@ -1911,7 +1911,7 @@ body {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   POLISH LAYER (v7) — unified buttons, card hovers, quiz feedback motion
+   POLISH LAYER (v7) - unified buttons, card hovers, quiz feedback motion
    ══════════════════════════════════════════════════════════════════════════ */
 
 /* Anchor targets never hide under the sticky nav */
@@ -1935,7 +1935,7 @@ body {
   box-shadow: 0 6px 24px -10px rgba(26,18,8,.16);
 }
 
-/* Quiz pick feedback — plays only on a fresh click (JS adds .fresh) */
+/* Quiz pick feedback - plays only on a fresh click (JS adds .fresh) */
 @keyframes faPop   { 0% { transform: scale(1); } 45% { transform: scale(1.018); } 100% { transform: scale(1); } }
 @keyframes faNudge { 0%, 100% { transform: translateX(0); } 30% { transform: translateX(-3px); } 60% { transform: translateX(3px); } }
 .q-choice.fresh.correct { animation: faPop .3s var(--ease); }
@@ -1965,7 +1965,7 @@ body {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   REFINEMENT LAYER (v8) — display type, glow pulse, dashboard + footer polish
+   REFINEMENT LAYER (v8) - display type, glow pulse, dashboard + footer polish
    ══════════════════════════════════════════════════════════════════════════ */
 
 /* Space Grotesk stays the display face; Inter handles reading text */
@@ -2018,7 +2018,7 @@ h1, h2, h3, h4,
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   REVIEW SECTION REFRESH (v9) — contained card, accent theming, motion
+   REVIEW SECTION REFRESH (v9) - contained card, accent theming, motion
    ══════════════════════════════════════════════════════════════════════════ */
 .site-review-section {
   background: transparent;
@@ -2060,7 +2060,7 @@ h1, h2, h3, h4,
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   AMBIENT GLOW LAYER (v10) — always-safe brand atmosphere, never a line
+   AMBIENT GLOW LAYER (v10) - always-safe brand atmosphere, never a line
    ══════════════════════════════════════════════════════════════════════════ */
 #fa-glow {
   position: fixed; inset: 0; z-index: -2; pointer-events: none;

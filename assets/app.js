@@ -1,4 +1,4 @@
-/* Five & A+ — app.js v2 (MCQ + legacy dual-mode, localStorage) */
+/* Five & A+ - app.js v2 (MCQ + legacy dual-mode, localStorage) */
 'use strict';
 
 /* ── Safe storage (private browsing fallback) ──────────────────────────────── */
@@ -262,7 +262,7 @@ function showGlobal(mode) {
   if (mode === 'missed')   document.body.classList.add('global-missed');
   if (mode === 'correct')  document.body.classList.add('global-correct');
   if (mode === 'unmarked') document.body.classList.add('global-unmarked');
-  /* 'all' clears filters — body class already removed above */
+  /* 'all' clears filters - body class already removed above */
 }
 
 /* ── Search filter ───────────────────────────────────────────────────────── */
@@ -516,7 +516,7 @@ document.addEventListener('DOMContentLoaded', initContinueBanner);
   bar.id = 'fa-progress';
   document.body.appendChild(bar);
 
-  /* Ambient glow layer — always present, sits deepest, never a hard line.
+  /* Ambient glow layer - always present, sits deepest, never a hard line.
      This is the universal, always-safe brand atmosphere: soft course-colored
      corner glows that can never obstruct text. */
   var glowLayer = document.createElement('div');
@@ -548,7 +548,7 @@ document.addEventListener('DOMContentLoaded', initContinueBanner);
     return any ? { left: left, right: right } : { left: 0, right: 0 };
   }
 
-  /* Vertical band between the page header (masthead/hero) and the footer —
+  /* Vertical band between the page header (masthead/hero) and the footer -
      the only stretch of the document the light path may occupy. Measured in
      document coordinates. */
   function headerFooterBand() {
@@ -568,10 +568,10 @@ document.addEventListener('DOMContentLoaded', initContinueBanner);
   }
 
   /* Content-aware mode:
-       'full' — flowing comet confined to a side gutter between the header
+       'full' - flowing comet confined to a side gutter between the header
                 and the footer (never crosses content). Needs a wide
                 viewport, a real gutter, and enough travel distance.
-       'glow' — ambient corner glow only (the safe default).
+       'glow' - ambient corner glow only (the safe default).
      Decided from measured layout, not viewport width alone. */
   function decideMode() {
     var w = window.innerWidth, h = window.innerHeight;
@@ -751,7 +751,7 @@ document.addEventListener('DOMContentLoaded', initContinueBanner);
     if (cometEl && pathLen) {
       target = -p * (pathLen - cometLen);
       if (reduced) {
-        current = target;   /* no glide under reduced motion — direct set */
+        current = target;   /* no glide under reduced motion - direct set */
       } else {
         current += (target - current) * 0.14;
         if (Math.abs(target - current) < 0.5) current = target;
@@ -783,7 +783,7 @@ document.addEventListener('DOMContentLoaded', initContinueBanner);
   }
   window.addEventListener('resize', rebuildSnap, { passive: true });
   /* Content height changes (lesson toggles, quiz explanations) move the
-     footer — rebuild so the document-anchored path still ends above it. */
+     footer - rebuild so the document-anchored path still ends above it. */
   if ('ResizeObserver' in window) {
     var lastDocH = document.documentElement.scrollHeight;
     new ResizeObserver(function() {

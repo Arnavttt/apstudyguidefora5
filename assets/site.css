@@ -163,7 +163,12 @@ img, iframe { max-width: 100%; border: 0; }
 /* No light-path rails inside the hero: the light path lives only between the
    header and the footer (see #fa-lightpath); the hero keeps soft accent
    washes for depth. */
-.masthead::before { content: none; }
+/* Crisp course-accent signature bar across the top of every hero. */
+.masthead::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--AC), color-mix(in srgb, var(--AC) 15%, transparent));
+  pointer-events: none; z-index: 2;
+}
 .masthead::after { content: none; }
 
 /* thin centered reading column. NOTE: intentionally NOT positioned, so the
@@ -188,7 +193,7 @@ img, iframe { max-width: 100%; border: 0; }
   margin-bottom: 1.4rem;
 }
 .mh-breadcrumb a { color: var(--ink3); }
-.mh-breadcrumb a:hover { color: color-mix(in srgb, var(--AC) 75%, var(--ink)); }
+.mh-breadcrumb a:hover { color: color-mix(in srgb, var(--AC) 80%, var(--ink)); text-decoration: underline; }
 .mh-tag {
   display: inline-block;
   font-family: 'Inter', sans-serif;
@@ -202,7 +207,7 @@ img, iframe { max-width: 100%; border: 0; }
   padding: .3rem .95rem;
   border-radius: 999px;
   box-shadow: 0 6px 18px -12px var(--ACglow);
-  margin-bottom: 1.15rem;
+  margin-bottom: 1.2rem;
 }
 .mh-title {
   font-family: 'Inter', sans-serif;
@@ -210,7 +215,7 @@ img, iframe { max-width: 100%; border: 0; }
   font-weight: 700;
   line-height: 1.08;
   letter-spacing: -0.015em;
-  margin-bottom: 0.9rem;
+  margin-bottom: 1rem;
   color: var(--ink);
   text-shadow: 0 2px 26px var(--ACglow);
 }
@@ -275,8 +280,11 @@ img, iframe { max-width: 100%; border: 0; }
    ══════════════════════════════════════════════════════════════════════════ */
 /* Contained reading width - centers content and opens side gutters so the
    light path has whitespace to live in (masthead stays full-bleed above). */
-.page-wrap { max-width: 1080px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
-.simple-layout { max-width: 1080px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+/* 1000px reading column opens side gutters wide enough for the light path to
+   live beside content (instead of falling back to glow-only) on standard
+   laptops/desktops. */
+.page-wrap { max-width: 1000px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+.simple-layout { max-width: 1000px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
 
 /* ══════════════════════════════════════════════════════════════════════════
    COURSE OVERVIEW (legacy .course-overview + .overview-card structure)
@@ -561,6 +569,7 @@ img, iframe { max-width: 100%; border: 0; }
   background: var(--parchment2);
   padding: .75rem 1.1rem;
   border-bottom: 1px solid var(--border);
+  box-shadow: inset 0 3px 0 0 color-mix(in srgb, var(--AC) 60%, transparent);
   display: flex;
   align-items: center;
   gap: .7rem;
@@ -887,32 +896,32 @@ body.global-unmarked .iq.right,.iq.wrong             { display: none; }
   font-style: italic;
 }
 .f-brand {
-  font-family: 'Inter', sans-serif;
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--AC);
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: color-mix(in srgb, var(--AC) 68%, var(--ink));
   font-style: normal;
   display: inline-block;
-  margin-bottom: .45rem;
-  letter-spacing: 0.05em;
+  margin-bottom: .65rem;
+  letter-spacing: 0.02em;
 }
 .trademark {
   font-family: 'Inter', sans-serif;
-  font-size: 11px;
+  font-size: 11.5px;
   font-style: normal;
-  color: rgba(232,223,197,0.5);
-  max-width: 640px;
-  margin: .35rem auto 0;
-  line-height: 1.8;
+  color: var(--ink2);
+  max-width: 680px;
+  margin: .4rem auto 0;
+  line-height: 1.75;
 }
 .f-sub {
   font-family: 'Inter', sans-serif;
-  font-size: 10px;
+  font-size: 11px;
   font-style: normal;
   font-weight: 600;
-  color: rgba(232,223,197,0.35);
-  letter-spacing: 0.06em;
-  margin-top: .3rem;
+  color: var(--ink2);
+  letter-spacing: 0.04em;
+  margin-top: .55rem;
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
@@ -1873,12 +1882,17 @@ mjx-container { overflow-x: auto; max-width: 100%; display: block; }
   pointer-events: none; will-change: transform;
 }
 
-/* Scroll light path - document-anchored in the side gutter; spans only the
-   stretch between the page header and the footer (top/height set inline by
-   app.js). Sits behind all content. */
+/* Scroll light path - viewport-pinned (position:fixed) and slid by scroll via a
+   translateY set in app.js, so the active comet/rail is always in view while
+   scrolling. Spans only the header-to-footer band. z-index:0 keeps it behind all
+   real content (promoted to z-index:1) and far below the nav (200). width:100% +
+   overflow:hidden guarantees it never creates horizontal scroll. */
 #fa-lightpath {
-  position: absolute; left: 0; top: 0; z-index: -1;
+  position: fixed; left: 0; top: 0;
+  width: 100%; overflow: hidden;
+  z-index: -1;            /* behind ALL content (above #fa-glow at -2 and the body canvas) */
   pointer-events: none;
+  contain: layout paint;
 }
 /* Continuous soft accent rail — makes the whole route (incl. its start, just
    below the header) visible; the comet rides on top as the bright highlight.
@@ -1904,6 +1918,9 @@ mjx-container { overflow-x: auto; max-width: 100%; display: block; }
 @media (prefers-reduced-motion: reduce) {
   .fa-rv { opacity: 1; transform: none; transition: none; }
   .q-choice:hover:not(.picked) { transform: none; }
+  /* kill color/border transitions too (not just transforms) for motion-sensitive users */
+  .q-choice, .dash-card, .lesson, .quiz-section, .gateway, .iqbank,
+  .sr-submit, .mh-pill, .pill, .cc, .feat, .how-step { transition: none !important; }
   html { scroll-behavior: auto; }
 }
 
@@ -2092,3 +2109,176 @@ h1, h2, h3, h4,
 #fa-glow { animation: faGlowDrift 26s ease-in-out infinite; will-change: transform; }
 @media (prefers-reduced-motion: reduce) { #fa-glow { animation: none; } }
 @media print { #fa-glow { display: none; } }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   SUBJECT THEMING (v11) — per-subject canvas texture + masthead watermark
+   Each course family gets its own faint background texture and a single
+   subject motif tucked into the hero corner, so a page reads as *its subject*
+   the instant it loads — without touching any generated page markup. Keyed on
+   [data-course] (stamped on <body> by app.js). Everything here is a decoration
+   layer behind content: ultra-faint, parchment-harmonised, and graceful — if a
+   data-URI ever fails it simply renders nothing.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* Keep hero text crisply above any masthead watermark. */
+.masthead .mh-inner { position: relative; z-index: 1; }
+
+/* ── 1 · Per-subject canvas texture ───────────────────────────────────────── */
+/* Science — staggered molecular dot lattice */
+[data-course="ap-biology"], [data-course="ap-chemistry"],
+[data-course="ap-physics-1-2"], [data-course="ap-physics-c-mechanics"],
+[data-course="ap-physics-c-electricity-and-magnetism"],
+[data-course="ap-environmental-science"], [data-course="ap-psychology"] {
+  background-image:
+    radial-gradient(circle, rgba(26,18,8,.05) 1px, transparent 1.4px),
+    radial-gradient(circle, rgba(26,18,8,.045) 1px, transparent 1.4px);
+  background-size: 34px 34px, 34px 34px;
+  background-position: 0 0, 17px 17px;
+}
+/* Math — graph paper */
+[data-course="ap-calculus-bc"], [data-course="ap-precalculus"],
+[data-course="college-algebra"], [data-course="college-trigonometry"] {
+  background-image:
+    linear-gradient(rgba(26,18,8,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26,18,8,.04) 1px, transparent 1px);
+  background-size: 30px 30px, 30px 30px;
+}
+/* Computer Science — fine terminal grid */
+[data-course="ap-computer-science-a"], [data-course="ap-computer-science-principles"] {
+  background-image:
+    linear-gradient(rgba(26,18,8,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26,18,8,.045) 1px, transparent 1px);
+  background-size: 19px 19px, 19px 19px;
+}
+/* History / Government — engraved diagonal hatch */
+[data-course="ap-u-s-history"], [data-course="ap-world-history-modern"],
+[data-course="ap-european-history"], [data-course="ap-u-s-government-politics"],
+[data-course="ap-comparative-government-and-politics"],
+[data-course="ap-human-geography"] {
+  background-image: repeating-linear-gradient(45deg,
+    transparent 0 22px, rgba(26,18,8,.035) 22px 23px);
+  background-size: auto;
+}
+/* Art History — sketch crosshatch */
+[data-course="ap-art-history"] {
+  background-image:
+    repeating-linear-gradient(45deg,  transparent 0 22px, rgba(26,18,8,.03) 22px 23px),
+    repeating-linear-gradient(-45deg, transparent 0 22px, rgba(26,18,8,.03) 22px 23px);
+  background-size: auto;
+}
+/* English — ruled writing paper */
+[data-course="ap-english-language-composition"],
+[data-course="ap-english-literature-composition"] {
+  background-image: repeating-linear-gradient(180deg,
+    transparent 0 31px, rgba(26,18,8,.05) 31px 32px);
+  background-size: auto;
+}
+/* Music Theory — five-line staves */
+[data-course="ap-music-theory"] {
+  background-image: repeating-linear-gradient(180deg,
+    rgba(26,18,8,.05) 0 1px, transparent 1px 9px,
+    rgba(26,18,8,.05) 9px 10px, transparent 10px 18px,
+    rgba(26,18,8,.05) 18px 19px, transparent 19px 27px,
+    rgba(26,18,8,.05) 27px 28px, transparent 28px 36px,
+    rgba(26,18,8,.05) 36px 37px, transparent 37px 66px);
+  background-size: auto;
+}
+/* Economics — wide chart grid */
+[data-course="ap-macroeconomics"], [data-course="ap-microeconomics"] {
+  background-image:
+    linear-gradient(rgba(26,18,8,.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26,18,8,.035) 1px, transparent 1px);
+  background-size: 44px 44px, 44px 44px;
+}
+
+/* ── 2 · Masthead subject watermark ───────────────────────────────────────── */
+/* A single faint subject glyph embossed into the hero's lower-right corner.
+   On course-overview heroes (which already carry the big themed banner) it is
+   suppressed, so it reads only on unit pages where there is no banner. */
+[data-course] .masthead::after {
+  content: '';
+  position: absolute;
+  right: clamp(-14px, -1vw, -6px);
+  bottom: -16px;
+  width: clamp(118px, 16vw, 196px);
+  aspect-ratio: 1 / 1;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  opacity: .07;
+  pointer-events: none;
+  z-index: 0;
+  animation: faWatermark 19s ease-in-out infinite;
+}
+[data-course] .masthead:has(.course-banner-svg)::after { content: none; }
+@keyframes faWatermark {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%      { transform: translateY(-7px) rotate(-1.6deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-course] .masthead::after { animation: none; }
+}
+
+/* Science — atom */
+[data-course="ap-biology"] .masthead::after,
+[data-course="ap-chemistry"] .masthead::after,
+[data-course="ap-physics-1-2"] .masthead::after,
+[data-course="ap-physics-c-mechanics"] .masthead::after,
+[data-course="ap-physics-c-electricity-and-magnetism"] .masthead::after,
+[data-course="ap-environmental-science"] .masthead::after,
+[data-course="ap-psychology"] .masthead::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231a1208' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cellipse cx='12' cy='12' rx='10' ry='4'/%3E%3Cellipse cx='12' cy='12' rx='10' ry='4' transform='rotate(60 12 12)'/%3E%3Cellipse cx='12' cy='12' rx='10' ry='4' transform='rotate(120 12 12)'/%3E%3Ccircle cx='12' cy='12' r='1.7' fill='%231a1208' stroke='none'/%3E%3C/svg%3E");
+}
+/* Math — integral swash */
+[data-course="ap-calculus-bc"] .masthead::after,
+[data-course="ap-precalculus"] .masthead::after,
+[data-course="college-algebra"] .masthead::after,
+[data-course="college-trigonometry"] .masthead::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231a1208' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15 4 C 10 4 12 9 11 12 C 10 15 12 20 7 20'/%3E%3C/svg%3E");
+}
+/* Computer Science — code brackets */
+[data-course="ap-computer-science-a"] .masthead::after,
+[data-course="ap-computer-science-principles"] .masthead::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231a1208' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 7 L5 12 L9 17'/%3E%3Cpath d='M15 7 L19 12 L15 17'/%3E%3Cpath d='M13.2 5 L10.8 19'/%3E%3C/svg%3E");
+}
+/* History / Government — fluted column */
+[data-course="ap-u-s-history"] .masthead::after,
+[data-course="ap-world-history-modern"] .masthead::after,
+[data-course="ap-european-history"] .masthead::after,
+[data-course="ap-u-s-government-politics"] .masthead::after,
+[data-course="ap-comparative-government-and-politics"] .masthead::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231a1208' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='5' y='4' width='14' height='2.4' rx='.6' fill='%231a1208' stroke='none'/%3E%3Crect x='5' y='17.6' width='14' height='2.4' rx='.6' fill='%231a1208' stroke='none'/%3E%3Cpath d='M8 6.4 L8 17.6 M12 6.4 L12 17.6 M16 6.4 L16 17.6'/%3E%3C/svg%3E");
+}
+/* Human Geography — globe */
+[data-course="ap-human-geography"] .masthead::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231a1208' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cellipse cx='12' cy='12' rx='4' ry='9'/%3E%3Cpath d='M3 12 L21 12 M5 7 L19 7 M5 17 L19 17'/%3E%3C/svg%3E");
+}
+/* Art History — framed landscape */
+[data-course="ap-art-history"] .masthead::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231a1208' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3.5' y='5' width='17' height='14' rx='1'/%3E%3Ccircle cx='9' cy='10' r='1.6' fill='%231a1208' stroke='none'/%3E%3Cpath d='M5 17 L10 12.5 L13 15 L16.5 10.5 L19 13'/%3E%3C/svg%3E");
+}
+/* English — open quotation marks */
+[data-course="ap-english-language-composition"] .masthead::after,
+[data-course="ap-english-literature-composition"] .masthead::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 13 C4 9.5 6 8 8.5 8 L8.5 10 C7 10 6 11 6 12.5 L8.5 12.5 L8.5 17 L4 17 Z' fill='%231a1208'/%3E%3Cpath d='M12.5 13 C12.5 9.5 14.5 8 17 8 L17 10 C15.5 10 14.5 11 14.5 12.5 L17 12.5 L17 17 L12.5 17 Z' fill='%231a1208'/%3E%3C/svg%3E");
+}
+/* Music Theory — staff with note */
+[data-course="ap-music-theory"] .masthead::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231a1208' stroke-linecap='round'%3E%3Cpath d='M3 7 L21 7 M3 11 L21 11 M3 15 L21 15 M3 19 L21 19' stroke-width='1'/%3E%3Cellipse cx='9' cy='18' rx='2.4' ry='1.8' fill='%231a1208' stroke='none'/%3E%3Cpath d='M11.2 18 L11.2 8' stroke-width='1.4'/%3E%3C/svg%3E");
+}
+/* Economics — supply & demand */
+[data-course="ap-macroeconomics"] .masthead::after,
+[data-course="ap-microeconomics"] .masthead::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231a1208' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 4 L4 20 L20 20'/%3E%3Cpath d='M6.5 8 L17.5 18'/%3E%3Cpath d='M6.5 18 L17.5 8'/%3E%3C/svg%3E");
+}
+
+/* ── 3 · Themed section divider ───────────────────────────────────────────── */
+/* The unit review band gets an accent-fading hairline instead of a flat rule. */
+.unit-review-wrap { position: relative; }
+.unit-review-wrap::before {
+  content: '';
+  position: absolute;
+  top: -1px; left: 1.5rem; right: 1.5rem; height: 2px;
+  background: linear-gradient(90deg, var(--AC), color-mix(in srgb, var(--AC) 35%, transparent) 45%, transparent 80%);
+  opacity: .55;
+}

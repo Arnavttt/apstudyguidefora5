@@ -1242,9 +1242,10 @@ mjx-container { overflow-x: auto; max-width: 100%; display: block; }
 @media(max-width:700px) {
   .topnav { padding: 0 .85rem; }
   .masthead { padding: 1.6rem 1.1rem 2rem; }
-  /* clear the absolute menu toggle so the breadcrumb never collides */
+  /* on mobile the breadcrumb chip is full-width, so flow the menu toggle
+     statically above it (top-left) instead of absolutely overlapping it */
   .masthead:has(.sidebar-toggle) { padding-top: 1.4rem; }
-  .masthead:has(.sidebar-toggle) .mh-inner { padding-top: 2.5rem; }
+  .masthead .sidebar-toggle { position: static; display: block; width: fit-content; margin: 0 0 .85rem; }
   .page-wrap, .simple-layout { padding: 1rem 0.5rem 2.5rem; }
   .dash-card b { font-size: 1.1rem; }
   .quiz-body { padding: .9rem 1rem; }

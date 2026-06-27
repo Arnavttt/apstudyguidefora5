@@ -357,7 +357,7 @@
     if (typeof repaired.estimatedTimeSeconds !== 'number' || repaired.estimatedTimeSeconds < 10 || repaired.estimatedTimeSeconds > 5400) {
       repaired.estimatedTimeSeconds = 90;
     }
-    if (!isStr(repaired.correctAnswer) && repaired.correctAnswer !== 0) errors.push('missing correctAnswer');
+    if (!isStr(repaired.correctAnswer)) errors.push('missing correctAnswer');
     if (!isStr(repaired.explanation) || repaired.explanation.trim().length < 10) errors.push('explanation missing or too short');
     if (!Array.isArray(repaired.tags) || repaired.tags.length === 0) repaired.tags = [repaired.topicId || 'general'];
     if (!isStr(repaired.sourceType)) repaired.sourceType = 'ai-generated';
@@ -369,7 +369,10 @@
     if (type === 'mcq' || type === 'multi-select') {
       var choices = repaired.answerChoices || [];
       if (choices.length < 4 || choices.length > 5) errors.push('MCQ needs 4 or 5 answer choices');
+      if (!choices.every(function (c) { return c && isStr(c.id) && isStr(c.text); })) errors.push('each MCQ choice needs a string id and text');
       var ids = choices.map(function (c) { return c && c.id; });
+      var seen = {}; ids.forEach(function (id) { seen[id] = (seen[id] || 0) + 1; });
+      if (Object.keys(seen).some(function (id) { return seen[id] > 1; })) errors.push('MCQ choice ids must be unique');
       if (type === 'mcq') {
         if (ids.indexOf(repaired.correctAnswer) === -1) errors.push('MCQ correctAnswer must match a choice id');
         if (!repaired.distractorRationales || Object.keys(repaired.distractorRationales).length < 1) {
@@ -379,6 +382,7 @@
         // multi-select: correctAnswer is a comma/space separated list of ids.
         var picks = String(repaired.correctAnswer).split(/[,\s]+/).filter(Boolean);
         if (picks.length < 1) errors.push('multi-select needs >=1 correct id');
+        if (!picks.every(function (p) { return ids.indexOf(p) !== -1; })) errors.push('multi-select correctAnswer ids must exist in choices');
       }
     } else if (isWritten(type)) {
       if ((!repaired.rubric || repaired.rubric.length === 0) && !isStr(repaired.modelAnswer)) {

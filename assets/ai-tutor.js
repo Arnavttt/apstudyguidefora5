@@ -108,6 +108,11 @@
     });
     inputRow.appendChild(textarea);
     inputRow.appendChild(sendBtn);
+    var aiDocHref = /\/(courses|units)\//.test(location.pathname) ? '../ai-disclosure.html' : 'ai-disclosure.html';
+    window_.appendChild(el('p', {
+      class: 'ai-tutor-disclaimer',
+      html: 'AI can be wrong — verify with official sources. Your message is sent to a third-party AI; don’t enter personal info. <a href="' + aiDocHref + '">Learn more</a>.'
+    }));
     window_.appendChild(inputRow);
 
     wrapper.appendChild(toggleBtn);

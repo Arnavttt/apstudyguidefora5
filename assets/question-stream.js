@@ -35,8 +35,18 @@
     try { var v = _store.getItem(key); return v ? JSON.parse(v) : fallback; }
     catch (e) { return fallback; }
   }
+  var _quotaHit = false;
   function writeJson(key, val) {
-    try { _store.setItem(key, JSON.stringify(val)); } catch (e) { /* quota */ }
+    try { _store.setItem(key, JSON.stringify(val)); return true; }
+    catch (e) { _quotaHit = true; return false; } // out of storage space
+  }
+  function prefersReducedMotion() {
+    try { return !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches); }
+    catch (e) { return false; }
+  }
+  // Path to a root-level page from the current page (course/unit pages are one level deep).
+  function rootRel(file) {
+    return (/\/(courses|units)\//.test(location.pathname)) ? '../' + file : file;
   }
 
   // ─── Config (overridable before this script via window.__FA_QSTREAM_CONFIG__) ─
@@ -66,7 +76,7 @@
         writeJson(K.attempts, list);
       },
       getReview: function () { return readJson(K.review, []); },
-      saveReview: function (list) { writeJson(K.review, list); },
+      saveReview: function (list) { if (list.length > 80) list = list.slice(-80); writeJson(K.review, list); },
       getCache: function () { return readJson(K.cache, []); },
       saveCache: function (list) { if (list.length > 60) list = list.slice(-60); writeJson(K.cache, list); },
       getSession: function () { return readJson(K.session, null); },
@@ -161,7 +171,7 @@
       }
 
       store.saveAttempt({
-        id: 'at-' + q.id + '-' + state.answeredCount, questionId: q.id, courseId: courseId,
+        id: 'at-' + Date.now() + '-' + Math.random().toString(36).slice(2, 7), questionId: q.id, courseId: courseId,
         unitId: q.unitId, topicId: q.topicId, answer: String(answer),
         isCorrect: evalResult.isCorrect, score: evalResult.score, maxScore: evalResult.maxScore,
         timeSpentSeconds: timeSec, submittedAt: new Date().toISOString(), feedback: evalResult
@@ -233,8 +243,7 @@
       var cached = cache.filter(function (q) {
         return state.previousQuestionIds.indexOf(q.id) === -1 &&
           (!crit.unitId || q.unitId === crit.unitId) &&
-          (!crit.topicId || q.topicId === crit.topicId) &&
-          q.difficulty === crit.difficulty;
+          (!crit.topicId || q.topicId === crit.topicId);
       })[0];
       if (cached) return Promise.resolve({ question: cached, source: 'cache' });
 
@@ -292,13 +301,39 @@
     // ════════════════════════════ RENDERING ════════════════════════════════
     function render() {
       mount.innerHTML = '';
+      mount.setAttribute('role', 'region');
+      mount.setAttribute('aria-label', 'AI practice question stream');
       mount.appendChild(buildHeader());
-      els.controls = buildControls();
-      mount.appendChild(els.controls);
-      els.stage = el('div', { class: 'qs-stage', 'aria-live': 'polite' });
+      mount.appendChild(buildControls());
+      // Dedicated visually-hidden status region so only concise updates are announced.
+      els.status = el('div', { class: 'qs-sr-only', role: 'status', 'aria-live': 'polite' });
+      mount.appendChild(els.status);
+      els.stage = el('div', { class: 'qs-stage' });
+      els.stage.addEventListener('keydown', onStageKey);
       mount.appendChild(els.stage);
       mount.appendChild(buildDashboard());
       renderIdle();
+    }
+    function announce(msg) { if (els.status) els.status.textContent = msg; }
+
+    // Keyboard shortcuts: Enter submits/continues; A–E or 1–9 pick an MCQ choice.
+    function onStageKey(e) {
+      var cont = els.stage.querySelector('.qs-feedback .qs-btn-primary');
+      if (cont) { if (e.key === 'Enter') { e.preventDefault(); cont.click(); } return; }
+      if (!current) return;
+      var inTextarea = e.target && e.target.tagName === 'TEXTAREA';
+      if (e.key === 'Enter' && !inTextarea) { e.preventDefault(); if (els.stage.querySelector('.qs-submit')) onSubmit(current); return; }
+      if (current.questionType === 'mcq' || current.questionType === 'multi-select') {
+        var idx = 'ABCDE'.indexOf(e.key.toUpperCase());
+        if (idx === -1 && /^[1-9]$/.test(e.key)) idx = parseInt(e.key, 10) - 1;
+        if (idx >= 0) {
+          var inputs = els.stage.querySelectorAll('.qs-choice-input');
+          if (inputs[idx]) {
+            inputs[idx].checked = current.questionType === 'multi-select' ? !inputs[idx].checked : true;
+            inputs[idx].focus(); e.preventDefault();
+          }
+        }
+      }
     }
 
     function buildHeader() {
@@ -310,7 +345,10 @@
             el('p', { class: 'qs-sub', text: 'Adaptive AP-style practice that learns what you need next.' })
           ])
         ]),
-        el('span', { class: 'qs-mode-badge', id: 'qs-source-note', text: AIClient.available() ? 'AI-ready' : 'Practice bank' })
+        el('div', { class: 'qs-head-right' }, [
+          el('span', { class: 'qs-session-tally', id: 'qs-session-tally', 'aria-live': 'off' }),
+          el('span', { class: 'qs-mode-badge', id: 'qs-source-note', text: AIClient.available() ? 'AI-ready' : 'Practice bank' })
+        ])
       ]);
     }
 
@@ -340,7 +378,17 @@
 
       wrap.appendChild(modeField); wrap.appendChild(unitField); wrap.appendChild(topicField); wrap.appendChild(diffField);
       wrap.appendChild(el('div', { class: 'qs-control-actions' }, [startBtn, resetBtn]));
+      wrap.appendChild(buildLegend());
       return wrap;
+    }
+
+    function buildLegend() {
+      var levels = [['easy', 'Easy'], ['medium', 'Medium'], ['hard', 'Hard'], ['exam-level', 'Exam']];
+      var legend = el('div', { class: 'qs-legend', 'aria-label': 'Difficulty levels, easiest to hardest' }, [
+        el('span', { text: 'Difficulty:' })
+      ]);
+      levels.forEach(function (l) { legend.appendChild(badge(l[1], 'diff diff-' + l[0])); });
+      return legend;
     }
 
     function refreshTopicOptions(unitId) {
@@ -385,7 +433,9 @@
 
     function renderLoading() {
       els.stage.innerHTML = '';
-      var sk = el('div', { class: 'qs-skeleton' }, [
+      els.stage.setAttribute('aria-busy', 'true');
+      announce('Loading next question…');
+      var sk = el('div', { class: 'qs-skeleton', 'aria-hidden': 'true' }, [
         el('div', { class: 'qs-sk-line qs-sk-badges' }), el('div', { class: 'qs-sk-line w90' }),
         el('div', { class: 'qs-sk-line w80' }), el('div', { class: 'qs-sk-line w60' }),
         el('div', { class: 'qs-sk-opt' }), el('div', { class: 'qs-sk-opt' }), el('div', { class: 'qs-sk-opt' })
@@ -402,6 +452,10 @@
     }
 
     function advance() {
+      // Review/Spaced with an empty queue: celebrate instead of silently drilling.
+      if ((state.mode === 'review' || state.mode === 'spaced') && !FAQS.dueReviewItems(store.getReview()).length) {
+        renderEmptyReview(); return;
+      }
       renderLoading();
       getNextQuestion().then(function (res) {
         if (!res || !res.question) { renderError('No question available. Try a different unit or mode.'); return; }
@@ -414,6 +468,20 @@
       });
     }
 
+    function renderEmptyReview() {
+      els.stage.innerHTML = '';
+      els.stage.removeAttribute('aria-busy');
+      announce('Review queue clear.');
+      els.stage.appendChild(el('div', { class: 'qs-card qs-empty-celebrate' }, [
+        el('span', { class: 'qs-ec-emoji', 'aria-hidden': 'true', text: '🎉' }),
+        el('h3', { class: 'qs-exam-title', text: 'Review queue clear' }),
+        el('p', { class: 'qs-idle-text', text: 'Every question you missed has been reviewed. Switch to Practice or Exam mode to keep building mastery.' }),
+        el('button', { class: 'qs-btn qs-btn-primary', type: 'button', text: 'Start Practice', onclick: function () {
+          state.mode = 'practice'; var sel = document.getElementById('qs-mode'); if (sel) sel.value = 'practice'; start();
+        } })
+      ]));
+    }
+
     function updateSourceNote(source) {
       var note = document.getElementById('qs-source-note');
       if (!note) return;
@@ -424,7 +492,9 @@
     // ── question card ──
     function renderQuestion(q, source) {
       els.stage.innerHTML = '';
-      var card = el('div', { class: 'qs-card' });
+      els.stage.removeAttribute('aria-busy');
+      var promptId = 'qs-prompt-' + q.id;
+      var card = el('div', { class: 'qs-card', role: 'group', 'aria-labelledby': promptId });
 
       card.appendChild(el('div', { class: 'qs-badges' }, [
         badge(q.unitName || q.unitId, 'unit'),
@@ -439,29 +509,35 @@
       if (q.musicNotationPlaceholder) card.appendChild(el('div', { class: 'qs-notation', html: '🎼 ' + esc(q.musicNotationPlaceholder) }));
       if (q.graphDescription) card.appendChild(el('div', { class: 'qs-graph', html: '📈 ' + esc(q.graphDescription) }));
 
-      card.appendChild(el('div', { class: 'qs-prompt', html: inlineMd(q.prompt) }));
+      card.appendChild(el('div', { class: 'qs-prompt', id: promptId, html: inlineMd(q.prompt) }));
 
-      if (q.codeBlock) card.appendChild(el('pre', { class: 'qs-code' }, [el('code', { text: q.codeBlock })]));
+      if (q.codeBlock) card.appendChild(el('pre', { class: 'qs-code', 'aria-label': 'Code', tabindex: '0' }, [el('code', { text: q.codeBlock })]));
       if (q.dataTable) card.appendChild(buildTable(q.dataTable));
 
-      card.appendChild(buildAnswerInput(q));
+      card.appendChild(buildAnswerInput(q, promptId));
 
       var submit = el('button', { class: 'qs-btn qs-btn-primary qs-submit', type: 'button', text: 'Submit Answer', onclick: function () { onSubmit(q); } });
       card.appendChild(submit);
+      card.appendChild(el('p', { class: 'qs-kbd-hint' }, [
+        'Tip: press ', el('kbd', { text: 'Enter' }), ' to submit',
+        (q.questionType === 'mcq' || q.questionType === 'multi-select') ? el('span', {}, [' · ', el('kbd', { text: 'A' }), '–', el('kbd', { text: 'E' }), ' to choose']) : null
+      ]));
       els.submit = submit;
 
       els.stage.appendChild(card);
       typeset(card);
+      announce('New ' + cap(q.difficulty) + ' ' + prettyType(q.questionType) + ' question on ' + (q.topicName || q.unitName || 'this topic') + '.');
       var firstInput = card.querySelector('input,textarea');
       if (firstInput) firstInput.focus();
     }
 
-    function buildAnswerInput(q) {
+    function buildAnswerInput(q, promptId) {
       var box = el('div', { class: 'qs-answer' });
       var type = q.questionType;
       if (type === 'mcq' || type === 'multi-select') {
         var multi = type === 'multi-select';
-        var group = el('div', { class: 'qs-choices', role: multi ? 'group' : 'radiogroup', 'aria-label': 'Answer choices' });
+        var group = el('div', { class: 'qs-choices', role: multi ? 'group' : 'radiogroup', 'aria-labelledby': promptId });
+        if (multi) box.appendChild(el('p', { class: 'qs-multi-hint', id: 'qs-multi-' + q.id, text: 'Select all that apply.' }));
         (q.answerChoices || []).forEach(function (c) {
           var inputId = 'qs-c-' + q.id + '-' + c.id;
           var input = el('input', { type: multi ? 'checkbox' : 'radio', name: 'qs-choice-' + q.id, id: inputId, value: c.id, class: 'qs-choice-input' });
@@ -473,11 +549,17 @@
         });
         box.appendChild(group);
       } else if (type === 'calculation') {
-        box.appendChild(el('input', { type: 'text', class: 'qs-input qs-numeric', id: 'qs-num-' + q.id, placeholder: 'Enter your answer (units optional)…', 'aria-label': 'Numeric answer' }));
+        box.appendChild(el('input', { type: 'text', class: 'qs-input qs-numeric', id: 'qs-num-' + q.id, placeholder: 'Enter your answer (units optional)…', 'aria-labelledby': promptId }));
       } else if (type === 'coding' || type === 'code-tracing') {
-        box.appendChild(el('textarea', { class: 'qs-input qs-codebox', id: 'qs-code-' + q.id, rows: '8', placeholder: type === 'code-tracing' ? 'Enter the exact program output…' : 'Write your code or pseudocode…', 'aria-label': 'Code answer', spellcheck: false }));
+        box.appendChild(el('textarea', { class: 'qs-input qs-codebox', id: 'qs-code-' + q.id, rows: '8', placeholder: type === 'code-tracing' ? 'Enter the exact program output…' : 'Write your code or pseudocode…', 'aria-labelledby': promptId, spellcheck: false }));
       } else {
-        box.appendChild(el('textarea', { class: 'qs-input qs-freebox', id: 'qs-free-' + q.id, rows: '6', placeholder: 'Write your response…', 'aria-label': 'Free response' }));
+        box.appendChild(el('textarea', { class: 'qs-input qs-freebox', id: 'qs-free-' + q.id, rows: '6', placeholder: 'Write your response…', 'aria-labelledby': promptId }));
+      }
+      // AI third-party disclosure shown only when written answers may be sent for AI grading.
+      if (FAQS.isWritten(type) && type !== 'multi-select' && AIClient.available()) {
+        box.appendChild(el('p', { class: 'qs-ai-disclaimer', html:
+          'Your typed answer may be sent to a third-party AI for grading. Don’t enter personal information. ' +
+          '<a href="' + rootRel('ai-disclosure.html') + '">Learn more</a>.' }));
       }
       return box;
     }
@@ -516,7 +598,7 @@
       else if (r.percentScore != null && r.percentScore > 0) verdict = el('div', { class: 'qs-verdict qs-verdict-partial' }, [el('strong', { text: '◐ Partial' }), el('span', { text: '  ' + r.percentScore + '%' })]);
       else verdict = el('div', { class: 'qs-verdict qs-verdict-wrong' }, [el('strong', { text: '✗ Not quite' })]);
 
-      var panel = el('div', { class: 'qs-feedback' }, [verdict]);
+      var panel = el('div', { class: 'qs-feedback', role: 'status' }, [verdict]);
 
       if (!r.selfGraded && (q.questionType === 'mcq' || q.questionType === 'multi-select' || q.questionType === 'calculation' || q.questionType === 'code-tracing')) {
         panel.appendChild(el('p', { class: 'qs-fb-row', html: '<strong>Correct answer:</strong> ' + inlineMd(String(r.correctAnswer)) }));
@@ -537,7 +619,7 @@
       els.stage.appendChild(panel);
       typeset(panel);
       cont.focus();
-      cont.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      cont.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'nearest' });
     }
 
     function onContinue() {
@@ -547,13 +629,15 @@
 
     function lockChoices(q, answer, r) {
       if (q.questionType !== 'mcq' && q.questionType !== 'multi-select') return;
-      var correctIds = String(q.correctAnswer).split(/[,\s]+/).filter(Boolean);
-      var chosen = String(answer).split(/[,\s]+/).filter(Boolean);
+      var norm = function (s) { return String(s).split(/[,\s]+/).filter(Boolean).map(function (x) { return x.toUpperCase(); }); };
+      var correctIds = norm(q.correctAnswer);
+      var chosen = norm(answer);
+      var group = els.stage.querySelector('.qs-choices'); if (group) group.setAttribute('aria-disabled', 'true');
       els.stage.querySelectorAll('.qs-choice').forEach(function (label) {
         var input = label.querySelector('input'); if (input) input.disabled = true;
-        var id = input ? input.value : '';
-        if (correctIds.indexOf(id) !== -1) label.classList.add('qs-choice-correct');
-        else if (chosen.indexOf(id) !== -1) label.classList.add('qs-choice-wrong');
+        var id = (input ? input.value : '').toUpperCase();
+        if (correctIds.indexOf(id) !== -1) { label.classList.add('qs-choice-correct'); label.appendChild(el('span', { class: 'qs-sr-only', text: ' (correct answer)' })); }
+        else if (chosen.indexOf(id) !== -1) { label.classList.add('qs-choice-wrong'); label.appendChild(el('span', { class: 'qs-sr-only', text: ' (your answer, incorrect)' })); }
       });
       if (els.submit) els.submit.style.display = 'none';
     }
@@ -615,6 +699,11 @@
           state.mode = 'review'; var sel = document.getElementById('qs-mode'); if (sel) sel.value = 'review'; start();
         } }));
       }
+      if (_quotaHit) {
+        els.dash.appendChild(el('p', { class: 'qs-quota-note', role: 'alert', text: '⚠ Your browser storage is full, so new progress may not be saved. Clear some space or reset older courses.' }));
+      }
+      var tally = document.getElementById('qs-session-tally');
+      if (tally) tally.textContent = state.answeredCount ? (state.answeredCount + ' answered' + (state.streak >= 3 ? '  🔥' + state.streak : '')) : '';
     }
     function topicName(unitId, topicId) {
       var n = topicId;
@@ -651,7 +740,8 @@
 
     function renderError(msg) {
       els.stage.innerHTML = '';
-      els.stage.appendChild(el('div', { class: 'qs-errorfb' }, [
+      els.stage.removeAttribute('aria-busy');
+      els.stage.appendChild(el('div', { class: 'qs-errorfb', role: 'alert' }, [
         el('p', { text: '⚠ ' + msg }),
         el('p', { class: 'qs-error-sub', text: 'AI generation is unavailable right now, so we loaded a local practice question instead.' }),
         el('button', { class: 'qs-btn qs-btn-primary', type: 'button', text: 'Try Again', onclick: advance })
@@ -668,9 +758,11 @@
 
     // ── misc ──
     function flash(msg) {
-      var n = el('div', { class: 'qs-flash', text: msg });
+      var existing = els.stage.querySelector('.qs-flash'); if (existing) existing.remove();
+      var n = el('div', { class: 'qs-flash', role: 'alert', text: msg });
       els.stage.appendChild(n);
-      setTimeout(function () { n.remove(); }, 2200);
+      var input = els.stage.querySelector('.qs-input, .qs-choice-input'); if (input) input.focus();
+      setTimeout(function () { n.remove(); }, 5000);
     }
     function bullets(title, items, kind) {
       return el('div', { class: 'qs-fb-list qs-fb-' + kind }, [

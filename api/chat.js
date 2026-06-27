@@ -37,15 +37,20 @@ function pruneRateLimitMap() {
   }
 }
 
-// ── CORS headers ────────────────────────────────────────────────────────────
-const CORS_HEADERS = {
-  'Access-Control-Allow-Origin': '*',   // Lock this down to your domain in production!
-  'Access-Control-Allow-Methods': 'POST, OPTIONS',
-  'Access-Control-Allow-Headers': 'Content-Type',
-};
-
-function corsResponse(body, status, extra = {}) {
-  return new Response(body, { status, headers: { ...CORS_HEADERS, ...extra } });
+// ── CORS (locked to the site's own origin so other sites can't proxy through
+//    this endpoint and burn the owner's API credits; override via env). ───────
+const ALLOWED_FALLBACK = ['https://arnavttt.github.io'];
+function corsHeaders(request, env) {
+  const list = (env && env.QS_ALLOWED_ORIGINS) ? env.QS_ALLOWED_ORIGINS.split(',').map(s => s.trim()).filter(Boolean) : ALLOWED_FALLBACK;
+  const origin = (request && request.headers.get('Origin')) || '';
+  const allow = list.indexOf(origin) !== -1 ? origin
+    : (/^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin) ? origin : list[0]);
+  return {
+    'Access-Control-Allow-Origin': allow,
+    'Vary': 'Origin',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+  };
 }
 
 // ── System prompt builder ────────────────────────────────────────────────────
@@ -81,6 +86,9 @@ function validateMessages(messages) {
 // ── Main handler (Cloudflare Workers fetch event) ───────────────────────────
 export default {
   async fetch(request, env) {
+    const cors = corsHeaders(request, env);
+    const corsResponse = (body, status, extra = {}) => new Response(body, { status, headers: { ...cors, ...extra } });
+
     // Preflight
     if (request.method === 'OPTIONS') {
       return corsResponse(null, 204);
@@ -159,9 +167,10 @@ export default {
     }
 
     if (!anthropicResponse.ok) {
-      const errText = await anthropicResponse.text().catch(() => '');
+      // Log upstream detail server-side only; don't echo provider errors to clients.
+      console.error('[chat] anthropic ' + anthropicResponse.status + ' ' + (await anthropicResponse.text().catch(() => '')));
       return corsResponse(
-        JSON.stringify({ error: `Anthropic API error: ${anthropicResponse.status}`, detail: errText }),
+        JSON.stringify({ error: 'Tutor backend error. Please try again.' }),
         502,
         { 'Content-Type': 'application/json' }
       );
@@ -217,7 +226,7 @@ export default {
 
     return new Response(readable, {
       headers: {
-        ...CORS_HEADERS,
+        ...cors,
         'Content-Type': 'text/event-stream',
         'Cache-Control': 'no-cache',
         'X-Accel-Buffering': 'no', // disable Nginx buffering

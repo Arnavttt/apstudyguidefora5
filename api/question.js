@@ -172,21 +172,42 @@ async function callOpenAI(env, system, user, maxTokens) {
   return (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) || '';
 }
 
+// Local, free, private inference via Ollama (https://ollama.com). Uses the
+// native /api/chat endpoint with format:'json' so the model returns valid JSON.
+async function callOllama(env, system, user) {
+  const base = (env.OLLAMA_URL || 'http://localhost:11434').replace(/\/$/, '');
+  const model = env.QS_OLLAMA_MODEL || env.OLLAMA_MODEL || 'llama3.1';
+  const res = await fetch(base + '/api/chat', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      model, stream: false, format: 'json',
+      messages: [{ role: 'system', content: system }, { role: 'user', content: user }],
+      options: { temperature: 0.6 }
+    })
+  });
+  if (!res.ok) throw new Error('ollama ' + res.status + ' ' + (await res.text().catch(() => '')));
+  const data = await res.json();
+  return (data.message && data.message.content) || '';
+}
+
 function pickProvider(env) {
   const pref = (env.QS_PROVIDER || 'auto').toLowerCase();
+  if (pref === 'ollama') return 'ollama';
   if (pref === 'anthropic') return env.ANTHROPIC_API_KEY ? 'anthropic' : null;
   if (pref === 'openai') return env.OPENAI_API_KEY ? 'openai' : null;
   if (env.ANTHROPIC_API_KEY) return 'anthropic';
   if (env.OPENAI_API_KEY) return 'openai';
+  if (env.OLLAMA_URL || env.QS_OLLAMA_MODEL || env.OLLAMA_MODEL) return 'ollama';
   return null;
 }
 
 async function runModel(env, system, user, maxTokens) {
   const provider = pickProvider(env);
   if (!provider) { const e = new Error('no_provider'); e.code = 'no_provider'; throw e; }
-  return provider === 'anthropic'
-    ? callAnthropic(env, system, user, maxTokens)
-    : callOpenAI(env, system, user, maxTokens);
+  if (provider === 'anthropic') return callAnthropic(env, system, user, maxTokens);
+  if (provider === 'openai') return callOpenAI(env, system, user, maxTokens);
+  return callOllama(env, system, user);
 }
 
 // ── Main handler ─────────────────────────────────────────────────────────────

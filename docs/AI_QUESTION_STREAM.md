@@ -159,14 +159,18 @@ Route it at `/api/question` on your domain (or set a custom endpoint — below).
 ### 2. Environment variables (server only)
 
 ```
-ANTHROPIC_API_KEY=...      # preferred provider
+ANTHROPIC_API_KEY=...      # preferred cloud provider
 OPENAI_API_KEY=...         # used if ANTHROPIC_API_KEY is absent
-QS_PROVIDER=auto           # auto | anthropic | openai   (auto = Anthropic first)
+QS_PROVIDER=auto           # auto | anthropic | openai | ollama
 QS_ANTHROPIC_MODEL=claude-sonnet-4-6
 QS_OPENAI_MODEL=gpt-4o-mini
+OLLAMA_URL=http://localhost:11434   # local Ollama (used when QS_PROVIDER=ollama)
+QS_OLLAMA_MODEL=llama3.1             # local model name
+QS_ALLOWED_ORIGINS=https://arnavttt.github.io   # CORS allow-list (comma-separated)
 ```
 
-Provider priority is **Anthropic → OpenAI → (none → client falls back to seeded)**.
+Provider priority is **Anthropic → OpenAI → Ollama → (none → client falls back to
+seeded)**. Set `QS_PROVIDER=ollama` to force local inference.
 
 ### 3. Point the client at the endpoint (optional)
 
@@ -181,6 +185,36 @@ If a request fails (404, network, key missing, invalid JSON, validation failure)
 the client disables AI for the rest of the session and silently uses seeded
 questions. Every AI-generated question is re-validated in the browser against the
 course framework before it is ever shown.
+
+## Run the AI locally with Ollama (free, private, no cloud)
+
+You can run the entire AI stack on your own PC with [Ollama](https://ollama.com) —
+no API keys, no cost, nothing leaves your machine. A zero-dependency local server
+(`serve-local.mjs`) serves the site **and** the `/api/question` + `/api/chat`
+endpoints, routing inference to Ollama.
+
+```bash
+# 1. Install Ollama:  https://ollama.com/download   (it runs a server on :11434)
+# 2. Pull a model
+ollama pull llama3.1
+# 3. Start the site + local AI (Node 18+, no npm install needed)
+node serve-local.mjs
+# 4. Open http://localhost:8765/index.html
+```
+
+The server prints whether Ollama is reachable and which model it will use. If
+Ollama isn't running, the site still works — it falls back to the seeded bank.
+
+Overrides (optional): `PORT`, `QS_OLLAMA_MODEL` (bigger models write better
+questions — e.g. `qwen2.5:7b-instruct`, `llama3.1:8b`), `OLLAMA_URL`.
+
+Under the hood: both workers gained an Ollama provider. `api/question.js` calls
+Ollama's native `/api/chat` with `format:"json"` (so generation/grading return
+valid JSON); `api/chat.js` streams Ollama NDJSON and re-emits it as the same SSE
+the tutor widget already consumes. Provider priority is set by `QS_PROVIDER`
+(`ollama` | `anthropic` | `openai` | `auto`); `serve-local.mjs` defaults it to
+`ollama`. The same code still deploys to Cloudflare/Vercel for cloud inference —
+Ollama only activates when selected, so the hosted site is unaffected.
 
 ---
 

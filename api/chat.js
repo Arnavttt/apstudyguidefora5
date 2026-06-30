@@ -129,108 +129,97 @@ export default {
       );
     }
 
-    // Build Anthropic request
-    const apiKey = env?.ANTHROPIC_API_KEY ?? (typeof ANTHROPIC_API_KEY !== 'undefined' ? ANTHROPIC_API_KEY : null);
-    if (!apiKey) {
-      return corsResponse(
-        JSON.stringify({ error: 'ANTHROPIC_API_KEY not configured on server' }),
-        500,
-        { 'Content-Type': 'application/json' }
-      );
+    // Provider: local Ollama if selected (or no Anthropic key but Ollama configured), else Anthropic.
+    const useOllama = (env?.QS_PROVIDER || '').toLowerCase() === 'ollama'
+      || (!(env?.ANTHROPIC_API_KEY) && (env?.OLLAMA_URL || env?.QS_OLLAMA_MODEL || env?.OLLAMA_MODEL));
+
+    let upstream, mode;
+    if (useOllama) {
+      const base = (env?.OLLAMA_URL || 'http://localhost:11434').replace(/\/$/, '');
+      const model = env?.QS_OLLAMA_MODEL || env?.OLLAMA_MODEL || 'llama3.1';
+      mode = 'ollama';
+      try {
+        upstream = await fetch(base + '/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            model, stream: true,
+            messages: [{ role: 'system', content: buildSystemPrompt(course) }, ...messages.map(m => ({ role: m.role, content: m.content }))],
+          }),
+        });
+      } catch (e) {
+        return corsResponse(JSON.stringify({ error: 'Could not reach Ollama. Is it running on ' + base + '?' }), 502, { 'Content-Type': 'application/json' });
+      }
+    } else {
+      const apiKey = env?.ANTHROPIC_API_KEY ?? (typeof ANTHROPIC_API_KEY !== 'undefined' ? ANTHROPIC_API_KEY : null);
+      if (!apiKey) {
+        return corsResponse(JSON.stringify({ error: 'No AI provider configured (set ANTHROPIC_API_KEY or QS_PROVIDER=ollama).' }), 500, { 'Content-Type': 'application/json' });
+      }
+      mode = 'anthropic';
+      try {
+        upstream = await fetch('https://api.anthropic.com/v1/messages', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'x-api-key': apiKey, 'anthropic-version': '2023-06-01' },
+          body: JSON.stringify({ model: 'claude-haiku-4-5', max_tokens: 1024, system: buildSystemPrompt(course), messages: messages.map(m => ({ role: m.role, content: m.content })), stream: true }),
+        });
+      } catch (e) {
+        return corsResponse(JSON.stringify({ error: 'Failed to reach Anthropic API' }), 502, { 'Content-Type': 'application/json' });
+      }
     }
 
-    const anthropicPayload = {
-      model: 'claude-haiku-4-5',
-      max_tokens: 1024,
-      system: buildSystemPrompt(course),
-      messages: messages.map(m => ({ role: m.role, content: m.content })),
-      stream: true,
-    };
-
-    let anthropicResponse;
-    try {
-      anthropicResponse = await fetch('https://api.anthropic.com/v1/messages', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-api-key': apiKey,
-          'anthropic-version': '2023-06-01',
-        },
-        body: JSON.stringify(anthropicPayload),
-      });
-    } catch (e) {
-      return corsResponse(
-        JSON.stringify({ error: 'Failed to reach Anthropic API' }),
-        502,
-        { 'Content-Type': 'application/json' }
-      );
-    }
-
-    if (!anthropicResponse.ok) {
+    if (!upstream.ok) {
       // Log upstream detail server-side only; don't echo provider errors to clients.
-      console.error('[chat] anthropic ' + anthropicResponse.status + ' ' + (await anthropicResponse.text().catch(() => '')));
-      return corsResponse(
-        JSON.stringify({ error: 'Tutor backend error. Please try again.' }),
-        502,
-        { 'Content-Type': 'application/json' }
-      );
+      console.error('[chat] ' + mode + ' ' + upstream.status + ' ' + (await upstream.text().catch(() => '')));
+      return corsResponse(JSON.stringify({ error: 'Tutor backend error. Please try again.' }), 502, { 'Content-Type': 'application/json' });
     }
 
-    // Transform Anthropic SSE → client SSE
-    // Anthropic sends: data: {"type":"content_block_delta","delta":{"type":"text_delta","text":"hello"}}
-    // We re-emit:      data: {"delta":"hello"}  then  data: [DONE]
+    // Transform upstream → client SSE: emit  data: {"delta":"..."}  then  data: [DONE].
+    // Anthropic: SSE `content_block_delta`. Ollama: NDJSON `{"message":{"content":...},"done":bool}`.
     const { readable, writable } = new TransformStream();
     const writer = writable.getWriter();
     const encoder = new TextEncoder();
 
     (async () => {
-      const reader = anthropicResponse.body.getReader();
+      const reader = upstream.body.getReader();
       const decoder = new TextDecoder();
       let buffer = '';
-
       try {
         while (true) {
           const { value, done } = await reader.read();
           if (done) break;
           buffer += decoder.decode(value, { stream: true });
-
           const lines = buffer.split('\n');
           buffer = lines.pop();
-
           for (const line of lines) {
-            if (!line.startsWith('data: ')) continue;
-            const raw = line.slice(6).trim();
-            if (raw === '[DONE]') continue; // Anthropic doesn't send this, but be safe
-
-            let event;
-            try { event = JSON.parse(raw); } catch { continue; }
-
-            if (event.type === 'content_block_delta' && event.delta?.type === 'text_delta') {
-              const chunk = JSON.stringify({ delta: event.delta.text });
-              await writer.write(encoder.encode(`data: ${chunk}\n\n`));
-            }
-
-            if (event.type === 'message_stop') {
-              await writer.write(encoder.encode('data: [DONE]\n\n'));
+            const trimmed = line.trim();
+            if (!trimmed) continue;
+            if (mode === 'ollama') {
+              let event; try { event = JSON.parse(trimmed); } catch { continue; }
+              const text = event.message && event.message.content;
+              if (text) await writer.write(encoder.encode('data: ' + JSON.stringify({ delta: text }) + '\n\n'));
+              if (event.done) await writer.write(encoder.encode('data: [DONE]\n\n'));
+            } else {
+              if (!trimmed.startsWith('data: ')) continue;
+              const raw = trimmed.slice(6).trim();
+              if (raw === '[DONE]') continue;
+              let event; try { event = JSON.parse(raw); } catch { continue; }
+              if (event.type === 'content_block_delta' && event.delta?.type === 'text_delta') {
+                await writer.write(encoder.encode('data: ' + JSON.stringify({ delta: event.delta.text }) + '\n\n'));
+              }
+              if (event.type === 'message_stop') await writer.write(encoder.encode('data: [DONE]\n\n'));
             }
           }
         }
-        // Flush if Anthropic didn't send message_stop
         await writer.write(encoder.encode('data: [DONE]\n\n'));
       } catch (e) {
-        await writer.write(encoder.encode(`data: ${JSON.stringify({ error: e.message })}\n\n`));
+        await writer.write(encoder.encode('data: ' + JSON.stringify({ error: e.message }) + '\n\n'));
       } finally {
         writer.close();
       }
     })();
 
     return new Response(readable, {
-      headers: {
-        ...cors,
-        'Content-Type': 'text/event-stream',
-        'Cache-Control': 'no-cache',
-        'X-Accel-Buffering': 'no', // disable Nginx buffering
-      },
+      headers: { ...cors, 'Content-Type': 'text/event-stream', 'Cache-Control': 'no-cache', 'X-Accel-Buffering': 'no' },
     });
   },
 };

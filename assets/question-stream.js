@@ -14,7 +14,7 @@
   'use strict';
 
   var FAQS = window.FAQS;
-  if (!FAQS) { console.warn('[qstream] core.js (window.FAQS) not loaded'); return; }
+  if (!FAQS) { if (window.__FA_DEBUG__) console.warn('[qstream] core.js (window.FAQS) not loaded'); return; }
 
   // ─── Safe storage (mirrors app.js _store; private-browsing fallback) ────────
   var _store = (function () {
@@ -861,7 +861,7 @@
       if (meta) courseId = meta.getAttribute('content');
     }
     if (!courseId) { courseId = FAQS.getCourseIdFromSlug((location.pathname.split('/').pop() || '').replace(/-overview\.html$|-review\.html$|\.html$/, '')); }
-    if (!courseId || !FAQS.isValidCourseId(courseId)) { console.warn('[qstream] could not resolve courseId for mount'); return; }
+    if (!courseId || !FAQS.isValidCourseId(courseId)) { if (window.__FA_DEBUG__) console.warn('[qstream] could not resolve courseId for mount'); return; }
 
     var data = (window.__FA_QSTREAM_DATA__ || {})[courseId];
     if (!data || !data.framework) {

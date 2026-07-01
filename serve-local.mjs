@@ -6,15 +6,18 @@
  * nothing leaves your machine and there are no API costs.
  *
  *   1. Install Ollama:           https://ollama.com/download
- *   2. Pull a model:             ollama pull llama3.1
- *      (Ollama runs a server on http://localhost:11434 automatically.)
+ *   2. Pull a model:             ollama pull llama3.2
+ *      (Ollama runs a server on http://127.0.0.1:11434 automatically.)
  *   3. Start this:               node serve-local.mjs
  *   4. Open:                     http://localhost:8765/index.html
  *
- * Environment overrides (optional):
- *   PORT=8765                    port for this site server
- *   QS_OLLAMA_MODEL=llama3.1     Ollama model to use (bigger = better questions)
- *   OLLAMA_URL=http://localhost:11434
+ * Environment overrides (optional — new spec names, legacy QS_* still honored):
+ *   PORT=8765                            port for this site server
+ *   AI_QUESTION_PROVIDER=ollama          ollama | auto | fallback | anthropic | openai
+ *   OLLAMA_BASE_URL=http://127.0.0.1:11434
+ *   OLLAMA_MODEL=llama3.2                Ollama model (bigger = better questions)
+ *   OLLAMA_EVALUATOR_MODEL=llama3.2      model used to grade written answers
+ *   OLLAMA_TIMEOUT_MS=60000              abort an AI call after this many ms
  */
 import http from 'node:http';
 import { readFile } from 'node:fs/promises';
@@ -26,11 +29,17 @@ import { Readable } from 'node:stream';
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const PORT = parseInt(process.env.PORT || '8765', 10);
 
-// Force the workers to use local Ollama unless the user set a cloud key explicitly.
-process.env.QS_PROVIDER = process.env.QS_PROVIDER || 'ollama';
-process.env.OLLAMA_URL = process.env.OLLAMA_URL || 'http://localhost:11434';
-process.env.QS_OLLAMA_MODEL = process.env.QS_OLLAMA_MODEL || process.env.OLLAMA_MODEL || 'llama3.1';
-process.env.QS_ALLOWED_ORIGINS = process.env.QS_ALLOWED_ORIGINS || `http://localhost:${PORT}`;
+// Default to local Ollama. New spec env names win; legacy QS_* names still work.
+// Both are exported so api/question.js sees whichever it looks for.
+const PROVIDER = process.env.AI_QUESTION_PROVIDER || process.env.QS_PROVIDER || 'ollama';
+const OLLAMA_BASE = process.env.OLLAMA_BASE_URL || process.env.OLLAMA_URL || 'http://127.0.0.1:11434';
+const OLLAMA_MODEL = process.env.OLLAMA_MODEL || process.env.QS_OLLAMA_MODEL || 'llama3.2';
+process.env.AI_QUESTION_PROVIDER = process.env.QS_PROVIDER = PROVIDER;
+process.env.OLLAMA_BASE_URL = process.env.OLLAMA_URL = OLLAMA_BASE;
+process.env.OLLAMA_MODEL = process.env.QS_OLLAMA_MODEL = OLLAMA_MODEL;
+process.env.OLLAMA_EVALUATOR_MODEL = process.env.OLLAMA_EVALUATOR_MODEL || OLLAMA_MODEL;
+process.env.OLLAMA_TIMEOUT_MS = process.env.OLLAMA_TIMEOUT_MS || '60000';
+process.env.QS_ALLOWED_ORIGINS = process.env.QS_ALLOWED_ORIGINS || `http://localhost:${PORT},http://127.0.0.1:${PORT}`;
 
 const questionWorker = (await import('./api/question.js')).default;
 const chatWorker = (await import('./api/chat.js')).default;
@@ -109,14 +118,15 @@ server.listen(PORT, async () => {
   console.log('\n  Five & A+  —  local server with Ollama AI');
   console.log('  ----------------------------------------------------------');
   console.log('  Site:   http://localhost:' + PORT + '/index.html');
-  console.log('  AI:     ' + process.env.OLLAMA_URL + '  (provider=ollama, model=' + process.env.QS_OLLAMA_MODEL + ')');
+  console.log('  AI:     ' + OLLAMA_BASE + '  (provider=' + PROVIDER + ', model=' + OLLAMA_MODEL +
+    ', evaluator=' + process.env.OLLAMA_EVALUATOR_MODEL + ', timeout=' + process.env.OLLAMA_TIMEOUT_MS + 'ms)');
   if (ollamaOk) {
     console.log('  Ollama: running ✓   models: ' + (models.join(', ') || '(none pulled yet)'));
-    if (!models.some((m) => m.split(':')[0] === process.env.QS_OLLAMA_MODEL.split(':')[0])) {
-      console.log('  NOTE:   model "' + process.env.QS_OLLAMA_MODEL + '" not pulled. Run:  ollama pull ' + process.env.QS_OLLAMA_MODEL);
+    if (!models.some((m) => m.split(':')[0] === OLLAMA_MODEL.split(':')[0])) {
+      console.log('  NOTE:   model "' + OLLAMA_MODEL + '" not pulled. Run:  ollama pull ' + OLLAMA_MODEL);
     }
   } else {
-    console.log('  Ollama: NOT reachable. Install from https://ollama.com/download and run:  ollama pull ' + process.env.QS_OLLAMA_MODEL);
+    console.log('  Ollama: NOT reachable. Install from https://ollama.com/download and run:  ollama pull ' + OLLAMA_MODEL);
     console.log('          (The site still works — it falls back to the built-in question bank.)');
   }
   console.log('  ----------------------------------------------------------\n');

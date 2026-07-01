@@ -519,10 +519,22 @@
       AIClient.statusProbe().then(function (s) {
         if (!s) return;
         var note = document.getElementById('qs-source-note');
-        if (note && s.provider) note.textContent = providerLabel(s.provider) + ' ready';
-        if (s.ollama && s.ollama.reachable && s.ollama.hasModel === false && els.stage && els.stage.querySelector('.qs-idle')) {
+        var ol = s.ollama;
+        // Forced 'ollama' mode still reports provider 'ollama' when it is offline —
+        // only claim "ready" if a backend is actually reachable/usable.
+        var ollamaOffline = s.provider === 'ollama' && ol && ol.reachable === false;
+        if (note) {
+          if (!s.provider || ollamaOffline) note.textContent = 'Seeded fallback';
+          else note.textContent = providerLabel(s.provider) + ' ready';
+        }
+        var idle = els.stage && els.stage.querySelector('.qs-idle');
+        if (!idle) return;
+        if (ollamaOffline) {
           els.stage.appendChild(el('p', { class: 'qs-idle-review', text:
-            '⚙ Ollama is running but the model “' + (s.ollama.model || '') + '” is not pulled yet. Run:  ollama pull ' + (s.ollama.model || 'llama3.2') + '   (until then, seeded practice questions are used).' }));
+            '⚙ Local Ollama is not running — using the built-in practice bank. Start Ollama and run  ollama pull ' + ((ol && ol.model) || 'llama3.2') + '  for fresh AI-generated questions.' }));
+        } else if (ol && ol.reachable && ol.hasModel === false) {
+          els.stage.appendChild(el('p', { class: 'qs-idle-review', text:
+            '⚙ Ollama is running but the model “' + (ol.model || '') + '” is not pulled yet. Run:  ollama pull ' + (ol.model || 'llama3.2') + '   (until then, seeded practice questions are used).' }));
         }
       });
     }

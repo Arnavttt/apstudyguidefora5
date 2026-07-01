@@ -1,2 +1,37 @@
 # Claude worktrees — never commit these as submodules
 .claude/worktrees/
+
+# ── Secrets / env (NEVER commit) ─────────────────────────────────────────────
+.env
+.env.local
+.env.*.local
+.env.*
+!.env.example
+
+# ── Dependencies / build output ──────────────────────────────────────────────
+node_modules/
+dist/
+build/
+.next/
+.vercel/
+.wrangler/
+
+# ── Local AI / agent runtime state (not part of the site) ────────────────────
+# ruflo / claude-flow scaffolding + local databases dropped into the tree.
+.claude-flow/
+.swarm/
+.mcp.json
+ruvector.db
+*.db
+.claude/memory.db
+.claude/settings.json
+.claude/agents/
+.claude/commands/
+.claude/helpers/
+.claude/skills/
+CLAUDE.md
+
+# ── OS / editor cruft ────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+*.log

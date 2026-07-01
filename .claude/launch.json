@@ -2,6 +2,12 @@
   "version": "0.0.1",
   "configurations": [
     {
+      "name": "apsite-ai",
+      "runtimeExecutable": "C:\\Program Files\\nodejs\\node.exe",
+      "runtimeArgs": ["C:\\Users\\arnav\\Documents\\apstudyguidefora5\\serve-local.mjs"],
+      "port": 8765
+    },
+    {
       "name": "apsite",
       "runtimeExecutable": "C:\\Program Files\\nodejs\\node.exe",
       "runtimeArgs": ["C:\\Users\\arnav\\Documents\\apstudyguidefora5\\.claude\\preview-server.js", "3000"],

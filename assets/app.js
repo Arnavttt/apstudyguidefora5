@@ -369,26 +369,75 @@ function initRatings() {
   });
 }
 
-/* ── Feedback widget ──────────────────────────────────────────────────── */
+/* ── Feedback widget (floating button, bottom-right, injected site-wide) ──── */
 function toggleFeedback() {
   var panel = document.getElementById('feedbackPanel');
   if (panel) panel.classList.toggle('open');
+  var t = document.getElementById('feedbackText');
+  if (panel && panel.classList.contains('open') && t) t.focus();
 }
 function submitFeedback() {
   var txt = document.getElementById('feedbackText');
   var thanks = document.getElementById('feedbackThanks');
   var btn = document.querySelector('.feedback-submit');
   if (!txt || !txt.value.trim()) return;
-  // Store locally (no backend)
+  var msg = txt.value.trim();
+  // Save on device (no backend, no tracking)…
   var fb = JSON.parse(_store.getItem('fa2-feedback') || '[]');
-  fb.push({ page: location.pathname, text: txt.value.trim(), ts: Date.now() });
+  fb.push({ page: location.pathname, text: msg, ts: Date.now() });
   _store.setItem('fa2-feedback', JSON.stringify(fb));
+  // …and open the user's own email client so it can actually reach us.
+  // Dedicated, filterable support alias (Gmail +tag routes to the same inbox;
+  // swap this one constant for a real support@ address when one exists).
+  var FEEDBACK_EMAIL = 'arnavsinha1807+support@gmail.com';
+  var mailto = 'mailto:' + FEEDBACK_EMAIL
+    + '?subject=' + encodeURIComponent('Five & A+ feedback')
+    + '&body=' + encodeURIComponent(msg + '\n\n— sent from ' + location.href);
+  try { window.location.href = mailto; } catch (e) {}
   txt.value = '';
   if (thanks) thanks.style.display = 'block';
   if (btn) btn.style.display = 'none';
-  setTimeout(function() { toggleFeedback(); if (thanks) thanks.style.display = 'none'; if (btn) btn.style.display = ''; }, 2000);
+  setTimeout(function() { toggleFeedback(); if (thanks) thanks.style.display = 'none'; if (btn) btn.style.display = ''; }, 2500);
 }
-document.addEventListener('DOMContentLoaded', initRatings);
+
+/* Path from the current page up to the site root (pages live at /, /courses/, /units/). */
+function _rootRel(file) {
+  return (/\/(courses|units)\//.test(location.pathname)) ? '../' + file : file;
+}
+
+/* Inject the favicon once — avoids editing 200+ static <head> blocks. */
+function injectFavicon() {
+  if (document.querySelector('link[rel="icon"]')) return;
+  var l = document.createElement('link');
+  l.rel = 'icon'; l.type = 'image/svg+xml'; l.href = _rootRel('favicon.svg');
+  document.head.appendChild(l);
+}
+
+/* Inject the floating Feedback button (bottom-right) on every page. */
+function injectFeedbackFab() {
+  if (document.getElementById('fa-feedback-fab')) return;
+  var wrap = document.createElement('div');
+  wrap.id = 'fa-feedback-fab';
+  wrap.innerHTML =
+    '<div class="feedback-panel" id="feedbackPanel" role="dialog" aria-label="Send feedback">'
+    +   '<div class="feedback-header"><span>Send feedback</span>'
+    +     '<button class="feedback-close" type="button" aria-label="Close" onclick="toggleFeedback()">&times;</button></div>'
+    +   '<textarea class="feedback-text" id="feedbackText" rows="4" placeholder="Found a bug or have an idea? Tell us…"></textarea>'
+    +   '<button class="feedback-submit" type="button" onclick="submitFeedback()">Send</button>'
+    +   '<p class="feedback-thanks" id="feedbackThanks" style="display:none">Thanks! Saved on this device — your email app will open so you can send it to us.</p>'
+    + '</div>'
+    + '<button class="fa-feedback-btn" type="button" aria-label="Send feedback" title="Send feedback" onclick="toggleFeedback()">'
+    +   '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>'
+    +   '<span class="fa-feedback-label">Feedback</span>'
+    + '</button>';
+  document.body.appendChild(wrap);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  initRatings();
+  injectFavicon();
+  injectFeedbackFab();
+});
 
 
 /* ── Site review rating ───────────────────────────────────────────────── */

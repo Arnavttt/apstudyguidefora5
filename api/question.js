@@ -131,42 +131,85 @@ Return JSON: { "isCorrect": boolean, "score": number, "maxScore": number, "perce
   "nextRecommendation": string }`;
 }
 
-// ── JSON extraction ──────────────────────────────────────────────────────────
+// ── JSON extraction (+ one lenient repair pass before giving up) ──────────────
 function extractJson(text) {
   if (text == null) return null;
   let s = String(text).trim().replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/i, '');
   try { return JSON.parse(s); } catch (e) {}
   const first = s.search(/[\[{]/), last = Math.max(s.lastIndexOf('}'), s.lastIndexOf(']'));
   if (first !== -1 && last > first) { try { return JSON.parse(s.slice(first, last + 1)); } catch (e) {} }
-  return null;
+  return repairJson(s);
+}
+// Strip fences, comments, smart quotes, and trailing commas, then retry once.
+function repairJson(text) {
+  if (text == null) return null;
+  let s = String(text).trim().replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/i, '');
+  const first = s.search(/[\[{]/), last = Math.max(s.lastIndexOf('}'), s.lastIndexOf(']'));
+  if (first !== -1 && last > first) s = s.slice(first, last + 1);
+  s = s.replace(/[“”]/g, '"').replace(/[‘’]/g, "'")
+       .replace(/\/\/[^\n\r]*/g, '').replace(/\/\*[\s\S]*?\*\//g, '')
+       .replace(/,\s*([}\]])/g, '$1');
+  try { return JSON.parse(s); } catch (e) { return null; }
 }
 
-// ── Provider calls ───────────────────────────────────────────────────────────
-async function callAnthropic(env, system, user, maxTokens) {
-  const key = env.ANTHROPIC_API_KEY;
-  const model = env.QS_ANTHROPIC_MODEL || 'claude-sonnet-4-6';
-  const res = await fetch('https://api.anthropic.com/v1/messages', {
+// ── Env normalization (new spec names + legacy aliases both honored) ──────────
+function normalizeEnv(env) {
+  env = env || {};
+  return {
+    provider: String(env.AI_QUESTION_PROVIDER || env.QS_PROVIDER || 'auto').toLowerCase(),
+    ollamaBase: String(env.OLLAMA_BASE_URL || env.OLLAMA_URL || 'http://127.0.0.1:11434').replace(/\/$/, ''),
+    ollamaModel: env.OLLAMA_MODEL || env.QS_OLLAMA_MODEL || 'llama3.2',
+    ollamaEvalModel: env.OLLAMA_EVALUATOR_MODEL || env.OLLAMA_MODEL || env.QS_OLLAMA_MODEL || 'llama3.2',
+    ollamaTimeoutMs: Math.max(1000, parseInt(env.OLLAMA_TIMEOUT_MS, 10) || 60000),
+    allowRemoteOllama: String(env.QS_ALLOW_REMOTE_OLLAMA || '') === '1',
+    anthropicKey: env.ANTHROPIC_API_KEY,
+    openaiKey: env.OPENAI_API_KEY,
+    anthropicModel: env.QS_ANTHROPIC_MODEL || 'claude-sonnet-4-6',
+    openaiModel: env.QS_OPENAI_MODEL || 'gpt-4o-mini'
+  };
+}
+function mkErr(code, msg) { const e = new Error(msg || code); e.code = code; return e; }
+function isLocalHost(h) { return h === 'localhost' || h === '127.0.0.1' || h === '::1' || h === '[::1]'; }
+
+// SSRF guard: a configured Ollama URL must be localhost unless the operator
+// explicitly opts in (QS_ALLOW_REMOTE_OLLAMA=1). Stops the endpoint being abused
+// as a blind proxy to internal/other hosts via a crafted env or request.
+function assertOllamaAllowed(cfg) {
+  let host;
+  try { host = new URL(cfg.ollamaBase).hostname; } catch (e) { throw mkErr('bad_ollama_url', 'Invalid Ollama URL'); }
+  if (!cfg.allowRemoteOllama && !isLocalHost(host)) {
+    throw mkErr('remote_ollama_blocked', 'Refusing non-localhost Ollama URL (' + host + ')');
+  }
+}
+async function fetchWithTimeout(url, opts, timeoutMs) {
+  const ctrl = new AbortController();
+  const t = setTimeout(() => ctrl.abort(), timeoutMs);
+  try { return await fetch(url, Object.assign({}, opts || {}, { signal: ctrl.signal })); }
+  finally { clearTimeout(t); }
+}
+
+// ── Provider calls (all time-bounded) ────────────────────────────────────────
+async function callAnthropic(cfg, system, user, maxTokens) {
+  const res = await fetchWithTimeout('https://api.anthropic.com/v1/messages', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'x-api-key': key, 'anthropic-version': '2023-06-01' },
-    body: JSON.stringify({ model, max_tokens: maxTokens || 1500, system, messages: [{ role: 'user', content: user }] })
-  });
+    headers: { 'Content-Type': 'application/json', 'x-api-key': cfg.anthropicKey, 'anthropic-version': '2023-06-01' },
+    body: JSON.stringify({ model: cfg.anthropicModel, max_tokens: maxTokens || 1500, system, messages: [{ role: 'user', content: user }] })
+  }, cfg.ollamaTimeoutMs);
   if (!res.ok) throw new Error('anthropic ' + res.status + ' ' + (await res.text().catch(() => '')));
   const data = await res.json();
   return (data.content && data.content[0] && data.content[0].text) || '';
 }
 
-async function callOpenAI(env, system, user, maxTokens) {
-  const key = env.OPENAI_API_KEY;
-  const model = env.QS_OPENAI_MODEL || 'gpt-4o-mini';
-  const res = await fetch('https://api.openai.com/v1/chat/completions', {
+async function callOpenAI(cfg, system, user, maxTokens) {
+  const res = await fetchWithTimeout('https://api.openai.com/v1/chat/completions', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + key },
+    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + cfg.openaiKey },
     body: JSON.stringify({
-      model, max_tokens: maxTokens || 1500, temperature: 0.6,
+      model: cfg.openaiModel, max_tokens: maxTokens || 1500, temperature: 0.5,
       response_format: { type: 'json_object' },
       messages: [{ role: 'system', content: system }, { role: 'user', content: user }]
     })
-  });
+  }, cfg.ollamaTimeoutMs);
   if (!res.ok) throw new Error('openai ' + res.status + ' ' + (await res.text().catch(() => '')));
   const data = await res.json();
   return (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) || '';
@@ -174,40 +217,67 @@ async function callOpenAI(env, system, user, maxTokens) {
 
 // Local, free, private inference via Ollama (https://ollama.com). Uses the
 // native /api/chat endpoint with format:'json' so the model returns valid JSON.
-async function callOllama(env, system, user) {
-  const base = (env.OLLAMA_URL || 'http://localhost:11434').replace(/\/$/, '');
-  const model = env.QS_OLLAMA_MODEL || env.OLLAMA_MODEL || 'llama3.1';
-  const res = await fetch(base + '/api/chat', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      model, stream: false, format: 'json',
-      messages: [{ role: 'system', content: system }, { role: 'user', content: user }],
-      options: { temperature: 0.6 }
-    })
-  });
+async function callOllama(cfg, system, user, opts) {
+  opts = opts || {};
+  assertOllamaAllowed(cfg);
+  let res;
+  try {
+    res = await fetchWithTimeout(cfg.ollamaBase + '/api/chat', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: opts.model || cfg.ollamaModel, stream: false, format: 'json',
+        messages: [{ role: 'system', content: system }, { role: 'user', content: user }],
+        options: { temperature: opts.temperature == null ? 0.2 : opts.temperature, top_p: 0.9 }
+      })
+    }, cfg.ollamaTimeoutMs);
+  } catch (e) {
+    throw (e && e.name === 'AbortError')
+      ? mkErr('ollama_timeout', 'Ollama timed out after ' + cfg.ollamaTimeoutMs + 'ms')
+      : mkErr('ollama_unreachable', 'Could not reach Ollama at ' + cfg.ollamaBase);
+  }
   if (!res.ok) throw new Error('ollama ' + res.status + ' ' + (await res.text().catch(() => '')));
   const data = await res.json();
   return (data.message && data.message.content) || '';
 }
 
-function pickProvider(env) {
-  const pref = (env.QS_PROVIDER || 'auto').toLowerCase();
-  if (pref === 'ollama') return 'ollama';
-  if (pref === 'anthropic') return env.ANTHROPIC_API_KEY ? 'anthropic' : null;
-  if (pref === 'openai') return env.OPENAI_API_KEY ? 'openai' : null;
-  if (env.ANTHROPIC_API_KEY) return 'anthropic';
-  if (env.OPENAI_API_KEY) return 'openai';
-  if (env.OLLAMA_URL || env.QS_OLLAMA_MODEL || env.OLLAMA_MODEL) return 'ollama';
+// Cheap health probe: GET /api/version then /api/tags. Used by 'auto' + status.
+async function ollamaStatus(cfg) {
+  try {
+    assertOllamaAllowed(cfg);
+    const probe = Math.min(4000, cfg.ollamaTimeoutMs);
+    const v = await fetchWithTimeout(cfg.ollamaBase + '/api/version', {}, probe);
+    if (!v.ok) return { reachable: false, models: [], hasModel: false };
+    let models = [];
+    try {
+      const t = await fetchWithTimeout(cfg.ollamaBase + '/api/tags', {}, probe);
+      if (t.ok) models = ((await t.json()).models || []).map((m) => m.name);
+    } catch (e) { /* tags optional */ }
+    const stem = String(cfg.ollamaModel).split(':')[0];
+    return { reachable: true, models, hasModel: models.some((m) => String(m).split(':')[0] === stem) };
+  } catch (e) { return { reachable: false, models: [], hasModel: false }; }
+}
+
+// Spec priority:
+//   'ollama'   → Ollama (client seeds if it errors)
+//   'fallback' → no AI at all (client uses seeded bank)
+//   'anthropic'/'openai' → that provider, only if its key is present
+//   'auto'     → Ollama if reachable, then Anthropic, then OpenAI, else none
+async function pickProvider(cfg) {
+  const p = cfg.provider;
+  if (p === 'fallback') return null;
+  if (p === 'ollama') return 'ollama';
+  if (p === 'anthropic') return cfg.anthropicKey ? 'anthropic' : null;
+  if (p === 'openai') return cfg.openaiKey ? 'openai' : null;
+  if ((await ollamaStatus(cfg)).reachable) return 'ollama';
+  if (cfg.anthropicKey) return 'anthropic';
+  if (cfg.openaiKey) return 'openai';
   return null;
 }
 
-async function runModel(env, system, user, maxTokens) {
-  const provider = pickProvider(env);
-  if (!provider) { const e = new Error('no_provider'); e.code = 'no_provider'; throw e; }
-  if (provider === 'anthropic') return callAnthropic(env, system, user, maxTokens);
-  if (provider === 'openai') return callOpenAI(env, system, user, maxTokens);
-  return callOllama(env, system, user);
+async function runModel(cfg, provider, system, user, maxTokens, opts) {
+  if (provider === 'anthropic') return callAnthropic(cfg, system, user, maxTokens);
+  if (provider === 'openai') return callOpenAI(cfg, system, user, maxTokens);
+  return callOllama(cfg, system, user, opts);
 }
 
 // ── Main handler ─────────────────────────────────────────────────────────────
@@ -229,37 +299,55 @@ export default {
     try { body = await request.json(); } catch (e) { return reply({ error: 'Invalid JSON' }, 400); }
 
     const action = body.action;
-    if (!pickProvider(env)) return reply({ error: 'No AI provider configured on server.' }, 503);
+    const cfg = normalizeEnv(env);
+
+    // Health/status: lets the client show an accurate AI-source badge and a
+    // helpful "pull the model" message. Never throws; safe to call anytime.
+    if (action === 'status') {
+      const os = cfg.provider === 'fallback' ? { reachable: false, models: [], hasModel: false } : await ollamaStatus(cfg);
+      const provider = await pickProvider(cfg);
+      return reply({
+        provider: provider,                 // 'ollama' | 'anthropic' | 'openai' | null
+        configured: cfg.provider,           // requested mode
+        ollama: { base: cfg.ollamaBase, model: cfg.ollamaModel, evaluatorModel: cfg.ollamaEvalModel,
+                  reachable: os.reachable, models: os.models, hasModel: os.hasModel }
+      });
+    }
+
+    const provider = await pickProvider(cfg);
+    if (!provider) return reply({ error: 'No AI provider configured on server.', provider: null }, 503);
 
     try {
       if (action === 'generate') {
         body.courseId = sani(body.courseId, 60);
         body.courseName = sani(body.courseName, 80);
         body.count = Math.max(1, Math.min(3, body.count || 1));
-        const raw = await runModel(env, GEN_SYSTEM, genUserPrompt(body), 2200);
+        const raw = await runModel(cfg, provider, GEN_SYSTEM, genUserPrompt(body), 2200, { temperature: 0.2 });
         const parsed = extractJson(raw);
         const questions = parsed && (parsed.questions || (Array.isArray(parsed) ? parsed : [parsed])) || [];
-        if (!questions.length) return reply({ error: 'Model returned no usable questions', questions: [] }, 502);
+        if (!questions.length) return reply({ error: 'Model returned no usable questions', questions: [], provider }, 502);
         // Stamp provenance; the CLIENT re-validates each against the framework.
         questions.forEach((q) => { q.sourceType = 'ai-generated'; if (!q.createdAt) q.createdAt = new Date().toISOString(); });
-        return reply({ questions });
+        return reply({ questions, provider });
       }
 
       if (action === 'evaluate') {
         if (!body.question) return reply({ error: 'Missing question' }, 400);
-        const raw = await runModel(env, EVAL_SYSTEM, evalUserPrompt(body), 900);
+        // Evaluation uses the (optionally distinct) evaluator model at low temperature.
+        const raw = await runModel(cfg, provider, EVAL_SYSTEM, evalUserPrompt(body), 900, { model: cfg.ollamaEvalModel, temperature: 0.1 });
         const parsed = extractJson(raw);
-        if (!parsed) return reply({ error: 'Could not parse evaluation' }, 502);
+        if (!parsed) return reply({ error: 'Could not parse evaluation', provider }, 502);
         if (parsed.correctAnswer == null) parsed.correctAnswer = String(body.question.correctAnswer || '');
+        parsed.provider = provider;
         return reply(parsed);
       }
 
       return reply({ error: 'Unknown action: ' + action }, 400);
     } catch (e) {
       // Log detail server-side only; never echo upstream provider errors to the client.
-      console.error('[question] ' + String((e && e.message) || e));
+      console.error('[question] ' + String((e && e.code ? e.code + ' ' : '') + ((e && e.message) || e)));
       const code = e && e.code === 'no_provider' ? 503 : 502;
-      return reply({ error: 'AI request failed' }, code);
+      return reply({ error: 'AI request failed', provider }, code);
     }
   }
 };

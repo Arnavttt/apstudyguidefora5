@@ -301,3 +301,5 @@
   border-left: 2px solid var(--border2, #c9bb9c); padding-left: .6rem; }
 .qs-ai-disclaimer a { color: var(--ACtext, var(--AC)); }
 .qs-quota-note { font-size: .82rem; color: #8b1a1a; margin: .7rem 0 0; }
+.qs-legal-note { font-size: .72rem; line-height: 1.5; color: var(--text3, #8a7f6c); margin: 1rem 0 0;
+  padding-top: .7rem; border-top: 1px solid var(--border2, #e6ddc9); opacity: .9; }

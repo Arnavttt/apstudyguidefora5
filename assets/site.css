@@ -1608,6 +1608,43 @@ mjx-container { overflow-x: auto; max-width: 100%; display: block; }
 .feedback-submit:hover { background: color-mix(in srgb, var(--AC, #8b6914) 85%, black); }
 .feedback-thanks { font-size: 0.85rem; color: var(--AC, #8b6914); text-align: center; margin: 0.5rem 0 0; }
 
+/* ── Floating feedback button (fixed bottom-right, injected on every page) ── */
+#fa-feedback-fab {
+  position: fixed;
+  right: 24px; bottom: 24px;
+  z-index: 10000;                 /* above the AI tutor (9999) */
+  display: flex; flex-direction: column; align-items: flex-end; gap: 10px;
+}
+.fa-feedback-btn {
+  display: inline-flex; align-items: center; gap: .5rem;
+  background: var(--AC, #8b6914); color: #fff;
+  border: none; border-radius: 999px;
+  padding: .7rem 1.05rem; font-size: .85rem; font-weight: 700;
+  font-family: inherit; cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0,0,0,.25);
+  transition: transform .15s, box-shadow .15s, background .15s;
+}
+.fa-feedback-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 22px rgba(0,0,0,.32);
+  background: color-mix(in srgb, var(--AC, #8b6914) 88%, black); }
+.fa-feedback-btn:focus-visible { outline: 2px solid var(--AC, #8b6914); outline-offset: 3px; }
+.fa-feedback-btn svg { flex-shrink: 0; }
+/* Panel sits above the button in the column; wrapper is bottom-anchored so it grows upward. */
+#fa-feedback-fab .feedback-panel {
+  position: static; display: none;
+  top: auto; right: auto;
+  width: 300px; max-width: calc(100vw - 48px);
+}
+#fa-feedback-fab .feedback-panel.open { display: block; }
+@media (max-width: 640px) {
+  #fa-feedback-fab { right: 16px; bottom: 16px; }
+  .fa-feedback-btn .fa-feedback-label { display: none; }  /* icon-only on small screens */
+  .fa-feedback-btn { padding: .7rem; border-radius: 50%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fa-feedback-btn { transition: none; }
+  .fa-feedback-btn:hover { transform: none; }
+}
+
 
 /* ── Site Review Section ─────────────────────────────────────────────────── */
 .site-review-section {

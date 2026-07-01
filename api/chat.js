@@ -53,6 +53,14 @@ function corsHeaders(request, env) {
   };
 }
 
+// ── Connection-bounded fetch (aborts if the upstream doesn't respond in time;
+//    the timer is cleared once headers arrive so streaming is never cut off). ──
+function timedFetch(url, opts, ms) {
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), ms);
+  return fetch(url, Object.assign({}, opts || {}, { signal: ctrl.signal })).finally(() => clearTimeout(timer));
+}
+
 // ── System prompt builder ────────────────────────────────────────────────────
 function buildSystemPrompt(course) {
   const courseName = (course || 'AP').replace(/[<>"']/g, ''); // basic sanitize
@@ -129,26 +137,36 @@ export default {
       );
     }
 
-    // Provider: local Ollama if selected (or no Anthropic key but Ollama configured), else Anthropic.
-    const useOllama = (env?.QS_PROVIDER || '').toLowerCase() === 'ollama'
-      || (!(env?.ANTHROPIC_API_KEY) && (env?.OLLAMA_URL || env?.QS_OLLAMA_MODEL || env?.OLLAMA_MODEL));
+    // Provider selection mirrors api/question.js (new names + legacy aliases).
+    const provider = String(env?.AI_QUESTION_PROVIDER || env?.QS_PROVIDER || '').toLowerCase();
+    const timeoutMs = Math.max(1000, parseInt(env?.OLLAMA_TIMEOUT_MS, 10) || 60000);
+    const jsonHdr = { 'Content-Type': 'application/json' };
+
+    // Fallback mode has no AI tutor (the practice stream still works fully).
+    if (provider === 'fallback') {
+      return corsResponse(JSON.stringify({ error: 'AI tutor is disabled (provider=fallback). Use the practice question stream instead.' }), 503, jsonHdr);
+    }
+
+    const useOllama = provider === 'ollama'
+      || (!(env?.ANTHROPIC_API_KEY) && (env?.OLLAMA_BASE_URL || env?.OLLAMA_URL || env?.QS_OLLAMA_MODEL || env?.OLLAMA_MODEL));
 
     let upstream, mode;
     if (useOllama) {
-      const base = (env?.OLLAMA_URL || 'http://localhost:11434').replace(/\/$/, '');
-      const model = env?.QS_OLLAMA_MODEL || env?.OLLAMA_MODEL || 'llama3.1';
+      const base = String(env?.OLLAMA_BASE_URL || env?.OLLAMA_URL || 'http://127.0.0.1:11434').replace(/\/$/, '');
+      const model = env?.OLLAMA_MODEL || env?.QS_OLLAMA_MODEL || 'llama3.2';
       mode = 'ollama';
       try {
-        upstream = await fetch(base + '/api/chat', {
+        upstream = await timedFetch(base + '/api/chat', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: jsonHdr,
           body: JSON.stringify({
             model, stream: true,
             messages: [{ role: 'system', content: buildSystemPrompt(course) }, ...messages.map(m => ({ role: m.role, content: m.content }))],
           }),
-        });
+        }, timeoutMs);
       } catch (e) {
-        return corsResponse(JSON.stringify({ error: 'Could not reach Ollama. Is it running on ' + base + '?' }), 502, { 'Content-Type': 'application/json' });
+        const msg = (e && e.name === 'AbortError') ? 'Ollama timed out after ' + timeoutMs + 'ms.' : 'Could not reach Ollama. Is it running on ' + base + '?';
+        return corsResponse(JSON.stringify({ error: msg }), 502, jsonHdr);
       }
     } else {
       const apiKey = env?.ANTHROPIC_API_KEY ?? (typeof ANTHROPIC_API_KEY !== 'undefined' ? ANTHROPIC_API_KEY : null);
@@ -157,13 +175,14 @@ export default {
       }
       mode = 'anthropic';
       try {
-        upstream = await fetch('https://api.anthropic.com/v1/messages', {
+        upstream = await timedFetch('https://api.anthropic.com/v1/messages', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'x-api-key': apiKey, 'anthropic-version': '2023-06-01' },
           body: JSON.stringify({ model: 'claude-haiku-4-5', max_tokens: 1024, system: buildSystemPrompt(course), messages: messages.map(m => ({ role: m.role, content: m.content })), stream: true }),
-        });
+        }, timeoutMs);
       } catch (e) {
-        return corsResponse(JSON.stringify({ error: 'Failed to reach Anthropic API' }), 502, { 'Content-Type': 'application/json' });
+        const msg = (e && e.name === 'AbortError') ? 'Anthropic request timed out.' : 'Failed to reach Anthropic API';
+        return corsResponse(JSON.stringify({ error: msg }), 502, { 'Content-Type': 'application/json' });
       }
     }
 

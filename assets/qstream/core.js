@@ -20,7 +20,7 @@
 
   // ─── Enumerations ──────────────────────────────────────────────────────────
   var COURSE_IDS = [
-    'ap-art-history', 'ap-biology', 'ap-calculus-bc', 'ap-chemistry',
+    'ap-art-history', 'ap-biology', 'ap-calculus-ab', 'ap-calculus-bc', 'ap-statistics', 'ap-chemistry',
     'ap-comparative-government', 'ap-computer-science-a',
     'ap-computer-science-principles', 'ap-english-language',
     'ap-english-literature', 'ap-environmental-science', 'ap-european-history',
@@ -45,7 +45,9 @@
   var COURSE_DISPLAY = {
     'ap-art-history': 'AP Art History',
     'ap-biology': 'AP Biology',
+    'ap-calculus-ab': 'AP Calculus AB',
     'ap-calculus-bc': 'AP Calculus BC',
+    'ap-statistics': 'AP Statistics',
     'ap-chemistry': 'AP Chemistry',
     'ap-comparative-government': 'AP Comparative Government and Politics',
     'ap-computer-science-a': 'AP Computer Science A',
@@ -73,7 +75,9 @@
   var SLUG_TO_ID = {
     'ap-art-history': 'ap-art-history',
     'ap-biology': 'ap-biology',
+    'ap-calculus-ab': 'ap-calculus-ab',
     'ap-calculus-bc': 'ap-calculus-bc',
+    'ap-statistics': 'ap-statistics',
     'ap-chemistry': 'ap-chemistry',
     'ap-comparative-government-and-politics': 'ap-comparative-government',
     'ap-computer-science-a': 'ap-computer-science-a',
@@ -100,7 +104,9 @@
   var CATEGORY = {
     'ap-art-history': 'arts',
     'ap-biology': 'stem',
+    'ap-calculus-ab': 'stem',
     'ap-calculus-bc': 'stem',
+    'ap-statistics': 'stem',
     'ap-chemistry': 'stem',
     'ap-comparative-government': 'history-social-science',
     'ap-computer-science-a': 'computer-science',
@@ -320,12 +326,56 @@
   }
 
   // ─── Question validation ───────────────────────────────────────────────────
+  // Phrases that imply the item was copied from (or claims to be) real, official,
+  // or secure College Board material. A match REJECTS the question outright.
   var OFFICIAL_MARKERS = [
     /question\s+\d+\s+refers\s+to\s+the\s+following/i,
     /\bAP\s+Exam\b.*\b(19|20)\d\d\b/i,
     /from\s+the\s+(19|20)\d\d\s+AP/i,
-    /college\s+board.{0,20}(released|secure)/i
+    /college\s+board.{0,20}(released|secure)/i,
+    /\bofficial\s+AP\s+(exam|question|test)/i,
+    /\breleased\s+AP\s+(exam|question|test|item)/i,
+    /\bsecure\s+AP\s+(exam|test|material)/i,
+    /\bAP\s+Classroom\s+(question|item|quiz)/i,
+    /\bcollege\s+board\s+question\b/i,
+    /copyright\s+(?:©\s*)?college\s+board/i,
+    /©\s*college\s+board/i,
+    /\bthis\s+(?:is|was)\s+(?:an?\s+)?(?:real|actual|official)\s+AP\s+exam\s+question/i,
+    /\breproduce\b.{0,40}\bofficial\b.{0,20}(exam|question)/i
   ];
+
+  // Softer signals that don't reject but SHOULD get a human look ("needs-review").
+  var SUSPICIOUS_MARKERS = [
+    /\bexcerpt\s+from\b.{0,40}(chapter|textbook|copyright)/i,
+    /\breprinted\s+with\s+permission\b/i,
+    /all\s+rights\s+reserved/i
+  ];
+  var MAX_STIMULUS_CHARS = 1200; // longer stimulus → possible copied passage → review
+
+  /**
+   * Classify a question's copyright/legal posture WITHOUT mutating it.
+   * Returns { legalStatus: 'original-practice'|'needs-review'|'rejected',
+   *           legalReviewNotes: string[] }.
+   */
+  function legalCheck(q) {
+    q = q || {};
+    var notes = [];
+    var blob = String(q.prompt || '') + ' ' + String(q.stimulus || '') + ' ' +
+      String(q.explanation || '') + ' ' + String(q.modelAnswer || '');
+    var rejected = false;
+    OFFICIAL_MARKERS.forEach(function (re) {
+      if (re.test(blob)) { rejected = true; notes.push('official/secure AP wording: ' + re.source); }
+    });
+    var review = false;
+    SUSPICIOUS_MARKERS.forEach(function (re) {
+      if (re.test(blob)) { review = true; notes.push('possible third-party copyrighted source: ' + re.source); }
+    });
+    if (String(q.stimulus || '').length > MAX_STIMULUS_CHARS) {
+      review = true; notes.push('stimulus exceeds ' + MAX_STIMULUS_CHARS + ' chars (possible copied passage)');
+    }
+    var status = rejected ? 'rejected' : (review ? 'needs-review' : 'original-practice');
+    return { legalStatus: status, legalReviewNotes: notes };
+  }
 
   /**
    * Validate one APQuestion against the schema and (optionally) a framework.
@@ -396,13 +446,17 @@
       }
     }
 
-    // Anti-plagiarism markers.
-    var blob = (repaired.prompt || '') + ' ' + (repaired.stimulus || '');
-    OFFICIAL_MARKERS.forEach(function (re) {
-      if (re.test(blob)) errors.push('contains official-AP wording marker');
-    });
+    // Legal / copyright posture. Official-AP wording is a hard failure; softer
+    // signals are recorded on the question as metadata for later human review.
+    var legal = legalCheck(repaired);
+    repaired.legalStatus = legal.legalStatus;
+    if (legal.legalReviewNotes.length) repaired.legalReviewNotes = legal.legalReviewNotes;
+    if (legal.legalStatus === 'rejected') errors.push('contains official-AP wording marker');
+    if (legal.legalStatus === 'needs-review' && repaired.reviewStatus === 'approved') {
+      repaired.reviewStatus = 'needs-review';
+    }
 
-    return { valid: errors.length === 0, errors: errors, repairedQuestion: repaired };
+    return { valid: errors.length === 0, errors: errors, repairedQuestion: repaired, legalStatus: legal.legalStatus };
   }
 
   function isWritten(type) {
@@ -431,7 +485,27 @@
       var sub = s.slice(first, last + 1);
       try { return JSON.parse(sub); } catch (e2) {}
     }
-    return null;
+    return repairJson(s);
+  }
+
+  /**
+   * One lenient JSON-repair pass for near-valid model output: strips code
+   * fences, trailing commas, JS-style comments, and smart quotes, then retries.
+   * Returns the parsed value or null. Used once before falling back to seeded.
+   */
+  function repairJson(text) {
+    if (text == null) return null;
+    if (typeof text === 'object') return text;
+    var s = String(text).trim().replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/i, '');
+    var first = s.search(/[\[{]/);
+    var last = Math.max(s.lastIndexOf('}'), s.lastIndexOf(']'));
+    if (first !== -1 && last > first) s = s.slice(first, last + 1);
+    s = s
+      .replace(/[“”]/g, '"').replace(/[‘’]/g, "'") // smart quotes
+      .replace(/\/\/[^\n\r]*/g, '')                                     // // comments
+      .replace(/\/\*[\s\S]*?\*\//g, '')                                 // /* */ comments
+      .replace(/,\s*([}\]])/g, '$1');                                   // trailing commas
+    try { return JSON.parse(s); } catch (e) { return null; }
   }
 
   // ─── Local (offline) answer evaluation ─────────────────────────────────────
@@ -665,9 +739,11 @@
     pickTopic: pickTopic,
     allTopics: allTopics,
     validateQuestion: validateQuestion,
+    legalCheck: legalCheck,
     isWritten: isWritten,
     isObjective: isObjective,
     extractJson: extractJson,
+    repairJson: repairJson,
     evaluateLocally: evaluateLocally,
     addToReviewQueue: addToReviewQueue,
     removeReviewItem: removeReviewItem,

@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Orphaned/legacy page — not part of the public site
+Disallow: /units/light-waves-personal-study-guide.html
+
+Sitemap: https://arnavttt.github.io/sitemap.xml

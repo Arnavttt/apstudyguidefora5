@@ -387,7 +387,10 @@ function submitFeedback() {
   fb.push({ page: location.pathname, text: msg, ts: Date.now() });
   _store.setItem('fa2-feedback', JSON.stringify(fb));
   // …and open the user's own email client so it can actually reach us.
-  var mailto = 'mailto:arnavsinha1807@gmail.com'
+  // Dedicated, filterable support alias (Gmail +tag routes to the same inbox;
+  // swap this one constant for a real support@ address when one exists).
+  var FEEDBACK_EMAIL = 'arnavsinha1807+support@gmail.com';
+  var mailto = 'mailto:' + FEEDBACK_EMAIL
     + '?subject=' + encodeURIComponent('Five & A+ feedback')
     + '&body=' + encodeURIComponent(msg + '\n\n— sent from ' + location.href);
   try { window.location.href = mailto; } catch (e) {}

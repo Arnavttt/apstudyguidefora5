@@ -26,8 +26,8 @@ function loadAllData() {
 const ALL = loadAllData();
 
 // ── Course registry ──────────────────────────────────────────────────────────
-test('registry has all 23 AP courses with display + category', () => {
-  assert.strictEqual(FAQS.COURSE_IDS.length, 23);
+test('registry has all 25 AP courses with display + category', () => {
+  assert.strictEqual(FAQS.COURSE_IDS.length, 25);
   for (const id of FAQS.COURSE_IDS) {
     assert.ok(FAQS.COURSE_DISPLAY[id], 'display name for ' + id);
     assert.ok(FAQS.CATEGORY[id], 'category for ' + id);
@@ -41,7 +41,7 @@ test('slug→id map resolves every course-page stem', () => {
     assert.ok(FAQS.isValidCourseId(id), slug + ' → ' + id);
     ids.add(id);
   }
-  assert.strictEqual(ids.size, 23, 'all 23 stable ids covered by slug map');
+  assert.strictEqual(ids.size, 25, 'all 25 stable ids covered by slug map');
 });
 
 // ── Per-course data files ─────────────────────────────────────────────────────

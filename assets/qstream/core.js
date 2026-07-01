@@ -20,7 +20,7 @@
 
   // ─── Enumerations ──────────────────────────────────────────────────────────
   var COURSE_IDS = [
-    'ap-art-history', 'ap-biology', 'ap-calculus-bc', 'ap-chemistry',
+    'ap-art-history', 'ap-biology', 'ap-calculus-ab', 'ap-calculus-bc', 'ap-statistics', 'ap-chemistry',
     'ap-comparative-government', 'ap-computer-science-a',
     'ap-computer-science-principles', 'ap-english-language',
     'ap-english-literature', 'ap-environmental-science', 'ap-european-history',
@@ -45,7 +45,9 @@
   var COURSE_DISPLAY = {
     'ap-art-history': 'AP Art History',
     'ap-biology': 'AP Biology',
+    'ap-calculus-ab': 'AP Calculus AB',
     'ap-calculus-bc': 'AP Calculus BC',
+    'ap-statistics': 'AP Statistics',
     'ap-chemistry': 'AP Chemistry',
     'ap-comparative-government': 'AP Comparative Government and Politics',
     'ap-computer-science-a': 'AP Computer Science A',
@@ -73,7 +75,9 @@
   var SLUG_TO_ID = {
     'ap-art-history': 'ap-art-history',
     'ap-biology': 'ap-biology',
+    'ap-calculus-ab': 'ap-calculus-ab',
     'ap-calculus-bc': 'ap-calculus-bc',
+    'ap-statistics': 'ap-statistics',
     'ap-chemistry': 'ap-chemistry',
     'ap-comparative-government-and-politics': 'ap-comparative-government',
     'ap-computer-science-a': 'ap-computer-science-a',
@@ -100,7 +104,9 @@
   var CATEGORY = {
     'ap-art-history': 'arts',
     'ap-biology': 'stem',
+    'ap-calculus-ab': 'stem',
     'ap-calculus-bc': 'stem',
+    'ap-statistics': 'stem',
     'ap-chemistry': 'stem',
     'ap-comparative-government': 'history-social-science',
     'ap-computer-science-a': 'computer-science',

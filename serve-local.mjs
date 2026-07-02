@@ -129,5 +129,14 @@ server.listen(PORT, async () => {
     console.log('  Ollama: NOT reachable. Install from https://ollama.com/download and run:  ollama pull ' + OLLAMA_MODEL);
     console.log('          (The site still works — it falls back to the built-in question bank.)');
   }
+  if (ollamaOk) {
+    // Pre-warm: load the model into memory now (keep_alive 30m) so the first
+    // generated question isn't slowed by a cold model load.
+    fetch(OLLAMA_BASE.replace(/\/$/, '') + '/api/chat', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ model: OLLAMA_MODEL, keep_alive: '30m', stream: false, messages: [{ role: 'user', content: 'ok' }], options: { num_predict: 1 } })
+    }).then(() => console.log('  Model warmed ✓')).catch(() => {});
+    console.log('  Warming model in background…');
+  }
   console.log('  ----------------------------------------------------------\n');
 });

@@ -161,6 +161,7 @@ function normalizeEnv(env) {
     ollamaModel: env.OLLAMA_MODEL || env.QS_OLLAMA_MODEL || 'llama3.2',
     ollamaEvalModel: env.OLLAMA_EVALUATOR_MODEL || env.OLLAMA_MODEL || env.QS_OLLAMA_MODEL || 'llama3.2',
     ollamaTimeoutMs: Math.max(1000, parseInt(env.OLLAMA_TIMEOUT_MS, 10) || 60000),
+    ollamaKeepAlive: env.OLLAMA_KEEP_ALIVE || '30m', // keep model resident → no per-call cold reload
     allowRemoteOllama: String(env.QS_ALLOW_REMOTE_OLLAMA || '') === '1',
     anthropicKey: env.ANTHROPIC_API_KEY,
     openaiKey: env.OPENAI_API_KEY,
@@ -226,6 +227,7 @@ async function callOllama(cfg, system, user, opts) {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         model: opts.model || cfg.ollamaModel, stream: false, format: 'json',
+        keep_alive: cfg.ollamaKeepAlive,
         messages: [{ role: 'system', content: system }, { role: 'user', content: user }],
         options: { temperature: opts.temperature == null ? 0.2 : opts.temperature, top_p: 0.9 }
       })

@@ -52,7 +52,8 @@
   // ─── Config (overridable before this script via window.__FA_QSTREAM_CONFIG__) ─
   var CFG = Object.assign({
     aiEndpoint: '/api/question',
-    aiEnabled: true,        // attempt server AI; auto-disables for the session on failure
+    aiEnabled: true,        // attempt server AI; auto-disables for the session on a hard failure
+    aiTimeoutMs: 12000,     // abort a slow generation and fall back to a seeded question
     examSetSize: 5
   }, window.__FA_QSTREAM_CONFIG__ || {});
 
@@ -90,13 +91,21 @@
     available: function () { return CFG.aiEnabled && !this._down; },
     _post: function (payload) {
       var self = this;
+      var ctrl = (typeof AbortController !== 'undefined') ? new AbortController() : null;
+      var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, CFG.aiTimeoutMs) : null;
       return fetch(CFG.aiEndpoint, {
-        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload)
+        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload),
+        signal: ctrl ? ctrl.signal : undefined
       }).then(function (r) {
+        if (timer) clearTimeout(timer);
         if (!r.ok) throw new Error('HTTP ' + r.status);
         return r.json();
       }).catch(function (e) {
-        self._down = true; // stop hammering a missing/erroring endpoint this session
+        if (timer) clearTimeout(timer);
+        // A timeout/abort is transient (slow local model) — don't disable AI for the
+        // whole session, just fall back to a seeded question for this one and retry later.
+        // A real HTTP/network error means no usable endpoint → stop hammering it.
+        if (!e || e.name !== 'AbortError') self._down = true;
         return null;
       });
     },
@@ -260,7 +269,7 @@
         return AIClient.generate({
           courseId: courseId, courseName: framework.displayName, unitId: crit.unitId, unitName: crit.unitName,
           topicId: crit.topicId, topicName: crit.topicName, questionType: crit.questionType,
-          difficulty: crit.difficulty, mode: state.mode, previousQuestionPrompts: lastPrompts(6), count: 2
+          difficulty: crit.difficulty, mode: state.mode, previousQuestionPrompts: lastPrompts(6), count: 1
         }).then(function (resp) {
           var qs = (resp && resp.questions) || [];
           var valid = [];
@@ -269,8 +278,7 @@
             if (res.valid) valid.push(res.repairedQuestion);
           });
           if (valid.length) {
-            var c = store.getCache().concat(valid.slice(1));
-            store.saveCache(c);
+            if (valid.length > 1) store.saveCache(store.getCache().concat(valid.slice(1)));
             return { question: valid[0], source: 'ai', provider: resp && resp.provider };
           }
           return seeded(crit);
@@ -446,6 +454,9 @@
       els.stage.innerHTML = '';
       els.stage.setAttribute('aria-busy', 'true');
       announce('Loading next question…');
+      els.stage.appendChild(el('div', { class: 'qs-loadbar', role: 'progressbar', 'aria-label': 'Loading question' }, [
+        el('div', { class: 'qs-loadbar-fill' })
+      ]));
       var sk = el('div', { class: 'qs-skeleton', 'aria-hidden': 'true' }, [
         el('div', { class: 'qs-sk-line qs-sk-badges' }), el('div', { class: 'qs-sk-line w90' }),
         el('div', { class: 'qs-sk-line w80' }), el('div', { class: 'qs-sk-line w60' }),
@@ -469,14 +480,34 @@
       }
       renderLoading();
       getNextQuestion().then(function (res) {
-        if (!res || !res.question) { renderError('No question available. Try a different unit or mode.'); return; }
-        current = res.question; startedAt = Date.now();
-        renderQuestion(res.question, res.source);
-        updateDashboard();
-        updateSourceNote(res.source, res.provider);
-      }).catch(function (e) {
-        renderError('Something went wrong loading a question. A local practice question will be used.');
+        // Try the chosen question; if it's missing OR the renderer chokes on an
+        // odd (but schema-valid) AI shape, fall back to a seeded question rather
+        // than erroring the whole stream.
+        if (res && res.question && tryRender(res.question, res.source, res.provider)) return;
+        if (!seededFallback()) renderError('No question available. Try a different unit or mode.');
+      }).catch(function () {
+        if (!seededFallback()) renderError('Something went wrong loading a question. Try again.');
       });
+    }
+
+    // Render a question; returns true on success, false if renderQuestion threw.
+    function tryRender(q, source, provider) {
+      try {
+        current = q; startedAt = Date.now();
+        renderQuestion(q, source);
+        updateDashboard();
+        updateSourceNote(source, provider);
+        return true;
+      } catch (e) { return false; }
+    }
+    // Guaranteed local fallback (seeded bank always yields a well-formed question).
+    function seededFallback() {
+      try {
+        var crit = nextCriteria();
+        crit.seed = courseId + '-fb-' + state.answeredCount;
+        var sd = seeded(crit);
+        return !!(sd && sd.question && tryRender(sd.question, 'seeded'));
+      } catch (e) { return false; }
     }
 
     function renderEmptyReview() {

@@ -87,3 +87,25 @@ test('extractJson falls through to repair for near-valid output', () => {
   const obj = FAQS.extractJson('Here: {"questions":[{"id":"a"},]}');
   assert.ok(obj && Array.isArray(obj.questions) && obj.questions.length === 1);
 });
+
+// ── Phase-2 additions: extra legal phrases + raw-HTML rejection ────────────────
+test('legalCheck: rejects leaked/unreleased/actual/real AP-exam phrasing', () => {
+  const phrases = [
+    'This is a leaked AP exam question.',
+    'From an unreleased AP exam.',
+    'This is an actual AP test question.',
+    'Here is the real AP exam answer.'
+  ];
+  for (const p of phrases) assert.strictEqual(FAQS.legalCheck({ prompt: p }).legalStatus, 'rejected', p);
+});
+
+test('validateQuestion: rejects raw HTML tags in text fields', () => {
+  const res = FAQS.validateQuestion(validMcq({ prompt: 'Pick the best: <img src=x onerror=alert(1)> which organelle?' }));
+  assert.strictEqual(res.valid, false);
+  assert.ok(res.errors.some((e) => /raw HTML/.test(e)));
+});
+
+test('validateQuestion: math inequalities (x < 5) are NOT flagged as HTML', () => {
+  const res = FAQS.validateQuestion(validMcq({ prompt: 'For which value is x < 5 and y > 2 both true in this cell model?' }));
+  assert.strictEqual(res.valid, true, res.errors.join('; '));
+});

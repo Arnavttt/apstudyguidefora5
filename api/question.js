@@ -69,7 +69,15 @@ Rules:
 - Art History questions may use imagePrompt (a description) instead of a real image.
 - Music Theory questions may use musicNotationPlaceholder instead of audio.
 - For history/English stimulus questions, write SHORT ORIGINAL or clearly-invented source-style passages — never copy real copyrighted text.
-- Keep content appropriate for high school. Avoid hallucinated facts. If unsure, set reviewStatus to "needs-review".`;
+- Keep content appropriate for high school. Avoid hallucinated facts. If unsure, set reviewStatus to "needs-review".
+- Every question MUST include "legalStatus":"original-practice" (or "needs-review" if unsure) plus "reviewStatus". Never use the words "official AP exam", "released AP exam", "College Board question", "AP Classroom", "secure AP exam", "from the 20XX AP Exam", "actual AP test question", "leaked AP exam", "unreleased AP exam", or "real AP exam answer".
+
+Before returning JSON, SELF-CHECK each question and fix or drop any that fails:
+1. It is original and copies no official/released/secure/AP-Classroom/College-Board material.
+2. The correct answer is actually correct.
+3. The explanation supports the correct answer.
+4. It matches the course, unit, topic, and the requested difficulty.
+5. MCQs have 4 choices with distractor rationales; written items have a rubric and a modelAnswer.`;
 
 const EVAL_SYSTEM = `You are an expert AP teacher and a fair grader. Evaluate the student's answer using the question, correct answer, explanation, and rubric. Be accurate, specific, and encouraging.
 
@@ -90,7 +98,7 @@ function genUserPrompt(b) {
   "prompt": string, "stimulus"?: string, "imagePrompt"?: string, "codeBlock"?: string, "dataTable"?: {"columns":[],"rows":[[]]},
   "answerChoices"?: [{"id":"A","text":""}], "correctAnswer": string, "acceptableAnswers"?: [], "numericTolerance"?: number,
   "rubric"?: [{"id":"r1","pointValue":1,"criterion":"","evidenceRequired":""}], "explanation": string,
-  "distractorRationales"?: {"A":"","B":""}, "modelAnswer"?: string, "tags": [], "sourceType": "ai-generated", "reviewStatus": "approved"|"needs-review", "createdAt": string }`;
+  "distractorRationales"?: {"A":"","B":""}, "modelAnswer"?: string, "tags": [], "sourceType": "ai-generated", "reviewStatus": "approved"|"needs-review", "legalStatus": "original-practice"|"needs-review", "legalReviewNotes"?: string, "createdAt": string }`;
   return `Generate ${b.count || 1} original AP practice question(s).
 Course: ${b.courseName} (courseId: ${b.courseId})
 Unit: ${b.unitName || b.unitId || 'any'} (unitId: ${b.unitId || ''})

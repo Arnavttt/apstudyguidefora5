@@ -341,7 +341,11 @@
     /copyright\s+(?:©\s*)?college\s+board/i,
     /©\s*college\s+board/i,
     /\bthis\s+(?:is|was)\s+(?:an?\s+)?(?:real|actual|official)\s+AP\s+exam\s+question/i,
-    /\breproduce\b.{0,40}\bofficial\b.{0,20}(exam|question)/i
+    /\breproduce\b.{0,40}\bofficial\b.{0,20}(exam|question)/i,
+    /\bleaked\s+AP\s+(exam|test|question)/i,
+    /\bunreleased\s+AP\s+(exam|test|question|material)/i,
+    /\bactual\s+AP\s+(test|exam)\s+question/i,
+    /\breal\s+AP\s+(exam|test)\s+(answer|question)/i
   ];
 
   // Softer signals that don't reject but SHOULD get a human look ("needs-review").
@@ -445,6 +449,13 @@
         errors.push('coding question needs codeBlock or coding prompt');
       }
     }
+
+    // Reject raw HTML tags in rendered text fields (defense-in-depth: the UI
+    // escapes AI content, but invalid output should never reach render at all).
+    // Uses a known-tag whitelist so math inequalities like "x < 5" don't trip it.
+    var HTML_TAG = /<\/?(script|style|iframe|img|svg|object|embed|link|meta|form|input|a|div|span|table|button|video|audio|source|base|body|html|head|marquee|details|summary)\b[^>]*>/i;
+    var htmlBlob = [repaired.prompt, repaired.stimulus, repaired.explanation, repaired.modelAnswer].filter(Boolean).join(' ');
+    if (HTML_TAG.test(htmlBlob)) errors.push('contains raw HTML tags');
 
     // Legal / copyright posture. Official-AP wording is a hard failure; softer
     // signals are recorded on the question as metadata for later human review.

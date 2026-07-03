@@ -1,0 +1,34 @@
+# Cloudflare Worker config for the AI Question Stream backend.
+# Deploys api/question.js so the public site (any device) can generate AI questions.
+# The API key is NOT stored here — it is an encrypted Worker secret (see below).
+#
+# Deploy:
+#   npx wrangler deploy
+#   npx wrangler secret put ANTHROPIC_API_KEY      # paste your key when prompted
+# Then copy the printed https://<name>.<subdomain>.workers.dev URL into
+# assets/question-stream.js (WORKER_ENDPOINT). Full guide: docs/DEPLOY_AI_WORKER.md
+
+name = "fa-question-stream"
+main = "api/question.js"
+compatibility_date = "2024-11-01"
+
+[vars]
+# Which provider to use. Must match the secret key you set below.
+#   "anthropic" -> needs ANTHROPIC_API_KEY secret
+#   "openai"    -> needs OPENAI_API_KEY secret, and set this to "openai"
+#   "auto"      -> works with whichever key is set, but adds a short delay each
+#                  request probing for local Ollama (never reachable from a Worker),
+#                  so pin it to a real provider for best latency.
+AI_QUESTION_PROVIDER = "anthropic"
+
+# Browser origin(s) allowed to call this Worker (your live site). Comma-separated.
+QS_ALLOWED_ORIGINS = "https://arnavttt.github.io"
+
+# Optional: pin the model. Defaults live in api/question.js.
+# QS_ANTHROPIC_MODEL = "claude-sonnet-5"
+# QS_OPENAI_MODEL = "gpt-4o-mini"
+
+# ── Secrets (DO NOT put keys in this file) ───────────────────────────────────
+# Set your key once, encrypted, with:
+#   npx wrangler secret put ANTHROPIC_API_KEY
+#   (or:  npx wrangler secret put OPENAI_API_KEY   if AI_QUESTION_PROVIDER = "openai")

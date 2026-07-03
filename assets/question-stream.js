@@ -50,8 +50,21 @@
   }
 
   // ─── Config (overridable before this script via window.__FA_QSTREAM_CONFIG__) ─
+  // ── Cross-device AI ─────────────────────────────────────────────────────────
+  // To enable AI-generated questions on the PUBLIC site (any device), deploy the
+  // backend as a Cloudflare Worker and paste its URL below. Leave it '' to use the
+  // same-origin endpoint (local `node serve-local.mjs`) with seeded fallback
+  // everywhere else. The API KEY is NEVER here — it is a Worker secret.
+  // Full guide: docs/DEPLOY_AI_WORKER.md
+  var WORKER_ENDPOINT = ''; // e.g. 'https://fa-question-stream.YOURNAME.workers.dev'
+
+  var _isLocalHost = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
+  var _aiEndpoint = (!_isLocalHost && WORKER_ENDPOINT)
+    ? WORKER_ENDPOINT.replace(/\/+$/, '') + '/api/question'
+    : '/api/question';
+
   var CFG = Object.assign({
-    aiEndpoint: '/api/question',
+    aiEndpoint: _aiEndpoint,
     aiEnabled: true,        // attempt server AI; auto-disables for the session on a hard failure
     aiTimeoutMs: 12000,     // abort a slow generation and fall back to a seeded question
     examSetSize: 5

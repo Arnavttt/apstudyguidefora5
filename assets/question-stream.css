@@ -321,3 +321,10 @@
 @media (prefers-reduced-motion: reduce) {
   .qs-loadbar-fill { animation: none; width: 100%; opacity: .5; }
 }
+
+/* Touch targets: WCAG 2.5.8 — interactive controls >=44px on touch devices.
+   Scoped to coarse pointers so desktop density is unchanged. */
+@media (pointer: coarse) {
+  .qs-choice, .qs-btn, .qs-submit, .qs-select { min-height: 44px; }
+  .qs-choice { align-items: center; }
+}

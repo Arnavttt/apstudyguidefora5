@@ -25,11 +25,16 @@ ruvector.db
 *.db
 .claude/memory.db
 .claude/settings.json
+.claude/settings.json.*.bak
 .claude/agents/
 .claude/commands/
 .claude/helpers/
-.claude/skills/
-CLAUDE.md
+# Ignore ruflo's generic skill dump, but SHIP the project-authored skills below.
+.claude/skills/*
+!.claude/skills/qstream-course-authoring/
+!.claude/skills/legal-safety-review/
+!.claude/skills/secure-secrets-ai-provider/
+!.claude/skills/ui-verification-loop/
 
 # ── OS / editor cruft ────────────────────────────────────────────────────────
 .DS_Store

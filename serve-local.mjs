@@ -27,6 +27,22 @@ import { fileURLToPath } from 'node:url';
 import { Readable } from 'node:stream';
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
+
+// Load .env.local (then .env) into process.env WITHOUT overriding real environment
+// variables. Zero-dependency parser: KEY=VALUE lines, # comments, optional quotes.
+// This is where the user's API keys live locally — both files are git-ignored.
+for (const envFile of ['.env.local', '.env']) {
+  const p = path.join(ROOT, envFile);
+  if (!existsSync(p)) continue;
+  for (const line of (await readFile(p, 'utf8')).split(/\r?\n/)) {
+    const m = line.match(/^\s*(?:export\s+)?([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.*)\s*$/);
+    if (!m || line.trim().startsWith('#')) continue;
+    let v = m[2].trim();
+    if ((v.startsWith('"') && v.endsWith('"')) || (v.startsWith("'") && v.endsWith("'"))) v = v.slice(1, -1);
+    if (process.env[m[1]] === undefined) process.env[m[1]] = v;
+  }
+}
+
 const PORT = parseInt(process.env.PORT || '8765', 10);
 
 // Default to local Ollama. New spec env names win; legacy QS_* names still work.

@@ -65,6 +65,9 @@ user-facing changes. Do not invoke every skill, and do not use the generic ruflo
 6. Verify user-facing behavior live in the preview (interact, don't assume).
 7. Review security/accessibility/performance per the skill checklists.
 8. Report exact results; never claim an unexecuted command passed.
+9. Fix root causes, not symptoms; understand code before editing it; never mark work
+   done without its tests (I11). CI (`.github/workflows/ci.yml`) re-runs syntax + suite
+   on every push — keep it green.
 
 ## Security rules
 - No secrets in code, docs, tests, logs, client bundles, or replies. Local key location:
@@ -86,6 +89,15 @@ user-facing changes. Do not invoke every skill, and do not use the generic ruflo
   `prefers-reduced-motion` coverage for every animation, per-course contrast via `--ACtext`.
 - Corners are owned: feedback FAB bottom-right, AI tutor bottom-left — don't add more
   fixed-corner widgets.
+- **Content rules** (from the 2026-07-03 reference study — see
+  `docs/reference-pattern-analysis.md`): if a heading promises N things, all N appear on
+  that page (A10); never gate study material behind engagement ("comment/share to
+  unlock" — A16); important state never lives in one channel only — pair every audio/
+  color/motion signal with visible text (A08); no attention-hack visuals, gimmick
+  widgets, or fake status badges (A05, A11); chunk term lists with hierarchy and
+  progressive disclosure, never jargon walls (A15); alarming legal/AI claims must link
+  the actual policy page (A09, A12); prefer one concrete analogy + tiny diagram per
+  dense concept (I03, A14).
 
 ## Anti-patterns (register — all bitten or blocked in this repo)
 - **Hook file-mangling (real incident):** local hooks have truncated `api/question.js`

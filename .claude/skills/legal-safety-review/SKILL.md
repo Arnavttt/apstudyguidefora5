@@ -35,6 +35,9 @@ The content or diff under review; whether it is seeded (shipped) or AI-generated
 4. Verify the AP® trademark disclaimer is present on any new page (footer block).
 5. Marketing numbers (courses/units/questions) must be verified against the filesystem before
    publishing — inflated claims are a false-advertising risk.
+5b. Any alarming or authoritative claim (legal risk, AI-safety, privacy) must link the actual
+   policy page it rests on — never a bare assertion (reference study A09/A12). If a heading
+   promises N items, all N must be present on the page (A10).
 6. If adding a new blocked phrase: add regex to `OFFICIAL_MARKERS`, add a rejection test in
    `tests/hardening.test.js`, run the full suite (seeded banks must still pass).
 

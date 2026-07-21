@@ -1,0 +1,28 @@
+# CI — syntax + full test suite on every push/PR.
+# Rationale (docs/reference-pattern-analysis.md I02/A03): shared assets fan out to
+# 236 pages, so one bad edit "breaks five things"; this gate catches it pre-deploy.
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Syntax-check every tracked JS file
+        run: |
+          set -e
+          for f in $(git ls-files '*.js' '*.mjs' '*.cjs'); do
+            node --check "$f"
+          done
+          echo "all JS files parse"
+
+      - name: Run test suite (course registry, seeded banks, legal, providers, secrets)
+        run: node --test tests/*.test.js

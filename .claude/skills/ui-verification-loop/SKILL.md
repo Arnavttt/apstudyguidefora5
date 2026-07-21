@@ -65,6 +65,10 @@ contrast (per-course `--ACtext` tokens), reduced motion, 44px touch targets.
 # Performance requirements
 First question ≤ ~12s worst case (timeout → seeded); no layout shift when the card renders
 (skeleton reserves space); no new render-blocking requests.
+Perf checklist from reference study I01 (all currently verified compliant — keep it so):
+scroll handlers stay passive + transform-only with work deferred to self-throttled rAF or
+IntersectionObserver; LCP element stays plain HTML/CSS (no blocking JS); network/storage
+writes are coalesced, never chatty per-event loops.
 
 # Validation checklist
 - [ ] `node --check` on touched JS; no junk files staged
